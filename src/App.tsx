@@ -6,9 +6,10 @@ import { Main } from './component/Main/Main';
 // import Counter from './components/counter/Counter';
 
 const background = {
-  width: 360,
+  // width: 360,
   height: 704,
-  backgroundColor: "#e7f5ff"
+  backgroundColor: "#e7f5ff",
+  maxWidth: 360
 };
 
 

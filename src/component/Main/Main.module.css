@@ -1,9 +1,42 @@
-.upTextBox {
-    width: 206;
-    height :90;
-    letter-spacing: 0;
+.mainContent {
+    position: relative;
+}
+
+
+.appBar {
+    z-index: 1; 
+    position: relative;
+
+    height: 56px;   
+    color: #000;
+}
+
+   
+.bottomSheet {
+    z-index: 10; 
+    position: relative;
+
+    margin-top: -44px;
+    border-radius: 24px;
+    height: 331px;
+    background-color: #ffffff;   
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 30px;
     align-items: left;
     text-align: left;
+}
+
+.upTextBox {
+    position: relative;
+    z-index: 1;
+
+    margin-top: 11px;
+    margin-left: 16px;
+    letter-spacing: 0;
+
+    text-align: left;
+    line-height: 30px;
     font-size: 24px;
     color: #242424;
     font-family: "AppleSDGothicNeo";
@@ -14,5 +47,112 @@
 .upText {
     font-family: "AppleSDGothicNeo";
     font-weight: 800;
+    line-height: 30px;
     font-style: normal; 
+}
+
+.upTextUnderline {
+    height: 6px;
+    width: 49px;
+    position: relative;
+    z-index: -1;
+    top: -10px;
+    background-color: #3dd0ff;
+}
+
+.frontImgBox {
+    display:flex;
+    margin-right: 33px;
+    justify-content: flex-end;  
+}
+
+.frontImg {
+}
+
+
+
+/* bottom sheet top */
+.bottomSheetInfoText {
+    font-size: 16px;
+    color: #242424;
+    font-family: "AppleSDGothicNeo";
+    font-weight: 600;
+    font-style: normal; 
+}
+
+.bottomSheetInfoUI {
+    display: flex;
+    margin-top: 13px;
+    height: 40px;
+    justify-content: space-between;
+}
+
+.bottomSheetInfoUItext {
+    font-size: 13px;
+    color: #6b6b6b;
+    font-family: "AppleSDGothicNeo";
+    font-weight: 400;
+    line-height: 20px;
+    font-style: normal; 
+}
+
+.bottomSheetInfoUIButton {
+    width: 100px;
+    height: 40px;
+    border-radius: 23px;
+    background-color: #3dd0ff;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.bottomSheetInfoUIButtonText {
+    font-size: 14px;
+    color: #ffffff;
+    font-family: "AppleSDGothicNeo";
+    font-weight: 600;
+}
+
+.bottomSheetLine {
+    height: 1px;
+    margin-top: 18px;
+    background-color: #efefef;
+}
+
+/* bottom sheet bottom */
+.bottomSheetMagazineText {
+    font-size: 18px;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    color: #242424;
+    font-family: "AppleSDGothicNeo";
+    font-weight: 800;
+    font-style: normal; 
+}
+
+.bottomSheetMagazineItem {
+    height: 106px;
+    border-radius: 8px;
+
+    margin-bottom: 12px;
+    background-color: #b5b4ff;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.bottomSheetMagazineItemText {
+    margin-left: 20px;
+    margin-top: 42px;
+    font-family: "AppleSDGothicNeo";
+    font-weight: 600;
+    font-size: 16px;
+    color: #ffffff;
+}
+
+
+.bottomSheetMagazineItemImage {
+    height: 88px;
+    align-self: flex-end;
 }
