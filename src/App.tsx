@@ -1,8 +1,8 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { CounterFunction } from './component/counter/Counter';
-import { Main } from './component/Main/Main';
+import { CounterFunction } from './pages/counter/Counter';
+import { Main } from './pages/Main/Main';
 // import Counter from './components/counter/Counter';
 
 const background = {
