@@ -3,6 +3,8 @@ import logo from './logo.svg';
 import './App.css';
 import { CounterFunction } from './pages/counter/Counter';
 import { Main } from './pages/Main/Main';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import AppRouter from './AppRouter';
 // import Counter from './components/counter/Counter';
 
 const background = {
@@ -15,10 +17,11 @@ const background = {
 
 function App() {
   return (
-    <div className="App" style={background}>
-      <Main></Main>
-      {/* <CounterFunction></CounterFunction> */}
-    </div>
+    <AppRouter />
+    // <div className="App" style={background}>
+    //   <Main></Main>
+    //   {/* <CounterFunction></CounterFunction> */}
+    // </div>
   );
 }
 
