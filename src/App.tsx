@@ -1,11 +1,11 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import { CounterFunction } from './pages/counter/Counter';
-import { Main } from './pages/Main/Main';
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
-import AppRouter from './AppRouter';
-// import Counter from './components/counter/Counter';
+import { BrowserRouter, Navigate, Route, Router, Routes } from 'react-router-dom';
+import LandingPage from './pages/LandingPage/LandingPage';
+
+import { useParams, useLocation, useNavigate } from 'react-router-dom';
+import RegisterPage from './pages/Register/RegisterPage';
+import LoginPage from './pages/LoginPage/LoginPage';
+
 
 const background = {
   // width: 360,
@@ -16,12 +16,20 @@ const background = {
 
 
 function App() {
+  const params = useParams();
+  const location = useLocation();
+  const navigate = useNavigate();
+
+
   return (
-    <AppRouter />
-    // <div className="App" style={background}>
-    //   <Main></Main>
-    //   {/* <CounterFunction></CounterFunction> */}
-    // </div>
+    <div>
+      <Routes>
+        <Route path='/' element = {<LandingPage />}/>
+        <Route path='/register' element = {<RegisterPage />}/>
+        <Route path='/login' element = {<LoginPage />}/>
+        
+      </Routes>
+    </div>
   );
 }
 
