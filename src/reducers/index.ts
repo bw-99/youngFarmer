@@ -1,9 +1,10 @@
 import {combineReducers} from "redux";
-import {adminReducer, textReducer} from "../pages/Register/RegisterReducer";
+import {adminReducer, userNameReducer,counterReducer} from "../pages/Register/RegisterReducer";
 
 const rootReducer = combineReducers({
   adminReducer,
-  textReducer
+  userNameReducer,
+  counterReducer
 });
 
 export default rootReducer;

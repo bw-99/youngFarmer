@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
-import { changeText, registerUser } from "./RegisterActions";
+import { changeToBar, changeToFoo, addName, registerUser, numberAddAsync, numberAdd, searchNaver } from "./RegisterActions";
 import {RootState} from "../../reducers/index";
 
 function RegisterPage() {
@@ -11,6 +11,15 @@ function RegisterPage() {
     const navigate = useNavigate();
 
     const dispatch = useDispatch();
+
+    const text = useSelector((state:RootState) =>
+        state.userNameReducer.text
+    );
+
+    const number = useSelector((state:RootState) =>
+        state.counterReducer.number
+    )
+
 
     const [Email, setEmail] = useState("");
     const [Password, setPassword] = useState("");
@@ -33,10 +42,7 @@ function RegisterPage() {
         setConfirmPasword(e.currentTarget.value);
     };
 
-    const text = useSelector((state:RootState) =>
-        state.textReducer.text
-    );
-
+    
     const onSubmitHandler = (e:any) => {
         e.preventDefault();
         if (Password === ConfirmPasword) {
@@ -45,9 +51,9 @@ function RegisterPage() {
                 name: Name,
                 password: Password,
             };
-            dispatch(registerUser(body)).payload.then((res) => {
-                navigate("/login");
-            });
+            // dispatch(registerUser(body)).payload.then((res) => {
+            //     navigate("/login");
+            // });
         } else {
             alert("비밀번호가 일치하지 않습니다");
         }
@@ -63,7 +69,24 @@ function RegisterPage() {
         height: "100vh",
         }}>
 
-        <button onClick={()=>{dispatch(changeText("fff"))}}>{text}</button>
+        <div>
+            <h1>{number}</h1>
+
+            <button onClick={()=>{dispatch(numberAddAsync())}}>INCREMENT ASYNC</button>
+            <button onClick={()=>{dispatch(numberAdd())}}>INCREMENT</button>
+        </div>
+
+
+        <div>
+            <h1>네이버 호출</h1>
+            <button onClick={()=>{dispatch(searchNaver())}}>네이버 호출</button>
+        </div>
+
+        
+
+        <button onClick={()=>{dispatch(addName("fff"))}}>{text}</button>
+        <button onClick={()=>{dispatch(changeToBar())}}>{text}</button>
+        <button onClick={()=>{dispatch(changeToFoo())}}>{text}</button>
 
         <form
         onSubmit={onSubmitHandler}
