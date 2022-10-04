@@ -1,0 +1,14 @@
+@font-face {
+    font-family: 'RecipekoreaM';
+    font-style: normal;
+    font-weight: medium;
+    src: url("./assets/fonts/RecipekoreaM.ttf")
+  }
+
+html,body {
+    width: 100%;
+    height: 100%;
+    max-width: 767px;
+    margin: 0px;
+    padding: 0px;
+}

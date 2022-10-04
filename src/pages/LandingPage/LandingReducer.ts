@@ -1,4 +1,5 @@
-import {CALL_MAIN_API, CALL_MAIN_API_FAILURE, CALL_MAIN_API_SUCCESS, CREATE_TASK, taskInitState} from "./LandingConstants";
+import { CALL_MAIN_API_FAILURE, CALL_MAIN_API_SUCCESS, CREATE_TASK } from "./LandingActions";
+import { taskInitState } from "./LandingConstants";
 
 type movieItem = {
     title: string,
@@ -18,16 +19,16 @@ const moviesInitState: movieItemList = {
     ]
 }
 
-export function mainMovieReducer(state = moviesInitState, action : any) {
+export function mainMovieReducer(state = moviesInitState, action: any) {
     switch (action.type) {
         case CALL_MAIN_API_SUCCESS:
             return {
-                ... state,
+                ...state,
                 movies: action.movies
             };
         case CALL_MAIN_API_FAILURE:
             return {
-                ... state
+                ...state
             };
         default:
             return state;
@@ -36,11 +37,11 @@ export function mainMovieReducer(state = moviesInitState, action : any) {
 
 
 
-export function remainTaskReducer(state = taskInitState, action : any) {
+export function remainTaskReducer(state = taskInitState, action: any) {
     switch (action.type) {
         case CREATE_TASK:
             return {
-                ... state,
+                ...state,
                 tasks: [
                     ...state.tasks,
                     action.task

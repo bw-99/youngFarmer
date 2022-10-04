@@ -5,14 +5,13 @@ import LandingPage from './pages/LandingPage/LandingPage';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import RegisterPage from './pages/Register/RegisterPage';
 import LoginPage from './pages/LoginPage/LoginPage';
+import SplashPage from './pages/SplashPage/SplashPage';
+import styled from 'styled-components';
 
 
-const background = {
-  // width: 360,
-  height: 704,
-  backgroundColor: "#e7f5ff",
-  maxWidth: 360
-};
+const Background = styled.div`
+    max-width: 150px;
+`
 
 
 function App() {
@@ -22,14 +21,13 @@ function App() {
 
 
   return (
-    <div>
+    <Background>
       <Routes>
-        <Route path='/' element = {<LandingPage />}/>
+        <Route path='/' element = {<LoginPage />}/>
         <Route path='/register' element = {<RegisterPage />}/>
         <Route path='/login' element = {<LoginPage />}/>
-        
       </Routes>
-    </div>
+    </Background>
   );
 }
 
