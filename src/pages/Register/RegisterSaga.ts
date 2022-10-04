@@ -9,8 +9,6 @@ export function* helloSaga () {
     const {data} = yield call(searchGoogleApi, "react");
 
     console.log('Hello Sagas!');
-    console.log(data);
-    
 
     // const $ = cheerio.load(data);
     // console.log($);
