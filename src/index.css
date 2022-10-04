@@ -5,6 +5,27 @@
     src: url("./assets/fonts/RecipekoreaM.ttf")
   }
 
+@font-face {
+  font-family: 'SCDream';
+  font-style: normal;
+  font-weight: light;
+  src: url("./assets/fonts/SCDream1.otf")
+}
+
+@font-face {
+  font-family: 'SCDream';
+  font-style: normal;
+  font-weight: ExtraLight;
+  src: url("./assets/fonts/SCDream2.otf")
+}
+
+@font-face {
+  font-family: 'SCDream';
+  font-style: normal;
+  font-weight: ExtraBold;
+  src: url("./assets/fonts/SCDream7.otf")
+}
+
 html,body {
     width: 100%;
     height: 100%;
