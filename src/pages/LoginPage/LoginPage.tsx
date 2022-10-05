@@ -3,79 +3,18 @@ import React, { useState } from "react";
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import styled from "styled-components";
 
-import bg from "../../assets/images/login_background.png";
-
-const Background = styled.div`
-    background-image: url(${bg});
-    background-size: 100%;
-    background-repeat: no-repeat;
-`
-
-const MainBox = styled.div`
-    display: flex;
-    height: 100vh;
-    flex-direction: column;
-    justify-content: space-between;
-`
-
-const MainTextBox = styled.div`
-    padding: 193px 122px 0px 24px;
-`
-
-const MainTextBold = styled.span`
-    font-family: SCDream;
-    font-size: 44px;
-    font-weight: ExtraBold;
-    line-height: 59px;
-    color: #ffffff;
-`
-
-const MainTextLight = styled.span`
-    font-family: SCDream;
-    font-size: 44px;
-    font-weight: light;
-    line-height: 59px;
-    color: #ffffff;
-`
-
-const BottomBox = styled.div`
-  width: 100vw;
-  height: 262px;
-  border-radius: 16px;
-  background-color: #ffffff;
-`
+import bg from "../../assets/images/login_background@3x.png";
+import kakao from "../../assets/images/icon-ui-sns-kakao@3x.png";
+import naver from "../../assets/images/icon-sns-naver@3x.png";
+import apple from "../../assets/images/icon-sns-apple@3x.png";
 
 
-const KakaoBox = styled.div`
-  margin: 20px 16px 12px 16px;
-  height: 50px;
-  border-radius: 8px;
-  background-color: #fde500;
-`
+import { AppleBox, BottomBox, KakaoBox, LookAround, LookAroundBeforeLogin, MainBox, MainTextBold, MainTextBox, MainTextLight, NaverBox, SnsText } from "./atoms/Box";
 
-const NaverBox = styled.div`
-  margin: 12px 16px 12px 16px;
-  height: 50px;
-  border-radius: 8px;
-  background-color: #00c73c;
-`
 
-const AppleBox = styled.div`
-  margin: 12px 16px 12px 16px;
-  height: 50px;
-  border-radius: 8px;
-  background-color: #000000;
-`
 
-const LookAroundBeforeLogin = styled.div`
-  font-family: AppleSDGothicNeo;
-  padding: 16px 115px 15px 115px;
-  border-radius: 8px;
-  font-size: 15px;
-  font-weight: 500;
-  color: #777777;
-  width: 100vw;
-`
+
+
 
 function LoginPage(props: any) {
     const params = useParams();
@@ -120,10 +59,35 @@ function LoginPage(props: any) {
                     </div>
                 </MainTextBox>
                 <BottomBox>
-                    <KakaoBox> 카카오로 계속하기 </KakaoBox>
-                    <NaverBox> 네이버로 계속하기 </NaverBox>
-                    <AppleBox> Apple로 계속하기 </AppleBox>
-                    <LookAroundBeforeLogin> 로그인 전 둘러보기 </LookAroundBeforeLogin>
+                    <KakaoBox> 
+                        <SnsText>
+                            <img src={kakao} style={{marginRight:'8px'}} width= '24px' height= '24px'/>
+                            <div>
+                            카카오로 계속하기
+                            </div>
+                        </SnsText>
+                    </KakaoBox>
+                    <NaverBox> 
+                        <SnsText>
+                            <img src={naver} style={{marginRight:'8px'}} width= '24px' height= '24px'/>
+                            <div>
+                            네이버로 계속하기
+                            </div>
+                        </SnsText> 
+                    </NaverBox>
+                    <AppleBox> 
+                        <SnsText>
+                            <img src={apple} style={{marginRight:'8px'}} width= '24px' height= '24px'/>
+                            <div>
+                            Apple로 계속하기 
+                            </div>
+                        </SnsText>
+                    </AppleBox>
+                    <LookAroundBeforeLogin> 
+                        <LookAround>
+                        로그인 전 둘러보기
+                        </LookAround>
+                    </LookAroundBeforeLogin>
                 </BottomBox>
             </MainBox>
         </div>

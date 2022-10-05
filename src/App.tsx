@@ -7,6 +7,7 @@ import RegisterPage from './pages/Register/RegisterPage';
 import LoginPage from './pages/LoginPage/LoginPage';
 import SplashPage from './pages/SplashPage/SplashPage';
 import styled from 'styled-components';
+import MainPage from './pages/MainPage/MainPage';
 
 
 const Background = styled.div`
@@ -23,7 +24,7 @@ function App() {
   return (
     <Background>
       <Routes>
-        <Route path='/' element = {<LoginPage />}/>
+        <Route path='/' element = {<MainPage />}/>
         <Route path='/register' element = {<RegisterPage />}/>
         <Route path='/login' element = {<LoginPage />}/>
       </Routes>

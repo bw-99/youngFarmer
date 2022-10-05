@@ -8,23 +8,68 @@
 @font-face {
   font-family: 'SCDream';
   font-style: normal;
-  font-weight: light;
+  font-weight: thin;
   src: url("./assets/fonts/SCDream1.otf")
 }
 
 @font-face {
   font-family: 'SCDream';
   font-style: normal;
-  font-weight: ExtraLight;
-  src: url("./assets/fonts/SCDream2.otf")
+  font-weight: bold;
+  src: url("./assets/fonts/SCDream7.otf")
+}
+
+
+
+@font-face {
+  font-family: 'AppleSDGothicNeo';
+  font-style: normal;
+  font-weight: bold;
+  src: url("./assets/fonts/AppleSDGothicNeoB.ttf")
 }
 
 @font-face {
-  font-family: 'SCDream';
+  font-family: 'AppleSDGothicNeo';
   font-style: normal;
-  font-weight: ExtraBold;
-  src: url("./assets/fonts/SCDream7.otf")
+  font-weight: 800;
+  src: url("./assets/fonts/AppleSDGothicNeoEB.ttf")
 }
+
+@font-face {
+  font-family: 'AppleSDGothicNeo';
+  font-style: normal;
+  font-weight: light;
+  src: url("./assets/fonts/AppleSDGothicNeoL.ttf")
+}
+
+@font-face {
+  font-family: 'AppleSDGothicNeo';
+  font-style: normal;
+  font-weight: 500;
+  src: url("./assets/fonts/AppleSDGothicNeoM.ttf")
+}
+@font-face {
+  font-family: 'AppleSDGothicNeo';
+  font-style: normal;
+  font-weight: regular;
+  src: url("./assets/fonts/AppleSDGothicNeoR.ttf")
+}
+
+@font-face {
+  font-family: 'AppleSDGothicNeo';
+  font-style: normal;
+  font-weight: 600;
+  src: url("./assets/fonts/AppleSDGothicNeoSB.ttf")
+}
+
+@font-face {
+  font-family: 'AppleSDGothicNeo';
+  font-style: normal;
+  font-weight: thin;
+  src: url("./assets/fonts/AppleSDGothicNeoT.ttf")
+}
+
+
 
 html,body {
     width: 100%;
