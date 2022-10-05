@@ -72,6 +72,7 @@ export const DiscountImageBox = styled.img`
   height: 287px;
   width: 100vw;
   opacity: 1.0;
+  object-fit: cover;
 `
 
 export const CategoryBox = styled.div`

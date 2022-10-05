@@ -10,6 +10,22 @@ import rootReducer from './reducers';
 import rootSaga from './sagas/index';
 
 import './index.css';
+import configInfo from "./firebaseConfig.json";
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+
+const firebaseConfig = {
+  apiKey: configInfo.apiKey,
+  authDomain: configInfo.authDomain,
+  projectId: configInfo.projectId,
+  storageBucket: configInfo.storageBucket,
+  messagingSenderId: configInfo.messagingSenderId,
+  appId: configInfo.appId,
+  measurementId: configInfo.measurementId
+};
+
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 
 const sagaMiddleware = createSagaMiddleware();
 
