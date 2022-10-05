@@ -24,7 +24,7 @@
 @font-face {
   font-family: 'AppleSDGothicNeo';
   font-style: normal;
-  font-weight: bold;
+  font-weight: 600;
   src: url("./assets/fonts/AppleSDGothicNeoB.ttf")
 }
 
@@ -77,4 +77,9 @@ html,body {
     max-width: 767px;
     margin: 0px;
     padding: 0px;
+}
+
+/* 스크롤바 삭제 */
+::-webkit-scrollbar {
+  display: none;
 }

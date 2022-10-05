@@ -1,6 +1,5 @@
 import styled from "styled-components"
 
-
 export const AppBar = styled.div`
   height: 56px;
   display: flex;
@@ -14,8 +13,6 @@ export const AppBarIcon = styled.img`
   padding: 16px 8px 16px 8px;
   src: ${(props:any) => props.src}
 `
-
-
 
 export const TopGradationBox = styled.div`
     height: 310px;
@@ -42,8 +39,6 @@ export const DiscountText = styled.div`
     color: #fb6159;
 `
 
-
-
 export const MainTextLight = styled.div`
   font-family: AppleSDGothicNeo;
   font-size: 24px;
@@ -63,7 +58,6 @@ export const MainTextBold = styled.div`
   line-height: 1.5;
 `
 
-
 export const DiscountPeriod = styled.div`
   opacity: 0.8;
   font-family: AppleSDGothicNeo;
@@ -73,17 +67,19 @@ export const DiscountPeriod = styled.div`
   margin: 8px 0px 0px 0px;
 `
 
-export const DiscountImageBox = styled.div`
+//! 이거 투명도 왜이러냐 ㅅㅂ
+export const DiscountImageBox = styled.img`
   height: 287px;
-  background-color: red;
+  width: 100vw;
+  opacity: 1.0;
 `
-
 
 export const CategoryBox = styled.div`
-  margin: 26px 16px 38px 16px;
+  padding: 26px 16px 38px 16px;
   display: flex;
+  overflow: auto;
+  scrollbar-width: none;
 `
-
 
 export const CategoryIconBox = styled.div`
   display: flex;
@@ -120,4 +116,4 @@ export const CategoryBottomLine = styled.div`
   background-color: #efefef;
 `
 
-// position: relative;
+// recommendRightArrow
