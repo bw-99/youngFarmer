@@ -76,7 +76,7 @@ export const DiscountImageBox = styled.img`
 `
 
 export const CategoryBox = styled.div`
-  padding: 26px 16px 38px 16px;
+  margin: 26px 16px 38px 16px;
   display: flex;
   overflow: auto;
   scrollbar-width: none;

@@ -19,21 +19,10 @@ export const LiveTitle = styled.div`
 display: flex;
 align-items: center;
 justify-content: space-between;
-margin-bottom: 17px;
+margin-bottom: 2px;
+padding: 0 8px 0 8px;
 `
 
-export const LiveItemCover = styled.div`
-    width: 343px;
-    height: 400px;
-    border-radius: 12px;
-    background-image: linear-gradient(to top, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, 0.7));
-    position: absolute;
-    z-index: 10;
-    top: ${(props:any) => props.top};
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-`
 
 export const LiveItemImage = styled.img`
     width: 343px;
@@ -50,6 +39,20 @@ export const LiveItemCoverTextDate = styled.div`
   color: #cccccc;
   padding: 30px 0 6px 16px;
 `
+
+export const LiveItemCover = styled.div`
+    width: 343px;
+    height: 400px;
+    border-radius: 12px;
+    background-image: linear-gradient(to top, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, 0.7));
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+`
+
 
 export const LiveItemCoverTextMain = styled.div`
   font-family: AppleSDGothicNeo;

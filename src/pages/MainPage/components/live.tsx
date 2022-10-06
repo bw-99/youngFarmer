@@ -4,15 +4,21 @@ import liveFruitMarket from "../../../assets/images/main_live_fruitMarket.png";
 
 export const LiveComponent = () => {
     return (
-       <div style={{position: "relative", top:"0px", padding: "43px 16px 24px 16px"}}>
+       <div style={{position: "relative", top:"0px", padding: "43px 8px 24px 8px"}}>
             
             <LiveTitleComponent />
             {/* <div style={{position: "absolute", opacity: 1}}> */}
-            <div>
-                {LiveItemComponent(92)}
-                {LiveItemComponent(92 + 419.7*1)}
-                {LiveItemComponent(92 + 419.7*2)}
-                {LiveItemComponent(92 + 419.7*3)}
+            <div style={{display:"flex", flexWrap:"wrap", flexDirection:"row"}}>
+                <LiveItemComponent />
+                <LiveItemComponent />
+                <LiveItemComponent />
+                <LiveItemComponent />
+                <LiveItemComponent />
+                <LiveItemComponent />
+                <LiveItemComponent />
+                <LiveItemComponent />
+                <LiveItemComponent />
+                <LiveItemComponent />
             </div>
        </div>
     );
@@ -27,18 +33,19 @@ const LiveTitleComponent = () => {
     );
 }
 
-const LiveItemComponent = (top:number) => {
+const LiveItemComponent = () => {
     return (
-        // <div style={{position: "relative", opacity: 1, zIndex : 100}}>
-        <div style={{marginBottom: "16px"}}>
+        <div style={{position:"relative", margin: "15px 8px 15px 8px"}}>
             <LiveItemImage src={liveFruitMarket} />    
-            {LiveItemCoverComponent(top)}
+            <LiveItemCoverComponent/>
         </div>
     );
 }
-const LiveItemCoverComponent = (top:number) => {
+
+
+const LiveItemCoverComponent = () => {
     return (
-        <LiveItemCover style={{top: `${top}px`}}>
+        <LiveItemCover>
             <div>
                 <LiveItemCoverTextDate>2022.09.07</LiveItemCoverTextDate>
                 <LiveItemCoverTextMain>
@@ -58,6 +65,5 @@ const LiveItemCoverComponent = (top:number) => {
                 </div>
             </LiveItemCoverBottom>
         </LiveItemCover>
-
     );
 }

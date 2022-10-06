@@ -4,7 +4,7 @@ import recommendItemStawberry from "../../../assets/images/main_recommend_strawb
 
 export const DiscountComponent = () => {
     return (
-        <div>
+        <div style={{position: "relative"}}>
             <div style={{ padding: "0px 16px 0px 16px"}}>
                 <DiscountBox>
                 <DiscountText>50% 마감 할인</DiscountText>
@@ -22,10 +22,10 @@ export const DiscountComponent = () => {
                     9/7부터 ~ 9/16까지
                 </DiscountPeriod>
 
-                <div style={{height: "201px"}}></div>
+                <div style={{height: "227px"}}></div>
             </div>
 
-            <div style={{zIndex: -10, position: "absolute", top:"129px", opacity: 1}}>
+            <div style={{zIndex: -10, position: "absolute", top:"73px", opacity: 1}}>
                 <DiscountImageBox src={recommendItemStawberry}></DiscountImageBox>
             </div>
         </div>
