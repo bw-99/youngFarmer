@@ -3,7 +3,7 @@ import lookEntireBannerTomato from "../../../assets/images/main_lookEntireBanner
 
 export const LookEntireBannerComponent = () => {
     return (
-       <div style={{position: "relative", top:"-80px", margin: "0 0 0 0"}}>
+       <div style={{margin: "0 0 0 0"}}>
             <BannerBackgroundAtom> 
                 <BannerTextComponent />
                 <BannerImageComponent />

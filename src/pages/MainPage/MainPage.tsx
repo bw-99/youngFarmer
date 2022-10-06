@@ -15,6 +15,7 @@ import { CategoryComponent } from "./components/category";
 import { RecommendComponent } from "./components/recommend";
 import { LookEntireBannerComponent } from "./components/lookEntireBanner";
 import { LiveComponent } from "./components/live";
+import { BottomNavigationBar } from "../../common/BottomNavigationBar/BottomNavigationBar";
 
 
 function MainPage(props: any) {
@@ -49,6 +50,8 @@ function MainPage(props: any) {
             <RecommendComponent />
             <LookEntireBannerComponent />
             <LiveComponent />
+
+            <BottomNavigationBar />
            
         </div>
 

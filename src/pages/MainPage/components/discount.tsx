@@ -21,9 +21,11 @@ export const DiscountComponent = () => {
                 <DiscountPeriod>
                     9/7부터 ~ 9/16까지
                 </DiscountPeriod>
+
+                <div style={{height: "201px"}}></div>
             </div>
 
-            <div style={{zIndex: -10, position: "relative", top:"-80px"}}>
+            <div style={{zIndex: -10, position: "absolute", top:"129px", opacity: 1}}>
                 <DiscountImageBox src={recommendItemStawberry}></DiscountImageBox>
             </div>
         </div>

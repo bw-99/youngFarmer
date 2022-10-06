@@ -9,7 +9,7 @@ import categoryHealthy from "../../../assets/images/category-healthy@3x.png";
 
 export const CategoryComponent = () => {
     return (
-        <div style={{position: "relative", top:"-80px"}}>
+        <div>
                 <CategoryBox>
                     <CategoryIconBox>
                         <CategoryIcon src={categoryBest}></CategoryIcon>

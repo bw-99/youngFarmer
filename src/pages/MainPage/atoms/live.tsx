@@ -29,7 +29,7 @@ export const LiveItemCover = styled.div`
     background-image: linear-gradient(to top, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, 0.7));
     position: absolute;
     z-index: 10;
-    top: 91px;
+    top: ${(props:any) => props.top};
     display: flex;
     flex-direction: column;
     justify-content: space-between;

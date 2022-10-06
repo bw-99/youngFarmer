@@ -4,7 +4,7 @@ import { RecommnedTitle, RecommnedTitleText, RecommnedTitleArrow, RecommendList,
 
 export const RecommendComponent = () => {
     return (
-       <div style={{position: "relative", top:"-80px", padding: "38px 0 0 0"}}>
+       <div style={{padding: "38px 0 0 0"}}>
             <RecommnedTitle>
                 <RecommnedTitleText>오늘의 추천 상품</RecommnedTitleText>
                 <RecommnedTitleArrow src={recommendRightArrow}/>

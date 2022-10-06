@@ -1,4 +1,5 @@
 import {combineReducers} from "redux";
+import { BottomNavigationBarReducer } from "../common/BottomNavigationBar/BottomNavigationBarReducer";
 import { mainMovieReducer, remainTaskReducer } from "../pages/LandingPage/LandingReducer";
 import {adminReducer, userNameReducer,counterReducer} from "../pages/Register/RegisterReducer";
 
@@ -7,7 +8,8 @@ const rootReducer = combineReducers({
   userNameReducer,
   counterReducer,
   mainMovieReducer,
-  remainTaskReducer
+  remainTaskReducer,
+  BottomNavigationBarReducer
 });
 
 export default rootReducer;

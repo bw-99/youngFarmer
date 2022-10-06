@@ -25,7 +25,8 @@ function App() {
     <Background>
       <Routes>
         <Route path='/' element = {<MainPage />}/>
-        <Route path='/register' element = {<RegisterPage />}/>
+        <Route path='/main' element = {<MainPage />}/>
+        <Route path='/splash' element = {<SplashPage />}/>
         <Route path='/login' element = {<LoginPage />}/>
       </Routes>
     </Background>
