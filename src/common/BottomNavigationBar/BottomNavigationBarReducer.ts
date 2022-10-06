@@ -1,7 +1,8 @@
+import { useLocation, useNavigate } from "react-router-dom";
 import { CHAT_PAGE, HOME_PAGE, LIKE_PAGE, MY_PAGE, SEARCH_PAGE } from "./BottomNavigationBarActions";
 import { BottomNavBarInitState } from "./BottomNavigationBarConstants";
 
-
+// ! 새로고침할 때 redux 상태 초기화 되는 문제 => 로컬 스토리지로 해결 필요
 export function BottomNavigationBarReducer(state = BottomNavBarInitState, action: any) {
     switch (action.type) {
         case HOME_PAGE:
@@ -30,6 +31,8 @@ export function BottomNavigationBarReducer(state = BottomNavBarInitState, action
                 index: 4
             };
         default:
+            console.log("이건가");
+
             return {
                 ...state,
                 index: 0

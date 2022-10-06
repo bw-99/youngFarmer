@@ -1,3 +1,4 @@
+
 export const HOME_PAGE = "HOME_PAGE";
 export const SEARCH_PAGE = "SEARCH_PAGE";
 export const LIKE_PAGE = "LIKE_PAGE";
@@ -6,8 +7,6 @@ export const MY_PAGE = "MY_PAGE";
 
 
 export const GOTO_HOME_PAGE = () => {
-    console.log("??");
-    
     return {
         type: HOME_PAGE
     }

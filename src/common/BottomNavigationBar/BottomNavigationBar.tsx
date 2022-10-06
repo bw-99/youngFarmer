@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { taskItem } from "../../pages/LandingPage/LandingConstants";
@@ -53,26 +53,69 @@ export const BottomNavigationBar = () => {
     const dispatch = useDispatch();
 
     const pageIndex: number = useSelector((state : RootState) => state.BottomNavigationBarReducer.index);
-    
+        
+    // //? 새로고침 했을 때 루트 페이지로 이동?
+    // useEffect(() => {
+    //     window.addEventListener("beforeunload", refreshApp);
+    //     return () => {
+    //     window.removeEventListener("beforeunload", refreshApp);
+    //     };
+    // }, []);
+
+    // const refreshApp = (e: BeforeUnloadEvent) => {
+    //     e.preventDefault();
+    //     let redirectPath = location.pathname.split('/')[1];
+    //     console.log(redirectPath);
+        
+    //     switch (redirectPath) {
+    //         case '':
+    //             dispatch(GOTO_HOME_PAGE());
+    //             break;
+    //         case 'search':
+    //             dispatch(GOTO_SEARCH_PAGE());
+    //             break;  
+    //         case 'like':
+    //             console.log("???????????????????????????");
+                
+    //             dispatch(GOTO_LIKE_PAGE());
+    //             break;
+    //         case 'chat':
+    //             dispatch(GOTO_CHAT_PAGE());
+    //             break;
+    //         case 'mypage':
+    //             dispatch(GOTO_MY_PAGE());
+    //             break;
+    //         default:
+    //             dispatch(GOTO_HOME_PAGE());
+    //         break;
+    //     }
+        
+    //     // dispatch(GOTO_HOME_PAGE());
+    // };
 
     return(
-        <div style={{position:"fixed", zIndex: 10000,bottom: 0,width:"100vw", height:"64px", backgroundColor: "#f5f5f5", display: "flex", justifyContent: "space-between"}}>
-            {IconItemComponent(
-                0,
-            )}
-            {IconItemComponent(
-                1,
-            )}
-            {IconItemComponent(
-                2,
-            )}
-            {IconItemComponent(
-                3,
-            )}
-            {IconItemComponent(
-                4,
-            )}
+        <div>
+            <div style={{height:"64px"}} ></div>
+
+            <div style={{position:"fixed", zIndex: 10000,bottom: 0,width:"100vw", height:"64px", backgroundColor: "#f5f5f5", display: "flex", justifyContent: "space-between"}}>
+                {IconItemComponent(
+                    0,
+                )}
+                {IconItemComponent(
+                    1,
+                )}
+                {IconItemComponent(
+                    2,
+                )}
+                {IconItemComponent(
+                    3,
+                )}
+                {IconItemComponent(
+                    4,
+                )}
+            </div>
         </div>
+        
     );
 }
 
@@ -86,7 +129,7 @@ const IconItemComponent = (itemNumber: number) => {
         GOTO_HOME_PAGE, GOTO_SEARCH_PAGE, GOTO_LIKE_PAGE, GOTO_CHAT_PAGE, GOTO_MY_PAGE
     ];
     const routeList = [
-        "/main", "/splash", "/login", "/login", "/login", 
+        "/main", "/splash", "/like", "/login", "/login", 
     ]
 
     const textList = [

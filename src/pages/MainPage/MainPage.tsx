@@ -4,8 +4,6 @@ import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import styled from "styled-components";
 
 
-import alarm from "../../assets/images/alarm@3x.png";
-import shopping_bag from "../../assets/images/shopping_bag@3x.png";
 
 
 
@@ -16,6 +14,8 @@ import { RecommendComponent } from "./components/recommend";
 import { LookEntireBannerComponent } from "./components/lookEntireBanner";
 import { LiveComponent } from "./components/live";
 import { BottomNavigationBar } from "../../common/BottomNavigationBar/BottomNavigationBar";
+import { NotiComponent } from "../../common/NotiIcon/NotiIcon";
+import { ShoppingBagIconComponent } from "../../common/ShoppingBagIcon/ShoppingBagIconComponent";
 
 
 function MainPage(props: any) {
@@ -38,10 +38,10 @@ function MainPage(props: any) {
     };
 
     return (
-        <div style={{position: "relative", width: "100vw", padding: "0px 0px 0px 0px" ,height:"100vh" , backgroundImage: 'linear-gradient(to bottom, #fdeae6, #fdeae6 23%, rgba(253, 234, 230, 0.73) 30%, rgba(253, 234, 230, 0))'}}>
+        <div style={{position: "relative", width: "100vw", height:"100vh" , backgroundImage: 'linear-gradient(to bottom, #fdeae6, #fdeae6 23%, rgba(253, 234, 230, 0.73) 30%, rgba(253, 234, 230, 0))'}}>
            <AppBar>
-                <AppBarIcon src={alarm} alt="" />
-                <AppBarIcon src={shopping_bag} alt="" />
+                <NotiComponent />
+                <ShoppingBagIconComponent />
                 <div style={{width: "8px"}}></div>
             </AppBar>
            

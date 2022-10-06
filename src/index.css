@@ -24,6 +24,37 @@
 @font-face {
   font-family: 'AppleSDGothicNeo';
   font-style: normal;
+  font-weight: 100;
+  src: url("./assets/fonts/AppleSDGothicNeoT.ttf")
+}
+
+@font-face {
+  font-family: 'AppleSDGothicNeo';
+  font-style: normal;
+  font-weight: light;
+  src: url("./assets/fonts/AppleSDGothicNeoL.ttf")
+}
+
+
+@font-face {
+  font-family: 'AppleSDGothicNeo';
+  font-style: normal;
+  font-weight: 400;
+  src: url("./assets/fonts/AppleSDGothicNeoR.ttf")
+}
+
+@font-face {
+  font-family: 'AppleSDGothicNeo';
+  font-style: normal;
+  font-weight: 500;
+  src: url("./assets/fonts/AppleSDGothicNeoM.ttf")
+}
+
+
+
+@font-face {
+  font-family: 'AppleSDGothicNeo';
+  font-style: normal;
   font-weight: 600;
   src: url("./assets/fonts/AppleSDGothicNeoB.ttf")
 }
@@ -35,39 +66,7 @@
   src: url("./assets/fonts/AppleSDGothicNeoEB.ttf")
 }
 
-@font-face {
-  font-family: 'AppleSDGothicNeo';
-  font-style: normal;
-  font-weight: light;
-  src: url("./assets/fonts/AppleSDGothicNeoL.ttf")
-}
 
-@font-face {
-  font-family: 'AppleSDGothicNeo';
-  font-style: normal;
-  font-weight: 500;
-  src: url("./assets/fonts/AppleSDGothicNeoM.ttf")
-}
-@font-face {
-  font-family: 'AppleSDGothicNeo';
-  font-style: normal;
-  font-weight: regular;
-  src: url("./assets/fonts/AppleSDGothicNeoR.ttf")
-}
-
-@font-face {
-  font-family: 'AppleSDGothicNeo';
-  font-style: normal;
-  font-weight: 600;
-  src: url("./assets/fonts/AppleSDGothicNeoSB.ttf")
-}
-
-@font-face {
-  font-family: 'AppleSDGothicNeo';
-  font-style: normal;
-  font-weight: thin;
-  src: url("./assets/fonts/AppleSDGothicNeoT.ttf")
-}
 
 
 
