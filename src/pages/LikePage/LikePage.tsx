@@ -6,11 +6,11 @@ import styled from "styled-components";
 
 import alarm from "../../assets/images/alarm@3x.png";
 import shopping_bag from "../../assets/images/shopping_bag@3x.png";
+import { AppBarComponentNoBack } from "../../common/AppBar/AppBar";
 
 
 
 import { BottomNavigationBar } from "../../common/BottomNavigationBar/BottomNavigationBar";
-import { AppBarComponent } from "./components/appbar";
 import { ItemComponent } from "./components/item";
 
 
@@ -35,7 +35,7 @@ function LikePage(props: any) {
 
     return (
         <div style={{width: "100vw", height: "100vh"}}>
-            <AppBarComponent />
+            {AppBarComponentNoBack("찜하기")}
             <ItemComponent />
             <BottomNavigationBar />
         </div>

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import alarm from "../../assets/images/alarm@3x.png";
+import alarm from "../../../assets/images/alarm@3x.png";
 
 const AppBarIcon = styled.img`
   width: 24px;

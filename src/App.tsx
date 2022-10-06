@@ -11,6 +11,7 @@ import MainPage from './pages/MainPage/MainPage';
 import LikePage from './pages/LikePage/LikePage';
 import { useDispatch } from 'react-redux';
 import { GOTO_CHAT_PAGE, GOTO_HOME_PAGE, GOTO_LIKE_PAGE, GOTO_MY_PAGE, GOTO_SEARCH_PAGE } from './common/BottomNavigationBar/BottomNavigationBarActions';
+import ChatPage from './pages/ChatPage/ChatPage';
 
 
 const Background = styled.div`
@@ -43,11 +44,12 @@ function App() {
   return (
     <Background>
       <Routes>
-        <Route path='/' element = {<MainPage />}/>
+        <Route path='/' element = {<SplashPage />}/>
         <Route path='/main' element = {<MainPage />}/>
         <Route path='/like' element = {<LikePage />}/>
         <Route path='/splash' element = {<SplashPage />}/>
         <Route path='/login' element = {<LoginPage />}/>
+        <Route path='/chat' element = {<ChatPage />}/>
       </Routes>
     </Background>
   );

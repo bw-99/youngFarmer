@@ -14,8 +14,9 @@ import { RecommendComponent } from "./components/recommend";
 import { LookEntireBannerComponent } from "./components/lookEntireBanner";
 import { LiveComponent } from "./components/live";
 import { BottomNavigationBar } from "../../common/BottomNavigationBar/BottomNavigationBar";
-import { NotiComponent } from "../../common/NotiIcon/NotiIcon";
-import { ShoppingBagIconComponent } from "../../common/ShoppingBagIcon/ShoppingBagIconComponent";
+import { NotiComponent } from "../../common/AppBar/NotiIcon/NotiIcon";
+import { ShoppingBagIconComponent } from "../../common/AppBar/ShoppingBagIcon/ShoppingBagIconComponent";
+import { AppBarComponentMain } from "../../common/AppBar/AppBar";
 
 
 function MainPage(props: any) {
@@ -39,11 +40,7 @@ function MainPage(props: any) {
 
     return (
         <div style={{position: "relative", width: "100vw", height:"100vh" , backgroundImage: 'linear-gradient(to bottom, #fdeae6, #fdeae6 23%, rgba(253, 234, 230, 0.73) 30%, rgba(253, 234, 230, 0))'}}>
-           <AppBar>
-                <NotiComponent />
-                <ShoppingBagIconComponent />
-                <div style={{width: "8px"}}></div>
-            </AppBar>
+            <AppBarComponentMain />
            
             <DiscountComponent />
             <CategoryComponent />

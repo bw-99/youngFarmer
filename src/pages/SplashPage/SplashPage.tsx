@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { RootState } from "../../reducers";
 import { createTask } from "../LandingPage/LandingActions";
 import { taskItem } from "../LandingPage/LandingConstants";
 import styled from "styled-components";
+import { CALL_LOGIN, LOGIN, LOGIN_SUCCESS } from "./SplashActions";
 
 
 const Background = styled.div`
@@ -29,8 +30,6 @@ const YoungerFarmerFont = styled.div`
     line-height: normal;
     letter-spacing: normal;
     color: #fff;
-
-    
 `
 
 
@@ -40,6 +39,17 @@ function SplashPage() {
     const navigate = useNavigate();
 
     const dispatch = useDispatch();
+
+    useEffect(() => {
+      dispatch(CALL_LOGIN(
+        () => {
+            navigate("/main");
+        }
+      ));
+      return () => {
+      }
+    }, [])
+    
 
     return (
         <div style={{maxWidth: "767px"}}>

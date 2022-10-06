@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import shoppingBag from "../../assets/images/shopping_bag@3x.png";
+import setting from "../../../assets/images/btn-dots-three@3x.png";
 
 const AppBarIcon = styled.img`
   width: 24px;
@@ -9,9 +9,8 @@ const AppBarIcon = styled.img`
   src: ${(props:any) => props.src}
 `
 
-
-export const ShoppingBagIconComponent = () => {
+export const SettingComponent = () => {
     return (
-        <AppBarIcon src={shoppingBag} alt="" />
+        <AppBarIcon src={setting} alt="" />
     );
 }
