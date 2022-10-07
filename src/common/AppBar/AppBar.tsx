@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { BackIconComponent } from "./BackIcon/BackIcon";
 import { NotiComponent } from "./NotiIcon/NotiIcon";
 import { ShoppingBagIconComponent } from "./ShoppingBagIcon/ShoppingBagIconComponent";
@@ -9,6 +9,8 @@ import { SettingComponent } from "./SettingIcon/SettingIcon";
 
 
 import searchIconImage from "../../assets/images/btn-search@3x.png";
+import { useDispatch, useSelector } from "react-redux";
+import { SearchCrateAction } from "../../pages/SearchPage/SearchActions";
 
 // btn-search
 
@@ -109,14 +111,30 @@ export const AppBarComponentNoBack = (title: string) => {
 }
 
 export const AppBarComponentSearch = () => {
-    return (
+    const dispatch = useDispatch();
+    const [search, setSearch] = useState("");
 
+    const handleInputChange = (e:ChangeEvent<HTMLInputElement>) => {
+        setSearch(e.target.value);
+    }
+
+    return (
         <div style={{display:"flex", width:"100vw", justifyContent: "flex-end", alignItems:"center" }}>
             {/* <div style={{display:"flex",flex:1,  justifyContent: "flex-start", alignItems:"center"}}> */}
                 <SearchInput> 
                     <div style={{display: "flex", flexDirection: "row", justifyContent: "flex-start", alignItems:"center"}}>
                         <SearchIcon src={searchIconImage}/>
-                        <SearchInputText type="text" placeholder="검색어를 입력해주세요."></SearchInputText>
+                        <SearchInputText 
+                        onKeyDown={
+                            (e: React.KeyboardEvent<HTMLInputElement>) =>{
+                                if(e.key === "Enter"){
+                                    console.log(search);
+                                    dispatch(SearchCrateAction(search));
+                                }
+                            }
+                        }
+                        onChange={handleInputChange}
+                            type="text" placeholder="검색어를 입력해주세요."></SearchInputText>
                     </div>
                     </SearchInput>
             {/* </div> */}

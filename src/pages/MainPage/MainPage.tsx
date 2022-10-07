@@ -7,9 +7,8 @@ import styled from "styled-components";
 
 
 
-import { AppBar, AppBarIcon, CategoryBottomLine, CategoryBox, CategoryIcon, CategoryIconBox,CategoryText,DiscountBox, DiscountImageBox, DiscountPeriod, DiscountText, MainTextBold, MainTextLight } from "./atoms/atoms";
 import { DiscountComponent } from "./components/discount";
-import { CategoryComponent } from "./components/category";
+import { CategoryComponent } from "../../common/Category/category";
 import { RecommendComponent } from "./components/recommend";
 import { LookEntireBannerComponent } from "./components/lookEntireBanner";
 import { LiveComponent } from "./components/live";

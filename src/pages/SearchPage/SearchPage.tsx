@@ -11,6 +11,8 @@ import { AppBarComponentNoBack, AppBarComponentSearch } from "../../common/AppBa
 
 
 import { BottomNavigationBar } from "../../common/BottomNavigationBar/BottomNavigationBar";
+import { CategoryComponent } from "../../common/Category/category";
+import { RecentSearchComponent } from "./components/RecentSearch";
 
 
 function SearchPage(props: any) {
@@ -18,11 +20,11 @@ function SearchPage(props: any) {
     const location = useLocation();
     const navigate = useNavigate();
 
-
     return (
         <div style={{width: "100vw", height: "100vh"}}>
             {AppBarComponentSearch()}
-            <h1> 작업 중 </h1>
+            <CategoryComponent />
+            <RecentSearchComponent />
             <BottomNavigationBar />
         </div>
     );
