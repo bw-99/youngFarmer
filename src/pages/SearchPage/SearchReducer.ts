@@ -38,13 +38,15 @@ export function SearchReducer(state = searchInitState, action: any) {
             };
 
         case SEARCH_DELETE:
-            console.log("DELETE");
+            console.log("DELETE " + action.payload);
             
             history = [...state.history];
 
             history = history.filter(
                 (value, index, arr) => {
-                    return value == action.payload
+                    console.log(value.text != action.payload);
+                    
+                    return value.text != action.payload
                 }
             )
 

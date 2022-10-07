@@ -58,7 +58,7 @@ export const RecentSearchComponent = () => {
 
 export const RecentSearchHistoryItemComponent = (text: string) => {
     const dispatch = useDispatch();
-    
+
     return(
         <RecentSearchHistoryBg key={text} style={{margin: "8px 6px"}}>
             <div style={{display:"flex", padding: "10px 7px 12px 10px"}}>
