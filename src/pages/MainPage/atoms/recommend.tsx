@@ -38,17 +38,41 @@ export const RecommendItemBox = styled.div`
   width: 154px;
   height: 154px;
   border-radius: 12px;
+  position: relative;
 `
 
 export const RecommendItemCover = styled.div`
-width: 154px;
-height: 60px;
-background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
-position: relative;
-z-index: 10;
-top: -158px;
-border-radius: 12px;
+  width: 154px;
+  height: 60px;
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
+  position: relative;
+  z-index: 10;
+  top: -158px;
+  border-radius: 12px;
 `
+
+export const RecommendItemLike = styled.img`
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  padding: 10px;
+  z-index: 20;
+`
+
+// export const RecommendItemNotLike = styled.img`
+//   width: 30px;
+//   height: 30px;
+//   object-fit: contain;
+//   position: absolute;
+//   top: 0px;
+//   right: 0px;
+//   padding: 10px;
+//   z-index: 20;
+// `
+
 
 export const RecommendItemImage = styled.img`
 width: 154px;

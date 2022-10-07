@@ -1,6 +1,10 @@
 import recommendRightArrow from "../../../assets/images/btn-arrow-r-20-px@3x.png";
 import recommendItemStawberry from "../../../assets/images/main_recommend_strawberry.png";
-import { RecommnedTitle, RecommnedTitleText, RecommnedTitleArrow, RecommendList, RecommendItem, RecommendItemBox, RecommendItemImage, RecommendItemCover, RecommendItemTextInfoSource, RecommendItemTextInfoTitle, RecommendItemTextInfoPrice, RecommendItemTextInfoPriceDiscount } from "../atoms/recommend";
+import recommendItemLikeIcon from "../../../assets/images/btn-heart-on@3x.png";
+import recommendItemLikeNotIcon from "../../../assets/images/btn-heart-off@3x.png";
+
+import { RecommnedTitle, RecommnedTitleText, RecommnedTitleArrow, RecommendList, RecommendItem, RecommendItemBox, RecommendItemImage, RecommendItemCover, RecommendItemTextInfoSource, RecommendItemTextInfoTitle, RecommendItemTextInfoPrice, RecommendItemTextInfoPriceDiscount, RecommendItemLike } from "../atoms/recommend";
+import { useState } from "react";
 
 export const RecommendComponent = () => {
     return (
@@ -24,11 +28,13 @@ export const RecommendComponent = () => {
 }
 
 const RecommentUnit = () => {
+    const [isLiked, setIsLiked]  = useState(false);
     return (
         <RecommendItem>
             <RecommendItemBox>
                 <RecommendItemImage src={recommendItemStawberry}/>
                 <RecommendItemCover />
+                <RecommendItemLike onClick={() => {setIsLiked(!isLiked)}} src={isLiked? recommendItemLikeIcon: recommendItemLikeNotIcon}/>
             </RecommendItemBox>
             <div>
                 <RecommendItemTextInfoSource>산천</RecommendItemTextInfoSource>

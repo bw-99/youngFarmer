@@ -1,4 +1,4 @@
-import { LOGIN_SUCCESS } from "./SplashActions"
+import { LOGIN_FAIL, LOGIN_SUCCESS } from "./SplashActions"
 
 type movieItem = {
     title: string,
@@ -21,7 +21,14 @@ const moviesInitState: movieItemList = {
 export function SplashReducer(state = moviesInitState, action: any) {
     switch (action.type) {
         case LOGIN_SUCCESS:
-            action.callback();
+            action.callback.successCallBack();
+
+            return {
+                ...state
+            }
+        case LOGIN_FAIL:
+            
+            action.callback.failCallBack();
             return {
                 ...state
             }

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { useParams, useLocation, useNavigate } from 'react-router-dom';
+import { useParams, useLocation, useNavigate, Link } from 'react-router-dom';
 import styled from "styled-components";
 
 import bg from "../../assets/images/login_background@3x.png";
@@ -12,10 +12,6 @@ import apple from "../../assets/images/icon-sns-apple@3x.png";
 import { AppleBox, BottomBox, KakaoBox, LookAround, LookAroundBeforeLogin, MainBox, MainTextBold, MainTextBox, MainTextLight, NaverBox, SnsText } from "./atoms/Box";
 
 
-
-
-
-
 function LoginPage(props: any) {
     const params = useParams();
     const location = useLocation();
@@ -24,8 +20,8 @@ function LoginPage(props: any) {
     const [Email, setEmail] = useState("");
     const [Password, setPassword] = useState("");
 
-    const onEmailHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setEmail(e.currentTarget.value);
+    const onButtonClickHandler = (e: React.MouseEvent<HTMLInputElement>) => {
+        navigate('/main');
     };
     const onPasswordHanlder = (e: React.ChangeEvent<HTMLInputElement>) => {
         setPassword(e.currentTarget.value);
@@ -83,7 +79,7 @@ function LoginPage(props: any) {
                             </div>
                         </SnsText>
                     </AppleBox>
-                    <LookAroundBeforeLogin> 
+                    <LookAroundBeforeLogin   onClick={onButtonClickHandler}> 
                         <LookAround>
                         로그인 전 둘러보기
                         </LookAround>

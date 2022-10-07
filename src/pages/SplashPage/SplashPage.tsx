@@ -41,10 +41,14 @@ function SplashPage() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-      dispatch(CALL_LOGIN(
-        () => {
+      dispatch(CALL_LOGIN({
+        successCallBack: () => {
             navigate("/main");
-        }
+        },
+        failCallBack:  () => {
+            navigate("/login");
+        },
+      }
       ));
       return () => {
       }

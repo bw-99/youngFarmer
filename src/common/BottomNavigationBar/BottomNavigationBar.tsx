@@ -129,7 +129,7 @@ const IconItemComponent = (itemNumber: number) => {
         GOTO_HOME_PAGE, GOTO_SEARCH_PAGE, GOTO_LIKE_PAGE, GOTO_CHAT_PAGE, GOTO_MY_PAGE
     ];
     const routeList = [
-        "/main", "/splash", "/like", "/chat", "/login", 
+        "/main", "/search", "/like", "/chat", "/mypage", 
     ]
 
     const textList = [
