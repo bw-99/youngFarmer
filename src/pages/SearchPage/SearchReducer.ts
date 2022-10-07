@@ -1,4 +1,4 @@
-import { SERACH_CREATE, SERACH_DELETE } from "./SearchActions";
+import { SEARCH_CREATE, SEARCH_DELETE } from "./SearchActions";
 import { SearchHistoryType, SearchHistoryTypeList } from "./SearchConstants";
 
 const searchInitState : SearchHistoryTypeList = {
@@ -17,25 +17,45 @@ const checkDuplicate = (stateHistory: SearchHistoryType[], payload: string) => {
 }
 
 export function SearchReducer(state = searchInitState, action: any) {
+    let history = [];
+    console.log("????Reducer");
+    
     switch (action.type) {
-        case SERACH_CREATE:
+        case SEARCH_CREATE:
             // 중복 검사
+            console.log("action!!");
+            history = [...state.history];
+
             if(!checkDuplicate(state.history, action.payload)){
-                state.history.push({
+                history.push({
                     text: action.payload
                 });
             }
-            state.history.push({
-                text: action.payload
-            });
+
             return {
                 ...state,
-                history: state.history
+                history: history
             };
-        case SERACH_DELETE:
+
+        case SEARCH_DELETE:
+            console.log("DELETE");
+            
+            history = [...state.history];
+
+            history = history.filter(
+                (value, index, arr) => {
+                    return value == action.payload
+                }
+            )
+
+            console.log(history);
+            
+
             return {
-                ...state
+                ...state,
+                history: history
             };
+
         default:
             return state;
     }

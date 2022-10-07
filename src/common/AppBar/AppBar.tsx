@@ -118,6 +118,21 @@ export const AppBarComponentSearch = () => {
         setSearch(e.target.value);
     }
 
+    const handleUserKeyPress = (e: any) => {
+        if(e.key === "Enter" || e.key === 13){
+            dispatch(SearchCrateAction(search));
+        }
+    }
+
+    useEffect(
+        ()=>{
+            window.addEventListener('keyup', handleUserKeyPress);
+            return () => {
+                window.removeEventListener('keyup', handleUserKeyPress);
+            }
+        }
+    )
+
     return (
         <div style={{display:"flex", width:"100vw", justifyContent: "flex-end", alignItems:"center" }}>
             {/* <div style={{display:"flex",flex:1,  justifyContent: "flex-start", alignItems:"center"}}> */}
@@ -125,14 +140,6 @@ export const AppBarComponentSearch = () => {
                     <div style={{display: "flex", flexDirection: "row", justifyContent: "flex-start", alignItems:"center"}}>
                         <SearchIcon src={searchIconImage}/>
                         <SearchInputText 
-                        onKeyDown={
-                            (e: React.KeyboardEvent<HTMLInputElement>) =>{
-                                if(e.key === "Enter"){
-                                    console.log(search);
-                                    dispatch(SearchCrateAction(search));
-                                }
-                            }
-                        }
                         onChange={handleInputChange}
                             type="text" placeholder="검색어를 입력해주세요."></SearchInputText>
                     </div>

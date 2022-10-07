@@ -5,12 +5,17 @@ import closeIcon from "../../../assets/images/btn-close-20-px@3x.png";
 
 import { RecentSearchHistoryBg, RecentSearchSeperateLine, RecentSearchHistoryText, RecentTextStyle, RecentSearchHistoryClose } from "../atoms/RecentSearch";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../reducers";
 import { SearchHistoryType, SearchHistoryTypeList } from "../SearchConstants";
 import { json } from "stream/consumers";
+import { SearchDeleteAction } from "../SearchActions";
 
 export const RecentSearchComponent = () => {
+
+    const searchHistoryList: SearchHistoryType[] = useSelector((state:RootState) =>
+        state.SearchReducer.history
+    );
     
 
     return(
@@ -26,7 +31,7 @@ export const RecentSearchComponent = () => {
                 {RecentSearchHistoryItemComponent("샤인머스켓")}
                 {RecentSearchHistoryItemComponent("사과")}
                 {RecentSearchHistoryItemComponent("시나몬 골드")} */}
-                {RecentSearchHistoryItemListComponent()}
+                {searchHistoryList.map(item => RecentSearchHistoryItemComponent(item.text))}
 
             </div>
             <div style={{margin:"22px 16px 0px 16px"}}>
@@ -37,27 +42,31 @@ export const RecentSearchComponent = () => {
     )
 }
 
-const RecentSearchHistoryItemListComponent = () => {
-    const searchHistoryList: SearchHistoryType[] = useSelector((state:RootState) =>
-        state.SearchReducer.history
-    );
+// const RecentSearchHistoryItemListComponent = () => {
+//     const searchHistoryList: SearchHistoryType[] = useSelector((state:RootState) =>
+//         state.SearchReducer.history
+//     );
     
-    const rows = [];
+//     const rows = [];
 
-    for(let item of searchHistoryList){
-        rows.push(RecentSearchHistoryItemComponent(item.text))
-    }
+//     for(let item of searchHistoryList){
+//         rows.push(RecentSearchHistoryItemComponent(item.text))
+//     }
 
-    return rows
-}
+//     return rows
+// }
 
 export const RecentSearchHistoryItemComponent = (text: string) => {
+    const dispatch = useDispatch();
+    
     return(
         <RecentSearchHistoryBg key={text} style={{margin: "8px 6px"}}>
             <div style={{display:"flex", padding: "10px 7px 12px 10px"}}>
                 <RecentSearchHistoryText> {text} </RecentSearchHistoryText>
                 <div style={{width:"10px"}}></div>
-                <RecentSearchHistoryClose src={closeIcon}/>
+                <RecentSearchHistoryClose onClick={() => {
+                    dispatch(SearchDeleteAction(text));
+                }} src={closeIcon}/>
             </div>
         </RecentSearchHistoryBg>
     );
