@@ -6,7 +6,7 @@ import styled from "styled-components";
 
 import alarm from "../../assets/images/alarm@3x.png";
 import shopping_bag from "../../assets/images/shopping_bag@3x.png";
-import { AppBarComponentNoBack } from "../../common/AppBar/AppBar";
+import { AppBarComponentNoBack, AppBarComponentSearch } from "../../common/AppBar/AppBar";
 
 
 
@@ -21,7 +21,7 @@ function SearchPage(props: any) {
 
     return (
         <div style={{width: "100vw", height: "100vh"}}>
-            {AppBarComponentNoBack("검색")}
+            {AppBarComponentSearch()}
             <h1> 작업 중 </h1>
             <BottomNavigationBar />
         </div>

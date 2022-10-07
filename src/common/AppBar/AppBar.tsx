@@ -7,6 +7,18 @@ import { ShoppingBagIconComponent } from "./ShoppingBagIcon/ShoppingBagIconCompo
 import styled from "styled-components";
 import { SettingComponent } from "./SettingIcon/SettingIcon";
 
+
+import searchIconImage from "../../assets/images/btn-search@3x.png";
+
+// btn-search
+
+export const SearchIcon = styled.img`
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  padding: 12px 10px 12px 12px;
+`
+
 const AppBar = styled.div`
   width: 100vw;
   height: 56px;
@@ -39,6 +51,28 @@ const AppBarTitle = styled.div`
 `
 
 
+export const SearchInput = styled.div`
+  height: 48px;
+  border-radius: 25px;
+  background-color: #f5f5f5;
+  flex: 1;
+  margin: 0 16px;
+`
+
+export const SearchInputText = styled.input`
+  font-family: AppleSDGothicNeo;
+  font-size: 15px;
+  font-weight: 500;
+  color: #b5b5b5;
+  border: none;
+  background-color: #f5f5f5;
+  flex: 1;
+  margin-right: 20px;
+  outline: none;
+
+
+`
+
 export const AppBarComponentBack = (title: string) => {
     return (
 
@@ -69,6 +103,27 @@ export const AppBarComponentNoBack = (title: string) => {
             <div style={{flex:2, display:"flex", justifyContent: "flex-end", alignItems:"center"}}>
                 <NotiComponent />
                 <ShoppingBagIconComponent />
+            </div>
+        </div>
+    )
+}
+
+export const AppBarComponentSearch = () => {
+    return (
+
+        <div style={{display:"flex", width:"100vw", justifyContent: "flex-end", alignItems:"center" }}>
+            {/* <div style={{display:"flex",flex:1,  justifyContent: "flex-start", alignItems:"center"}}> */}
+                <SearchInput> 
+                    <div style={{display: "flex", flexDirection: "row", justifyContent: "flex-start", alignItems:"center"}}>
+                        <SearchIcon src={searchIconImage}/>
+                        <SearchInputText type="text" placeholder="검색어를 입력해주세요."></SearchInputText>
+                    </div>
+                    </SearchInput>
+            {/* </div> */}
+            
+            <div style={{display:"flex", justifyContent: "flex-end", alignItems:"center"}}>
+                <NotiComponent />
+                <SettingComponent />
             </div>
         </div>
     )
