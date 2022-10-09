@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { RootState } from "../../reducers";
-import { createTask } from "../LandingPage/LandingActions";
-import { taskItem } from "../LandingPage/LandingConstants";
 import styled from "styled-components";
 import { CALL_LOGIN, LOGIN, LOGIN_SUCCESS } from "./SplashActions";
 

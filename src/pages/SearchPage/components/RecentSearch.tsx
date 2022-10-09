@@ -17,7 +17,6 @@ export const RecentSearchComponent = () => {
         state.SearchReducer.history
     );
     
-
     return(
         <div>
             <div style={{margin:"20px 16px 8px 16px"}}>

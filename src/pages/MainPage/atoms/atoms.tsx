@@ -75,46 +75,5 @@ export const DiscountImageBox = styled.img`
   object-fit: cover;
 `
 
-export const CategoryBox = styled.div`
-  padding: 26px 16px 38px 16px;
-  display: flex;
-  overflow: auto;
-  scrollbar-width: none;
-`
-
-export const CategoryIconBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-right: 20px;
-`
-
-
-
-export const CategoryIcon = styled.img`
-    width: 34px;
-    height: 34px;
-    padding: 13px;
-    background-color: #efefef;
-    border-radius: 50%;
-
-    object-fit: contain;
-    src: ${(props:any) => props.src}
-`
-
-export const CategoryText = styled.div`
-  font-family: AppleSDGothicNeo;
-  font-size: 14px;
-  font-weight: 500;
-  text-align: center;
-  color: #272727;
-  margin-top: 8px;
-`
-
-export const CategoryBottomLine = styled.div`
-  height: 1px;
-  background-color: #efefef;
-`
 
 // recommendRightArrow

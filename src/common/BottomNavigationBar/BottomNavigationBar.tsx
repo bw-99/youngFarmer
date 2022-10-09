@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
-import { taskItem } from "../../pages/LandingPage/LandingConstants";
 import { RootState } from "../../reducers";
 import HomePageIconOn from "../../assets/images/btn-tabbar-home-on@3x.png";
 import HomePageIconOff from "../../assets/images/btn-tabbar-home-off@3x.png";
@@ -17,7 +16,7 @@ import LikePageIconOff from "../../assets/images/btn-tabbar-like-off@3x.png";
 
 import MyPageIconOff from "../../assets/images/btn-tabbar-mypage-off@3x.png";
 import styled from "styled-components";
-import { GOTO_CHAT_PAGE, GOTO_HOME_PAGE, GOTO_LIKE_PAGE, GOTO_MY_PAGE, GOTO_SEARCH_PAGE } from "./BottomNavigationBarActions";
+import { CHAT_PAGE, GOTO_CHAT_PAGE, GOTO_HOME_PAGE, GOTO_LIKE_PAGE, GOTO_MY_PAGE, GOTO_SEARCH_PAGE, HOME_PAGE, LIKE_PAGE, MY_PAGE, SEARCH_PAGE } from "./BottomNavigationBarActions";
 
 const IconItem = styled.div`
     display: flex;
@@ -128,6 +127,10 @@ const IconItemComponent = (itemNumber: number) => {
     const actionList = [
         GOTO_HOME_PAGE, GOTO_SEARCH_PAGE, GOTO_LIKE_PAGE, GOTO_CHAT_PAGE, GOTO_MY_PAGE
     ];
+
+    const actionConstantList = [
+        HOME_PAGE, SEARCH_PAGE, LIKE_PAGE, CHAT_PAGE, MY_PAGE
+    ];
     const routeList = [
         "/main", "/search", "/like", "/chat", "/mypage", 
     ]
@@ -149,6 +152,7 @@ const IconItemComponent = (itemNumber: number) => {
     
     return (
         <div onClick={()=> {
+            localStorage.setItem("pageIndex", actionConstantList[itemNumber]);
             navigate(routeList[itemNumber]);
             dispatch(actionList[itemNumber]());
         }}>

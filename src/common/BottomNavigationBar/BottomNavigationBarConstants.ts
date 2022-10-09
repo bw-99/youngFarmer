@@ -9,5 +9,5 @@
 // }
 
 export const BottomNavBarInitState = {
-    index: 0
+    index: -1
 }

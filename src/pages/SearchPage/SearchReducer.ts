@@ -18,12 +18,10 @@ const checkDuplicate = (stateHistory: SearchHistoryType[], payload: string) => {
 
 export function SearchReducer(state = searchInitState, action: any) {
     let history = [];
-    console.log("????Reducer");
     
     switch (action.type) {
         case SEARCH_CREATE:
             // 중복 검사
-            console.log("action!!");
             history = [...state.history];
 
             if(!checkDuplicate(state.history, action.payload)){

@@ -1,9 +1,7 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter, Navigate, Route, Router, Routes } from 'react-router-dom';
-import LandingPage from './pages/LandingPage/LandingPage';
 
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
-import RegisterPage from './pages/Register/RegisterPage';
 import LoginPage from './pages/LoginPage/LoginPage';
 import SplashPage from './pages/SplashPage/SplashPage';
 import styled from 'styled-components';
