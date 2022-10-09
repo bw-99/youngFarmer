@@ -75,6 +75,24 @@ export const SearchInputText = styled.input`
 
 `
 
+export const AppBarComponentOnlyBack = (title: string) => {
+    return (
+
+        <div style={{display:"flex", width:"100vw"}}>
+            <div style={{flex:2, display:"flex", justifyContent: "flex-start", alignItems:"center"}}>
+                <BackIconComponent />
+            </div>
+            <div style={{flex:4, display:"flex", justifyContent: "center"}}>
+                <AppBarTitle> {title} </AppBarTitle>
+            </div>
+            <div style={{flex:2, display:"flex", justifyContent: "flex-end", alignItems:"center"}}>
+            </div>
+        </div>
+    )
+}
+
+
+
 export const AppBarComponentBack = (title: string) => {
     return (
 

@@ -44,6 +44,16 @@ const CategoryText = styled.div`
   margin-top: 8px;
 `
 
+
+const CategoryTextBold = styled.div`
+  font-family: AppleSDGothicNeo;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 8px;
+  color: #f25672;
+`
+
 const CategoryBottomLine = styled.div`
   height: 1px;
   background-color: #efefef;
@@ -61,7 +71,10 @@ export const CategoryComponent = () => {
 
                     <CategoryIconBox>   
                         <CategoryIcon src={categoryDiscount}></CategoryIcon>
-                        <CategoryText> 할인중% </CategoryText>
+                        <div style={{display:"flex"}}>
+                            <CategoryText> 할인중 </CategoryText>
+                            <CategoryTextBold>%</CategoryTextBold>
+                        </div>
                     </CategoryIconBox>
 
                     <CategoryIconBox>   

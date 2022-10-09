@@ -5,11 +5,14 @@ import recommendItemLikeNotIcon from "../../../assets/images/btn-heart-off@3x.pn
 
 import { RecommnedTitle, RecommnedTitleText, RecommnedTitleArrow, RecommendList, RecommendItem, RecommendItemBox, RecommendItemImage, RecommendItemCover, RecommendItemTextInfoSource, RecommendItemTextInfoTitle, RecommendItemTextInfoPrice, RecommendItemTextInfoPriceDiscount, RecommendItemLike } from "../atoms/recommend";
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 export const RecommendComponent = () => {
+    const navigate = useNavigate();
+    
     return (
        <div style={{padding: "38px 0 0 0"}}>
-            <RecommnedTitle>
+            <RecommnedTitle onClick={()=>{navigate("/main/todayRecommend");}}>
                 <RecommnedTitleText>오늘의 추천 상품</RecommnedTitleText>
                 <RecommnedTitleArrow src={recommendRightArrow}/>
             </RecommnedTitle>
@@ -34,7 +37,12 @@ const RecommentUnit = () => {
             <RecommendItemBox>
                 <RecommendItemImage src={recommendItemStawberry}/>
                 <RecommendItemCover />
-                <RecommendItemLike onClick={() => {setIsLiked(!isLiked)}} src={isLiked? recommendItemLikeIcon: recommendItemLikeNotIcon}/>
+                <RecommendItemLike 
+                style={{padding: isLiked? "3px": "10px"}}
+                width={isLiked? "44px":"30px"}
+                height={isLiked? "44px":"30px"}
+                onClick={() => {setIsLiked(!isLiked)}} 
+                src={isLiked? recommendItemLikeIcon: recommendItemLikeNotIcon}/>
             </RecommendItemBox>
             <div>
                 <RecommendItemTextInfoSource>산천</RecommendItemTextInfoSource>

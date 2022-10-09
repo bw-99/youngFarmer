@@ -52,13 +52,10 @@ export const RecommendItemCover = styled.div`
 `
 
 export const RecommendItemLike = styled.img`
-  width: 30px;
-  height: 30px;
-  object-fit: contain;
+  object-fit: cover;
   position: absolute;
   top: 0px;
   right: 0px;
-  padding: 10px;
   z-index: 20;
 `
 

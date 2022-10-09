@@ -11,11 +11,11 @@ import { DiscountComponent } from "./components/discount";
 import { CategoryComponent } from "../../common/Category/category";
 import { RecommendComponent } from "./components/recommend";
 import { LookEntireBannerComponent } from "./components/lookEntireBanner";
-import { LiveComponent } from "./components/live";
 import { BottomNavigationBar } from "../../common/BottomNavigationBar/BottomNavigationBar";
 import { NotiComponent } from "../../common/AppBar/NotiIcon/NotiIcon";
 import { ShoppingBagIconComponent } from "../../common/AppBar/ShoppingBagIcon/ShoppingBagIconComponent";
 import { AppBarComponentMain } from "../../common/AppBar/AppBar";
+import {  LiveTitleComponent, LiveTitleListComponent } from "../../common/LiveItem/liveItem";
 
 
 function MainPage(props: any) {
@@ -45,7 +45,10 @@ function MainPage(props: any) {
             <CategoryComponent />
             <RecommendComponent />
             <LookEntireBannerComponent />
-            <LiveComponent />
+            <div style={{position: "relative", top:"0px", padding: "43px 8px 24px 8px"}}>
+                <LiveTitleComponent />
+                <LiveTitleListComponent/>
+            </div>
 
             <BottomNavigationBar />
            

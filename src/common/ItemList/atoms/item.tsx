@@ -107,3 +107,11 @@ export const ItemOrderShoppingBagButtonText = styled.div`
   font-style: normal;
   margin-left: 6px;
 `
+
+export const ItemLike = styled.img`
+  object-fit: cover;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  z-index: 20;
+`

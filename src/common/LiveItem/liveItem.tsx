@@ -1,25 +1,23 @@
-import { LiveItemCover, LiveItemCoverBottom, LiveItemCoverBottomCost, LiveItemCoverBottomDiscount, LiveItemCoverBottomImage, LiveItemCoverBottomTitle, LiveItemCoverTextDate, LiveItemCoverTextMain, LiveItemImage, LiveTitle, LiveTitleArrow, LiveTitleText } from "../atoms/live";
-import liveRightArrow from "../../../assets/images/btn-arrow-r-20-px@3x.png";
-import liveFruitMarket from "../../../assets/images/main_live_fruitMarket.png";
+import { LiveTitle, LiveTitleText, LiveTitleArrow, LiveItemImage, LiveItemCover, LiveItemCoverTextDate, LiveItemCoverTextMain, LiveItemCoverBottom, LiveItemCoverBottomImage, LiveItemCoverBottomTitle, LiveItemCoverBottomCost, LiveItemCoverBottomDiscount } from "./atoms/live";
+import liveRightArrow from "../../assets/images/btn-arrow-r-20-px@3x.png";
+import liveFruitMarket from "../../assets/images/main_live_fruitMarket.png";
+import { useNavigate } from "react-router-dom";
 
-export const LiveComponent = () => {
+export const LiveTitleListComponent = () => {
     return (
-       <div style={{position: "relative", top:"0px", padding: "43px 8px 24px 8px"}}>
-            
-            <LiveTitleComponent />
-            {/* <div style={{position: "absolute", opacity: 1}}> */}
-            <div style={{display:"flex", flexWrap:"wrap", flexDirection:"row"}}>
-                <LiveItemComponent />
-                <LiveItemComponent />
-                <LiveItemComponent />
-            </div>
-       </div>
+        <div style={{display:"flex", flexWrap:"wrap", flexDirection:"row"}}>
+            <LiveItemComponent />
+            <LiveItemComponent />
+            <LiveItemComponent />
+        </div>
     );
 }
 
-const LiveTitleComponent = () => {
+
+export const LiveTitleComponent = () => {
+    const navigate = useNavigate();
     return (
-        <LiveTitle>
+        <LiveTitle onClick={()=>{navigate('/main/liveList');}}>
             <LiveTitleText> 청년농부 라이브 </LiveTitleText>
             <LiveTitleArrow src={liveRightArrow} />
         </LiveTitle>
