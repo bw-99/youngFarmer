@@ -13,6 +13,7 @@ import { AppBarComponentNoBack, AppBarComponentSearch } from "../../common/AppBa
 import { BottomNavigationBar } from "../../common/BottomNavigationBar/BottomNavigationBar";
 import { CategoryComponent } from "../../common/Category/category";
 import { RecentSearchComponent } from "./components/RecentSearch";
+import { RecommendStoreComponent } from "./components/RecommendStore";
 
 
 function SearchPage(props: any) {
@@ -25,6 +26,7 @@ function SearchPage(props: any) {
             {AppBarComponentSearch()}
             <CategoryComponent />
             <RecentSearchComponent />
+            <RecommendStoreComponent />
             <BottomNavigationBar />
         </div>
     );

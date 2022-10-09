@@ -10,8 +10,6 @@ export const SearchCrateAction = (searchWord: string) => {
 
 
 export const SearchDeleteAction = (searchWord: string) => {
-    console.log("SearchDeleteAction");
-    
     return {
         type: SEARCH_DELETE,
         payload: searchWord

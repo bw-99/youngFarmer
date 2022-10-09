@@ -18,7 +18,7 @@ const checkDuplicate = (stateHistory: SearchHistoryType[], payload: string) => {
 
 export function SearchReducer(state = searchInitState, action: any) {
     let history = [];
-    
+
     switch (action.type) {
         case SEARCH_CREATE:
             // 중복 검사
@@ -29,6 +29,8 @@ export function SearchReducer(state = searchInitState, action: any) {
                     text: action.payload
                 });
             }
+
+            localStorage.setItem("searchHistory", JSON.stringify(history));
 
             return {
                 ...state,
@@ -49,7 +51,7 @@ export function SearchReducer(state = searchInitState, action: any) {
             )
 
             console.log(history);
-            
+            localStorage.setItem("searchHistory", JSON.stringify(history));
 
             return {
                 ...state,
@@ -57,6 +59,12 @@ export function SearchReducer(state = searchInitState, action: any) {
             };
 
         default:
+            let searchHistory = localStorage.getItem("searchHistory");
+
+            if(searchHistory){
+                state.history = JSON.parse(searchHistory);
+            }
+            
             return state;
     }
 }

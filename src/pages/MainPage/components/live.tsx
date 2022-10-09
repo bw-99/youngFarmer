@@ -12,13 +12,6 @@ export const LiveComponent = () => {
                 <LiveItemComponent />
                 <LiveItemComponent />
                 <LiveItemComponent />
-                <LiveItemComponent />
-                <LiveItemComponent />
-                <LiveItemComponent />
-                <LiveItemComponent />
-                <LiveItemComponent />
-                <LiveItemComponent />
-                <LiveItemComponent />
             </div>
        </div>
     );
