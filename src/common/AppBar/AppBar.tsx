@@ -121,6 +121,7 @@ export const AppBarComponentSearch = () => {
     const handleUserKeyPress = (e: any) => {
         if(e.key === "Enter" || e.key === 13){
             dispatch(SearchCrateAction(search));
+            setSearch("");
         }
     }
 
@@ -140,6 +141,7 @@ export const AppBarComponentSearch = () => {
                     <div style={{display: "flex", flexDirection: "row", justifyContent: "flex-start", alignItems:"center"}}>
                         <SearchIcon src={searchIconImage}/>
                         <SearchInputText 
+                        value={search}
                         onChange={handleInputChange}
                             type="text" placeholder="검색어를 입력해주세요."></SearchInputText>
                     </div>
