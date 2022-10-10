@@ -6,27 +6,35 @@ import recommendItemLikeNotIcon from "../../../assets/images/btn-heart-off@3x.pn
 import { RecommnedTitle, RecommnedTitleText, RecommnedTitleArrow, RecommendList, RecommendItem, RecommendItemBox, RecommendItemImage, RecommendItemCover, RecommendItemTextInfoSource, RecommendItemTextInfoTitle, RecommendItemTextInfoPrice, RecommendItemTextInfoPriceDiscount, RecommendItemLike } from "../atoms/recommend";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { ItemUnitImgComp, ItemUnitListComp } from "../../../common/ItemList/ItemList";
 
 export const RecommendComponent = () => {
     const navigate = useNavigate();
     
     return (
-       <div style={{padding: "38px 0 0 0"}}>
+       <div style={{padding: "38px 0 0 0 "}}>
             <RecommnedTitle onClick={()=>{navigate("/main/todayRecommend");}}>
                 <RecommnedTitleText>오늘의 추천 상품</RecommnedTitleText>
                 <RecommnedTitleArrow src={recommendRightArrow}/>
             </RecommnedTitle>
-            
-            <RecommendList>
-                <RecommentUnit />
-                <RecommentUnit />
-                <RecommentUnit />
-            </RecommendList>
-            
 
-            
+            <div style={{padding: "15px 9.5px 42px 9.5px",display:"flex", flexDirection: "row",flexWrap:"nowrap", overflow: "auto"}}>
+                <ItemUnitDesign />
+                <ItemUnitDesign />
+                <ItemUnitDesign />
+                <ItemUnitDesign />
+                <ItemUnitDesign />
+            </div>
             
        </div>
+    );
+}
+
+const ItemUnitDesign = () => {
+    return (
+        <div style={{padding:"0 6.5px"}}>
+            {ItemUnitImgComp(154)}
+        </div>
     );
 }
 

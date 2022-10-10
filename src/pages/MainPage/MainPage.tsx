@@ -4,9 +4,6 @@ import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import styled from "styled-components";
 
 
-
-
-
 import { DiscountComponent } from "./components/discount";
 import { CategoryComponent } from "../../common/Category/category";
 import { RecommendComponent } from "./components/recommend";

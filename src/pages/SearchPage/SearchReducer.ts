@@ -30,6 +30,9 @@ export function SearchReducer(state = searchInitState, action: any) {
                 });
             }
 
+            action.callback();
+            
+
             localStorage.setItem("searchHistory", JSON.stringify(history));
 
             return {

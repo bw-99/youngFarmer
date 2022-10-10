@@ -1,10 +1,11 @@
 export const SEARCH_CREATE = "SEARCH_CREATE";
 export const SEARCH_DELETE = "SEARCH_DELETE";
 
-export const SearchCrateAction = (searchWord: string) => {
+export const SearchCrateAction = (searchWord: string, callback:Function) => {
     return {
         type: SEARCH_CREATE,
-        payload: searchWord
+        payload: searchWord,
+        callback: callback
     };
 }
 

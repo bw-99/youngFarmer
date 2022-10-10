@@ -16,7 +16,7 @@ function TodayRecommendPage() {
         <div style={{width: "100vw", height: "100vh"}}>
             {AppBarComponentOnlyBack("오늘의 추천 상품")}
             <div style={{padding: "10px 9.5px 20px 9.5px"}}>
-                <ItemUnitListComp />
+                {ItemUnitListComp(165)}
             </div>
         </div>
         

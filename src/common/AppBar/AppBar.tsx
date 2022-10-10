@@ -11,6 +11,7 @@ import { SettingComponent } from "./SettingIcon/SettingIcon";
 import searchIconImage from "../../assets/images/btn-search@3x.png";
 import { useDispatch, useSelector } from "react-redux";
 import { SearchCrateAction } from "../../pages/SearchPage/SearchActions";
+import { useNavigate } from "react-router-dom";
 
 // btn-search
 
@@ -131,6 +132,7 @@ export const AppBarComponentNoBack = (title: string) => {
 export const AppBarComponentSearch = () => {
     const dispatch = useDispatch();
     const [search, setSearch] = useState("");
+    const navigate = useNavigate();
 
     const handleInputChange = (e:ChangeEvent<HTMLInputElement>) => {
         setSearch(e.target.value);
@@ -138,8 +140,12 @@ export const AppBarComponentSearch = () => {
 
     const handleUserKeyPress = (e: any) => {
         if(e.key === "Enter" || e.key === 13){
-            dispatch(SearchCrateAction(search));
-            setSearch("");
+            dispatch(
+                SearchCrateAction(
+                    search, ()=>{navigate(`/search/${search}`);}
+                )
+            );
+            // setSearch("");
         }
     }
 
@@ -168,7 +174,7 @@ export const AppBarComponentSearch = () => {
             
             <div style={{display:"flex", justifyContent: "flex-end", alignItems:"center"}}>
                 <NotiComponent />
-                <SettingComponent />
+                <ShoppingBagIconComponent />
             </div>
         </div>
     )

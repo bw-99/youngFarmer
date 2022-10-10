@@ -20,7 +20,6 @@ export const ItemCountText = styled.div`
 export const ItemUnitList = styled.div`
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
 `
 
 export const Item = styled.div`
@@ -31,15 +30,11 @@ export const Item = styled.div`
 
 
 export const ItemImage = styled.img`
-  width: 165px;
-  height: 165px;
   border-radius: 12px;
   object-fit: cover;
 `
 
 export const ItemCover = styled.div`
-  width: 165px;
-  height: 60px;
   background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
   position: absolute;
   border-radius: 12px;

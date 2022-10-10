@@ -5,7 +5,7 @@ export const ItemComponent = () => {
     return(
         <div style={{padding: "20px 9.5px 20px 9.5px"}}>
             <ItemCountText> 134개 </ItemCountText>
-            <ItemUnitListComp />
+            {ItemUnitListComp(165)}
         </div>
     );
 }
