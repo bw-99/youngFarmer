@@ -110,3 +110,47 @@ export const ItemLike = styled.img`
   right: 0px;
   z-index: 20;
 `
+
+
+export const BestBanner = styled.div`
+  position: absolute;
+  top: 14px;
+  left: 12px;
+  z-index: 20;
+
+
+  width: 44px;
+  height: 23px;
+  border-radius: 6px;
+  background-color: #ffffff;
+  font-family: AppleSDGothicNeo;
+  font-size: 13px;
+  font-weight: bold;
+  text-align: center;
+  color: #fb6159;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center
+`
+
+export const SaleBanner = styled.div`
+  position: absolute;
+  top: 14px;
+  left: 12px;
+  z-index: 20;
+
+  width: 44px;
+  height: 23px;
+  border-radius: 6px;
+  background-color: #fb6159;
+  font-family: AppleSDGothicNeo;
+  font-size: 13px;
+  font-weight: bold;
+  text-align: center;
+  color: #ffffff;
+
+  display: flex;
+  justify-content: center;
+  align-items: center
+`

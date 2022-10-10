@@ -33,7 +33,7 @@ export const RecommendComponent = () => {
 const ItemUnitDesign = () => {
     return (
         <div style={{padding:"0 6.5px"}}>
-            {ItemUnitImgComp(154)}
+            {ItemUnitImgComp(154,false)}
         </div>
     );
 }

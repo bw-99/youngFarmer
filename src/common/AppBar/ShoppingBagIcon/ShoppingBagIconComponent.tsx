@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import shoppingBag from "../../../assets/images/shopping_bag@3x.png";
+import shoppingBagWhite from "../../../assets/images/shoppingbag-white-24-px@3x.png";
 
 const AppBarIcon = styled.img`
   width: 24px;
@@ -14,4 +15,10 @@ export const ShoppingBagIconComponent = () => {
     return (
         <AppBarIcon src={shoppingBag} alt="" />
     );
+}
+
+export const ShoppingBagIconWhiteComponent = () => {
+  return (
+      <AppBarIcon src={shoppingBagWhite} alt="" />
+  );
 }

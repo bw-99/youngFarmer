@@ -6,18 +6,16 @@ import styled from "styled-components";
 
 import alarm from "../../assets/images/alarm@3x.png";
 import shopping_bag from "../../assets/images/shopping_bag@3x.png";
-import { AppBarComponentNoBack, AppBarComponentSearch } from "../../common/AppBar/AppBar";
+import { AppBarComponentNoBack, AppBarComponentProduct, AppBarComponentSearch } from "../../common/AppBar/AppBar";
 
 
 
 import { BottomNavigationBar } from "../../common/BottomNavigationBar/BottomNavigationBar";
 import { CategoryComponent } from "../../common/Category/category";
-import { OtherChoiceComp } from "./components/OtherChoice";
-import { SearchResultComp } from "./components/SearchResult";
-import { ToggleComponent } from "./components/ToggleComponent";
+import { TopImageComp } from "./components/topImage";
 
 
-function SearchDetailPage(props: any) {
+function ProductPage(props: any) {
     const params = useParams();
     const location = useLocation();
     const navigate = useNavigate();
@@ -25,14 +23,13 @@ function SearchDetailPage(props: any) {
     console.log(params);
 
     return (
-        <div style={{width: "100vw", height: "100vh"}}>
-            {AppBarComponentSearch()}
-            <ToggleComponent />
-            <OtherChoiceComp />
-            <SearchResultComp />
+        <div style={{position:"relative", width: "100vw", height: "100vh"}}>
+            <AppBarComponentProduct />
+            <TopImageComp />
+
             {/* <BottomNavigationBar /> */}
         </div>
     );
 }
 
-export default SearchDetailPage;
+export default ProductPage;

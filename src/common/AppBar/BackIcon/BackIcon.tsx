@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import backArrow from "../../../assets/images/btn-back@3x.png"
+import backArrowWhite from "../../../assets/images/btn-back-white@3x.png"
 
 const AppBarArrow = styled.img`
   width: 24px;
@@ -15,6 +16,17 @@ export const BackIconComponent = () => {
         <div onClick={()=> {
             navigate("../");}}>
             <AppBarArrow src={backArrow}/>
+        </div>
+    );
+}
+
+
+export const BackIconWhiteComponent = () => {
+    const navigate = useNavigate();
+    return (
+        <div onClick={()=> {
+            navigate("../");}}>
+            <AppBarArrow src={backArrowWhite}/>
         </div>
     );
 }

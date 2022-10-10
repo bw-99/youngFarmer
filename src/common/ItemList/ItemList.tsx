@@ -1,15 +1,17 @@
-import { Item, ItemCover, ItemImage, ItemLike, ItemOrderShoppingBagButton, ItemOrderShoppingBagButtonIcon, ItemOrderShoppingBagButtonText, ItemTextInfoPrice, ItemTextInfoPriceDiscount, ItemTextInfoSource, ItemTextInfoTitle, ItemUnitList } from "./atoms/item";
+import { BestBanner, Item, ItemCover, ItemImage, ItemLike, ItemOrderShoppingBagButton, ItemOrderShoppingBagButtonIcon, ItemOrderShoppingBagButtonText, ItemTextInfoPrice, ItemTextInfoPriceDiscount, ItemTextInfoSource, ItemTextInfoTitle, ItemUnitList, SaleBanner } from "./atoms/item";
 import recommendItemStawberry from "../../assets/images/main_recommend_strawberry.png";
 import shoppingBag from "../../assets/images/shopping-bag-20px@3x.png";
 import { useRef, useState } from "react";
 import recommendItemLikeIcon from "../../assets/images/btn-heart-on@3x.png";
 import recommendItemLikeNotIcon from "../../assets/images/btn-heart-off@3x.png";
+import { useNavigate } from "react-router-dom";
 
 
 export const ItemUnitListComp = (image_width:number) => {
     return (
         <ItemUnitList style={{
-            overflow: "auto"
+            display: "flex",
+            flexWrap: "wrap"
             }}>  
             {ItemUnitComp(image_width)}
             {ItemUnitComp(image_width)}
@@ -40,13 +42,21 @@ export const ItemUnitComp = (image_width:number) => {
     );
 }
 
-export const ItemUnitImgComp = (image_width:number) => {
+export const ItemUnitImgComp = (image_width:number, bsFlag: boolean  = true) => {
     const [isLiked, setIsLiked]  = useState(false);
+    const isBest = true&&bsFlag;
+    const isSale = true&&bsFlag;
+    const navigate = useNavigate();
     return(
-        <div>
+        <div onClick={()=>{navigate("/product/1")}}>
             <div style={{position: "relative", width:  `${image_width}px`}}>
                 <ItemImage src={recommendItemStawberry} width={image_width+"px"} height={image_width+"px"}/>
                 <ItemCover style={{width: `${image_width}px`, height: "60px"}}/>
+                
+                {isBest? <BestBanner>BEST</BestBanner> : null}
+                {isSale? <SaleBanner style={{left: isBest? "62px" : "12px"}}>SALE</SaleBanner> : null}
+                
+
                 <ItemLike 
                 style={{padding: isLiked? "3px": "10px"}}
                 width={isLiked? "44px":"30px"}

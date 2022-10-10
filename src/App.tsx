@@ -14,6 +14,7 @@ import SearchPage from './pages/SearchPage/SearchPage';
 import TodayRecommendPage from './pages/TodayRecommendPage/TodayRecommendPage';
 import LiveListPage from './pages/LiveListPage/LiveListPage';
 import SearchDetailPage from './pages/SearchDetailPage/SearchDetailPage';
+import ProductPage from './pages/ProductPage/ProductPage';
 
 
 const Background = styled.div`
@@ -57,6 +58,7 @@ function App() {
         <Route path='/search' element = {<SearchPage />}/>
         <Route path='/search/:search' element = {<SearchDetailPage />}/>
         <Route path='/mypage' element = {<SearchPage />}/>
+        <Route path='/product/:productId' element = {<ProductPage />}/>
       </Routes>
     </Background>
   );

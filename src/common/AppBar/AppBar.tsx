@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
-import { BackIconComponent } from "./BackIcon/BackIcon";
+import { BackIconComponent, BackIconWhiteComponent } from "./BackIcon/BackIcon";
 import { NotiComponent } from "./NotiIcon/NotiIcon";
-import { ShoppingBagIconComponent } from "./ShoppingBagIcon/ShoppingBagIconComponent";
+import { ShoppingBagIconComponent, ShoppingBagIconWhiteComponent } from "./ShoppingBagIcon/ShoppingBagIconComponent";
 
 
 import styled from "styled-components";
@@ -9,9 +9,13 @@ import { SettingComponent } from "./SettingIcon/SettingIcon";
 
 
 import searchIconImage from "../../assets/images/btn-search@3x.png";
+
+
+
 import { useDispatch, useSelector } from "react-redux";
 import { SearchCrateAction } from "../../pages/SearchPage/SearchActions";
 import { useNavigate } from "react-router-dom";
+import { ShareIconComponent } from "./ShareIcon/ShareIcon";
 
 // btn-search
 
@@ -87,6 +91,21 @@ export const AppBarComponentOnlyBack = (title: string) => {
                 <AppBarTitle> {title} </AppBarTitle>
             </div>
             <div style={{flex:2, display:"flex", justifyContent: "flex-end", alignItems:"center"}}>
+            </div>
+        </div>
+    )
+}
+
+export const AppBarComponentProduct = () => {
+    return (
+        <div style={{display:"flex", width:"100vw", justifyContent: "space-between"}}>
+            <div style={{display:"flex", justifyContent: "flex-start", alignItems:"center"}}>
+                <BackIconWhiteComponent />
+            </div>
+           
+            <div style={{display:"flex", justifyContent: "flex-end", alignItems:"center"}}>
+                <ShareIconComponent />
+                <ShoppingBagIconWhiteComponent />
             </div>
         </div>
     )
