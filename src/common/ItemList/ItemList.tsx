@@ -47,11 +47,12 @@ export const ItemUnitImgComp = (image_width:number, bsFlag: boolean  = true) => 
     const isBest = true&&bsFlag;
     const isSale = true&&bsFlag;
     const navigate = useNavigate();
+    const targetUrl = "/product/1";
     return(
-        <div onClick={()=>{navigate("/product/1")}}>
+        <div >
             <div style={{position: "relative", width:  `${image_width}px`}}>
-                <ItemImage src={recommendItemStawberry} width={image_width+"px"} height={image_width+"px"}/>
-                <ItemCover style={{width: `${image_width}px`, height: "60px"}}/>
+                <ItemImage  onClick={()=>{navigate(targetUrl)}} src={recommendItemStawberry} width={image_width+"px"} height={image_width+"px"}/>
+                <ItemCover onClick={()=>{navigate(targetUrl)}} style={{width: `${image_width}px`, height: "60px"}}/>
                 
                 {isBest? <BestBanner>BEST</BestBanner> : null}
                 {isSale? <SaleBanner style={{left: isBest? "62px" : "12px"}}>SALE</SaleBanner> : null}
@@ -61,11 +62,13 @@ export const ItemUnitImgComp = (image_width:number, bsFlag: boolean  = true) => 
                 style={{padding: isLiked? "3px": "10px"}}
                 width={isLiked? "44px":"30px"}
                 height={isLiked? "44px":"30px"}
-                onClick={() => {setIsLiked(!isLiked)}} 
+                onClick={() => {
+                    setIsLiked(!isLiked)
+                }} 
                 src={isLiked? recommendItemLikeIcon: recommendItemLikeNotIcon}/>
             </div>
 
-            <div >
+            <div onClick={()=>{navigate(targetUrl)}} >
                 <ItemTextInfoSource>산천</ItemTextInfoSource>
                 <ItemTextInfoTitle> 친환경 복숭아 5kg /10kg </ItemTextInfoTitle>
                 <div style={{display: "flex", alignItems: "flex-start", marginTop: "8px"}}>
