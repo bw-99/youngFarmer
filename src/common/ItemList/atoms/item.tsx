@@ -113,12 +113,6 @@ export const ItemLike = styled.img`
 
 
 export const BestBanner = styled.div`
-  position: absolute;
-  top: 14px;
-  left: 12px;
-  z-index: 20;
-
-
   width: 44px;
   height: 23px;
   border-radius: 6px;
@@ -135,11 +129,6 @@ export const BestBanner = styled.div`
 `
 
 export const SaleBanner = styled.div`
-  position: absolute;
-  top: 14px;
-  left: 12px;
-  z-index: 20;
-
   width: 44px;
   height: 23px;
   border-radius: 6px;

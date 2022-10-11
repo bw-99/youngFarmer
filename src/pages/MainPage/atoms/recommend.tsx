@@ -53,10 +53,7 @@ export const RecommendItemCover = styled.div`
 
 export const RecommendItemLike = styled.img`
   object-fit: cover;
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  z-index: 20;
+
 `
 
 // export const RecommendItemNotLike = styled.img`

@@ -18,11 +18,6 @@ import ProductPage from './pages/ProductPage/ProductPage';
 import { BottomNavBarChanger } from './services/BottomNavBarChanger';
 
 
-const Background = styled.div`
-    max-width: 150px;
-`
-
-
 function App() {
   const params = useParams();
   const location = useLocation();

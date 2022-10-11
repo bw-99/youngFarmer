@@ -39,18 +39,12 @@ const ItemUnitDesign = () => {
 }
 
 const RecommentUnit = () => {
-    const [isLiked, setIsLiked]  = useState(false);
     return (
         <RecommendItem>
             <RecommendItemBox>
                 <RecommendItemImage src={recommendItemStawberry}/>
                 <RecommendItemCover />
-                <RecommendItemLike 
-                style={{padding: isLiked? "3px": "10px"}}
-                width={isLiked? "44px":"30px"}
-                height={isLiked? "44px":"30px"}
-                onClick={() => {setIsLiked(!isLiked)}} 
-                src={isLiked? recommendItemLikeIcon: recommendItemLikeNotIcon}/>
+                <LikeIconComp />
             </RecommendItemBox>
             <div>
                 <RecommendItemTextInfoSource>산천</RecommendItemTextInfoSource>
@@ -61,5 +55,21 @@ const RecommentUnit = () => {
                 </div>
             </div>
         </RecommendItem>
+    );
+}
+
+export const LikeIconComp = () => {
+    const [isLiked, setIsLiked]  = useState(false);
+    // position: absolute;
+    // top: 0px;
+    // right: 0px;
+    // z-index: 20;
+    return(
+        <RecommendItemLike 
+                style={{padding: isLiked? "3px": "10px"}}
+                width={isLiked? "44px":"30px"}
+                height={isLiked? "44px":"30px"}
+                onClick={() => {setIsLiked(!isLiked)}} 
+                src={isLiked? recommendItemLikeIcon: recommendItemLikeNotIcon}/>
     );
 }

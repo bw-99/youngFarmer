@@ -51,6 +51,14 @@
 }
 
 
+@font-face {
+  font-family: 'AppleSDGothicNeo';
+  font-style: normal;
+  font-weight: 550;
+  src: url("./assets/fonts/AppleSDGothicNeoSB.ttf")
+}
+
+
 
 @font-face {
   font-family: 'AppleSDGothicNeo';

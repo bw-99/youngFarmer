@@ -54,8 +54,15 @@ export const ItemUnitImgComp = (image_width:number, bsFlag: boolean  = true) => 
                 <ItemImage  onClick={()=>{navigate(targetUrl)}} src={recommendItemStawberry} width={image_width+"px"} height={image_width+"px"}/>
                 <ItemCover onClick={()=>{navigate(targetUrl)}} style={{width: `${image_width}px`, height: "60px"}}/>
                 
-                {isBest? <BestBanner>BEST</BestBanner> : null}
-                {isSale? <SaleBanner style={{left: isBest? "62px" : "12px"}}>SALE</SaleBanner> : null}
+                {isBest? 
+                <div style={{ position: "absolute", top: "14px", left: "12px", zIndex: "20" }}> 
+                    <ItemBestMark />
+                </div>: null}
+
+                {isSale? 
+                <div style={{left: isBest? "62px" : "12px", position: "absolute", top: "14px", zIndex: "20" }}> 
+                    <ItemSaleMark />
+                </div> : null}
                 
 
                 <ItemLike 
@@ -90,5 +97,25 @@ export const ItemUnitShoppingBagComp = () => {
             <ItemOrderShoppingBagButtonIcon src={shoppingBag}/>
             <ItemOrderShoppingBagButtonText> 담기 </ItemOrderShoppingBagButtonText>
         </ItemOrderShoppingBagButton>
+    );
+}
+
+export const ItemBestMark = () => {
+    return(
+        <BestBanner>BEST</BestBanner>
+    );
+}
+
+export const ItemBestMarkRedBorder = () => {
+    return(
+        <BestBanner style={{border: "solid 1px #fb6159"}}>BEST</BestBanner>
+    );
+}
+
+
+
+export const ItemSaleMark = () => {
+    return(
+        <SaleBanner>SALE</SaleBanner>
     );
 }
