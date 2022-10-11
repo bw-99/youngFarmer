@@ -52,45 +52,6 @@ export const BottomNavigationBar = () => {
     const dispatch = useDispatch();
 
     const pageIndex: number = useSelector((state : RootState) => state.BottomNavigationBarReducer.index);
-        
-    // //? 새로고침 했을 때 루트 페이지로 이동?
-    // useEffect(() => {
-    //     window.addEventListener("beforeunload", refreshApp);
-    //     return () => {
-    //     window.removeEventListener("beforeunload", refreshApp);
-    //     };
-    // }, []);
-
-    // const refreshApp = (e: BeforeUnloadEvent) => {
-    //     e.preventDefault();
-    //     let redirectPath = location.pathname.split('/')[1];
-    //     console.log(redirectPath);
-        
-    //     switch (redirectPath) {
-    //         case '':
-    //             dispatch(GOTO_HOME_PAGE());
-    //             break;
-    //         case 'search':
-    //             dispatch(GOTO_SEARCH_PAGE());
-    //             break;  
-    //         case 'like':
-    //             console.log("???????????????????????????");
-                
-    //             dispatch(GOTO_LIKE_PAGE());
-    //             break;
-    //         case 'chat':
-    //             dispatch(GOTO_CHAT_PAGE());
-    //             break;
-    //         case 'mypage':
-    //             dispatch(GOTO_MY_PAGE());
-    //             break;
-    //         default:
-    //             dispatch(GOTO_HOME_PAGE());
-    //         break;
-    //     }
-        
-    //     // dispatch(GOTO_HOME_PAGE());
-    // };
 
     return(
         <div>
@@ -152,9 +113,7 @@ const IconItemComponent = (itemNumber: number) => {
     
     return (
         <div onClick={()=> {
-            localStorage.setItem("pageIndex", actionConstantList[itemNumber]);
             navigate(routeList[itemNumber]);
-            dispatch(actionList[itemNumber]());
         }}>
             <IconItem>
                 {isSelected? <IconImage src={imageList[itemNumber][0]} />: <IconImage src={imageList[itemNumber][1]} />}

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { FC, ReactElement, ReactNode, useEffect } from 'react';
 import { BrowserRouter, Navigate, Route, Router, Routes } from 'react-router-dom';
 
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
@@ -15,6 +15,7 @@ import TodayRecommendPage from './pages/TodayRecommendPage/TodayRecommendPage';
 import LiveListPage from './pages/LiveListPage/LiveListPage';
 import SearchDetailPage from './pages/SearchDetailPage/SearchDetailPage';
 import ProductPage from './pages/ProductPage/ProductPage';
+import { BottomNavBarChanger } from './services/BottomNavBarChanger';
 
 
 const Background = styled.div`
@@ -27,42 +28,32 @@ function App() {
   const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  //? 새로고침 했을 때 루트 페이지로 이동?
-  // useEffect(() => {
-  //   window.addEventListener("beforeunload", refreshApp);
-  //   return () => {
-  //     window.removeEventListener("beforeunload", refreshApp);
-  //   };
-  // }, []);
-
-  // const refreshApp = (e: BeforeUnloadEvent) => {
-  //   e.preventDefault();
-  //   navigate('/');
-    
-  //   // dispatch(GOTO_HOME_PAGE());
-  // };
-
-
+  
   return (
-    <Background>
-      <Routes>
-        <Route path='/' element = {<SplashPage />}/>
-        <Route path='/main' element = {<MainPage />}/>
-        <Route path='/main/todayRecommend' element = {<TodayRecommendPage />}/>
-        <Route path='/main/liveList' element = {<LiveListPage />}/>
-        <Route path='/like' element = {<LikePage />}/>
-        <Route path='/splash' element = {<SplashPage />}/>
-        <Route path='/login' element = {<LoginPage />}/>
-        <Route path='/chat' element = {<ChatPage />}/>
-        <Route path='/search' element = {<SearchPage />}/>
-        <Route path='/search/:search' element = {<SearchDetailPage />}/>
-        <Route path='/mypage' element = {<SearchPage />}/>
-        <Route path='/product/:productId' element = {<ProductPage />}/>
-      </Routes>
-    </Background>
+    <BottomNavBarChanger>
+          <Routes>
+            <Route path='/' element = {<SplashPage />}/>
+            <Route path='/main' element = {<MainPage />}/>
+            <Route path='/main/todayRecommend' element = {<TodayRecommendPage />}/>
+            <Route path='/main/liveList' element = {<LiveListPage />}/>
+            <Route path='/like' element = {<LikePage />}/>
+            <Route path='/splash' element = {<SplashPage />}/>
+            <Route path='/login' element = {<LoginPage />}/>
+            <Route path='/chat' element = {<ChatPage />}/>
+            <Route path='/search' element = {<SearchPage />}/>
+            <Route path='/search/:search' element = {<SearchDetailPage />}/>
+            <Route path='/mypage' element = {<SearchPage />}/>
+            <Route path='/product/:productId' element = {<ProductPage />}/>
+          </Routes>
+    </BottomNavBarChanger>  
+    
   );
 }
 
 
+
 export default App;
+function dispatch(arg0: { type: string; }) {
+  throw new Error('Function not implemented.');
+}
+
