@@ -18,6 +18,7 @@ function ChatPage() {
     return (
         <div style={{width: "100vw", height: "100vh"}}>
             {AppBarComponentSetting("채팅목록")}
+            <div style={{marginTop: "56px"}}></div>
             <ChatItemComponent isReaded={true}/>
             <ChatItemComponent isReaded={true} />
             <ChatItemComponent isReaded={false} />

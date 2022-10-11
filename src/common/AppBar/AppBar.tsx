@@ -4,7 +4,7 @@ import { NotiComponent } from "./NotiIcon/NotiIcon";
 import { ShoppingBagIconComponent, ShoppingBagIconWhiteComponent } from "./ShoppingBagIcon/ShoppingBagIconComponent";
 
 
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { SettingComponent } from "./SettingIcon/SettingIcon";
 
 
@@ -39,6 +39,7 @@ const AppBarMain = styled.div`
   display: flex;
   justify-content: flex-end;
 `
+
 
 const AppBarArrow = styled.img`
   width: 24px;
@@ -76,13 +77,19 @@ export const SearchInputText = styled.input`
   flex: 1;
   margin-right: 20px;
   outline: none;
+`
 
-
+const fadein = keyframes`
+    from {
+        background-color: rgba(0,0,0,0);
+    }   
+    to {
+        background-color: rgba(0,0,0,1);
+    }
 `
 
 export const AppBarComponentOnlyBack = (title: string) => {
     return (
-
         <div style={{display:"flex", width:"100vw"}}>
             <div style={{flex:2, display:"flex", justifyContent: "flex-start", alignItems:"center"}}>
                 <BackIconComponent />
@@ -132,9 +139,32 @@ export const AppBarComponentBack = (title: string) => {
 }
 
 export const AppBarComponentNoBack = (title: string) => {
+    const [isScrolled, setIsScrolled] = useState(false);
+
+    const pop = () => {
+        console.log(window.scrollY);
+        if(window.scrollY > 0){
+            setIsScrolled(true);
+        }
+        else{
+            setIsScrolled(false);
+        }
+      }
+
+      
+    useEffect(() => {
+        window.addEventListener('scroll', pop);
+      
+        return () => window.removeEventListener('scroll', pop);
+      },[]);
+
+    
+
     return (
 
-        <div style={{display:"flex", width:"100vw"}}>
+        <div style={{display:"flex",
+            position: "fixed", zIndex:100, top: 0, backgroundColor: isScrolled? "rgba(255,255,255,1)":"rgba(255,255,255,0)",width:"100vw"
+        }}>
             <div style={{flex:2, display:"flex", justifyContent: "flex-start", alignItems:"center"}}>
             </div>
             <div style={{flex:1, display:"flex", justifyContent: "center"}}>
@@ -168,17 +198,33 @@ export const AppBarComponentSearch = () => {
         }
     }
 
+    const [isScrolled, setIsScrolled] = useState(false);
+
+    const pop = () => {
+        console.log(window.scrollY);
+        if(window.scrollY > 0){
+            setIsScrolled(true);
+        }
+        else{
+            setIsScrolled(false);
+        }
+    }
+
     useEffect(
         ()=>{
+            window.addEventListener('scroll', pop);
             window.addEventListener('keyup', handleUserKeyPress);
             return () => {
                 window.removeEventListener('keyup', handleUserKeyPress);
+                window.removeEventListener('scroll', pop);
             }
         }
     )
 
     return (
-        <div style={{display:"flex", width:"100vw", justifyContent: "flex-end", alignItems:"center" }}>
+        <div style={{
+            position: "fixed", zIndex:100, top: 0, backgroundColor: isScrolled? "rgba(255,255,255,1)":"rgba(255,255,255,0)",
+            display:"flex", width:"100vw", justifyContent: "flex-end", alignItems:"center" }}>
             {/* <div style={{display:"flex",flex:1,  justifyContent: "flex-start", alignItems:"center"}}> */}
                 <SearchInput> 
                     <div style={{display: "flex", flexDirection: "row", justifyContent: "flex-start", alignItems:"center"}}>
@@ -200,9 +246,31 @@ export const AppBarComponentSearch = () => {
 }
 
 export const AppBarComponentSetting = (title: string) => {
+    const [isScrolled, setIsScrolled] = useState(false);
+
+    const pop = () => {
+        console.log(window.scrollY);
+        if(window.scrollY > 0){
+            setIsScrolled(true);
+        }
+        else{
+            setIsScrolled(false);
+        }
+      }
+
+      
+    useEffect(() => {
+        window.addEventListener('scroll', pop);
+      
+        return () => window.removeEventListener('scroll', pop);
+      },[]);
+
+
     return (
 
-        <div style={{display:"flex", width:"100vw"}}>
+        <div style={{
+            display:"flex", width:"100vw",
+            position: "fixed", zIndex:100, top: 0, backgroundColor: isScrolled? "rgba(255,255,255,1)":"rgba(255,255,255,0)"}}>
             <div style={{flex:2, display:"flex", justifyContent: "flex-start", alignItems:"center"}}>
             </div>
             <div style={{flex:1, display:"flex", justifyContent: "center"}}>
@@ -216,9 +284,30 @@ export const AppBarComponentSetting = (title: string) => {
     )
 }
 
-export const AppBarComponentMain = () => {
+export const AppBarComponentMain = () => {  
+    const [isScrolled, setIsScrolled] = useState(false);
+
+    const pop = () => {
+        console.log(window.scrollY);
+        if(window.scrollY > 0){
+            setIsScrolled(true);
+        }
+        else{
+            setIsScrolled(false);
+        }
+      }
+
+      
+    useEffect(() => {
+        window.addEventListener('scroll', pop);
+      
+        return () => window.removeEventListener('scroll', pop);
+      },[]);
+
+    
+
     return (
-        <AppBarMain>
+        <AppBarMain style={{position: "fixed", zIndex:100, top: 0, backgroundColor: isScrolled? "rgba(255,255,255,1)":"rgba(255,255,255,0)",width:"100vw"}}>
             <NotiComponent />
             <ShoppingBagIconComponent />
         </AppBarMain>

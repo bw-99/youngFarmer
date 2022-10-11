@@ -3,7 +3,7 @@ import { ItemUnitListComp } from "../../../common/ItemList/ItemList";
 
 export const ItemComponent = () => {
     return(
-        <div style={{padding: "20px 9.5px 20px 9.5px"}}>
+        <div style={{marginTop:"56px", padding: "20px 9.5px 20px 9.5px"}}>
             <ItemCountText> 134개 </ItemCountText>
             {ItemUnitListComp(165)}
         </div>

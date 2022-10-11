@@ -26,7 +26,7 @@ export const DiscountBox = styled.div`
   height: 28px;
   border-radius: 4px;
   background-color: rgb(251, 97, 89, 0.15);
-  margin: 20px 0px 14px 0px;
+  margin: 76px 0px 14px 0px;
   display: flex;
   align-items: center;
   justify-content: center;

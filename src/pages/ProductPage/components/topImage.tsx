@@ -4,7 +4,7 @@ import { ImageSize, ImageCover, BottomBox, BottomBoxCurPage, BottomBoxTotalPage 
 
 export const TopImageComp = () => {
     return (
-        <div style={{ display: "flex", height: "375px", alignItems: "center", justifyContent: "center"}}>
+        <div style={{ display: "flex", height: "310px", alignItems: "center", justifyContent: "center"}}>
             <ImageSize src={recommendItemStawberry} />
             <ImageCover />
             <BottomBox>

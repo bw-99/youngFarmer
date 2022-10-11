@@ -12,6 +12,7 @@ import { AppBarComponentNoBack, AppBarComponentProduct, AppBarComponentSearch } 
 
 import { BottomNavigationBar } from "../../common/BottomNavigationBar/BottomNavigationBar";
 import { CategoryComponent } from "../../common/Category/category";
+import { ItemDetailComp } from "./components/itemDetail";
 import { ItemInfoComp } from "./components/itemInfo";
 import { TopImageComp } from "./components/topImage";
 
@@ -26,12 +27,13 @@ function ProductPage(props: any) {
     return (
         <div style={{position:"relative", width: "100vw", height: "100vh"}}>
             <div style={{position:"relative"}}>
-                <div style={{position:"fixed", top:0}}>
+                <div style={{top:0}}>
                     <AppBarComponentProduct />
                 </div>
                 <TopImageComp />
             </div>
             <ItemInfoComp />
+            <ItemDetailComp />
 
             {/* <BottomNavigationBar /> */}
         </div>

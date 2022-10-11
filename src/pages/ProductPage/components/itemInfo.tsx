@@ -9,7 +9,7 @@ import { LikeIconComp } from "../../MainPage/components/recommend";
 
 export const ItemInfoComp = () => {
     return(
-        <div style={{position: "relative", padding: "30px 0"}}>
+        <div style={{position: "relative", padding: "30px 0 0 0"}}>
             <div style={{position: "relative", padding: "0 16px"}}>
                 <FarmerComp />
                 <div style={{marginTop: "20px", display:"flex", alignItems:"center", flexDirection:"row", justifyContent:"flex-start"}}>

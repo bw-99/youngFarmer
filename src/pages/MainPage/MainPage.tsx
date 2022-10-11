@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import styled from "styled-components";
@@ -34,8 +34,10 @@ function MainPage(props: any) {
         e.preventDefault();
     };
 
+    
+
     return (
-        <div style={{position: "relative", width: "100vw", height:"100vh" , backgroundImage: 'linear-gradient(to bottom, #fdeae6, #fdeae6 23%, rgba(253, 234, 230, 0.73) 30%, rgba(253, 234, 230, 0))'}}>
+        <div style={{position: "relative", width: "100vw", height:"100vh" }}>
             <AppBarComponentMain />
            
             <DiscountComponent />
