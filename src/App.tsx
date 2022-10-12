@@ -27,7 +27,7 @@ function App() {
   
   return (
     <BottomNavBarChanger>
-          <ScrollToTop >
+          <ScrollToTop>
             <Routes>
               <Route path='/' element = {<SplashPage />}/>
               <Route path='/main' element = {<MainPage />}/>
@@ -51,7 +51,17 @@ function App() {
 
 
 export default App;
-function dispatch(arg0: { type: string; }) {
-  throw new Error('Function not implemented.');
+
+interface Props {
+  children?: ReactNode
+  // any props that come into the component
 }
 
+
+export const AppFrame:FC<Props> = ({ children, ...props }) => {
+  return (
+    <div style={{width: "100vw", height: "100vh", marginTop:"56px"}}>
+      {children}
+    </div>
+  );
+}

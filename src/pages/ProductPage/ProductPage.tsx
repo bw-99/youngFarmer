@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import styled from "styled-components";
+import { AppFrame } from "../../App";
 
 
 import alarm from "../../assets/images/alarm@3x.png";
@@ -25,18 +26,14 @@ function ProductPage(props: any) {
     console.log(params);
 
     return (
-        <div style={{position:"relative", width: "100vw", height: "100vh"}}>
-            <div style={{position:"relative"}}>
-                <div style={{top:0}}>
-                    <AppBarComponentProduct />
-                </div>
-                <TopImageComp />
-            </div>
+        <AppFrame>
+            <AppBarComponentProduct />
+            <TopImageComp />
             <ItemInfoComp />
             <ItemDetailComp />
 
             {/* <BottomNavigationBar /> */}
-        </div>
+        </AppFrame>
     );
 }
 

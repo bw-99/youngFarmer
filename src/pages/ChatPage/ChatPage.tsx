@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import styled from "styled-components";
+import { AppFrame } from "../../App";
 
 
 import alarm from "../../assets/images/alarm@3x.png";
@@ -16,14 +17,14 @@ import { ChatItemComponent } from "./components/chatItem";
 
 function ChatPage() {
     return (
-        <div style={{width: "100vw", height: "100vh"}}>
+        <AppFrame>
             {AppBarComponentSetting("채팅목록")}
             <div style={{marginTop: "56px"}}></div>
             <ChatItemComponent isReaded={true}/>
             <ChatItemComponent isReaded={true} />
             <ChatItemComponent isReaded={false} />
             <BottomNavigationBar />
-        </div>
+        </AppFrame>
     );
 }
 

@@ -16,10 +16,10 @@ export  const ScrollToTop:FC<Props> = ({ children, ...props }) => {
   const dispatch = useDispatch();
 
   const { pathname } = useLocation();
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+  window.scrollTo(0, 0);
+//   useEffect(() => {
+//     window.scrollTo(0, 0);
+//   }, [pathname]);
   
   return (
     <div {...props}>

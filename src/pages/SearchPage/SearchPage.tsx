@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import styled from "styled-components";
+import { AppFrame } from "../../App";
 
 
 import alarm from "../../assets/images/alarm@3x.png";
@@ -22,7 +23,7 @@ function SearchPage(props: any) {
     const navigate = useNavigate();
 
     return (
-        <div style={{width: "100vw", height: "100vh"}}>
+        <AppFrame>
             <AppBarComponentSearch />
             <div style={{marginTop: "56px"}}>
                 <CategoryComponent />
@@ -30,7 +31,7 @@ function SearchPage(props: any) {
             <RecentSearchComponent />
             <RecommendStoreComponent />
             <BottomNavigationBar />
-        </div>
+        </AppFrame>
     );
 }
 

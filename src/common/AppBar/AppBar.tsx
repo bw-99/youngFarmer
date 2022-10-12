@@ -18,6 +18,9 @@ import { useNavigate } from "react-router-dom";
 import { ShareIconComponent } from "./ShareIcon/ShareIcon";
 
 // btn-search
+interface ScrollProps {
+    readonly isScrollDown: boolean;
+}
 
 export const SearchIcon = styled.img`
   width: 24px;
@@ -25,6 +28,28 @@ export const SearchIcon = styled.img`
   object-fit: contain;
   padding: 12px 10px 12px 12px;
 `
+
+const fadein = keyframes`
+    from {
+        background-color: rgba(255,255,255,0);
+    }   
+    to {
+        background-color: rgba(255,255,255,1);
+    }
+`
+
+
+const AppBarAtom = styled.div<ScrollProps>`
+    position: fixed;
+    z-index:1000;
+    height: 56px;
+    transition: background-color 200ms cubic-bezier(0.4, 0, 0.2, 1);
+    top: 0;
+    background-color: ${props => props.isScrollDown? "rgba(255,255,255,1)" : "rgba(255,255,255,0)"};
+    width: 100vw;
+`
+
+
 
 const AppBar = styled.div`
   width: 100vw;
@@ -35,10 +60,10 @@ const AppBar = styled.div`
 `
 
 const AppBarMain = styled.div`
-  height: 56px;
-  display: flex;
-  justify-content: flex-end;
+    display: flex;
+    justify-content: flex-end;
 `
+
 
 
 const AppBarArrow = styled.img`
@@ -55,7 +80,7 @@ const AppBarTitle = styled.div`
   text-align: center;
   color: #272727;
   padding-top: 18px;
-  padding-down: 17px;
+  padding-bottom: 17px;
 `
 
 
@@ -79,17 +104,29 @@ export const SearchInputText = styled.input`
   outline: none;
 `
 
-const fadein = keyframes`
-    from {
-        background-color: rgba(0,0,0,0);
-    }   
-    to {
-        background-color: rgba(0,0,0,1);
-    }
-`
 
 export const AppBarComponentOnlyBack = (title: string) => {
+    const [isScrolled, setIsScrolled] = useState(false);
+
+    const pop = () => {
+        console.log(window.scrollY);
+        if(window.scrollY > 0){
+            setIsScrolled(true);
+        }
+        else{
+            setIsScrolled(false);
+        }
+      }
+
+      
+    useEffect(() => {
+        window.addEventListener('scroll', pop);
+      
+        return () => window.removeEventListener('scroll', pop);
+      },[]);
+      
     return (
+    <AppBarAtom isScrollDown={isScrolled}>
         <div style={{display:"flex", width:"100vw"}}>
             <div style={{flex:2, display:"flex", justifyContent: "flex-start", alignItems:"center"}}>
                 <BackIconComponent />
@@ -100,11 +137,32 @@ export const AppBarComponentOnlyBack = (title: string) => {
             <div style={{flex:2, display:"flex", justifyContent: "flex-end", alignItems:"center"}}>
             </div>
         </div>
+        </AppBarAtom>
     )
 }
 
 export const AppBarComponentProduct = () => {
+    const [isScrolled, setIsScrolled] = useState(false);
+
+    const pop = () => {
+        console.log(window.scrollY);
+        if(window.scrollY > 0){
+            setIsScrolled(true);
+        }
+        else{
+            setIsScrolled(false);
+        }
+      }
+
+      
+    useEffect(() => {
+        window.addEventListener('scroll', pop);
+      
+        return () => window.removeEventListener('scroll', pop);
+      },[]);
+      
     return (
+    <AppBarAtom isScrollDown={isScrolled}>
         <div style={{display:"flex", width:"100vw", justifyContent: "space-between"}}>
             <div style={{display:"flex", justifyContent: "flex-start", alignItems:"center"}}>
                 <BackIconWhiteComponent />
@@ -115,26 +173,48 @@ export const AppBarComponentProduct = () => {
                 <ShoppingBagIconWhiteComponent />
             </div>
         </div>
+    </AppBarAtom>
     )
 }
 
 
 
 export const AppBarComponentBack = (title: string) => {
-    return (
+    const [isScrolled, setIsScrolled] = useState(false);
 
+    const pop = () => {
+        console.log(window.scrollY);
+        if(window.scrollY > 0){
+            setIsScrolled(true);
+        }
+        else{
+            setIsScrolled(false);
+        }
+      }
+
+      
+    useEffect(() => {
+        window.addEventListener('scroll', pop);
+      
+        return () => window.removeEventListener('scroll', pop);
+      },[]);
+
+    return (
+    <AppBarAtom isScrollDown={isScrolled}>
         <div style={{display:"flex", width:"100vw"}}>
-            <div style={{flex:2, display:"flex", justifyContent: "flex-start", alignItems:"center"}}>
-                <BackIconComponent />
-            </div>
-            <div style={{flex:1, display:"flex", justifyContent: "center"}}>
-                <AppBarTitle> {title} </AppBarTitle>
-            </div>
-            <div style={{flex:2, display:"flex", justifyContent: "flex-end", alignItems:"center"}}>
-                <NotiComponent />
-                <ShoppingBagIconComponent />
-            </div>
+                    <div style={{flex:2, display:"flex", justifyContent: "flex-start", alignItems:"center"}}>
+                        <BackIconComponent />
+                    </div>
+                    <div style={{flex:1, display:"flex", justifyContent: "center"}}>
+                        <AppBarTitle> {title} </AppBarTitle>
+                    </div>
+                    <div style={{flex:2, display:"flex", justifyContent: "flex-end", alignItems:"center"}}>
+                        <NotiComponent />
+                        <ShoppingBagIconComponent />
+                    </div>
         </div>
+    </AppBarAtom>
+
     )
 }
 
@@ -161,20 +241,21 @@ export const AppBarComponentNoBack = (title: string) => {
     
 
     return (
-
-        <div style={{display:"flex",
-            position: "fixed", zIndex:100, top: 0, backgroundColor: isScrolled? "rgba(255,255,255,1)":"rgba(255,255,255,0)",width:"100vw"
-        }}>
-            <div style={{flex:2, display:"flex", justifyContent: "flex-start", alignItems:"center"}}>
+        <AppBarAtom isScrollDown={isScrolled}>
+            <div style={{display:"flex",
+                position: "fixed", zIndex:100, top: 0, backgroundColor: isScrolled? "rgba(255,255,255,1)":"rgba(255,255,255,0)",width:"100vw"
+            }}>
+                <div style={{flex:2, display:"flex", justifyContent: "flex-start", alignItems:"center"}}>
+                </div>
+                <div style={{flex:1, display:"flex", justifyContent: "center"}}>
+                    <AppBarTitle> {title} </AppBarTitle>
+                </div>
+                <div style={{flex:2, display:"flex", justifyContent: "flex-end", alignItems:"center"}}>
+                    <NotiComponent />
+                    <ShoppingBagIconComponent />
+                </div>
             </div>
-            <div style={{flex:1, display:"flex", justifyContent: "center"}}>
-                <AppBarTitle> {title} </AppBarTitle>
-            </div>
-            <div style={{flex:2, display:"flex", justifyContent: "flex-end", alignItems:"center"}}>
-                <NotiComponent />
-                <ShoppingBagIconComponent />
-            </div>
-        </div>
+        </AppBarAtom>
     )
 }
 
@@ -222,26 +303,25 @@ export const AppBarComponentSearch = () => {
     )
 
     return (
-        <div style={{
-            position: "fixed", zIndex:100, top: 0, backgroundColor: isScrolled? "rgba(255,255,255,1)":"rgba(255,255,255,0)",
-            display:"flex", width:"100vw", justifyContent: "flex-end", alignItems:"center" }}>
-            {/* <div style={{display:"flex",flex:1,  justifyContent: "flex-start", alignItems:"center"}}> */}
-                <SearchInput> 
-                    <div style={{display: "flex", flexDirection: "row", justifyContent: "flex-start", alignItems:"center"}}>
-                        <SearchIcon src={searchIconImage}/>
-                        <SearchInputText 
-                        value={search}
-                        onChange={handleInputChange}
-                            type="text" placeholder="검색어를 입력해주세요."></SearchInputText>
-                    </div>
-                    </SearchInput>
-            {/* </div> */}
-            
-            <div style={{display:"flex", justifyContent: "flex-end", alignItems:"center"}}>
-                <NotiComponent />
-                <ShoppingBagIconComponent />
+        <AppBarAtom isScrollDown={isScrolled}>
+            <div style={{
+                display:"flex", width:"100vw", justifyContent: "flex-end", alignItems:"center" }}>
+                    <SearchInput> 
+                        <div style={{display: "flex", flexDirection: "row", justifyContent: "flex-start", alignItems:"center"}}>
+                            <SearchIcon src={searchIconImage}/>
+                            <SearchInputText 
+                            value={search}
+                            onChange={handleInputChange}
+                                type="text" placeholder="검색어를 입력해주세요."></SearchInputText>
+                        </div>
+                        </SearchInput>
+                <div style={{display:"flex", justifyContent: "flex-end", alignItems:"center"}}>
+                    <NotiComponent />
+                    <ShoppingBagIconComponent />
+                </div>
             </div>
-        </div>
+        </AppBarAtom>
+        
     )
 }
 
@@ -285,15 +365,15 @@ export const AppBarComponentSetting = (title: string) => {
 }
 
 export const AppBarComponentMain = () => {  
-    const [isScrolled, setIsScrolled] = useState(false);
+    const [isScrollDown, setIsScrollDown] = useState(false);
 
     const pop = () => {
         console.log(window.scrollY);
         if(window.scrollY > 0){
-            setIsScrolled(true);
+            setIsScrollDown(true);
         }
         else{
-            setIsScrolled(false);
+            setIsScrollDown(false);
         }
       }
 
@@ -307,9 +387,13 @@ export const AppBarComponentMain = () => {
     
 
     return (
-        <AppBarMain style={{position: "fixed", zIndex:100, top: 0, backgroundColor: isScrolled? "rgba(255,255,255,1)":"rgba(255,255,255,0)",width:"100vw"}}>
-            <NotiComponent />
-            <ShoppingBagIconComponent />
-        </AppBarMain>
+        <AppBarAtom isScrollDown={isScrollDown}>
+            <AppBarMain>
+                <NotiComponent />
+                <ShoppingBagIconComponent />
+            </AppBarMain>
+        </AppBarAtom>
+
     );
 }
+

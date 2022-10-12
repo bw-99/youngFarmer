@@ -32,7 +32,7 @@ const CategoryIcon = styled.img`
     border-radius: 50%;
 
     object-fit: contain;
-    src: ${(props:any) => props.src}
+    src: ${(props:any) => props.src};
 `
 
 const CategoryText = styled.div`

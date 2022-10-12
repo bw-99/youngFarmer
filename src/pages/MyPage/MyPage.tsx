@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import styled from "styled-components";
+import { AppFrame } from "../../App";
 
 
 import alarm from "../../assets/images/alarm@3x.png";
@@ -33,11 +34,11 @@ function MyPage(props: any) {
     };
 
     return (
-        <div style={{width: "100vw", height: "100vh"}}>
+        <AppFrame>
             {AppBarComponentNoBack("마이페이지")}
             <h1> 작업 중 </h1>
             <BottomNavigationBar />
-        </div>
+        </AppFrame>
     );
 }
 

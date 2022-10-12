@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import styled from "styled-components";
+import { AppFrame } from "../../App";
 
 
 import alarm from "../../assets/images/alarm@3x.png";
@@ -25,13 +26,14 @@ function SearchDetailPage(props: any) {
     console.log(params);
 
     return (
-        <div style={{width: "100vw", height: "100vh"}}>
-            {AppBarComponentSearch()}
+        <AppFrame>
+             {AppBarComponentSearch()}
             <ToggleComponent />
             <OtherChoiceComp />
             <SearchResultComp />
             {/* <BottomNavigationBar /> */}
-        </div>
+        </AppFrame>
+           
     );
 }
 
