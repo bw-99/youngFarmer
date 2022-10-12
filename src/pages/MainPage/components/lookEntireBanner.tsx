@@ -1,14 +1,17 @@
-import { BannerBackgroundAtom, BannerButton, BannerCircleOne, BannerCircleTwo, BannerImage, BannerTextBoldAtom, BannerTextLightAtom } from "../atoms/lookEntireBanner";
-import lookEntireBannerTomato from "../../../assets/images/main_lookEntireBanner_tomato.png";
+import { BannerAtom, BannerBackgroundAtom, BannerButton, BannerCircleOne, BannerCircleTwo, BannerImage, BannerTextBoldAtom, BannerTextLightAtom } from "../atoms/lookEntireBanner";
+import mainMiddleBanner from "../../../assets/images/main_middle_banner.png";
 
 export const LookEntireBannerComponent = () => {
     return (
-       <div style={{margin: "0 0 0 0"}}>
-            <BannerBackgroundAtom> 
-                <BannerTextComponent />
-                <BannerImageComponent />
-            </BannerBackgroundAtom>
-       </div>
+        <div>
+            <BannerAtom src={mainMiddleBanner}/>
+        </div>
+    //    <div style={{margin: "0 0 0 0"}}>
+    //         <BannerBackgroundAtom> 
+    //             <BannerTextComponent />
+    //             <BannerImageComponent />
+    //         </BannerBackgroundAtom>
+    //    </div>
     );
 }
 
@@ -27,7 +30,7 @@ const BannerImageComponent = () => {
         <div style={{marginTop: "14px", display: "flex", flexDirection: "row"}}>
             <BannerCircleOne />
             <div style={{position: "relative", zIndex: 10}}>
-                <BannerImage src={lookEntireBannerTomato}/>
+                <BannerImage src={mainMiddleBanner}/>
             </div>
             <div style={{position: "absolute", zIndex: 1, right: "11px"}}>
                 <BannerCircleTwo />

@@ -1,6 +1,7 @@
 import recommendItemStawberry from "../../../assets/images/main_recommend_strawberry.png";
 import rightArrowIcon from "../../../assets/images/btn-arrow-r-14-px@3x.png";
 import itemLikeIcon from "../../../assets/images/like-off@3x.png";
+import rateStarIcon from "../../../assets/images/rate-star@3x.png";
 
 import { DeliveryInfoCategory, DeliveryInfoExplainMain, DeliveryInfoExplainSub, DeliveryInfoTitle, DeliverySepLine, FarmerArrow, FarmerNickname, FarmerProfile, ItemDiscount, ItemDiscountPrice, ItemLike, ItemLikeBg, ItemPriceDefault, ItemRateArrow, ItemRateStar, ItemRateText, ItemSepLine, ItemTitle } from "../atoms/itemInfo";
 import { ItemBestMark, ItemBestMarkRedBorder, ItemSaleMark } from "../../../common/ItemList/ItemList";
@@ -30,7 +31,7 @@ export const ItemInfoComp = () => {
                 </div>
 
                 <div style={{display: "flex", alignItems:"center"}}>
-                    <ItemRateStar />
+                    <ItemRateStar  src={rateStarIcon}/>
                     <ItemRateText style={{marginLeft: "2px"}}> 4.5 (123) </ItemRateText>
                     <ItemRateArrow  style={{marginLeft: "3px"}} src={rightArrowIcon}/>
                 </div>

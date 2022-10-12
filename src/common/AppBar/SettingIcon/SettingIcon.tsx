@@ -6,7 +6,7 @@ const AppBarIcon = styled.img`
   height: 24px;
   object-fit: contain;
   padding: 16px 16px 16px 8px;
-  src: ${(props:any) => props.src}
+  src: ${(props:any) => props.src};
 `
 
 export const SettingComponent = () => {

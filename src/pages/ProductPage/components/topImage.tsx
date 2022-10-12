@@ -1,11 +1,12 @@
 import styled from "styled-components";
 import recommendItemStawberry from "../../../assets/images/main_recommend_strawberry.png";
 import { ImageSize, ImageCover, BottomBox, BottomBoxCurPage, BottomBoxTotalPage } from "../atoms/topImage";
+import topExampleIcon from "../../../assets/images/rectangle@3x.png";
 
 export const TopImageComp = () => {
     return (
         <div style={{ display: "flex", height: "310px", alignItems: "center", justifyContent: "center"}}>
-            <ImageSize src={recommendItemStawberry} />
+            <ImageSize src={topExampleIcon} />
             <ImageCover />
             <BottomBox>
                 <div style={{padding: "4px 11px", display: "flex",  justifyContent: "center"}}>

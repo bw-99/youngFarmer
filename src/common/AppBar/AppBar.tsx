@@ -15,7 +15,8 @@ import searchIconImage from "../../assets/images/btn-search@3x.png";
 import { useDispatch, useSelector } from "react-redux";
 import { SearchCrateAction } from "../../pages/SearchPage/SearchActions";
 import { useNavigate } from "react-router-dom";
-import { ShareIconComponent } from "./ShareIcon/ShareIcon";
+import { ShareIconBlackComponent, ShareIconComponent } from "./ShareIcon/ShareIcon";
+import { MySettingComponent } from "./SettingIcon/Mysetting";
 
 // btn-search
 interface ScrollProps {
@@ -48,8 +49,6 @@ const AppBarAtom = styled.div<ScrollProps>`
     background-color: ${props => props.isScrollDown? "rgba(255,255,255,1)" : "rgba(255,255,255,0)"};
     width: 100vw;
 `
-
-
 
 const AppBar = styled.div`
   width: 100vw;
@@ -165,12 +164,13 @@ export const AppBarComponentProduct = () => {
     <AppBarAtom isScrollDown={isScrolled}>
         <div style={{display:"flex", width:"100vw", justifyContent: "space-between"}}>
             <div style={{display:"flex", justifyContent: "flex-start", alignItems:"center"}}>
-                <BackIconWhiteComponent />
+                {isScrolled? <BackIconComponent /> : <BackIconWhiteComponent />}
             </div>
            
             <div style={{display:"flex", justifyContent: "flex-end", alignItems:"center"}}>
-                <ShareIconComponent />
-                <ShoppingBagIconWhiteComponent />
+                { isScrolled? <ShareIconBlackComponent /> : <ShareIconComponent />}
+                {isScrolled? <ShoppingBagIconComponent />: <ShoppingBagIconWhiteComponent />}
+                
             </div>
         </div>
     </AppBarAtom>
@@ -397,3 +397,41 @@ export const AppBarComponentMain = () => {
     );
 }
 
+export const AppBarComponentMyPage = (title: string) => {
+    const [isScrolled, setIsScrolled] = useState(false);
+
+    const pop = () => {
+        console.log(window.scrollY);
+        if(window.scrollY > 0){
+            setIsScrolled(true);
+        }
+        else{
+            setIsScrolled(false);
+        }
+      }
+
+      
+    useEffect(() => {
+        window.addEventListener('scroll', pop);
+      
+        return () => window.removeEventListener('scroll', pop);
+      },[]);
+
+    return (
+    <AppBarAtom isScrollDown={isScrolled}>
+        <div style={{display:"flex", width:"100vw"}}>
+                    <div style={{flex:1, display:"flex", justifyContent: "flex-start", alignItems:"center"}}>
+                        <MySettingComponent />
+                    </div>
+                    <div style={{flex:2, display:"flex", justifyContent: "center"}}>
+                        <AppBarTitle> {title} </AppBarTitle>
+                    </div>
+                    <div style={{flex:1, display:"flex", justifyContent: "flex-end", alignItems:"center"}}>
+                        <NotiComponent />
+                        <ShoppingBagIconComponent />
+                    </div>
+        </div>
+    </AppBarAtom>
+
+    )
+}

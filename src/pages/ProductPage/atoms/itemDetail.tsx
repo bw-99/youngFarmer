@@ -28,3 +28,10 @@ export const IndexSelectedLine = styled.div`
   height: 2px;
   background-color: #fb6159;
 `
+
+
+export const ImageBox = styled.img`
+  object-fit: contain;
+  width: calc(100vw - 32px);
+  margin: 8px 0;
+`

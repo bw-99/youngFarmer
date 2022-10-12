@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import btnOutIcon from "../../../assets/images/btn-out@3x.png";
+import btnOutBlackIcon from "../../../assets/images/btn-out-black@3x.png";
 
 const AppBarIcon = styled.img`
   width: 24px;
@@ -13,5 +14,11 @@ const AppBarIcon = styled.img`
 export const ShareIconComponent = () => {
     return (
         <AppBarIcon src={btnOutIcon} alt="" />
+    );
+}
+
+export const ShareIconBlackComponent = () => {
+    return (
+        <AppBarIcon src={btnOutBlackIcon} alt="" />
     );
 }

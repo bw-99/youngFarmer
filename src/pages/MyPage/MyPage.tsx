@@ -7,11 +7,14 @@ import { AppFrame } from "../../App";
 
 import alarm from "../../assets/images/alarm@3x.png";
 import shopping_bag from "../../assets/images/shopping_bag@3x.png";
-import { AppBarComponentNoBack } from "../../common/AppBar/AppBar";
+import { AppBarComponentMyPage, AppBarComponentNoBack } from "../../common/AppBar/AppBar";
 
 
 
 import { BottomNavigationBar } from "../../common/BottomNavigationBar/BottomNavigationBar";
+import { ProfileComp } from "./components/profile";
+import { ServiceCenterComp } from "./components/serviceCenter";
+import { ShoppingComp } from "./components/shopping";
 
 
 function MyPage(props: any) {
@@ -35,8 +38,10 @@ function MyPage(props: any) {
 
     return (
         <AppFrame>
-            {AppBarComponentNoBack("마이페이지")}
-            <h1> 작업 중 </h1>
+            {AppBarComponentMyPage("마이페이지")}
+            <ProfileComp />
+            <ShoppingComp />
+            <ServiceCenterComp />
             <BottomNavigationBar />
         </AppFrame>
     );

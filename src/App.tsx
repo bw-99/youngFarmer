@@ -17,6 +17,7 @@ import SearchDetailPage from './pages/SearchDetailPage/SearchDetailPage';
 import ProductPage from './pages/ProductPage/ProductPage';
 import { BottomNavBarChanger } from './services/BottomNavBarChanger';
 import { ScrollToTop } from './services/ScrollToTop';
+import MyPage from './pages/MyPage/MyPage';
 
 
 function App() {
@@ -39,7 +40,7 @@ function App() {
               <Route path='/chat' element = {<ChatPage />}/>
               <Route path='/search' element = {<SearchPage />}/>
               <Route path='/search/:search' element = {<SearchDetailPage />}/>
-              <Route path='/mypage' element = {<SearchPage />}/>
+              <Route path='/mypage' element = {<MyPage />}/>
               <Route path='/product/:productId' element = {<ProductPage />}/>
             </Routes>
           </ScrollToTop>

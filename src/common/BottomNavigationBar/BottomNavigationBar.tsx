@@ -14,7 +14,9 @@ import ChatPageIconOff from "../../assets/images/btn-tabbar-chat-off@3x.png";
 import LikePageIconOn from "../../assets/images/btn-tabbar-like-on@3x.png";
 import LikePageIconOff from "../../assets/images/btn-tabbar-like-off@3x.png";
 
+import MyPageIconOn from "../../assets/images/btn-tabbar-mypage-on@3x.png";
 import MyPageIconOff from "../../assets/images/btn-tabbar-mypage-off@3x.png";
+
 import styled from "styled-components";
 import { CHAT_PAGE, GOTO_CHAT_PAGE, GOTO_HOME_PAGE, GOTO_LIKE_PAGE, GOTO_MY_PAGE, GOTO_SEARCH_PAGE, HOME_PAGE, LIKE_PAGE, MY_PAGE, SEARCH_PAGE } from "./BottomNavigationBarActions";
 
@@ -106,7 +108,7 @@ const IconItemComponent = (itemNumber: number) => {
         [SearchPageIconOn, SearchPageIconOff],
         [LikePageIconOn, LikePageIconOff],
         [ChatPageIconOn, ChatPageIconOff],
-        [MyPageIconOff, MyPageIconOff],
+        [MyPageIconOn, MyPageIconOff],
     ]
 
     const dispatch = useDispatch();

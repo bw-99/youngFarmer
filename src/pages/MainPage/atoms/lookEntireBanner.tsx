@@ -1,5 +1,12 @@
 import styled from "styled-components";
 
+
+export const BannerAtom = styled.img`
+  width: 100vw;
+  object-fit: cover;
+`
+
+
 export const MainTextLight = styled.div`
     font-family: AppleSDGothicNeo;
     font-size: 24px;

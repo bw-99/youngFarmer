@@ -40,11 +40,9 @@ export const ItemLikeBg = styled.div`
 `
 
 
-export const ItemRateStar = styled.div`
+export const ItemRateStar = styled.img`
   width: 16px;
   height: 16px;
-  border-radius: 1px;
-  background-color: #fb6159;
 `
 
 export const ItemRateText = styled.div`

@@ -13,6 +13,7 @@ import { AppBarComponentNoBack, AppBarComponentProduct, AppBarComponentSearch } 
 
 import { BottomNavigationBar } from "../../common/BottomNavigationBar/BottomNavigationBar";
 import { CategoryComponent } from "../../common/Category/category";
+import { BottomBarComp } from "./components/BottomBar";
 import { ItemDetailComp } from "./components/itemDetail";
 import { ItemInfoComp } from "./components/itemInfo";
 import { TopImageComp } from "./components/topImage";
@@ -31,6 +32,7 @@ function ProductPage(props: any) {
             <TopImageComp />
             <ItemInfoComp />
             <ItemDetailComp />
+            <BottomBarComp />
 
             {/* <BottomNavigationBar /> */}
         </AppFrame>
