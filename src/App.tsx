@@ -16,6 +16,7 @@ import LiveListPage from './pages/LiveListPage/LiveListPage';
 import SearchDetailPage from './pages/SearchDetailPage/SearchDetailPage';
 import ProductPage from './pages/ProductPage/ProductPage';
 import { BottomNavBarChanger } from './services/BottomNavBarChanger';
+import { ScrollToTop } from './services/ScrollToTop';
 
 
 function App() {
@@ -26,20 +27,22 @@ function App() {
   
   return (
     <BottomNavBarChanger>
-          <Routes>
-            <Route path='/' element = {<SplashPage />}/>
-            <Route path='/main' element = {<MainPage />}/>
-            <Route path='/main/todayRecommend' element = {<TodayRecommendPage />}/>
-            <Route path='/main/liveList' element = {<LiveListPage />}/>
-            <Route path='/like' element = {<LikePage />}/>
-            <Route path='/splash' element = {<SplashPage />}/>
-            <Route path='/login' element = {<LoginPage />}/>
-            <Route path='/chat' element = {<ChatPage />}/>
-            <Route path='/search' element = {<SearchPage />}/>
-            <Route path='/search/:search' element = {<SearchDetailPage />}/>
-            <Route path='/mypage' element = {<SearchPage />}/>
-            <Route path='/product/:productId' element = {<ProductPage />}/>
-          </Routes>
+          <ScrollToTop >
+            <Routes>
+              <Route path='/' element = {<SplashPage />}/>
+              <Route path='/main' element = {<MainPage />}/>
+              <Route path='/main/todayRecommend' element = {<TodayRecommendPage />}/>
+              <Route path='/main/liveList' element = {<LiveListPage />}/>
+              <Route path='/like' element = {<LikePage />}/>
+              <Route path='/splash' element = {<SplashPage />}/>
+              <Route path='/login' element = {<LoginPage />}/>
+              <Route path='/chat' element = {<ChatPage />}/>
+              <Route path='/search' element = {<SearchPage />}/>
+              <Route path='/search/:search' element = {<SearchDetailPage />}/>
+              <Route path='/mypage' element = {<SearchPage />}/>
+              <Route path='/product/:productId' element = {<ProductPage />}/>
+            </Routes>
+          </ScrollToTop>
     </BottomNavBarChanger>  
     
   );

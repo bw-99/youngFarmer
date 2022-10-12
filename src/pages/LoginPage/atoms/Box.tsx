@@ -3,7 +3,8 @@ import styled from "styled-components"
 export const BottomBox = styled.div `
     width: 100vw;
     height: 262px;
-    border-radius: 16px;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
     background-color: #ffffff;
 `
 
@@ -66,7 +67,6 @@ export const SnsText = styled.div`
 
 export const LookAroundBeforeLogin = styled.div `
     border-radius: 8px;
-    margin: 12px 16px 10px 16px
     height: 50px;
     color: #777777;
     width: 100vw;

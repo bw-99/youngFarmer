@@ -14,7 +14,7 @@ export const BackIconComponent = () => {
     const navigate = useNavigate();
     return (
         <div onClick={()=> {
-            navigate("../");}}>
+            navigate(-1);}}>
             <AppBarArrow src={backArrow}/>
         </div>
     );
@@ -25,7 +25,7 @@ export const BackIconWhiteComponent = () => {
     const navigate = useNavigate();
     return (
         <div onClick={()=> {
-            navigate("../");}}>
+            navigate(-1);}}>
             <AppBarArrow src={backArrowWhite}/>
         </div>
     );

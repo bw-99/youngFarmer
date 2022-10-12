@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { CHAT_PAGE, HOME_PAGE, LIKE_PAGE, MY_PAGE, SEARCH_PAGE } from "./BottomNavigationBarActions";
-import { BottomNavBarInitState } from "./BottomNavigationBarConstants";
+import { CHAT_PAGE, HOME_PAGE, LIKE_PAGE, MY_PAGE, SEARCH_PAGE } from "../common/BottomNavigationBar/BottomNavigationBarActions";
+import { BottomNavBarInitState } from "../common/BottomNavigationBar/BottomNavigationBarConstants";
 
 export function BottomNavigationBarReducer(state = BottomNavBarInitState, action: any) {
 

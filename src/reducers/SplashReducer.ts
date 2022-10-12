@@ -1,4 +1,4 @@
-import { LOGIN_FAIL, LOGIN_SUCCESS } from "./SplashActions"
+import { LOGIN_FAIL, LOGIN_SUCCESS } from "../pages/SplashPage/SplashActions"
 
 type movieItem = {
     title: string,

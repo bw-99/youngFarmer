@@ -25,7 +25,7 @@ padding: 0 8px 0 8px;
 
 
 export const LiveItemImage = styled.img`
-    width: 343px;
+    width: calc(100vw - 32px);
     height: 400px;
     border-radius: 12px;
     object-fit: cover;
@@ -41,7 +41,7 @@ export const LiveItemCoverTextDate = styled.div`
 `
 
 export const LiveItemCover = styled.div`
-    width: 343px;
+    width: calc(100vw - 32px);
     height: 400px;
     border-radius: 12px;
     background-image: linear-gradient(to top, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, 0.7));

@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { call, delay, put, takeLatest } from "redux-saga/effects";
-import { LOGIN, LOGIN_FAIL, LOGIN_SUCCESS } from "./SplashActions";
+import { LOGIN, LOGIN_FAIL, LOGIN_SUCCESS } from "../pages/SplashPage/SplashActions";
 
 
 export function* autoLogin(action: any) {

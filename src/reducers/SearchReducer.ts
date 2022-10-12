@@ -1,5 +1,5 @@
-import { SEARCH_CREATE, SEARCH_DELETE } from "./SearchActions";
-import { SearchHistoryType, SearchHistoryTypeList } from "./SearchConstants";
+import { SEARCH_CREATE, SEARCH_DELETE } from "../pages/SearchPage/SearchActions";
+import { SearchHistoryType, SearchHistoryTypeList } from "../pages/SearchPage/SearchConstants";
 
 const searchInitState : SearchHistoryTypeList = {
     history: []
