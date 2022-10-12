@@ -37,7 +37,7 @@ function MainPage(props: any) {
     
 
     return (
-        <div style={{position: "relative", width: "100vw", height:"100vh" }}>
+        <div style={{maxWidth:"767px", position: "relative", width: "100vw", height:"100vh" }}>
             <AppBarComponentMain />
            
             <DiscountComponent />

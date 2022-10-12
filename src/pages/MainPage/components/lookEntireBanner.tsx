@@ -4,7 +4,7 @@ import mainMiddleBanner from "../../../assets/images/main_middle_banner.png";
 export const LookEntireBannerComponent = () => {
     return (
         <div>
-            <BannerAtom src={mainMiddleBanner}/>
+            <BannerAtom style={{maxWidth: "767px", }} src={mainMiddleBanner}/>
         </div>
     //    <div style={{margin: "0 0 0 0"}}>
     //         <BannerBackgroundAtom> 

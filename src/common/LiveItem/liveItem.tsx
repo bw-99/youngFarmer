@@ -27,7 +27,7 @@ export const LiveTitleComponent = () => {
 const LiveItemComponent = () => {
     return (
         <div style={{position:"relative", margin: "15px 8px 15px 8px"}}>
-            <LiveItemImage src={liveFruitMarket} />    
+            <LiveItemImage style={{maxWidth: "767px", }} src={liveFruitMarket} />    
             <LiveItemCoverComponent/>
         </div>
     );
@@ -36,7 +36,7 @@ const LiveItemComponent = () => {
 
 const LiveItemCoverComponent = () => {
     return (
-        <LiveItemCover>
+        <LiveItemCover style={{maxWidth: "767px", }} >
             <div>
                 <LiveItemCoverTextDate>2022.09.07</LiveItemCoverTextDate>
                 <LiveItemCoverTextMain>

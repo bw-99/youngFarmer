@@ -6,8 +6,8 @@ import topExampleIcon from "../../../assets/images/rectangle@3x.png";
 export const TopImageComp = () => {
     return (
         <div style={{ display: "flex", height: "310px", alignItems: "center", justifyContent: "center"}}>
-            <ImageSize src={topExampleIcon} />
-            <ImageCover />
+            <ImageSize style={{maxWidth: "767px", }} src={topExampleIcon} />
+            <ImageCover style={{maxWidth: "767px", }}/>
             <BottomBox>
                 <div style={{padding: "4px 11px", display: "flex",  justifyContent: "center"}}>
                     <BottomBoxCurPage> 1 </BottomBoxCurPage>

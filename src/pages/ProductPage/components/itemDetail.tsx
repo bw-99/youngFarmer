@@ -37,9 +37,9 @@ export const ItemDetailComp = () => {
                     <IndexNotSelectedLine />
                 </div>
             </div>
-            <ImageBox src={productExOne} />
-            <ImageBox src={productExTwo} />
-            <ImageBox src={productExThree} />
+            <ImageBox style={{maxWidth: "767px", }} src={productExOne} />
+            <ImageBox style={{maxWidth: "767px", }} src={productExTwo} />
+            <ImageBox style={{maxWidth: "767px", }} src={productExThree} />
         </div>
     );
 }
