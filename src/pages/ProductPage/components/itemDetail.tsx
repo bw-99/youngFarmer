@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React,{ useState } from "react";
 import { IndexSelectedText, IndexNotSelectedText, IndexSelectedLine, IndexNotSelectedLine, ImageBox } from "../atoms/itemDetail";
 
 import productExOne from "../../../assets/images/product-ex1@3x.png";

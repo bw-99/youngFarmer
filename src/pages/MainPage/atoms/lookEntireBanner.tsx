@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import React from "react";
 
 export const BannerAtom = styled.img`
   width: 100vw;

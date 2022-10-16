@@ -2,6 +2,7 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { AppFrame } from "../../App";
 import { AppBarComponentOnlyBack, AppBarComponentSearch } from "../../common/AppBar/AppBar";
 import { LiveTitleListComponent } from "../../common/LiveItem/liveItem";
+import React from "react";
 
 function LiveListPage(props: any) {
     const params = useParams();

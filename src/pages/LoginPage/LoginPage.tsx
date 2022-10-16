@@ -25,18 +25,9 @@ function LoginPage(props: any) {
 
     const [searchParams, setSearchParams] = useSearchParams();
 
-    const [Email, setEmail] = useState("");
-    const [Password, setPassword] = useState("");
 
     const onButtonClickHandler = (e: React.MouseEvent<HTMLInputElement>) => {
         navigate('/main');
-    };
-    const onPasswordHanlder = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setPassword(e.currentTarget.value);
-    };  
-
-    const onSubmitHandler = (e:React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
     };
 
 

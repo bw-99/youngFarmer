@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import React from "react";
 
 export const RecommnedTitleText = styled.div`
 font-family: AppleSDGothicNeo;
@@ -12,7 +13,7 @@ line-height: normal;
 export const RecommnedTitleArrow = styled.img`
 width: 20px;
 height: 20px;
-src: ${(props:any) => props.src}
+src: ${(props:any) => props.src};
 `
 
 export const RecommnedTitle = styled.div`
@@ -74,7 +75,7 @@ height: 154px;
 background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
 border-radius: 12px;
 object-fit: cover;
-src: ${(props:any) => props.src}
+src: ${(props:any) => props.src};
 position: relative;
 z-index: 1;
 `

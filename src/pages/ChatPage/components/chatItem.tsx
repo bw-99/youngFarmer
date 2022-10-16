@@ -1,5 +1,6 @@
 import { ChatSeperateLine, FarmerNickname, FarmerProfile, NewChatNoti, RecentChat, RecentChatDate } from "../atoms/chatItem";
 import farmer from "../../../assets/images/farmer.png";
+import React from "react";
 
 interface chatPropsType {
     isReaded:boolean;

@@ -1,3 +1,4 @@
+import React from "react";
 import { Icon, ShoppingItemAtom, ShoppingItemRightArrow, ShoppingItemText, ShoppingSepLine, ShoppingText } from "../atoms/shopping";
 import questionIcon from "../../../assets/images/icon-question@3x.png";
 

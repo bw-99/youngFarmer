@@ -1,7 +1,7 @@
 import { BottomBoxAtom, BottomBoxBuy, BottomBoxLikeIcon, BottomBoxLikeText, BottomBoxShoppingCart } from "../atoms/BottomBar";
 import itemLikeIcon from "../../../assets/images/like-off@3x.png";
 
-
+import React from "react";
 
 export const BottomBarComp = () => {
     return(

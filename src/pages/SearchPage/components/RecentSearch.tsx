@@ -4,7 +4,7 @@ import closeIcon from "../../../assets/images/btn-close-20-px@3x.png";
 
 
 import { RecentSearchHistoryBg, RecentSearchSeperateLine, RecentSearchHistoryText, RecentTextStyle, RecentSearchHistoryClose } from "../atoms/RecentSearch";
-import { useState } from "react";
+import React,{ useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../reducers";
 import { SearchHistoryType, SearchHistoryTypeList } from "../SearchConstants";

@@ -2,7 +2,7 @@ import { LiveTitle, LiveTitleText, LiveTitleArrow, LiveItemImage, LiveItemCover,
 import liveRightArrow from "../../assets/images/btn-arrow-r-20-px@3x.png";
 import liveFruitMarket from "../../assets/images/main_live_fruitMarket.png";
 import { useNavigate } from "react-router-dom";
-
+import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 export const LiveTitleListComponent = () => {
     return (
         <div style={{display:"flex", flexWrap:"wrap", flexDirection:"row"}}>

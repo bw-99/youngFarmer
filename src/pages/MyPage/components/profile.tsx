@@ -2,7 +2,7 @@ import recommendItemStawberry from "../../../assets/images/main_recommend_strawb
 import shoppingBag from "../../../assets/images/shopping-bag-20px@3x.png";
 import defaultPhoto from "../../../assets/images/btn-avatar-default@3x.png";
 import cameraIcon from "../../../assets/images/icon-camera-16-px@3x.png";
-
+import React from "react";
 import orderIcon from "../../../assets/images/btn-order@3x.png";
 import reviewIcon from "../../../assets/images/btn-review@3x.png";
 import pointIcon from "../../../assets/images/btn-point@3x.png";

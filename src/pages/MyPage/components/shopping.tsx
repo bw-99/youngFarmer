@@ -2,7 +2,7 @@ import { Icon, ShoppingItemAtom, ShoppingItemRightArrow, ShoppingItemText, Shopp
 import questionIcon from "../../../assets/images/icon-question@3x.png";
 import btnRightIcon from "../../../assets/images/btn-arrow-r-14-px@3x.png";
 import plusIcon from "../../../assets/images/icon-plus@3x.png";
-
+import React from "react";
 export const ShoppingComp = () => {
     return(
         <div style={{margin: "30px 16px 0 16px"}}>

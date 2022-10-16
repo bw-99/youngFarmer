@@ -2,6 +2,7 @@ import styled from "styled-components";
 import recommendItemStawberry from "../../../assets/images/main_recommend_strawberry.png";
 import { ImageSize, ImageCover, BottomBox, BottomBoxCurPage, BottomBoxTotalPage } from "../atoms/topImage";
 import topExampleIcon from "../../../assets/images/rectangle@3x.png";
+import React from "react";
 
 export const TopImageComp = () => {
     return (

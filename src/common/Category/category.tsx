@@ -6,6 +6,7 @@ import categoryVegitable from "../../assets/images/category-vegitable@3x.png";
 import categoryHealthy from "../../assets/images/category-healthy@3x.png";
 import styled from "styled-components";
 
+import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 
 const CategoryBox = styled.div`
   padding: 26px 16px 38px 16px;

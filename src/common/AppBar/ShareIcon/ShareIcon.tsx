@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "styled-components";
 import btnOutIcon from "../../../assets/images/btn-out@3x.png";
 import btnOutBlackIcon from "../../../assets/images/btn-out-black@3x.png";

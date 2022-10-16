@@ -1,3 +1,4 @@
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import backArrow from "../../../assets/images/btn-back@3x.png"

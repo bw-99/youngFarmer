@@ -2,7 +2,7 @@ import { ItemUnitListComp } from "../../../common/ItemList/ItemList";
 import { DropDownBtn, FilterBackGround, FilterImage, FilterText, FilterName } from "../atoms/SearchResult";
 import btnDropDown from "../../../assets/images/btn-dropdown-20-px@3x.png";
 import filterBtn from "../../../assets/images/filter-btn@3x.png";
-
+import React from "react";
 export const SearchResultComp = () => {
     return(
         <div>

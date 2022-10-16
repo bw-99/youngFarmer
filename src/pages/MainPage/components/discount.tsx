@@ -1,7 +1,7 @@
 import { DiscountBox, DiscountText, MainTextLight, MainTextBold, DiscountPeriod, DiscountImageBox } from "../atoms/atoms"
 
 import mainBanner from "../../../assets/images/main_banner.png";
-
+import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 export const DiscountComponent = () => {
     return (
         <img src={mainBanner} alt="" style={{maxWidth: "767px", objectFit: "cover", width:"100vw", height:"416px"}}/>

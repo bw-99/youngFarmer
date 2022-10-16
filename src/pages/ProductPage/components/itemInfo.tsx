@@ -7,6 +7,7 @@ import { DeliveryInfoCategory, DeliveryInfoExplainMain, DeliveryInfoExplainSub, 
 import { ItemBestMark, ItemBestMarkRedBorder, ItemSaleMark } from "../../../common/ItemList/ItemList";
 import { LikeIconComp } from "../../MainPage/components/recommend";
 
+import React from "react";
 
 export const ItemInfoComp = () => {
     return(

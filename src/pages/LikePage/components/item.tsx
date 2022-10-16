@@ -1,5 +1,6 @@
 import { Item, ItemCountText, ItemCover, ItemImage, ItemOrderShoppingBagButton, ItemOrderShoppingBagButtonIcon, ItemOrderShoppingBagButtonText, ItemTextInfoPrice, ItemTextInfoPriceDiscount, ItemTextInfoSource, ItemTextInfoTitle, ItemUnitList } from "../../../common/ItemList/atoms/item";
 import { ItemUnitListComp } from "../../../common/ItemList/ItemList";
+import React from "react";
 
 export const ItemComponent = () => {
     return(

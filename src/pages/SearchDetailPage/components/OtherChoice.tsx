@@ -1,7 +1,7 @@
 import { ChoiceItem, ChoiceSepLine, OtherChoiceTitle } from "../atoms/OtherChoice";
 import recommendItemStawberry from "../../../assets/images/main_recommend_strawberry.png";
 import { ItemUnitImgComp, ItemUnitListComp } from "../../../common/ItemList/ItemList";
-
+import React from "react";
 
 export const OtherChoiceComp = () => {
     return(
