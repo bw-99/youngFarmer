@@ -1,14 +1,14 @@
-import axios from "axios";
+import axios from 'axios'
 
-// const DOMAIN = "https://www.youtube.com";
-axios.defaults.withCredentials = true; // 쿠키 데이터를 전송받기 위해
+// axios.defaults.withCredentials = true; // 쿠키 데이터를 전송받기 위해
 
-const apiClient = axios.create({
+export const apiClient = axios.create({
     // baseURL: DOMAIN   // 환경변수로 지정한 BASE_URL을 사용
     // baseURL: DOMAIN,
-    headers: {
-      'Content-Type': 'application/json',
-    },
+    // headers: {
+    //   // 'Content-Type': 'application/json',
+    //   // "Access-Control-Allow-Origin": "*"
+    // },
 });
 
 const { get, post, put, delete: destroy } = apiClient;

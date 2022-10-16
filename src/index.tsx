@@ -11,6 +11,7 @@ import rootSaga from './sagas/index';
 
 import './index.css';
 import configInfo from "./firebaseConfig.json";
+import kakaoConfigInfo from "./kakaoConfig.json";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 
@@ -23,6 +24,15 @@ const firebaseConfig = {
   appId: configInfo.appId,
   measurementId: configInfo.measurementId
 };
+
+export const kakaoConfig = {
+  nativeAppKey: kakaoConfigInfo.nativeAppKey,
+  restAPIKey: kakaoConfigInfo.restAPIKey,
+  javascriptKey: kakaoConfigInfo.javascriptKey,
+  adminKey: kakaoConfigInfo.adminKey,
+  kakaoAuthUri: `https://kauth.kakao.com/oauth/authorize?client_id=${kakaoConfigInfo.restAPIKey}&redirect_uri=${"http://localhost:52324/login"}&response_type=code`,
+  redirectUri: "/oauth/callback/kakao"
+}
 
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);

@@ -30,7 +30,7 @@ function App() {
     <BottomNavBarChanger>
           <ScrollToTop>
             <Routes>
-              <Route path='/' element = {<SplashPage />}/>
+              <Route path='/' element = {<LoginPage />}/>
               <Route path='/main' element = {<MainPage />}/>
               <Route path='/main/todayRecommend' element = {<TodayRecommendPage />}/>
               <Route path='/main/liveList' element = {<LiveListPage />}/>

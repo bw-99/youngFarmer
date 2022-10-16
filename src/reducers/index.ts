@@ -1,12 +1,12 @@
 import {combineReducers} from "redux";
 import { BottomNavigationBarReducer } from "./BottomNavigationBarReducer";
+import { LoginReducer } from "./LoginReducer";
 import { SearchReducer } from "./SearchReducer";
-import { SplashReducer } from "./SplashReducer";
 
 const rootReducer = combineReducers({
   BottomNavigationBarReducer,
-  SplashReducer,
-  SearchReducer
+  SearchReducer,
+  LoginReducer
 });
 
 export default rootReducer;

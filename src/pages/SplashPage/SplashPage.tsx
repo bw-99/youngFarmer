@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { RootState } from "../../reducers";
 import styled from "styled-components";
-import { CALL_LOGIN, LOGIN, LOGIN_SUCCESS } from "./SplashActions";
+import { CALL_LOGIN, LOGIN } from "./SplashActions";
 
 
 const Background = styled.div`
