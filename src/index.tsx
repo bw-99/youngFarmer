@@ -30,8 +30,8 @@ export const kakaoConfig = {
   restAPIKey: kakaoConfigInfo.restAPIKey,
   javascriptKey: kakaoConfigInfo.javascriptKey,
   adminKey: kakaoConfigInfo.adminKey,
-  kakaoAuthUri: `https://kauth.kakao.com/oauth/authorize?client_id=${kakaoConfigInfo.restAPIKey}&redirect_uri=${"http://localhost:52324/login"}&response_type=code`,
-  redirectUri: "/oauth/callback/kakao"
+  kakaoAuthUri: `https://kauth.kakao.com/oauth/authorize?client_id=${kakaoConfigInfo.restAPIKey}&redirect_uri=${encodeURI(window.location.origin + "/login")}&response_type=code`,
+  redirectUri: encodeURI(window.location.origin + "/login")
 }
 
 const app = initializeApp(firebaseConfig);

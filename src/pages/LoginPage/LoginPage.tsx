@@ -33,10 +33,11 @@ function LoginPage(props: any) {
 
     useEffect(
         () => {
+            const isLocal:boolean =  window.location.hostname == "localhost";
             const code = searchParams.get("code");
             if(code){
                 post(
-                    `/oauth/token?grant_type=${encodeURI("authorization_code")}&client_id=${encodeURIComponent(kakaoConfig.restAPIKey)}&redirect_uri=${encodeURI("http://localhost:52324/login")}&code=${encodeURI(code)}`, 
+                    `${isLocal? "kakaoLogin" : "https://kauth.kakao.com"}/oauth/token?grant_type=${encodeURI("authorization_code")}&client_id=${encodeURIComponent(kakaoConfig.restAPIKey)}&redirect_uri=${encodeURI(window.location.origin + "/login")}&code=${encodeURI(code)}`, 
                     {
                         headers: {
                             'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
