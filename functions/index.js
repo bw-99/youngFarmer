@@ -1,5 +1,6 @@
 const functions = require("firebase-functions");
 
+// TODO: 한국 서버로 변경 필요
 
 // import necessary modules
 const express = require('express');
