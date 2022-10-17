@@ -16,8 +16,6 @@ export  const BottomNavBarChanger:FC<Props> = ({ children, ...props }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  console.log(location.pathname.split("/")[1]);
-  
   switch (location.pathname.split("/")[1]) {
     case "main":
       dispatch(GOTO_HOME_PAGE());
@@ -35,6 +33,7 @@ export  const BottomNavBarChanger:FC<Props> = ({ children, ...props }) => {
       dispatch(GOTO_MY_PAGE());
       break;
     default:
+      dispatch(GOTO_HOME_PAGE());
       break;
   }
   

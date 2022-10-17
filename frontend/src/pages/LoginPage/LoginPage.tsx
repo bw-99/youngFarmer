@@ -10,10 +10,12 @@ import apple from "../../assets/images/icon-sns-apple@3x.png";
 
 
 import { AppleBox, BottomBox, KakaoBox, LookAround, LookAroundBeforeLogin, MainBox, MainTextBold, MainTextBox, MainTextLight, NaverBox, SnsText } from "./atoms/Box";
-import { LoginWithKakaoAction, LoginWithNaverAction } from "./LoginAction";
+import { LoginWithAnonymous, LoginWithKakaoAction, LoginWithNaverAction } from "./LoginAction";
 import { useDispatch } from "react-redux";
 import { get, post } from "../../api/axios";
 import { kakaoConfig } from "../..";
+
+import { getAuth, signInAnonymously } from "firebase/auth";
 
 
   
@@ -30,31 +32,29 @@ function LoginPage(props: any) {
         navigate('/main');
     };
 
+    const handleAnonymousLogin = () => {
+        dispatch(LoginWithAnonymous(()=>{navigate("/main")}));
+        // const auth = getAuth();
+        // signInAnonymously(auth)
+        // .then(() => {
+        //     alert("sign in");
+        // })
+        // .catch((error) => {
+        //     const errorCode = error.code;
+        //     const errorMessage = error.message;
+        // });
+    }
+
+    
     useEffect(
         () => {
-            const isLocal:boolean =  window.location.hostname == "localhost" && window.location.origin != process.env.REACT_APP_FIREBASE_LOCAL;
             const code = searchParams.get("code");
             if(code){
-                post(
-                    `${isLocal? "kakaoLogin" : "https://kauth.kakao.com"}/oauth/token?grant_type=${encodeURI("authorization_code")}&client_id=${encodeURIComponent(kakaoConfig.restAPIKey)}&redirect_uri=${encodeURI(window.location.origin + "/login")}&code=${encodeURI(code)}`, 
-                    {
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
-                        },
-                    }
-                ).then((data) => {
-                    console.log(data.data.access_token);
-                    console.log(data.data.token_type);
-                    console.log(data.data.refresh_token);
-                    console.log(data.data.expires_in);
-                    console.log(data.data.scope);
-                })
-             }   
+                dispatch(LoginWithKakaoAction(code));
+            }   
         }, [searchParams.get("code")]
     )
     
-    
-
     return (
         <div style={{backgroundImage: `url(${bg})`, backgroundRepeat: "no-repeat", width: "100vw", height:"100vh", backgroundSize: "cover"}}>
             <MainBox>
@@ -111,9 +111,9 @@ function LoginPage(props: any) {
                             </div>
                         </SnsText>
                     </AppleBox>
-                    <LookAroundBeforeLogin   onClick={onButtonClickHandler}> 
-                        <LookAround>
-                        로그인 전 둘러보기
+                    <LookAroundBeforeLogin onClick={handleAnonymousLogin}> 
+                        <LookAround unselectable="on">
+                            로그인 전 둘러보기
                         </LookAround>
                     </LookAroundBeforeLogin>
                 </BottomBox>

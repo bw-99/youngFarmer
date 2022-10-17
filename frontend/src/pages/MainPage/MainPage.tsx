@@ -13,6 +13,11 @@ import { NotiComponent } from "../../common/AppBar/NotiIcon/NotiIcon";
 import { ShoppingBagIconComponent } from "../../common/AppBar/ShoppingBagIcon/ShoppingBagIconComponent";
 import { AppBarComponentMain } from "../../common/AppBar/AppBar";
 import {  LiveTitleComponent, LiveTitleListComponent } from "../../common/LiveItem/liveItem";
+import { app, FirebaseAuth } from "../..";
+import { getAuth, signInWithCustomToken } from "firebase/auth";
+import { useSelector } from "react-redux";
+import { RootState } from "../../reducers";
+import { getUserInfo } from "../../services/firebase";
 
 
 function MainPage(props: any) {
@@ -20,26 +25,30 @@ function MainPage(props: any) {
     const location = useLocation();
     const navigate = useNavigate();
 
-    const [Email, setEmail] = useState("");
-    const [Password, setPassword] = useState("");
+    const userInfo:any = useSelector((state : RootState) => state.UserInfoReducer);
 
-    const onEmailHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setEmail(e.currentTarget.value);
-    };
-    const onPasswordHanlder = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setPassword(e.currentTarget.value);
-    };  
 
-    const onSubmitHandler = (e:React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-    };
+    useEffect(
+        () => {
+            const auth = getAuth();
+            const user = auth.currentUser;
 
+            console.log(user);
+            console.log(getUserInfo());
+            
+
+            console.log(FirebaseAuth.currentUser);
+            
+            console.log(userInfo);
+        }
+        , []
+    )
     
 
     return (
         <div style={{maxWidth:"767px", position: "relative", width: "100vw", height:"100vh" }}>
             <AppBarComponentMain />
-           
+            {/* <h1> {JSON.stringify(userInfo)} </h1> */}
             <DiscountComponent />
             <CategoryComponent />
             <RecommendComponent />

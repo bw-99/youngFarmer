@@ -1,4 +1,4 @@
-import React, { FC, ReactElement, ReactNode, useEffect } from 'react';
+import React, { createContext, FC, ReactElement, ReactNode, useContext, useEffect } from 'react';
 import { BrowserRouter, Navigate, Route, Router, Routes } from 'react-router-dom';
 
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
@@ -18,7 +18,9 @@ import ProductPage from './pages/ProductPage/ProductPage';
 import { BottomNavBarChanger } from './services/BottomNavBarChanger';
 import { ScrollToTop } from './services/ScrollToTop';
 import MyPage from './pages/MyPage/MyPage';
+import { AuthProvider, LoginRoute, PrivateRoute } from './services/firebase';
 
+export const AuthContext = createContext(false);
 
 function App() {
   const params = useParams();
@@ -26,26 +28,62 @@ function App() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   
+
+
   return (
-    <BottomNavBarChanger>
+          <BottomNavBarChanger>
           <ScrollToTop>
+          <AuthProvider>
+
             <Routes>
-              <Route path='/' element = {<LoginPage />}/>
-              <Route path='/main' element = {<MainPage />}/>
+              <Route path="/" element = {<PrivateRoute />} >
+                <Route path='/' element = {<MainPage />}/>
+                <Route path='/main' element = {<MainPage />}/>
+                <Route path='/main/todayRecommend' element = {<TodayRecommendPage />}/>
+                <Route path='/main/liveList' element = {<LiveListPage />}/>
+                <Route path='/like' element = {<LikePage />}/>
+                <Route path='/splash' element = {<SplashPage />}/>
+                <Route path='/chat' element = {<ChatPage />}/>
+                <Route path='/search' element = {<SearchPage />}/>
+                <Route path='/search/:search' element = {<SearchDetailPage />}/>
+                <Route path='/mypage' element = {<MyPage />}/>
+                <Route path='/product/:productId' element = {<ProductPage />}/>
+              </Route>
+                              
+              <Route path="/login" element = { 
+                <LoginRoute>
+                  <LoginPage />
+                </LoginRoute>
+              }/>
+              
+
+              <Route path="*" element = {<h1>Page Not Found</h1>}/>
+
+              {/* 
+              <Route path='/main' element = {
+                <PrivateRoute> 
+                  <MainPage /> 
+                </PrivateRoute>
+              }/>
+              <Route path='/' element = {
+                <PrivateRoute> 
+                  <MainPage /> 
+                </PrivateRoute>
+              }/>
               <Route path='/main/todayRecommend' element = {<TodayRecommendPage />}/>
               <Route path='/main/liveList' element = {<LiveListPage />}/>
               <Route path='/like' element = {<LikePage />}/>
               <Route path='/splash' element = {<SplashPage />}/>
-              <Route path='/login' element = {<LoginPage />}/>
               <Route path='/chat' element = {<ChatPage />}/>
               <Route path='/search' element = {<SearchPage />}/>
               <Route path='/search/:search' element = {<SearchDetailPage />}/>
               <Route path='/mypage' element = {<MyPage />}/>
-              <Route path='/product/:productId' element = {<ProductPage />}/>
+              <Route path='/product/:productId' element = {<ProductPage />}/> */}
             </Routes>
-          </ScrollToTop>
-    </BottomNavBarChanger>  
-    
+    </AuthProvider>
+
+            </ScrollToTop>
+      </BottomNavBarChanger>  
   );
 }
 
