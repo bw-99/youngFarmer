@@ -12,8 +12,8 @@ import apple from "../../assets/images/icon-sns-apple@3x.png";
 import { AppleBox, BottomBox, KakaoBox, LookAround, LookAroundBeforeLogin, MainBox, MainTextBold, MainTextBox, MainTextLight, NaverBox, SnsText } from "./atoms/Box";
 import { LoginWithKakaoAction, LoginWithNaverAction } from "./LoginAction";
 import { useDispatch } from "react-redux";
-import { kakaoConfig } from "../..";
 import { get, post } from "../../api/axios";
+import { kakaoConfig } from "../..";
 
 
   
@@ -30,10 +30,9 @@ function LoginPage(props: any) {
         navigate('/main');
     };
 
-
     useEffect(
         () => {
-            const isLocal:boolean =  window.location.hostname == "localhost";
+            const isLocal:boolean =  window.location.hostname == "localhost" && window.location.origin != process.env.REACT_APP_FIREBASE_LOCAL;
             const code = searchParams.get("code");
             if(code){
                 post(

@@ -4,6 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
+./package-lock.json
 
 # testing
 /coverage
@@ -24,6 +25,4 @@ yarn-error.log*
 
 #config
 *.log
-*.json
-
 .env

@@ -10,27 +10,25 @@ import rootReducer from './reducers';
 import rootSaga from './sagas/index';
 
 import './index.css';
-import configInfo from "./firebaseConfig.json";
-import kakaoConfigInfo from "./kakaoConfig.json";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 
 const firebaseConfig = {
-  apiKey: configInfo.apiKey,
-  authDomain: configInfo.authDomain,
-  projectId: configInfo.projectId,
-  storageBucket: configInfo.storageBucket,
-  messagingSenderId: configInfo.messagingSenderId,
-  appId: configInfo.appId,
-  measurementId: configInfo.measurementId
+  apiKey: process.env.REACT_APP_FIREBASE_CONFIG_API_KEY!,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN!,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID!,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET!,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID!,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID!,
+  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID!,
 };
 
 export const kakaoConfig = {
-  nativeAppKey: kakaoConfigInfo.nativeAppKey,
-  restAPIKey: kakaoConfigInfo.restAPIKey,
-  javascriptKey: kakaoConfigInfo.javascriptKey,
-  adminKey: kakaoConfigInfo.adminKey,
-  kakaoAuthUri: `https://kauth.kakao.com/oauth/authorize?client_id=${kakaoConfigInfo.restAPIKey}&redirect_uri=${encodeURI(window.location.origin + "/login")}&response_type=code`,
+  nativeAppKey: process.env.REACT_APP_KAKAO_NATIVE_APP_KEY!,
+  restAPIKey: process.env.REACT_APP_KAKAO_REST_API_KEY!,
+  javascriptKey: process.env.REACT_APP_KAKAO_JAVASCRIPT_KEY!,
+  adminKey: process.env.REACT_APP_KAKAO_ADMIN_KEY!,
+  kakaoAuthUri: `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_REST_API_KEY}&redirect_uri=${encodeURI(window.location.origin + "/login")}&response_type=code`,
   redirectUri: encodeURI(window.location.origin + "/login")
 }
 
