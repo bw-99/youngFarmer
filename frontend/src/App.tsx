@@ -48,7 +48,8 @@ function App() {
               <Route path='/search' element = {<SearchPage />}/>
               <Route path='/search/:search' element = {<SearchDetailPage />}/>
               <Route path='/mypage' element = {<MyPage />}/>
-              <Route path='/product/:productId' element = {<ProductPage />}/>
+              <Route path='/product/:productId' element={<ProductPage />} />
+              <Route path='/Store' element={<StorePage />} />
             </Routes>
     </AuthProvider>
 
