@@ -168,8 +168,8 @@ export const AppBarComponentProduct = () => {
             </div>
            
             <div style={{display:"flex", justifyContent: "flex-end", alignItems:"center"}}>
-                { isScrolled? <ShareIconBlackComponent /> : <ShareIconComponent />}
-                {isScrolled? <ShoppingBagIconComponent />: <ShoppingBagIconWhiteComponent />}
+                {isScrolled? <ShareIconBlackComponent /> : <ShareIconComponent />}
+                {isScrolled? <ShoppingBagIconComponent /> : <ShoppingBagIconWhiteComponent />}
                 
             </div>
         </div>
@@ -177,6 +177,43 @@ export const AppBarComponentProduct = () => {
     )
 }
 
+
+export const AppBarComponentStore = () => {
+    const [isScrolled, setIsScrolled] = useState(false);
+
+    const pop = () => {
+        console.log(window.scrollY);
+        if (window.scrollY > 0) {
+            setIsScrolled(true);
+        }
+        else {
+            setIsScrolled(false);
+        }
+    }
+
+
+    useEffect(() => {
+        window.addEventListener('scroll', pop);
+
+        return () => window.removeEventListener('scroll', pop);
+    }, []);
+
+    return (
+        <AppBarAtom isScrollDown={isScrolled}>
+            <div style={{ display: "flex", width: "100vw", justifyContent: "space-between" }}>
+                <div style={{ display: "flex", justifyContent: "flex-start", alignItems: "center" }}>
+                    {isScrolled ? <BackIconComponent /> : <BackIconWhiteComponent />}
+                </div>
+
+                <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "center" }}>
+                    {isScrolled ? <NotiComponent /> : <NotiComponent />} {/* }--Notice컴포넌트 화이트 필요*/}
+                    {isScrolled ? <ShoppingBagIconComponent /> : <ShoppingBagIconWhiteComponent />}
+
+                </div>
+            </div>
+        </AppBarAtom>
+    )
+}
 
 
 export const AppBarComponentBack = (title: string) => {

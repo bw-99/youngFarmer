@@ -18,6 +18,7 @@ import ProductPage from './pages/ProductPage/ProductPage';
 import { BottomNavBarChanger } from './services/BottomNavBarChanger';
 import { ScrollToTop } from './services/ScrollToTop';
 import MyPage from './pages/MyPage/MyPage';
+import StorePage from './pages/StorePage/StorePage';
 
 
 function App() {
@@ -39,9 +40,10 @@ function App() {
               <Route path='/login' element = {<LoginPage />}/>
               <Route path='/chat' element = {<ChatPage />}/>
               <Route path='/search' element = {<SearchPage />}/>
-              <Route path='/search/:search' element = {<SearchDetailPage />}/>
-              <Route path='/mypage' element = {<MyPage />}/>
-              <Route path='/product/:productId' element = {<ProductPage />}/>
+              <Route path='/search/:search' element={<SearchDetailPage />} />
+              <Route path='/mypage' element={<MyPage />} />
+              <Route path='/product/:productId' element={<ProductPage />} />
+              <Route path='/StorePage' element={<StorePage />} />
             </Routes>
           </ScrollToTop>
     </BottomNavBarChanger>  
