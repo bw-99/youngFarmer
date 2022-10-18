@@ -2,8 +2,8 @@ import styled from "styled-components";
 import React from "react";
 
 export const FarmerProfile = styled.img`
-  width: 66px;
-  height: 66px;
+  width: 33px;
+  height: 33px;
   border-radius: 33px;
 `
 
