@@ -11,4 +11,15 @@ module.exports = function(app) {
         }
     })
   );
+
+  app.use(
+    '/functions',
+    createProxyMiddleware({
+        target: process.env.REACT_APP_FIREBASE_FUNCTION_URL,
+        changeOrigin: true,
+        pathRewrite: {
+          "^/functions" : ""
+        }
+    })
+  );
 };

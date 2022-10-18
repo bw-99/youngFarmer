@@ -24,13 +24,14 @@ export interface LOGIN_PAYLOAD {
 }
 
 
-export const LoginWithKakaoAction = (code:string) => {
+export const LoginWithKakaoAction = (code:string, callback:Function) => {
     return(
         {
             type: LOGIN_TRY,
             payload: {
                 type: LOGIN_WITH_KAKAO,
-                code: code
+                code: code,
+                callback: callback
             }
         }
     );

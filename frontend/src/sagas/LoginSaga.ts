@@ -4,7 +4,7 @@ import { LOGIN_FAIL, LOGIN_PAYLOAD, LOGIN_SUCCESS, LOGIN_TRY, LOGIN_WITH_ANONYMO
 import { kakaoConfig } from "..";
 import axios from 'axios'
 import { apiClient, get, post } from "../api/axios";
-import { getAuth, signInAnonymously } from "firebase/auth";
+import { getAuth, signInAnonymously, signInWithCustomToken } from "firebase/auth";
 
 type LoginServiceResponse = SagaReturnType<any>;
 
@@ -22,8 +22,34 @@ async function kakaoLoginAPI(payload:any) {
         }
     )
 
-    console.log(result.data);
-    return result.data;
+    console.log(result.data.access_token);
+
+    const customToken = await post(
+        `${isLocal? "functions" : process.env.REACT_APP_FIREBASE_FUNCTION_URL}/verifyToken`,
+        {
+            headers: {
+                'Content-Type': 'text/plain',
+            },
+            token: result.data.access_token
+        }
+    );
+
+    console.log(customToken);
+    console.log(customToken.data.firebase_token);
+    
+
+    const auth = getAuth();
+    signInWithCustomToken(auth, customToken.data.firebase_token)
+    .then((userCredential) => {
+        const user = userCredential.user;
+        console.log(user);
+        return true;
+    })
+    .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        return false;
+    });
 }
 
 async function anonymousLoginAPI(payload:LOGIN_PAYLOAD) {
@@ -34,20 +60,21 @@ async function anonymousLoginAPI(payload:LOGIN_PAYLOAD) {
 }
 
 
-
 function* kakaoLogin(action:any) {
     const result:LoginServiceResponse = yield call(kakaoLoginAPI, action.payload);
     
     if(result){
+        console.log(action);
+        
         yield put({
             type: LOGIN_SUCCESS,
-            callback: action.callback
+            callback: action.payload.callback
         }); 
     }
     else{
         yield put({
             type: LOGIN_FAIL,
-            callback: action.callback
+            callback: action.payload.callback
         }); 
     }
 }

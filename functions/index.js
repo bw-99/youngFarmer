@@ -1,11 +1,16 @@
 const functions = require("firebase-functions");
-
-// TODO: 한국 서버로 변경 필요
+/**
+ * ! 필독: 
+ * Unhandled rejection StatusCodeError: 401 - "{\"msg\":\"ip mismatched! callerIp=115.145.122.2. check out registered ips.\",\"code\":-401}"
+ * 위 같은 에러가 난다면 붙잡지 말고 연락주세요
+ * (kakao에서 직접 수정해야합니다) 
+ */
 
 // import necessary modules
 const express = require('express');
 const bodyParser = require('body-parser');
 const request = require('request-promise');
+const cors = require("cors");
 
 // Firebase setup
 const firebaseAdmin = require('firebase-admin');
@@ -15,7 +20,8 @@ const serviceAccount = require('./service-account.json');
 
 // Kakao API request url to retrieve user profile based on access token
 const requestMeUrl = 'https://kapi.kakao.com/v2/user/me?secure_resource=true';
-
+// const requestMeUrl2 = 'https://kapi.kakao.com/v1/user/access_token_info';
+  
 // Initialize FirebaseApp with service-account.json
 firebaseAdmin.initializeApp({
   credential: firebaseAdmin.credential.cert(serviceAccount),
@@ -32,7 +38,10 @@ function requestMe(kakaoAccessToken) {
   console.log('Requesting user profile from Kakao API server.');
   return request({
     method: 'GET',
-    headers: {'Authorization': 'Bearer ' + kakaoAccessToken},
+    headers: {
+      'Authorization': 'Bearer ' + kakaoAccessToken,
+      'Content-type': "application/x-www-form-urlencoded"
+    },
     url: requestMeUrl,
   });
 };
@@ -85,6 +94,7 @@ function updateOrCreateUser(userId, email, displayName, photoURL) {
  */
 function createFirebaseToken(kakaoAccessToken) {
   return requestMe(kakaoAccessToken).then((response) => {
+    console.log(response);
     const body = JSON.parse(response);
     console.log(body);
     const userId = `kakao:${body.id}`;
@@ -111,11 +121,17 @@ function createFirebaseToken(kakaoAccessToken) {
 // create an express app and use json body parser
 const app = express();
 app.use(bodyParser.json());
-
+app.use(cors({
+  origin: '*', // 모든 출처 허용 옵션. true 를 써도 된다.
+}));
+var port = '3000';
+app.set('port', port);
 
 // default root url to test if the server is up
-app.get('/', (req, res) => res.status(200)
-.send('KakaoLoginServer for Firebase is up and running!'));
+app.get('/', (req, res) => {
+  console.log("hi");
+  res.status(200)
+.send('KakaoLoginServer for Firebase is up and running!')});
 
 app.get('/ff', (req, res) => res.status(200)
 .send('hello world'));
@@ -137,7 +153,8 @@ app.post('/verifyToken', (req, res) => {
 exports.kakaoAPI = functions.region("asia-northeast3").https.onRequest(app);
 
 // // Start the server
-// const server = app.listen(process.env.PORT || '8000', () => {
-//   console.log('KakaoLoginServer for Firebase listening on port %s',
-//   server.address().port);
+// const server = app.listen(app.get("port"), () => {
+//   console.log('KakaoLoginServer for Firebase listening on port %s %s',
+//   server.address().port,
+//   app.port);
 // });

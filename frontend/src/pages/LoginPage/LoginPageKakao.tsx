@@ -19,7 +19,7 @@ import { getAuth, signInAnonymously } from "firebase/auth";
 
 
   
-function LoginPage(props: any) {
+function LoginPageKakao(props: any) {
     const params = useParams();
     const location = useLocation();
     const navigate = useNavigate();
@@ -45,21 +45,18 @@ function LoginPage(props: any) {
         // });
     }
 
+    
     useEffect(
         () => {
             const code = searchParams.get("code");
             if(code){
-                dispatch(LoginWithKakaoAction(code, ()=> {
+                dispatch(LoginWithKakaoAction(code, () => {
                     navigate("/main");
                 }));
             }   
-            return () => {
-                searchParams.delete("code");
-            }
         }, [searchParams.get("code")]
     )
     
-    // alert(`https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_REST_API_KEY}&redirect_uri=${encodeURI(window.location.origin + "/login")}&response_type=code`);
     console.log(`https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_REST_API_KEY}&redirect_uri=${encodeURI(window.location.origin + "/login")}&response_type=code`);
     
     return (
@@ -128,7 +125,7 @@ function LoginPage(props: any) {
     );
 }
 
-export default LoginPage;
+export default LoginPageKakao;
 
 function dispatch() {
     throw new Error("Function not implemented.");

@@ -44,7 +44,9 @@ export function LoginReducer(state = searchInitState, action: any) {
             };
 
         case LOGIN_FAIL:
-            alert("로그인 실패");
+            // alert("로그인 실패");
+            console.log("로그인 실패");
+            
             return {
                 ...state
             };
