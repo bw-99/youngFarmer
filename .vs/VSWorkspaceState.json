@@ -1,8 +1,13 @@
 {
   "ExpandedNodes": [
     "",
-    "\\frontend"
+    "\\frontend",
+    "\\frontend\\src",
+    "\\frontend\\src\\pages",
+    "\\frontend\\src\\pages\\StorePage",
+    "\\frontend\\src\\pages\\StorePage\\atoms",
+    "\\frontend\\src\\pages\\StorePage\\components"
   ],
-  "SelectedNode": "\\frontend\\src",
+  "SelectedNode": "\\frontend\\src\\pages\\StorePage\\components\\topImage.tsx",
   "PreviewInSolutionExplorer": false
 }
