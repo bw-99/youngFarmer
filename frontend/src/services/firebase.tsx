@@ -18,7 +18,7 @@ interface Props {
   
 export const AuthProvider:FC<Props> = ({children}) :React.ReactElement|null => {
     
-    const [user, setUser] = useState(true);
+    const [user, setUser] = useState<null | boolean>(null);
     const dispatch = useDispatch();
     // setPersistence(auth, browserSessionPersistence)
     useEffect(()=>{
@@ -40,7 +40,7 @@ export const AuthProvider:FC<Props> = ({children}) :React.ReactElement|null => {
 
     return (
         <AuthContext.Provider 
-            value={user}
+            value={user!}
         >
             {children}
         </AuthContext.Provider>
@@ -67,6 +67,8 @@ export const PrivateRoute:FC<NavigateProps> = ({children, ...props}):any => {
 
 export const LoginRoute:FC<NavigateProps> = ({children, ...props}):any => {
     let currentUser = useContext(AuthContext);
+    console.log("currentUser = " + currentUser);
+    
     currentUser = currentUser? currentUser: false;
 
     return (

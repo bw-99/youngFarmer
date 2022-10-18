@@ -36,6 +36,14 @@ function App() {
           <AuthProvider>
 
             <Routes>
+
+            <Route path="/login" element = { 
+                <LoginRoute>
+                  <LoginPage />
+                </LoginRoute>
+              }/>
+              
+
               <Route path="/" element = {<PrivateRoute />} >
                 <Route path='/' element = {<MainPage />}/>
                 <Route path='/main' element = {<MainPage />}/>
@@ -50,12 +58,7 @@ function App() {
                 <Route path='/product/:productId' element = {<ProductPage />}/>
               </Route>
                               
-              <Route path="/login" element = { 
-                <LoginRoute>
-                  <LoginPage />
-                </LoginRoute>
-              }/>
-              
+
 
               <Route path="*" element = {<h1>Page Not Found</h1>}/>
 
