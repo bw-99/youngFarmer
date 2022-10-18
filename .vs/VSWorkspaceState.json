@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\frontend"
   ],
-  "SelectedNode": "\\database.rules.json",
+  "SelectedNode": "\\frontend\\src",
   "PreviewInSolutionExplorer": false
 }
