@@ -3,11 +3,12 @@
     "",
     "\\frontend",
     "\\frontend\\src",
+    "\\frontend\\src\\common",
     "\\frontend\\src\\pages",
     "\\frontend\\src\\pages\\StorePage",
     "\\frontend\\src\\pages\\StorePage\\atoms",
     "\\frontend\\src\\pages\\StorePage\\components"
   ],
-  "SelectedNode": "\\frontend\\src\\pages\\StorePage\\components\\topImage.tsx",
+  "SelectedNode": "\\frontend\\src\\App.tsx",
   "PreviewInSolutionExplorer": false
 }

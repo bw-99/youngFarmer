@@ -200,7 +200,7 @@ export const AppBarComponentStore = () => {
 
     return (
         <AppBarAtom isScrollDown={isScrolled}>
-            <div style={{ display: "flex", width: "100vw", justifyContent: "space-between" }}>
+            <div style={{ display: "flex", maxWidth: "767px", width: "100vw", justifyContent: "space-between" }}>
                 <div style={{ display: "flex", justifyContent: "flex-start", alignItems: "center" }}>
                     {isScrolled ? <BackIconComponent /> : <BackIconWhiteComponent />}
                 </div>

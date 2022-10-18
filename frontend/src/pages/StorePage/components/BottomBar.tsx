@@ -7,8 +7,8 @@ export const BottomBarComp = () => {
     return(
         <div>
             <div style={{height: "100px"}}></div>
-            <BottomBoxAtom style={{maxWidth: "767px", }}>
-                <div style={{marginLeft:"16px", display:"flex", alignItems:"center", flexDirection: "column"}}>
+            <BottomBoxAtom style={{ maxWidth: "767px", }}>
+                <div style={{ marginLeft: "16px", display: "flex", alignItems: "center", flexDirection: "column" }}>
                     <BottomBoxLikeIcon src={itemLikeIcon} />
                     <BottomBoxLikeText> 20 </BottomBoxLikeText>
                 </div>
