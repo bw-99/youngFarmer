@@ -134,8 +134,7 @@ app.post('/verifyToken', (req, res) => {
   });
 });
 
-exports.kakaoAPI = functions
-    .https.onRequest(app);
+exports.kakaoAPI = functions.region("asia-northeast3").https.onRequest(app);
 
 // // Start the server
 // const server = app.listen(process.env.PORT || '8000', () => {

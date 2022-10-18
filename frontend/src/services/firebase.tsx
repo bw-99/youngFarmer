@@ -20,7 +20,6 @@ export const AuthProvider:FC<Props> = ({children}) :React.ReactElement|null => {
     
     const [user, setUser] = useState<null | boolean>(null);
     const dispatch = useDispatch();
-    // setPersistence(auth, browserSessionPersistence)
     useEffect(()=>{
         console.log("auth change use effect");
 

@@ -12,6 +12,7 @@
     }
   ],
   "hosting": {
+    "site": "youngfarmer-beta",
     "public": "frontend/build",
     "ignore": [
       "firebase.json",
