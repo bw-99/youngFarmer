@@ -202,6 +202,44 @@ export const AppBarComponentProduct = () => {
 }
 
 
+export const AppBarComponentStore = () => {
+    const [isScrollDown, setIsScrollDown] = useState(false);
+    const [topPosition, setTopPosition] = useState(0);
+
+    const pop = () => {
+        console.log(window.scrollY);
+        setTopPosition(window.scrollY);
+        if(window.scrollY > 0){
+            setIsScrollDown(true);
+        }
+        else{
+            setIsScrollDown(false);
+        }
+      }
+
+      
+    useEffect(() => {
+        window.addEventListener('scroll', pop);
+      
+        return () => window.removeEventListener('scroll', pop);
+      },[]);
+      
+    return (
+        <AppBarAtom topPosition={topPosition}>
+            <div style={{ display: "flex", maxWidth: "767px", width: "100vw", justifyContent: "space-between" }}>
+                <div style={{ display: "flex", justifyContent: "flex-start", alignItems: "center" }}>
+                    {isScrollDown ? <BackIconComponent /> : <BackIconWhiteComponent />}
+                </div>
+
+                <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "center" }}>
+                    {isScrollDown ? <NotiComponent /> : <NotiComponent />} {/*--Notice컴포넌트 화이트 필요*/}
+                    {isScrollDown ? <ShoppingBagIconComponent /> : <ShoppingBagIconWhiteComponent />}
+                </div>
+            </div>
+        </AppBarAtom>
+    )
+}
+
 
 export const AppBarComponentBack = (title: string) => {
     const [isScrollDown, setIsScrollDown] = useState(false);

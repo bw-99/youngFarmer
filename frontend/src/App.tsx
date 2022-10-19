@@ -18,6 +18,7 @@ import ProductPage from './pages/ProductPage/ProductPage';
 import { BottomNavBarChanger } from './services/BottomNavBarChanger';
 import { ScrollToTop } from './services/ScrollToTop';
 import MyPage from './pages/MyPage/MyPage';
+import StorePage from './pages/StorePage/StorePage';
 import { AuthProvider, LoginRoute, PrivateRoute } from './services/firebase';
 import LoginKakaoPage from './pages/LoginPage/LoginPageKakao';
 
@@ -50,13 +51,13 @@ function App() {
                 <Route path='/search/:search' element = {<SearchDetailPage />}/>
                 <Route path='/mypage' element = {<MyPage />}/>
                 <Route path='/product/:productId' element = {<ProductPage />}/>
+                <Route path='/Store' element={<StorePage />} />
               </Route>
 
               <Route path="/login" element = {<LoginRoute />}>
                 <Route path="/login" element = {<LoginPage />}/>
                 <Route path="/login/oauth/kakao" element = {<LoginKakaoPage />}/>
               </Route>
-
               
                               
               <Route path="*" element = {<h1>Page Not Found</h1>}/>
@@ -80,8 +81,8 @@ interface Props {
 
 
 export const AppFrame:FC<Props> = ({ children, ...props }) => {
-  return (
-    <div style={{maxWidth:"767px", width: "100vw", height: "100vh", marginTop:"56px"}}>
+    return (
+        <div style={{ maxWidth: "767px", width: "100vw", height: "100vh", marginTop: "56px"}}>
       {children}
     </div>
   );
