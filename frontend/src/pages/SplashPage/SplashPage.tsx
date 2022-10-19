@@ -41,7 +41,7 @@ function SplashPage() {
     useEffect(() => {
       dispatch(CALL_LOGIN({
         successCallBack: () => {
-            navigate("/main");
+            navigate("/");
         },
         failCallBack:  () => {
             navigate("/login");

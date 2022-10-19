@@ -17,7 +17,6 @@ import { app, FirebaseAuth } from "../..";
 import { getAuth, signInWithCustomToken } from "firebase/auth";
 import { useSelector } from "react-redux";
 import { RootState } from "../../reducers";
-import { getUserInfo } from "../../services/firebase";
 
 
 function MainPage(props: any) {
@@ -30,16 +29,15 @@ function MainPage(props: any) {
 
     useEffect(
         () => {
-            const auth = getAuth();
-            const user = auth.currentUser;
+            // const auth = getAuth();
+            // const user = auth.currentUser;
 
-            console.log(user);
-            console.log(getUserInfo());
-            
+            // console.log(user);
+            // console.log(getUserInfo());
 
-            console.log(FirebaseAuth.currentUser);
+            // console.log(FirebaseAuth.currentUser);
             
-            console.log(userInfo);
+            // console.log(userInfo);
         }
         , []
     )
