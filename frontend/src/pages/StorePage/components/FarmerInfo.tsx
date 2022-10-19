@@ -10,7 +10,7 @@ import { LikeIconComp } from "../../MainPage/components/recommend";
 
 import React from "react";
 
-export const ItemInfoComp = () => {
+export const FarmerInfoComp = () => {
     return (
         <RecommendStoreItemComp />
     );
