@@ -4,19 +4,13 @@ import rightArrowIcon from "../../../assets/images/btn-arrow-r-14-px@3x.png";
 import itemLikeIcon from "../../../assets/images/like-off@3x.png";
 import rateStarIcon from "../../../assets/images/rate-star@3x.png";
 
-import { FarmerProfileImage, FarmerNickname, FarmerRateStar, FarmerRateText, DetailSepLine, FarmerIntroduceText, FarmerSortIcon, FarmerSortText, FarmerFollowButton } from "../atoms/itemInfo";
+import { FarmerProfileImage, FarmerNickname, FarmerRateStar, FarmerRateText, DetailSepLine, FarmerIntroduceText, FarmerSortIcon, FarmerSortText, FarmerFollowButton } from "../atoms/FarmerInfo";
 import { ItemBestMark, ItemBestMarkRedBorder, ItemSaleMark } from "../../../common/ItemList/ItemList";
 import { LikeIconComp } from "../../MainPage/components/recommend";
 
 import React from "react";
 
 export const FarmerInfoComp = () => {
-    return (
-        <RecommendStoreItemComp />
-    );
-}
-
-const RecommendStoreItemComp = () => {
     return (
         <div style={{position: "relative", padding: "34px 0 0 0", borderTopRightRadius: "12px", borderTopLeftRadius: " 12px" }}>
             <div style={{ padding: "0 16px", display: "flex", alignItems: "center", justifyContent: "space-between" } }>
