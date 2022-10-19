@@ -3,12 +3,14 @@
     "",
     "\\frontend",
     "\\frontend\\src",
-    "\\frontend\\src\\common",
     "\\frontend\\src\\pages",
-    "\\frontend\\src\\pages\\StorePage",
-    "\\frontend\\src\\pages\\StorePage\\atoms",
-    "\\frontend\\src\\pages\\StorePage\\components"
+    "\\frontend\\src\\pages\\ProductPage",
+    "\\frontend\\src\\pages\\ProductPage\\components",
+    "\\frontend\\src\\pages\\SearchPage",
+    "\\frontend\\src\\pages\\SearchPage\\atoms",
+    "\\frontend\\src\\pages\\SearchPage\\components",
+    "\\frontend\\src\\pages\\StorePage"
   ],
-  "SelectedNode": "\\frontend\\src\\App.tsx",
+  "SelectedNode": "\\frontend\\src\\pages\\SearchPage\\atoms\\RecommendStore.tsx",
   "PreviewInSolutionExplorer": false
 }
