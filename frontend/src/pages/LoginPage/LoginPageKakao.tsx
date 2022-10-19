@@ -19,7 +19,7 @@ import { getAuth, signInAnonymously } from "firebase/auth";
 
 
   
-function LoginPageKakao(props: any) {
+function LoginKakaoPage(props: any) {
     const params = useParams();
     const location = useLocation();
     const navigate = useNavigate();
@@ -29,21 +29,8 @@ function LoginPageKakao(props: any) {
 
 
     const onButtonClickHandler = (e: React.MouseEvent<HTMLInputElement>) => {
-        navigate('/main');
+        navigate('/');
     };
-
-    const handleAnonymousLogin = () => {
-        dispatch(LoginWithAnonymous(()=>{navigate("/main")}));
-        // const auth = getAuth();
-        // signInAnonymously(auth)
-        // .then(() => {
-        //     alert("sign in");
-        // })
-        // .catch((error) => {
-        //     const errorCode = error.code;
-        //     const errorMessage = error.message;
-        // });
-    }
 
     
     useEffect(
@@ -51,13 +38,13 @@ function LoginPageKakao(props: any) {
             const code = searchParams.get("code");
             if(code){
                 dispatch(LoginWithKakaoAction(code, () => {
-                    navigate("/main");
+                    navigate("/");
                 }));
             }   
         }, [searchParams.get("code")]
     )
     
-    console.log(`https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_REST_API_KEY}&redirect_uri=${encodeURI(window.location.origin + "/login")}&response_type=code`);
+    console.log(`https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_REST_API_KEY}&redirect_uri=${encodeURI(window.location.origin + "/login/oauth/kakao")}&response_type=code`);
     
     return (
         <div style={{backgroundImage: `url(${bg})`, backgroundRepeat: "no-repeat", width: "100vw", height:"100vh", backgroundSize: "cover"}}>
@@ -83,7 +70,7 @@ function LoginPageKakao(props: any) {
                     </div>
                 </MainTextBox>
                 <BottomBox>
-                    <a style={{textDecoration: "none"}} href={`https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_REST_API_KEY}&redirect_uri=${encodeURI(window.location.origin + "/login")}&response_type=code`}>
+                    <a style={{textDecoration: "none"}} href={`https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_REST_API_KEY}&redirect_uri=${encodeURI(window.location.origin + "/login/oauth/kakao")}&response_type=code`}>
                         <KakaoBox>
                             <SnsText>
                                 <img src={kakao} style={{marginRight:'8px'}} width= '24px' height= '24px'/>
@@ -94,16 +81,14 @@ function LoginPageKakao(props: any) {
                         </KakaoBox>
                     </a>
                     {/* process.env.REACT_APP_REDIRECT_URL */}
-                    <a style={{textDecoration: "none"}} href={"http://localhost:52324/login/oauth/naver"}>
-                        <NaverBox> 
-                            <SnsText>
-                                <img src={naver} style={{marginRight:'8px'}} width= '24px' height= '24px'/>
-                                <div>
-                                네이버로 계속하기
-                                </div>
-                            </SnsText> 
+                    <NaverBox> 
+                        <SnsText>
+                            <img src={naver} style={{marginRight:'8px'}} width= '24px' height= '24px'/>
+                            <div>
+                            네이버로 계속하기
+                            </div>
+                        </SnsText> 
                         </NaverBox>
-                    </a>
                     
                     <AppleBox> 
                         <SnsText>
@@ -113,7 +98,7 @@ function LoginPageKakao(props: any) {
                             </div>
                         </SnsText>
                     </AppleBox>
-                    <LookAroundBeforeLogin onClick={handleAnonymousLogin}> 
+                    <LookAroundBeforeLogin> 
                         <LookAround unselectable="on">
                             로그인 전 둘러보기
                         </LookAround>
@@ -125,7 +110,7 @@ function LoginPageKakao(props: any) {
     );
 }
 
-export default LoginPageKakao;
+export default LoginKakaoPage;
 
 function dispatch() {
     throw new Error("Function not implemented.");

@@ -27,41 +27,14 @@ function LoginPage(props: any) {
 
     const [searchParams, setSearchParams] = useSearchParams();
 
-
     const onButtonClickHandler = (e: React.MouseEvent<HTMLInputElement>) => {
-        navigate('/main');
+        navigate('/');
     };
 
     const handleAnonymousLogin = () => {
-        dispatch(LoginWithAnonymous(()=>{navigate("/main")}));
-        // const auth = getAuth();
-        // signInAnonymously(auth)
-        // .then(() => {
-        //     alert("sign in");
-        // })
-        // .catch((error) => {
-        //     const errorCode = error.code;
-        //     const errorMessage = error.message;
-        // });
+        dispatch(LoginWithAnonymous(()=>{navigate("/")}));
     }
 
-    useEffect(
-        () => {
-            const code = searchParams.get("code");
-            if(code){
-                dispatch(LoginWithKakaoAction(code, ()=> {
-                    navigate("/main");
-                }));
-            }   
-            return () => {
-                searchParams.delete("code");
-            }
-        }, [searchParams.get("code")]
-    )
-    
-    // alert(`https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_REST_API_KEY}&redirect_uri=${encodeURI(window.location.origin + "/login")}&response_type=code`);
-    console.log(`https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_REST_API_KEY}&redirect_uri=${encodeURI(window.location.origin + "/login")}&response_type=code`);
-    
     return (
         <div style={{backgroundImage: `url(${bg})`, backgroundRepeat: "no-repeat", width: "100vw", height:"100vh", backgroundSize: "cover"}}>
             <MainBox>
@@ -86,7 +59,7 @@ function LoginPage(props: any) {
                     </div>
                 </MainTextBox>
                 <BottomBox>
-                    <a style={{textDecoration: "none"}} href={`https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_REST_API_KEY}&redirect_uri=${encodeURI(window.location.origin + "/login")}&response_type=code`}>
+                    <a style={{textDecoration: "none"}} href={`https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_REST_API_KEY}&redirect_uri=${encodeURI(window.location.origin + "/login/oauth/kakao")}&response_type=code`}>
                         <KakaoBox>
                             <SnsText>
                                 <img src={kakao} style={{marginRight:'8px'}} width= '24px' height= '24px'/>
@@ -96,7 +69,6 @@ function LoginPage(props: any) {
                             </SnsText>
                         </KakaoBox>
                     </a>
-                    {/* process.env.REACT_APP_REDIRECT_URL */}
                     <a style={{textDecoration: "none"}} href={"http://localhost:52324/login/oauth/naver"}>
                         <NaverBox> 
                             <SnsText>

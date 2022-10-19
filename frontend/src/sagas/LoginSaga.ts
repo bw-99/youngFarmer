@@ -14,7 +14,7 @@ async function kakaoLoginAPI(payload:any) {
     const code:string = payload.code;
     
     const result = await post(
-        `${isLocal? "kakaoLogin" : "https://kauth.kakao.com"}/oauth/token?grant_type=${encodeURI("authorization_code")}&client_id=${encodeURIComponent(kakaoConfig.restAPIKey)}&redirect_uri=${encodeURI(window.location.origin + "/login")}&code=${encodeURI(code)}`, 
+        `${isLocal? "/kakaoLogin" : "https://kauth.kakao.com"}/oauth/token?grant_type=${encodeURI("authorization_code")}&client_id=${encodeURIComponent(kakaoConfig.restAPIKey)}&redirect_uri=${encodeURI(window.location.origin + "/login/oauth/kakao")}&code=${encodeURI(code)}`, 
         {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
@@ -25,7 +25,7 @@ async function kakaoLoginAPI(payload:any) {
     console.log(result.data.access_token);
 
     const customToken = await post(
-        `${isLocal? "functions" : process.env.REACT_APP_FIREBASE_FUNCTION_URL}/verifyToken`,
+        `${isLocal? "/functions" : process.env.REACT_APP_FIREBASE_FUNCTION_URL}/verifyToken`,
         {
             headers: {
                 'Content-Type': 'text/plain',
@@ -61,9 +61,14 @@ async function anonymousLoginAPI(payload:LOGIN_PAYLOAD) {
 
 
 function* kakaoLogin(action:any) {
+    console.log("kakao login");
+    
     const result:LoginServiceResponse = yield call(kakaoLoginAPI, action.payload);
     
+    console.log("kakao login result : " + JSON.stringify(result));
+    
     if(result){
+
         console.log(action);
         
         yield put({

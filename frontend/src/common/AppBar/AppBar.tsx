@@ -39,16 +39,32 @@ const fadein = keyframes`
     }
 `
 
+// btn-search
+interface ScrollPositionProps {
+    readonly topPosition: number;
+}
 
-const AppBarAtom = styled.div<ScrollProps>`
+
+const AppBarAtom = styled.div<ScrollPositionProps>`
     position: fixed;
     z-index:1000;
     height: 56px;
-    transition: background-color 200ms cubic-bezier(0.4, 0, 0.2, 1);
+    /* transition: background-color 200ms cubic-bezier(0.4, 0, 0.2, 1); */
     top: 0;
-    background-color: ${props => props.isScrollDown? "rgba(255,255,255,1)" : "rgba(255,255,255,0)"};
+    background-color: ${props => `rgba(255,255,255,calc(${props.topPosition/100}))`};
     width: 100vw;
 `
+
+
+// const AppBarAtom = styled.div<ScrollProps>`
+//     position: fixed;
+//     z-index:1000;
+//     height: 56px;
+//     transition: background-color 200ms cubic-bezier(0.4, 0, 0.2, 1);
+//     top: 0;
+//     background-color: ${props => props.isScrollDown? "rgba(255,255,255,1)" : "rgba(255,255,255,0)"};
+//     width: 100vw;
+// `
 
 const AppBar = styled.div`
   width: 100vw;
@@ -105,15 +121,17 @@ export const SearchInputText = styled.input`
 
 
 export const AppBarComponentOnlyBack = (title: string) => {
-    const [isScrolled, setIsScrolled] = useState(false);
+    const [isScrollDown, setIsScrollDown] = useState(false);
+    const [topPosition, setTopPosition] = useState(0);
 
     const pop = () => {
         console.log(window.scrollY);
+        setTopPosition(window.scrollY);
         if(window.scrollY > 0){
-            setIsScrolled(true);
+            setIsScrollDown(true);
         }
         else{
-            setIsScrolled(false);
+            setIsScrollDown(false);
         }
       }
 
@@ -123,9 +141,11 @@ export const AppBarComponentOnlyBack = (title: string) => {
       
         return () => window.removeEventListener('scroll', pop);
       },[]);
-      
+
+    
+
     return (
-    <AppBarAtom isScrollDown={isScrolled}>
+        <AppBarAtom topPosition={topPosition}>
         <div style={{display:"flex", width:"100vw"}}>
             <div style={{flex:2, display:"flex", justifyContent: "flex-start", alignItems:"center"}}>
                 <BackIconComponent />
@@ -141,15 +161,17 @@ export const AppBarComponentOnlyBack = (title: string) => {
 }
 
 export const AppBarComponentProduct = () => {
-    const [isScrolled, setIsScrolled] = useState(false);
+    const [isScrollDown, setIsScrollDown] = useState(false);
+    const [topPosition, setTopPosition] = useState(0);
 
     const pop = () => {
         console.log(window.scrollY);
+        setTopPosition(window.scrollY);
         if(window.scrollY > 0){
-            setIsScrolled(true);
+            setIsScrollDown(true);
         }
         else{
-            setIsScrolled(false);
+            setIsScrollDown(false);
         }
       }
 
@@ -159,17 +181,19 @@ export const AppBarComponentProduct = () => {
       
         return () => window.removeEventListener('scroll', pop);
       },[]);
-      
+
+    
+
     return (
-    <AppBarAtom isScrollDown={isScrolled}>
+        <AppBarAtom topPosition={topPosition}>
         <div style={{display:"flex", width:"100vw", justifyContent: "space-between"}}>
             <div style={{display:"flex", justifyContent: "flex-start", alignItems:"center"}}>
-                {isScrolled? <BackIconComponent /> : <BackIconWhiteComponent />}
+                {isScrollDown? <BackIconComponent /> : <BackIconWhiteComponent />}
             </div>
            
             <div style={{display:"flex", justifyContent: "flex-end", alignItems:"center"}}>
-                {isScrolled? <ShareIconBlackComponent /> : <ShareIconComponent />}
-                {isScrolled? <ShoppingBagIconComponent /> : <ShoppingBagIconWhiteComponent />}
+                { isScrollDown? <ShareIconBlackComponent /> : <ShareIconComponent />}
+                {isScrollDown? <ShoppingBagIconComponent />: <ShoppingBagIconWhiteComponent />}
                 
             </div>
         </div>
@@ -179,36 +203,37 @@ export const AppBarComponentProduct = () => {
 
 
 export const AppBarComponentStore = () => {
-    const [isScrolled, setIsScrolled] = useState(false);
+    const [isScrollDown, setIsScrollDown] = useState(false);
+    const [topPosition, setTopPosition] = useState(0);
 
     const pop = () => {
         console.log(window.scrollY);
-        if (window.scrollY > 0) {
-            setIsScrolled(true);
+        setTopPosition(window.scrollY);
+        if(window.scrollY > 0){
+            setIsScrollDown(true);
         }
-        else {
-            setIsScrolled(false);
+        else{
+            setIsScrollDown(false);
         }
-    }
+      }
 
-
+      
     useEffect(() => {
         window.addEventListener('scroll', pop);
-
+      
         return () => window.removeEventListener('scroll', pop);
-    }, []);
-
+      },[]);
+      
     return (
-        <AppBarAtom isScrollDown={isScrolled}>
+        <AppBarAtom topPosition={topPosition}>
             <div style={{ display: "flex", maxWidth: "767px", width: "100vw", justifyContent: "space-between" }}>
                 <div style={{ display: "flex", justifyContent: "flex-start", alignItems: "center" }}>
-                    {isScrolled ? <BackIconComponent /> : <BackIconWhiteComponent />}
+                    {isScrollDown ? <BackIconComponent /> : <BackIconWhiteComponent />}
                 </div>
 
                 <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "center" }}>
-                    {isScrolled ? <NotiComponent /> : <NotiComponent />} {/*--Notice컴포넌트 화이트 필요*/}
-                    {isScrolled ? <ShoppingBagIconComponent /> : <ShoppingBagIconWhiteComponent />}
-
+                    {isScrollDown ? <NotiComponent /> : <NotiComponent />} {/*--Notice컴포넌트 화이트 필요*/}
+                    {isScrollDown ? <ShoppingBagIconComponent /> : <ShoppingBagIconWhiteComponent />}
                 </div>
             </div>
         </AppBarAtom>
@@ -217,15 +242,17 @@ export const AppBarComponentStore = () => {
 
 
 export const AppBarComponentBack = (title: string) => {
-    const [isScrolled, setIsScrolled] = useState(false);
+    const [isScrollDown, setIsScrollDown] = useState(false);
+    const [topPosition, setTopPosition] = useState(0);
 
     const pop = () => {
         console.log(window.scrollY);
+        setTopPosition(window.scrollY);
         if(window.scrollY > 0){
-            setIsScrolled(true);
+            setIsScrollDown(true);
         }
         else{
-            setIsScrolled(false);
+            setIsScrollDown(false);
         }
       }
 
@@ -236,8 +263,10 @@ export const AppBarComponentBack = (title: string) => {
         return () => window.removeEventListener('scroll', pop);
       },[]);
 
+    
+
     return (
-    <AppBarAtom isScrollDown={isScrolled}>
+        <AppBarAtom topPosition={topPosition}>
         <div style={{display:"flex", width:"100vw"}}>
                     <div style={{flex:2, display:"flex", justifyContent: "flex-start", alignItems:"center"}}>
                         <BackIconComponent />
@@ -256,15 +285,17 @@ export const AppBarComponentBack = (title: string) => {
 }
 
 export const AppBarComponentNoBack = (title: string) => {
-    const [isScrolled, setIsScrolled] = useState(false);
+    const [isScrollDown, setIsScrollDown] = useState(false);
+    const [topPosition, setTopPosition] = useState(0);
 
     const pop = () => {
         console.log(window.scrollY);
+        setTopPosition(window.scrollY);
         if(window.scrollY > 0){
-            setIsScrolled(true);
+            setIsScrollDown(true);
         }
         else{
-            setIsScrolled(false);
+            setIsScrollDown(false);
         }
       }
 
@@ -278,9 +309,9 @@ export const AppBarComponentNoBack = (title: string) => {
     
 
     return (
-        <AppBarAtom isScrollDown={isScrolled}>
+        <AppBarAtom topPosition={topPosition}>
             <div style={{display:"flex",
-                position: "fixed", zIndex:100, top: 0, backgroundColor: isScrolled? "rgba(255,255,255,1)":"rgba(255,255,255,0)",width:"100vw"
+                position: "fixed", zIndex:100, top: 0, backgroundColor: isScrollDown? "rgba(255,255,255,1)":"rgba(255,255,255,0)",width:"100vw"
             }}>
                 <div style={{flex:2, display:"flex", justifyContent: "flex-start", alignItems:"center"}}>
                 </div>
@@ -316,17 +347,21 @@ export const AppBarComponentSearch = () => {
         }
     }
 
-    const [isScrolled, setIsScrolled] = useState(false);
+    const [isScrollDown, setIsScrollDown] = useState(false);
+    const [topPosition, setTopPosition] = useState(0);
 
     const pop = () => {
         console.log(window.scrollY);
+        setTopPosition(window.scrollY);
         if(window.scrollY > 0){
-            setIsScrolled(true);
+            setIsScrollDown(true);
         }
         else{
-            setIsScrolled(false);
+            setIsScrollDown(false);
         }
-    }
+      }
+
+
 
     useEffect(
         ()=>{
@@ -340,7 +375,7 @@ export const AppBarComponentSearch = () => {
     )
 
     return (
-        <AppBarAtom isScrollDown={isScrolled}>
+        <AppBarAtom topPosition={topPosition}>
             <div style={{
                 display:"flex", width:"100vw", justifyContent: "flex-end", alignItems:"center" }}>
                     <SearchInput> 
@@ -401,11 +436,16 @@ export const AppBarComponentSetting = (title: string) => {
     )
 }
 
+
+
+
 export const AppBarComponentMain = () => {  
     const [isScrollDown, setIsScrollDown] = useState(false);
+    const [topPosition, setTopPosition] = useState(0);
 
     const pop = () => {
         console.log(window.scrollY);
+        setTopPosition(window.scrollY);
         if(window.scrollY > 0){
             setIsScrollDown(true);
         }
@@ -424,7 +464,7 @@ export const AppBarComponentMain = () => {
     
 
     return (
-        <AppBarAtom isScrollDown={isScrollDown}>
+        <AppBarAtom topPosition={topPosition}>
             <AppBarMain>
                 <NotiComponent />
                 <ShoppingBagIconComponent />
@@ -435,15 +475,17 @@ export const AppBarComponentMain = () => {
 }
 
 export const AppBarComponentMyPage = (title: string) => {
-    const [isScrolled, setIsScrolled] = useState(false);
+    const [isScrollDown, setIsScrollDown] = useState(false);
+    const [topPosition, setTopPosition] = useState(0);
 
     const pop = () => {
         console.log(window.scrollY);
+        setTopPosition(window.scrollY);
         if(window.scrollY > 0){
-            setIsScrolled(true);
+            setIsScrollDown(true);
         }
         else{
-            setIsScrolled(false);
+            setIsScrollDown(false);
         }
       }
 
@@ -454,8 +496,10 @@ export const AppBarComponentMyPage = (title: string) => {
         return () => window.removeEventListener('scroll', pop);
       },[]);
 
+    
+
     return (
-    <AppBarAtom isScrollDown={isScrolled}>
+        <AppBarAtom topPosition={topPosition}>
         <div style={{display:"flex", width:"100vw"}}>
                     <div style={{flex:1, display:"flex", justifyContent: "flex-start", alignItems:"center"}}>
                         <MySettingComponent />
