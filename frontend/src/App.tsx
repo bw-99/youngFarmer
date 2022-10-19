@@ -51,7 +51,7 @@ function App() {
                 <Route path='/search/:search' element = {<SearchDetailPage />}/>
                 <Route path='/mypage' element = {<MyPage />}/>
                 <Route path='/product/:productId' element = {<ProductPage />}/>
-                <Route path='/Store' element={<StorePage />} />
+                <Route path='/store' element={<StorePage />} />
               </Route>
 
               <Route path="/login" element = {<LoginRoute />}>

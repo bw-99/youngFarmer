@@ -8,6 +8,7 @@ import { ItemBestMark, ItemBestMarkRedBorder, ItemSaleMark } from "../../../comm
 import { LikeIconComp } from "../../MainPage/components/recommend";
 
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 export const ItemInfoComp = () => {
     return(
@@ -78,8 +79,10 @@ export const ItemInfoComp = () => {
 }
 
 const FarmerComp = () => {
+    const navigate = useNavigate();
+
     return(
-        <div style={{display: "flex",alignItems:"center"}}>
+        <div onClick={() => {navigate("/store")}} style={{display: "flex",alignItems:"center"}}>
             <FarmerProfile src={recommendItemStawberry}/>
             <FarmerNickname style={{marginLeft: "10px"}}> 청년농부 </FarmerNickname> 
             <FarmerArrow style={{marginLeft:"2px"}} src={rightArrowIcon}/>
