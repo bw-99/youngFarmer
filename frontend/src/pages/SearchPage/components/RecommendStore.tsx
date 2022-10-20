@@ -14,7 +14,6 @@ export const RecommendStoreComponent = () => {
                 <RecommendStoreItemComp />
                 <RecommendStoreItemComp />
                 <RecommendStoreItemComp />
-                <RecommendStoreItemComp />
             </div>
         </div>
     );

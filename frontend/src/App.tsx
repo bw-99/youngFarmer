@@ -79,7 +79,7 @@ interface Props {
 
 export const AppFrame:FC<Props> = ({ children, ...props }) => {
     return (
-        <div style={{ maxWidth: "625px", width: "100vw", height: "100vh", marginTop: "56px"}}>
+        <div style={{ maxWidth: "625px", width: "100vw", height: "calc(100vh - 56px)", marginTop: "56px"}}>
       {children}
     </div>
   );

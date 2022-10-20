@@ -81,7 +81,6 @@ function LoginPage(props: any) {
                                 </SnsText> 
                             </NaverBox>
                         </a>
-                        
                     <AppleBox> 
                         <SnsText>
                             <img src={apple} style={{marginRight:'8px'}} width= '24px' height= '24px'/>
@@ -99,8 +98,6 @@ function LoginPage(props: any) {
             </MainBox>
          </div>
         </AppFrame>
-        
-
     );
 }
 
