@@ -10,7 +10,7 @@ const Background = styled.div`
     width: 100vw;
     height: 100vh;
     background-color: #f34c49;
-    max-width: 767px;
+    max-width: 625px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -54,7 +54,7 @@ function SplashPage() {
     
 
     return (
-        <div style={{maxWidth: "767px"}}>
+        <div style={{maxWidth: "625px"}}>
             <Background>
                 <YoungerFarmerFont className="-copy">
                 청년농부

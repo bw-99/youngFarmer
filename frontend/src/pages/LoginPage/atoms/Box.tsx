@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 export const BottomBox = styled.div `
-    width: 100vw;
+    /* width: 100vw; */
     height: 262px;
     border-top-left-radius: 16px;
     border-top-right-radius: 16px;
@@ -69,7 +69,7 @@ export const LookAroundBeforeLogin = styled.div `
     border-radius: 8px;
     height: 50px;
     color: #777777;
-    width: 100vw;
+    /* width: 100vw; */
     display: flex;
     flex-direction: row;
     justify-content: center;

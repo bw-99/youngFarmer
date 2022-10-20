@@ -33,40 +33,37 @@ function App() {
 
 
   return (
-          <BottomNavBarChanger>
+    <div style={{display: "flex", alignItems: "center", justifyContent: "center"}}>
+      <BottomNavBarChanger>
           <ScrollToTop>
-          <AuthProvider>
+            <AuthProvider>
+              <Routes>
+                <Route path="/" element = {<PrivateRoute />} >
+                    <Route path="/" element = {<MainPage />}/>
+                    <Route path='/main' element = {<MainPage />}/>
+                    <Route path='/main/todayRecommend' element = {<TodayRecommendPage />}/>
+                    <Route path='/main/liveList' element = {<LiveListPage />}/>
+                    <Route path='/like' element = {<LikePage />}/>
+                    <Route path='/splash' element = {<SplashPage />}/>
+                    <Route path='/chat' element = {<ChatPage />}/>
+                    <Route path='/search' element = {<SearchPage />}/>
+                    <Route path='/search/:search' element = {<SearchDetailPage />}/>
+                    <Route path='/mypage' element = {<MyPage />}/>
+                    <Route path='/product/:productId' element = {<ProductPage />}/>
+                    <Route path='/store' element={<StorePage />} />
+                  </Route>
 
-            <Routes>
-
-            <Route path="/" element = {<PrivateRoute />} >
-                <Route path="/" element = {<MainPage />}/>
-                <Route path='/main' element = {<MainPage />}/>
-                <Route path='/main/todayRecommend' element = {<TodayRecommendPage />}/>
-                <Route path='/main/liveList' element = {<LiveListPage />}/>
-                <Route path='/like' element = {<LikePage />}/>
-                <Route path='/splash' element = {<SplashPage />}/>
-                <Route path='/chat' element = {<ChatPage />}/>
-                <Route path='/search' element = {<SearchPage />}/>
-                <Route path='/search/:search' element = {<SearchDetailPage />}/>
-                <Route path='/mypage' element = {<MyPage />}/>
-                <Route path='/product/:productId' element = {<ProductPage />}/>
-                <Route path='/store' element={<StorePage />} />
-              </Route>
-
-              <Route path="/login" element = {<LoginRoute />}>
-                <Route path="/login" element = {<LoginPage />}/>
-                <Route path="/login/oauth/kakao" element = {<LoginKakaoPage />}/>
-              </Route>
-              
-                              
-              <Route path="*" element = {<h1>Page Not Found</h1>}/>
-
-            </Routes>
-    </AuthProvider>
-
-            </ScrollToTop>
+                  <Route path="/login" element = {<LoginRoute />}>
+                    <Route path="/login" element = {<LoginPage />}/>
+                    <Route path="/login/oauth/kakao" element = {<LoginKakaoPage />}/>
+                  </Route>
+                <Route path="*" element = {<h1>Page Not Found</h1>}/>
+              </Routes>
+          </AuthProvider>
+        </ScrollToTop>
       </BottomNavBarChanger>  
+    </div>
+          
   );
 }
 
@@ -82,7 +79,7 @@ interface Props {
 
 export const AppFrame:FC<Props> = ({ children, ...props }) => {
     return (
-        <div style={{ maxWidth: "767px", width: "100vw", height: "100vh", marginTop: "56px"}}>
+        <div style={{ maxWidth: "625px", width: "100vw", height: "calc(100vh - 56px)", marginTop: "56px"}}>
       {children}
     </div>
   );

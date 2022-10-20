@@ -59,7 +59,7 @@ export const BottomNavigationBar = () => {
         <div>
             <div style={{height:"64px"}} ></div>
 
-            <div style={{position:"fixed", zIndex: 10000,bottom: 0,width:"100vw", height:"64px", backgroundColor: "#f5f5f5", display: "flex", justifyContent: "space-between"}}>
+            <div style={{position:"fixed", zIndex: 10000,bottom: 0,maxWidth:"625px", width:"100vw", height:"64px", backgroundColor: "#f5f5f5", display: "flex", justifyContent: "space-between"}}>
                 {IconItemComponent(
                     0,
                 )}
