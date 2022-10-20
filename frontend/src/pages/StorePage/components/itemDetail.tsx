@@ -9,17 +9,17 @@ import productExThree from "../../../assets/images/product-ex3@3x.png";
 export const ItemDetailComp = () => {
     const [index, setIndex] = useState(0);
 
-    function clickHandler(i: number){
+    const clickHandler = (i: number) => {
         return (event: React.MouseEvent) => {
             setIndex(i);
             event.preventDefault();
-        }     
+        }
     }
 
     return(
         <div style={{marginLeft: "16px", padding: "0 0 20px 0"}}>
             <div style={{ display: "flex", marginBottom: "22px" }}>
-                <button onClick={clickHandler(0)} style={{ flex: 1 }}>
+                <div onClick={clickHandler(0)} style={{ flex: 1 }}>
                     {
                         index == 0? 
                         <>
@@ -32,17 +32,37 @@ export const ItemDetailComp = () => {
                             <IndexNotSelectedLine />
                         </>
                     }
-                    
-                </button>
 
-                <div style={{flex:1}}>
-                    <IndexNotSelectedText style={{padding:"16px 0"}}> 리뷰 25 </IndexNotSelectedText>
-                    <IndexNotSelectedLine />
                 </div>
+                <div onClick={clickHandler(1)} style={{ flex: 1 }}>
+                    {
+                        index == 1 ?
+                            <>
+                                <IndexSelectedText style={{ padding: "16px 0" }}> 리뷰 25 </IndexSelectedText>
+                                <IndexSelectedLine />
+                            </>
+                            :
+                            <>
+                                <IndexNotSelectedText style={{ padding: "16px 0" }}> 리뷰 25 </IndexNotSelectedText>
+                                <IndexNotSelectedLine />
+                            </>
+                    }
 
-                <div style={{flex:1}}>
-                    <IndexNotSelectedText style={{flex:1, padding:"16px 0"}}> 상품문의 </IndexNotSelectedText>
-                    <IndexNotSelectedLine />
+                </div>
+                <div onClick={clickHandler(2)} style={{ flex: 1 }}>
+                    {
+                        index == 2 ?
+                            <>
+                                <IndexSelectedText style={{ padding: "16px 0" }}> 상품문의 </IndexSelectedText>
+                                <IndexSelectedLine />
+                            </>
+                            :
+                            <>
+                                <IndexNotSelectedText style={{ padding: "16px 0" }}> 상품문의 </IndexNotSelectedText>
+                                <IndexNotSelectedLine />
+                            </>
+                    }
+
                 </div>
             </div>
         </div>

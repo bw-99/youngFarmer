@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const IndexSelectedText = styled.div`
+  
   font-family: AppleSDGothicNeo;
   font-size: 16px;
   font-weight: 600;
@@ -20,7 +21,6 @@ export const IndexNotSelectedText = styled.div`
   font-style: normal;
   line-height: normal;
   letter-spacing: normal;
-
   text-align: center;
   color: #979797;
 `
