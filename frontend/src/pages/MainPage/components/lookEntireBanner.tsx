@@ -5,7 +5,7 @@ import React from "react";
 export const LookEntireBannerComponent = () => {
     return (
         <div>
-            <BannerAtom style={{maxWidth: "767px", }} src={mainMiddleBanner}/>
+            <BannerAtom style={{maxWidth: "625px", }} src={mainMiddleBanner}/>
         </div>
     //    <div style={{margin: "0 0 0 0"}}>
     //         <BannerBackgroundAtom> 

@@ -4,7 +4,7 @@ import mainBanner from "../../../assets/images/main_banner.png";
 import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 export const DiscountComponent = () => {
     return (
-        <img src={mainBanner} alt="" style={{maxWidth: "767px", objectFit: "cover", width:"100vw", height:"416px"}}/>
+        <img src={mainBanner} alt="" style={{maxWidth: "625px", objectFit: "cover", width:"100vw", height:"416px"}}/>
         // <div style={{position: "relative"}}>
         //     <div style={{ padding: "0px 16px 0px 16px"}}>
         //         <DiscountBox>

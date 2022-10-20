@@ -16,6 +16,7 @@ import { get, post } from "../../api/axios";
 import { kakaoConfig } from "../..";
 
 import { getAuth, signInAnonymously } from "firebase/auth";
+import { AppFrame } from "../../App";
 
 
   
@@ -36,50 +37,51 @@ function LoginPage(props: any) {
     }
 
     return (
-        <div style={{backgroundImage: `url(${bg})`, backgroundRepeat: "no-repeat", width: "100vw", height:"100vh", backgroundSize: "cover"}}>
-            <MainBox>
-                <MainTextBox>
-                    <div>
-                        <MainTextLight>
-                            올 가을엔
-                        </MainTextLight>
-                    </div>
-                    <div>
-                        <MainTextBold>
-                            청송사과
-                        </MainTextBold>
-                        <MainTextLight>
-                            로
-                        </MainTextLight>
-                    </div>
-                    <div>
-                        <MainTextLight>
-                            비타민 충전
-                        </MainTextLight>
-                    </div>
-                </MainTextBox>
-                <BottomBox>
-                    <a style={{textDecoration: "none"}} href={`https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_REST_API_KEY}&redirect_uri=${encodeURI(window.location.origin + "/login/oauth/kakao")}&response_type=code`}>
-                        <KakaoBox>
-                            <SnsText>
-                                <img src={kakao} style={{marginRight:'8px'}} width= '24px' height= '24px'/>
-                                <div>
-                                카카오로 계속하기
-                                </div> 
-                            </SnsText>
-                        </KakaoBox>
-                    </a>
-                    <a style={{textDecoration: "none"}} href={"http://localhost:52324/login/oauth/naver"}>
-                        <NaverBox> 
-                            <SnsText>
-                                <img src={naver} style={{marginRight:'8px'}} width= '24px' height= '24px'/>
-                                <div>
-                                네이버로 계속하기
-                                </div>
-                            </SnsText> 
-                        </NaverBox>
-                    </a>
-                    
+        <AppFrame>
+            <div style={{position:"relative", top: "-31px", backgroundImage: `url(${bg})`,  backgroundRepeat: "no-repeat",  height:"100vh", backgroundSize: "cover"}}>
+                <MainBox>
+                    <MainTextBox>
+                        <div>
+                            <MainTextLight>
+                                올 가을엔
+                            </MainTextLight>
+                        </div>
+                        <div>
+                            <MainTextBold>
+                                청송사과
+                            </MainTextBold>
+                            <MainTextLight>
+                                로
+                            </MainTextLight>
+                        </div>
+                        <div>
+                            <MainTextLight>
+                                비타민 충전
+                            </MainTextLight>
+                        </div>
+                    </MainTextBox>
+                    <BottomBox>
+                        <a style={{textDecoration: "none"}} href={`https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_REST_API_KEY}&redirect_uri=${encodeURI(window.location.origin + "/login/oauth/kakao")}&response_type=code`}>
+                            <KakaoBox>
+                                <SnsText>
+                                    <img src={kakao} style={{marginRight:'8px'}} width= '24px' height= '24px'/>
+                                    <div>
+                                    카카오로 계속하기
+                                    </div> 
+                                </SnsText>
+                            </KakaoBox>
+                        </a>
+                        <a style={{textDecoration: "none"}} href={"http://localhost:52324/login/oauth/naver"}>
+                            <NaverBox> 
+                                <SnsText>
+                                    <img src={naver} style={{marginRight:'8px'}} width= '24px' height= '24px'/>
+                                    <div>
+                                    네이버로 계속하기
+                                    </div>
+                                </SnsText> 
+                            </NaverBox>
+                        </a>
+                        
                     <AppleBox> 
                         <SnsText>
                             <img src={apple} style={{marginRight:'8px'}} width= '24px' height= '24px'/>
@@ -95,7 +97,9 @@ function LoginPage(props: any) {
                     </LookAroundBeforeLogin>
                 </BottomBox>
             </MainBox>
-        </div>
+         </div>
+        </AppFrame>
+        
 
     );
 }

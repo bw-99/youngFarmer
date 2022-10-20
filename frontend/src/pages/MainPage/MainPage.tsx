@@ -44,7 +44,7 @@ function MainPage(props: any) {
     
 
     return (
-        <div style={{maxWidth:"767px", position: "relative", width: "100vw", height:"100vh" }}>
+        <div style={{maxWidth:"625px", position: "relative", width: "100vw", height:"100vh" }}>
             <AppBarComponentMain />
             {/* <h1> {JSON.stringify(userInfo)} </h1> */}
             <DiscountComponent />
