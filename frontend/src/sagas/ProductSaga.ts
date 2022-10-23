@@ -1,0 +1,93 @@
+import { call, delay, put, SagaReturnType, takeLatest } from "redux-saga/effects";
+import { LOGIN_FAIL, LOGIN_PAYLOAD, LOGIN_SUCCESS, LOGIN_TRY, LOGIN_WITH_ANONYMOUS, LOGIN_WITH_KAKAO, LOGIN_WITH_NAVER } from "../pages/LoginPage/LoginAction";
+import { db, kakaoConfig } from "..";
+import { GET_PRODUCT, GET_PRODUCT_SUCCESS } from "../pages/ProductPage/ProductAction";
+import { collection, getDoc, getDocs, limit, orderBy, query, where } from "firebase/firestore";
+import { AxiosResponse } from "axios";
+import { ProductDataType } from "../reducers/ProductReducer";
+
+
+
+// type ProductDataType=  {
+//     store_id: number,
+//     discount: number,
+//     product_id: number,
+//     title: string,
+//     price: number
+// }
+
+
+async function getProdcutAPI(payload:any) {
+    const product_id = Number(payload);
+
+    const productRef = collection(db, "product");
+    const q = query(productRef, where("product_id", "==", product_id), limit(1));
+    const fbdata = await getDocs(q);
+    const productData = fbdata.docs[0].data();
+
+    const reviewRef = collection(fbdata.docs[0].ref, "detail_review");
+    const q2 = query(reviewRef, orderBy("uid"), limit(1));
+    const fbdata2 = await getDocs(q2);
+    const reviewDataList = fbdata2.docs.map((doc) => {
+        return doc.data()
+    });
+
+    const photoRef = collection(fbdata.docs[0].ref, "detail_photo","");
+    const q3 = query(photoRef);
+    const fbdata3 = await getDocs(q3);
+    const photoDataList = fbdata3.docs[0].data();
+
+
+    const questionRef = collection(fbdata.docs[0].ref, "detail_question","");
+    const q4 = query(questionRef);
+    const fbdata4 = await getDocs(q4);
+    const questionDataList = fbdata4.docs.map((doc) => {
+        return doc.data()
+    });
+
+    return {
+        ...productData,
+        reviewDataList: reviewDataList,
+        photoDataList: photoDataList,
+        questionDataList: questionDataList
+    };
+}
+
+
+function* getProdcut(action:any) {
+    console.log("get product" + action.payload);
+    
+    const result:ProductDataType = yield call(getProdcutAPI, action.payload);
+    
+    if(result){        
+        console.log("result" + JSON.stringify(result));
+        yield put({
+            type: GET_PRODUCT_SUCCESS,
+            payload: result,
+            callback: action.payload.callback
+        }); 
+    }
+    else{
+        yield put({
+            type: LOGIN_FAIL,
+            callback: action.payload.callback
+        }); 
+    }
+}
+
+
+function* productIndex(action: any) {
+    
+    switch (action.type) {
+        case GET_PRODUCT:
+            yield getProdcut(action); 
+            break;
+   
+        default:
+            break;
+    }
+}
+
+export function* getProductSignal() {
+    yield takeLatest(GET_PRODUCT, productIndex);
+}

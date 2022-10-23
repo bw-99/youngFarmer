@@ -128,7 +128,6 @@ export const AppBarComponentOnlyBack = (title: string) => {
     const [topPosition, setTopPosition] = useState(0);
 
     const pop = () => {
-        console.log(window.scrollY);
         setTopPosition(window.scrollY);
         if(window.scrollY > 0){
             setIsScrollDown(true);
@@ -168,7 +167,6 @@ export const AppBarComponentProduct = () => {
     const [topPosition, setTopPosition] = useState(0);
 
     const pop = () => {
-        console.log(window.scrollY);
         setTopPosition(window.scrollY);
         if(window.scrollY > 0){
             setIsScrollDown(true);
@@ -189,18 +187,18 @@ export const AppBarComponentProduct = () => {
 
     return (
         <AppBarAtom topPosition={topPosition}>
-        <div style={{display:"flex", width:"100vw", justifyContent: "space-between"}}>
-            <div style={{display:"flex", justifyContent: "flex-start", alignItems:"center"}}>
-                {isScrollDown? <BackIconComponent /> : <BackIconWhiteComponent />}
+            <div style={{display:"flex", width:"100vw", justifyContent: "space-between"}}>
+                <div style={{display:"flex", justifyContent: "flex-start", alignItems:"center"}}>
+                    {isScrollDown? <BackIconComponent /> : <BackIconWhiteComponent />}
+                </div>
+            
+                <div style={{display:"flex", justifyContent: "flex-end", alignItems:"center"}}>
+                    { isScrollDown? <ShareIconBlackComponent /> : <ShareIconComponent />}
+                    {isScrollDown? <ShoppingBagIconComponent />: <ShoppingBagIconWhiteComponent />}
+                    
+                </div>
             </div>
-           
-            <div style={{display:"flex", justifyContent: "flex-end", alignItems:"center"}}>
-                { isScrollDown? <ShareIconBlackComponent /> : <ShareIconComponent />}
-                {isScrollDown? <ShoppingBagIconComponent />: <ShoppingBagIconWhiteComponent />}
-                
-            </div>
-        </div>
-    </AppBarAtom>
+        </AppBarAtom>
     )
 }
 
@@ -210,7 +208,6 @@ export const AppBarComponentStore = () => {
     const [topPosition, setTopPosition] = useState(0);
 
     const pop = () => {
-        console.log(window.scrollY);
         setTopPosition(window.scrollY);
         if(window.scrollY > 0){
             setIsScrollDown(true);
@@ -249,7 +246,6 @@ export const AppBarComponentBack = (title: string) => {
     const [topPosition, setTopPosition] = useState(0);
 
     const pop = () => {
-        console.log(window.scrollY);
         setTopPosition(window.scrollY);
         if(window.scrollY > 0){
             setIsScrollDown(true);
@@ -292,7 +288,6 @@ export const AppBarComponentNoBack = (title: string) => {
     const [topPosition, setTopPosition] = useState(0);
 
     const pop = () => {
-        console.log(window.scrollY);
         setTopPosition(window.scrollY);
         if(window.scrollY > 0){
             setIsScrollDown(true);
@@ -354,7 +349,6 @@ export const AppBarComponentSearch = () => {
     const [topPosition, setTopPosition] = useState(0);
 
     const pop = () => {
-        console.log(window.scrollY);
         setTopPosition(window.scrollY);
         if(window.scrollY > 0){
             setIsScrollDown(true);
@@ -405,7 +399,6 @@ export const AppBarComponentSetting = (title: string) => {
     const [topPosition, setTopPosition] = useState(0);
 
     const pop = () => {
-        console.log(window.scrollY);
         setTopPosition(window.scrollY);
         if(window.scrollY > 0){
             setIsScrollDown(true);
@@ -452,7 +445,6 @@ export const AppBarComponentMain = () => {
     const [topPosition, setTopPosition] = useState(0);
 
     const pop = () => {
-        console.log(window.scrollY);
         setTopPosition(window.scrollY);
         if(window.scrollY > 0){
             setIsScrollDown(true);
@@ -487,7 +479,6 @@ export const AppBarComponentMyPage = (title: string) => {
     const [topPosition, setTopPosition] = useState(0);
 
     const pop = () => {
-        console.log(window.scrollY);
         setTopPosition(window.scrollY);
         if(window.scrollY > 0){
             setIsScrollDown(true);

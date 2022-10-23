@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import styled from "styled-components";
@@ -18,25 +18,61 @@ import { ItemDetailComp } from "./components/itemDetail";
 import { ItemInfoComp } from "./components/itemInfo";
 import { TopImageComp } from "./components/topImage";
 
+import { collection, doc, setDoc, getDoc, query, orderBy, limit, getDocs, where } from "firebase/firestore";
+import { db } from "../..";
+import { useDispatch, useSelector } from "react-redux";
+import { GetProductInfo } from "./ProductAction";
+import { ProductDataType } from "../../reducers/ProductReducer";
+import { RootState } from "../../reducers";
 
 function ProductPage(props: any) {
     const params = useParams();
     const location = useLocation();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
-    console.log(params);
+    console.log(params.productId);
 
-    return (
-        <AppFrame>
-            <AppBarComponentProduct />
-            <TopImageComp />
-            <ItemInfoComp />
-            <ItemDetailComp />
-            <BottomBarComp />
+    const selector: any = useSelector((state:RootState) =>
+        state.ProductInfoReducer!.productInfo
+    );  
+    
+    // const productRef = collection(db, "product");
+    // const q = query(productRef, where("product_id", "==", params.productId), orderBy("title"), limit(1));
 
-            {/* <BottomNavigationBar /> */}
-        </AppFrame>
-    );
+    useEffect(() => {
+        dispatch(GetProductInfo(params.productId));
+    }, []);
+
+    const settings = {
+        dots: true,
+        infinite: false,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1
+      };
+	
+
+    if(selector) {
+        return (
+            <AppFrame>
+
+                <AppBarComponentProduct />
+                <TopImageComp />
+                <ItemInfoComp />
+                <ItemDetailComp />
+                <BottomBarComp />
+                {/* <BottomNavigationBar /> */}
+            </AppFrame>
+        );
+    }
+    else{
+        return (
+            <></>
+        )
+    }   
+
+    
 }
 
 export default ProductPage;
