@@ -25,14 +25,7 @@ export const TopImageComp = () => {
         setCurrent(current === 0 ? length - 1 : current - 1);
     };
 
-    if (!Array.isArray(selector.photoDataList.photos) || selector.photoDataList.photos.length <= 0) {
-        return null;
-    }
-
-
     return (
-
-        
         <div style={{paddingTop:"0px", display: "flex", height: "310px", alignItems: "center", justifyContent: "center"}}>
             {
                 selector.photoDataList.main_photo.map((photo, index) => {

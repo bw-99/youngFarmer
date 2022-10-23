@@ -78,7 +78,7 @@
 
 html {
     width: 100vw;
-    height: 100%;
+    /* height: 100%; */
     /* max-width: 625px; */
     margin: 0px;
     padding: 0px;
@@ -86,7 +86,7 @@ html {
 
 
 body {
-  height: 100%;
+  /* height: 100%; */
   margin: 0px;
   padding: 0px;
   width: 100%;

@@ -56,7 +56,6 @@ function ProductPage(props: any) {
     if(selector) {
         return (
             <AppFrame>
-
                 <AppBarComponentProduct />
                 <TopImageComp />
                 <ItemInfoComp />
