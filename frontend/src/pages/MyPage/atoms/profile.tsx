@@ -12,7 +12,8 @@ export const ProfilePhotoAtom = styled.div`
 export const ProfilePhoto = styled.img`
   width: 80px;
   height: 80px;
-  object-fit: contain;
+  object-fit: cover;
+  border-radius: 50%;
 `
 export const ProfilePhotoChangeIcon = styled.img`
   width: 16px;

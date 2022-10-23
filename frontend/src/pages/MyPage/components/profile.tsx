@@ -9,8 +9,16 @@ import pointIcon from "../../../assets/images/btn-point@3x.png";
 import followIcon from "../../../assets/images/btn-follow@3x.png";
 
 import { ProfileEmail, ProfileFuncMenu, ProfileFuncMenuDivider, ProfileFuncMenuIcon, ProfileFuncMenuText, ProfileNickname, ProfileNicknameSub, ProfilePhoto, ProfilePhotoAtom, ProfilePhotoChange, ProfilePhotoChangeIcon } from "../atoms/profile";
+import { MyPageDataType } from "../../../reducers/MypageReducer";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../reducers";
 
 export const ProfileComp = () => {
+    const selector: MyPageDataType = useSelector((state:RootState) =>
+        state.ProfileReducer!.mypageInfo
+    );      
+
+
     return(
         <div style={{padding: "20px 16px 0 16px"}}>
             <ProfilePersonalComp />
@@ -20,21 +28,28 @@ export const ProfileComp = () => {
 }
 
 const ProfilePersonalComp = () => {
+    const selector: MyPageDataType = useSelector((state:RootState) =>
+        state.ProfileReducer!.mypageInfo
+    );   
+
     return(
         <div style={{display:"flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
             <ProfilePhotoAtom>
-                <ProfilePhoto src={defaultPhoto}/>
+                <ProfilePhoto src={
+                    selector.profileData.profile_img ?
+                    selector.profileData.profile_img
+                    : defaultPhoto}/>
                 <ProfilePhotoChange >
                     <ProfilePhotoChangeIcon src={cameraIcon} />
                 </ProfilePhotoChange>
             </ProfilePhotoAtom>
            
             <div style={{marginTop: "16px", display:"flex", alignItems:"flex-end"}}>
-                <ProfileNickname> 청년농부 </ProfileNickname>
+                <ProfileNickname> {selector.profileData.profile_nickname} </ProfileNickname>
                 <ProfileNicknameSub> 님 </ProfileNicknameSub>
             </div>
 
-            <ProfileEmail style={{marginTop: "8px"}}> abcd@naver.com </ProfileEmail>
+            <ProfileEmail style={{marginTop: "8px"}}> {selector.profileData.profile_email} </ProfileEmail>
 
         </div>
     );

@@ -44,14 +44,6 @@ function ProductPage(props: any) {
         dispatch(GetProductInfo(params.productId));
     }, []);
 
-    const settings = {
-        dots: true,
-        infinite: false,
-        speed: 500,
-        slidesToShow: 1,
-        slidesToScroll: 1
-      };
-	
 
     if(selector) {
         return (
