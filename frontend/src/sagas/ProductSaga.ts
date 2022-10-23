@@ -3,32 +3,55 @@ import { LOGIN_FAIL, LOGIN_PAYLOAD, LOGIN_SUCCESS, LOGIN_TRY, LOGIN_WITH_ANONYMO
 import { db, kakaoConfig } from "..";
 import { GET_PRODUCT, GET_PRODUCT_SUCCESS } from "../pages/ProductPage/ProductAction";
 import { collection, getDoc, getDocs, limit, orderBy, query, where } from "firebase/firestore";
+import { AxiosResponse } from "axios";
+import { ProductDataType } from "../reducers/ProductReducer";
 
-type APIResponse = SagaReturnType<any>;
+
+
+// type ProductDataType=  {
+//     store_id: number,
+//     discount: number,
+//     product_id: number,
+//     title: string,
+//     price: number
+// }
 
 
 async function getProdcutAPI(payload:any) {
-    const productRef = collection(db, "product");
     const product_id = Number(payload);
-    console.log(typeof(product_id));
-    
-    
-    const q = query(productRef, where("product_id", "==", product_id), limit(1));
-    
-    const data = await getDocs(q);
-    console.log(data.docs[0].data());
 
-    return data.docs[0].data();
+    const productRef = collection(db, "product");
+    const q = query(productRef, where("product_id", "==", product_id), limit(1));
+    const fbdata = await getDocs(q);
+    const productData = fbdata.docs[0].data();
+
+    const reviewRef = collection(fbdata.docs[0].ref, "detail_review");
+    const q2 = query(reviewRef, orderBy("uid"), limit(1));
+    const fbdata2 = await getDocs(q2);
+    const reviewDataList = fbdata2.docs.map((doc) => {
+        return doc.data()
+    });
+
+    const photoRef = collection(fbdata.docs[0].ref, "detail_photo","");
+    const q3 = query(photoRef);
+    const fbdata3 = await getDocs(q3);
+    const photoDataList = fbdata3.docs[0].data();
+
+    return {
+        ...productData,
+        reviewDataList: reviewDataList,
+        photoDataList: photoDataList
+    };
 }
 
 
 function* getProdcut(action:any) {
     console.log("get product" + action.payload);
     
-    const result:APIResponse = yield call(getProdcutAPI, action.payload);
+    const result:ProductDataType = yield call(getProdcutAPI, action.payload);
     
-    if(result){
-        console.log(action);
+    if(result){        
+        console.log("result" + JSON.stringify(result));
         yield put({
             type: GET_PRODUCT_SUCCESS,
             payload: result,

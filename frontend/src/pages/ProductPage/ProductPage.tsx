@@ -33,30 +33,36 @@ function ProductPage(props: any) {
 
     console.log(params.productId);
 
-    const productInfo: ProductDataType = useSelector((state:RootState) =>
-        state.ProductInfoReducer
+    const selector: any = useSelector((state:RootState) =>
+        state.ProductInfoReducer!.productInfo
     );  
     
     // const productRef = collection(db, "product");
     // const q = query(productRef, where("product_id", "==", params.productId), orderBy("title"), limit(1));
 
     useEffect(() => {
-        console.log("시발");
         dispatch(GetProductInfo(params.productId));
     }, []);
 
-    return (
-        <AppFrame>
-            {/* <h1> {JSON.stringify(productInfo)} </h1> */}
-            <AppBarComponentProduct />
-            <TopImageComp />
-            <ItemInfoComp />
-            <ItemDetailComp />
-            <BottomBarComp />
+    if(selector) {
+        return (
+            <AppFrame>
+                <AppBarComponentProduct />
+                <TopImageComp />
+                <ItemInfoComp />
+                <ItemDetailComp />
+                <BottomBarComp />
+                {/* <BottomNavigationBar /> */}
+            </AppFrame>
+        );
+    }
+    else{
+        return (
+            <></>
+        )
+    }   
 
-            {/* <BottomNavigationBar /> */}
-        </AppFrame>
-    );
+    
 }
 
 export default ProductPage;

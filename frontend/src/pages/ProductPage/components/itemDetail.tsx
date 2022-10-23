@@ -4,9 +4,17 @@ import { IndexSelectedText, IndexNotSelectedText, IndexSelectedLine, IndexNotSel
 import productExOne from "../../../assets/images/product-ex1@3x.png";
 import productExTwo from "../../../assets/images/product-ex2@3x.png";
 import productExThree from "../../../assets/images/product-ex3@3x.png";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../reducers";
+import { ProductDataType } from "../../../reducers/ProductReducer";
 
 export const ItemDetailComp = () => {
     const [index, setIndex] = useState(0);
+
+    const selector: ProductDataType = useSelector((state:RootState) =>
+        state.ProductInfoReducer!.productInfo
+    );  
+
 
     return(
         <div style={{margin: "0 16px", padding: "0 0 20px 0"}}>
@@ -28,7 +36,7 @@ export const ItemDetailComp = () => {
                 </div>
 
                 <div style={{flex:1}}>
-                    <IndexNotSelectedText style={{padding:"16px 0"}}> 리뷰 25 </IndexNotSelectedText>
+                    <IndexNotSelectedText style={{padding:"16px 0"}}> 리뷰 {selector.reviewDataList.length} </IndexNotSelectedText>
                     <IndexNotSelectedLine />
                 </div>
 
@@ -37,9 +45,14 @@ export const ItemDetailComp = () => {
                     <IndexNotSelectedLine />
                 </div>
             </div>
-            <ImageBox style={{maxWidth: "625px", }} src={productExOne} />
-            <ImageBox style={{maxWidth: "625px", }} src={productExTwo} />
-            <ImageBox style={{maxWidth: "625px", }} src={productExThree} />
+            {
+                selector.photoDataList.photos.map((photo) => {
+                    return(
+                        <ImageBox style={{maxWidth: "625px", }} src={photo} key={photo} />
+                    );
+                })
+            }
+           
         </div>
     );
 }

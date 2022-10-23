@@ -11,16 +11,16 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../reducers";
-import { ProductDataType } from "../../../reducers/ProductReducer";
+import { ProductDataReviewType, ProductDataType } from "../../../reducers/ProductReducer";
 
 export const ItemInfoComp = () => {
 
-    const productInfo: ProductDataType = useSelector((state:RootState) =>
-        state.ProductInfoReducer
-    );  
+    const selector: ProductDataType = useSelector((state:RootState) =>
+        state.ProductInfoReducer!.productInfo
+    ); 
 
     return(
-        <div style={{position: "relative", padding: "60px 0 0 0"}}>
+        <div style={{position: "relative", padding: "30px 0 0 0"}}>
             <div style={{position: "relative", padding: "0 16px"}}>
                 <FarmerComp />
                 <div style={{marginTop: "20px", display:"flex", alignItems:"center", flexDirection:"row", justifyContent:"flex-start"}}>
@@ -34,9 +34,7 @@ export const ItemInfoComp = () => {
 
 
                 <div style={{marginTop:"9px",marginBottom:"14px", display: "flex", alignItems:"center", justifyContent: "space-between"}}>
-                <div> {JSON.stringify(productInfo)} </div>
-                <div> {productInfo?  JSON.stringify(productInfo.price) : ""} </div>
-                    <ItemTitle> {productInfo ? productInfo.title : "null"} </ItemTitle> 
+                    <ItemTitle> {selector.title} </ItemTitle> 
                     <ItemLikeBg style={{display:"flex", alignItems:"center", justifyContent: "center"}}>
                         <ItemLike src={itemLikeIcon}/>
                     </ItemLikeBg>   
@@ -44,16 +42,16 @@ export const ItemInfoComp = () => {
 
                 <div style={{display: "flex", alignItems:"center"}}>
                     <ItemRateStar  src={rateStarIcon}/>
-                    <ItemRateText style={{marginLeft: "2px"}}> 4.5 (123) </ItemRateText>
+                    <ItemRateText style={{marginLeft: "2px"}}> {getAverageReviewScore(selector.reviewDataList)} ({selector.reviewDataList.length}) </ItemRateText>
                     <ItemRateArrow  style={{marginLeft: "3px"}} src={rightArrowIcon}/>
                 </div>
 
                 <div style={{marginTop:"16px", display: "flex", alignItems:"center", justifyContent:"space-between"}}>
-                    <ItemPriceDefault style={{textDecoration: "line-through"}}> 34,000원 </ItemPriceDefault>
+                    <ItemPriceDefault style={{textDecoration: "line-through"}}> {(selector.price).toLocaleString('ko-KR')}원 </ItemPriceDefault>
 
                     <div style={{display: "flex", alignItems:"center"}}>
-                        <ItemDiscount> 20% </ItemDiscount>
-                        <ItemDiscountPrice style={{marginLeft: "10px"}}> 27,200원 </ItemDiscountPrice>
+                        <ItemDiscount> {selector.discount}% </ItemDiscount>
+                        <ItemDiscountPrice style={{marginLeft: "10px"}}> {(selector.price * (1 - (selector.discount/100))).toLocaleString('ko-KR')}원 </ItemDiscountPrice>
                     </div>
                 </div>
 
@@ -64,18 +62,18 @@ export const ItemInfoComp = () => {
                     
                     <div style={{display: "flex", alignItems:"center"}}>
                         <DeliveryInfoCategory> 배송비 </DeliveryInfoCategory>
-                        <DeliveryInfoExplainMain> 3,200원 </DeliveryInfoExplainMain>
+                        <DeliveryInfoExplainMain> {selector.delivery_charge.toLocaleString("ko-KR")}원 </DeliveryInfoExplainMain>
                         <DeliveryInfoExplainSub > (50,000원 이상 무료배송) </DeliveryInfoExplainSub>
                     </div>
 
                     <div style={{display: "flex", alignItems:"center"}}>
                         <DeliveryInfoCategory> 배송시작 </DeliveryInfoCategory>
-                        <DeliveryInfoExplainMain> 7일 이내 </DeliveryInfoExplainMain>
+                        <DeliveryInfoExplainMain> {selector.delivery_start} </DeliveryInfoExplainMain>
                     </div>
 
                     <div style={{display: "flex", alignItems:"center"}}>
                         <DeliveryInfoCategory> 수량 </DeliveryInfoCategory>
-                        <DeliveryInfoExplainMain> 340개 남음 </DeliveryInfoExplainMain>
+                        <DeliveryInfoExplainMain> {selector.delivery_remain} 남음 </DeliveryInfoExplainMain>
                     </div>
                 </div>
             </div>
@@ -98,4 +96,13 @@ const FarmerComp = () => {
             <FarmerArrow style={{marginLeft:"2px"}} src={rightArrowIcon}/>
         </div>
     );
+}
+
+const getAverageReviewScore = (reviewList: ProductDataReviewType[]) => {
+    let score: number = 0;
+    reviewList.forEach((review)=> {
+        score+=review.score
+    });
+
+    return (score/(reviewList.length)).toFixed(1);
 }
