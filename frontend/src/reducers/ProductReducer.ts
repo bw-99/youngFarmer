@@ -1,3 +1,4 @@
+import { Timestamp } from "firebase/firestore";
 import { GET_PRODUCT, GET_PRODUCT_FAIL, GET_PRODUCT_LOADING, GET_PRODUCT_SUCCESS } from "../pages/ProductPage/ProductAction";
 
 
@@ -7,22 +8,34 @@ export interface ProductDataType {
     product_id: number,
     title: string,
     price: number,
-    reviewDataList: ProductDataReviewType[],
-    photoDataList: ProductDataPhotoType,
+    is_best: boolean,
+    is_sale: boolean,
     delivery_charge: number,
     delivery_remain: number,
     delivery_start: string,
+    reviewDataList: ProductDataReviewType[],
+    photoDataList: ProductDataPhotoType,
+    questionDataList: ProductDataQuestionType[]
 }
 
 export interface ProductDataReviewType {
     content: string,
     score: number,
-    time_created: Date,
+    time_created: Timestamp,
     uid: string,
+    photos: string[]
+}
+
+export interface ProductDataQuestionType {
+    content: string,
+    is_answered: boolean,
+    time_created: Timestamp,
+    uid: string,
+    is_secret: boolean
 }
 
 export interface ProductDataPhotoType {
-    main_photo: string,
+    main_photo: string[],
     photos: string[]
 }
 

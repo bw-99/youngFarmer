@@ -37,10 +37,19 @@ async function getProdcutAPI(payload:any) {
     const fbdata3 = await getDocs(q3);
     const photoDataList = fbdata3.docs[0].data();
 
+
+    const questionRef = collection(fbdata.docs[0].ref, "detail_question","");
+    const q4 = query(questionRef);
+    const fbdata4 = await getDocs(q4);
+    const questionDataList = fbdata4.docs.map((doc) => {
+        return doc.data()
+    });
+
     return {
         ...productData,
         reviewDataList: reviewDataList,
-        photoDataList: photoDataList
+        photoDataList: photoDataList,
+        questionDataList: questionDataList
     };
 }
 

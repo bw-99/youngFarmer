@@ -1,5 +1,15 @@
 import styled from "styled-components"
 
+export const ImageTop =  styled.div`
+    opacity: 0;
+    transition-duration: 1s ease;
+`
+
+export const ImageTopActive = styled(ImageTop)`
+    opacity: 1;
+    transition-duration: 1s;
+    transform: scale(1.08);
+`
 
 export const ImageSize = styled.img`
     height: 375px;

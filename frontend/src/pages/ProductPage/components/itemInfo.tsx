@@ -20,18 +20,37 @@ export const ItemInfoComp = () => {
     ); 
 
     return(
-        <div style={{position: "relative", padding: "30px 0 0 0"}}>
+        <div style={{position: "relative", margin: "30px 0 0 0"}}>
             <div style={{position: "relative", padding: "0 16px"}}>
                 <FarmerComp />
-                <div style={{marginTop: "20px", display:"flex", alignItems:"center", flexDirection:"row", justifyContent:"flex-start"}}>
-                    <div>
-                        <ItemBestMarkRedBorder />
-                    </div>      
-                    <div style={{marginLeft: "6px"}}>
-                        <ItemSaleMark />
-                    </div>
-                </div>   
-
+                {
+                    !selector.is_best && !selector.is_sale ?
+                    <></>
+                    :
+                    <div style={{marginTop: "20px", display:"flex", alignItems:"center", flexDirection:"row", justifyContent:"flex-start"}}>
+                    {
+                        selector.is_best && selector.is_sale?
+                        <>
+                            <div>
+                                <ItemBestMarkRedBorder />
+                            </div>      
+                            <div style={{marginLeft: "6px"}}>
+                                <ItemSaleMark />
+                            </div>
+                        </>
+                        :
+                        selector.is_best?
+                        <div>
+                            <ItemBestMarkRedBorder />
+                        </div>
+                        :
+                        <div>
+                            <ItemSaleMark />
+                        </div>
+                    }
+                   
+                    </div>   
+                }
 
                 <div style={{marginTop:"9px",marginBottom:"14px", display: "flex", alignItems:"center", justifyContent: "space-between"}}>
                     <ItemTitle> {selector.title} </ItemTitle> 
@@ -98,7 +117,7 @@ const FarmerComp = () => {
     );
 }
 
-const getAverageReviewScore = (reviewList: ProductDataReviewType[]) => {
+export const getAverageReviewScore = (reviewList: ProductDataReviewType[]) => {
     let score: number = 0;
     reviewList.forEach((review)=> {
         score+=review.score
