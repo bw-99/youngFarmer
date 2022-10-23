@@ -13,6 +13,7 @@ import './index.css';
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth } from 'firebase/auth';
+import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_CONFIG_API_KEY!,
@@ -34,6 +35,8 @@ export const kakaoConfig = {
 
 export const app = initializeApp(firebaseConfig);
 export const FirebaseAuth = getAuth(app);
+export const db = getFirestore(app);
+
 const analytics = getAnalytics(app);
 
 const sagaMiddleware = createSagaMiddleware();

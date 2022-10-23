@@ -9,10 +9,18 @@ import { LikeIconComp } from "../../MainPage/components/recommend";
 
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../reducers";
+import { ProductDataType } from "../../../reducers/ProductReducer";
 
 export const ItemInfoComp = () => {
+
+    const productInfo: ProductDataType = useSelector((state:RootState) =>
+        state.ProductInfoReducer
+    );  
+
     return(
-        <div style={{position: "relative", padding: "30px 0 0 0"}}>
+        <div style={{position: "relative", padding: "60px 0 0 0"}}>
             <div style={{position: "relative", padding: "0 16px"}}>
                 <FarmerComp />
                 <div style={{marginTop: "20px", display:"flex", alignItems:"center", flexDirection:"row", justifyContent:"flex-start"}}>
@@ -26,7 +34,9 @@ export const ItemInfoComp = () => {
 
 
                 <div style={{marginTop:"9px",marginBottom:"14px", display: "flex", alignItems:"center", justifyContent: "space-between"}}>
-                    <ItemTitle> 친환경 복숭아 5kg/10kg </ItemTitle> 
+                <div> {JSON.stringify(productInfo)} </div>
+                <div> {productInfo?  JSON.stringify(productInfo.price) : ""} </div>
+                    <ItemTitle> {productInfo ? productInfo.title : "null"} </ItemTitle> 
                     <ItemLikeBg style={{display:"flex", alignItems:"center", justifyContent: "center"}}>
                         <ItemLike src={itemLikeIcon}/>
                     </ItemLikeBg>   
