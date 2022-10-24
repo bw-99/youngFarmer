@@ -3,11 +3,19 @@ import itemLikeOffIcon from "../../../assets/images/like-off@3x.png";
 import itemLikeOnIcon from "../../../assets/images/btn-heart-on@3x.png";
 import { storeLike} from "../../../reducers/ProductReducer";
 
-import React from "react";
+import React, {useState }  from "react";
 
 export const BottomBarComp = () => {
     const changeHeartIcon = (event: React.MouseEvent) => {
         !storeLike.getState() ? storeLike.dispatch({ type: 'CHANGETRUE' }) : storeLike.dispatch({ type: 'CHANGEFALSE' });
+    }
+
+    const BottomBoxLikeLikeFunc = () => {
+        let [imageSrc, setSrc] = useState(storeLike.getState() ? itemLikeOnIcon : itemLikeOffIcon);
+        storeLike.subscribe(() => {
+            setSrc(storeLike.getState() ? itemLikeOnIcon : itemLikeOffIcon);
+        });
+        return <BottomBoxLikeIcon onClick={changeHeartIcon} src={imageSrc} />
     }
 
     return (
@@ -15,7 +23,7 @@ export const BottomBarComp = () => {
             <div style={{height: "100px"}}></div>
             <BottomBoxAtom style={{maxWidth: "625px", }}>
                 <div style={{marginLeft:"16px", display:"flex", alignItems:"center", flexDirection: "column"}}>
-                    <BottomBoxLikeIcon onClick={changeHeartIcon} src={storeLike.getState() ? itemLikeOnIcon : itemLikeOffIcon} />
+                    <BottomBoxLikeLikeFunc />
                     <BottomBoxLikeText> 20 </BottomBoxLikeText>
                 </div>
 

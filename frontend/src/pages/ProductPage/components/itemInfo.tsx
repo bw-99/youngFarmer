@@ -8,11 +8,14 @@ import { DeliveryInfoCategory, DeliveryInfoExplainMain, DeliveryInfoExplainSub, 
 import { ItemBestMark, ItemBestMarkRedBorder, ItemSaleMark } from "../../../common/ItemList/ItemList";
 import { LikeIconComp } from "../../MainPage/components/recommend";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSelector, Provider} from "react-redux";
+import { useSelector, Provider, connect} from "react-redux";
 import { RootState } from "../../../reducers";
 import { ProductDataReviewType, ProductDataType, storeLike } from "../../../reducers/ProductReducer";
+
+
+connect()(ItemLike);
 
 export const ItemInfoComp = () => {
 
@@ -22,12 +25,16 @@ export const ItemInfoComp = () => {
 
     const changeHeartIcon = (event: React.MouseEvent) => {
         !storeLike.getState() ? storeLike.dispatch({ type: 'CHANGETRUE' }) : storeLike.dispatch({ type: 'CHANGEFALSE' });
-        return <ItemLike onClick={changeHeartIcon} src={storeLike.getState() ? itemLikeOnIcon : itemLikeOffIcon} />;
     }
 
     const ItemLikeFunc = () => {
-        return <ItemLike onClick={changeHeartIcon} src={storeLike.getState() ? itemLikeOnIcon : itemLikeOffIcon} />;
+        let [imageSrc, setSrc] = useState(storeLike.getState() ? itemLikeOnIcon : itemLikeOffIcon);
+        storeLike.subscribe(() => {
+            setSrc(storeLike.getState() ? itemLikeOnIcon : itemLikeOffIcon);
+        });
+        return <ItemLike onClick={changeHeartIcon} src={imageSrc} />
     }
+
 
     return(
         <div style={{position: "relative", margin: "30px 0 0 0"}}>
@@ -65,7 +72,7 @@ export const ItemInfoComp = () => {
                 <div style={{marginTop:"9px",marginBottom:"14px", display: "flex", alignItems:"center", justifyContent: "space-between"}}>
                     <ItemTitle> {selector.title} </ItemTitle> 
                     <ItemLikeBg style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-                        <ItemLike onClick={changeHeartIcon} src={storeLike.getState() ? itemLikeOnIcon : itemLikeOffIcon} />
+                        <ItemLikeFunc />
                     </ItemLikeBg>   
                 </div>
 

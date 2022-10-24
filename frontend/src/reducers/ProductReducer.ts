@@ -77,7 +77,7 @@ export function ProductInfoReducer(state = productInfoInitState, action: any) {
     }
 }
 
-export function likeReducer(currentState= true, action: any) {
+export function LikeReducer(currentState= true, action: any) {
     const newState = currentState ? false : true;
 
     if (action.type === 'CHANGETRUE') {
@@ -91,4 +91,4 @@ export function likeReducer(currentState= true, action: any) {
     return newState;
 }
 
-export const storeLike = createStore(likeReducer);
+export const storeLike = createStore(LikeReducer);
