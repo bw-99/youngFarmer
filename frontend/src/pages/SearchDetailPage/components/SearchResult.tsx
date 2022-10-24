@@ -4,20 +4,23 @@ import btnDropDown from "../../../assets/images/btn-dropdown-20-px@3x.png";
 import filterBtn from "../../../assets/images/filter-btn@3x.png";
 import React from "react";
 import { ProductDataType } from "../../../reducers/ProductReducer";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../reducers";
 export const SearchResultComp = () => {
+
+    const searchSelector: ProductDataType[] = useSelector((state:RootState) =>
+        state.SearchDetailReducer.products
+    );
+
+
     return(
         <div>
            <SearchResultFilterComp />
             <div style={{padding: "0 9.5px 0 9.5px"}}>
                 <ItemUnitListComp image_width={165} product_list={
-                    [
-                        {
-                            product_id: 1
-                        } as ProductDataType,
-                        {
-                            product_id: 1
-                        } as ProductDataType
-                    ]
+                    searchSelector.map((product)=> {
+                        return product
+                    })
                 } />
             </div>
         </div>

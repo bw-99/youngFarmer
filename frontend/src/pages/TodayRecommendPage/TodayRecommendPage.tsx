@@ -16,7 +16,7 @@ function TodayRecommendPage() {
 
     return (
         <AppFrame>
-            {AppBarComponentOnlyBack("오늘의 추천 상품")}
+            <AppBarComponentOnlyBack title="오늘의 추천 상품"/>
             <div style={{padding: "10px 9.5px 20px 9.5px"}}>
                 <ItemUnitListComp image_width={165}  product_list={
                     [

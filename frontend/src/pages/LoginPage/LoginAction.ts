@@ -4,6 +4,7 @@ export const LOGIN_WITH_ANONYMOUS = "LOGIN_WITH_ANONYMOUS";
 
 export const LOGIN_TRY = "LOGIN_TRY";
 
+export const LOGIN_SUCCESS_FIRST = "LOGIN_SUCCESS_FIRST";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAIL = "LOGIN_FAIL";
 
@@ -24,14 +25,21 @@ export interface LOGIN_PAYLOAD {
 }
 
 
-export const LoginWithKakaoAction = (code:string, callback:Function) => {
+export const LoginWithKakaoAction = (
+    code:string, 
+    sCallback:Function, 
+    fCallback:Function, 
+    sfCallback:Function
+    ) => {
     return(
         {
             type: LOGIN_TRY,
             payload: {
                 type: LOGIN_WITH_KAKAO,
                 code: code,
-                callback: callback
+                sCallback: sCallback,
+                fCallback: fCallback,
+                sfCallback: sfCallback
             }
         }
     );

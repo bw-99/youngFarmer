@@ -78,7 +78,7 @@ export const ItemUnitImgComp = ({image_width ,bsFlag= true, product}:itemUnitPro
     const isSale = true&&bsFlag;
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const product_id = 1;
+    const product_id = product.product_id? product.product_id: 1;
     const targetUrl = "/product/"+product_id;
     
     const selector: LikeData[] = useSelector((state:RootState) =>
@@ -131,11 +131,11 @@ export const ItemUnitImgComp = ({image_width ,bsFlag= true, product}:itemUnitPro
 
             <div onClick={()=>{navigate(targetUrl)}} >
                 <ItemTextInfoSource>산천</ItemTextInfoSource>
-                <ItemTextInfoTitle> 친환경 복숭아 5kg /10kg </ItemTextInfoTitle>
+                <ItemTextInfoTitle> {product.title?product.title: "친환경 복숭아 5kg /10kg"} </ItemTextInfoTitle>
                 <div style={{display: "flex", alignItems: "flex-start", marginTop: "8px"}}>
                     <div style={{display:"flex"}}>
-                        <ItemTextInfoPrice> 29,000원 </ItemTextInfoPrice>
-                        <ItemTextInfoPriceDiscount> 20% </ItemTextInfoPriceDiscount>
+                        <ItemTextInfoPrice> {product.price ? product.price + "원" : "29,000원"} </ItemTextInfoPrice>
+                        <ItemTextInfoPriceDiscount> {product.discount? product.discount+ "%": "20%"} </ItemTextInfoPriceDiscount>
                     </div>
                     
                 </div>

@@ -21,6 +21,8 @@ import MyPage from './pages/MyPage/MyPage';
 import StorePage from './pages/StorePage/StorePage';
 import { AuthProvider, LoginRoute, PrivateRoute } from './services/firebase';
 import LoginKakaoPage from './pages/LoginPage/LoginPageKakao';
+import AgreePage from './pages/LoginPage/AgreePage';
+import SubmitInfoPage from './pages/LoginPage/SubmitInfoPage';
 
 export const AuthContext = createContext(false);
 
@@ -29,8 +31,6 @@ function App() {
   const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  
-
 
   return (
     <div style={{display: "flex", alignItems: "center", justifyContent: "center"}}>
@@ -40,6 +40,7 @@ function App() {
               <Routes>
                 <Route path="/" element = {<PrivateRoute />} >
                     <Route path="/" element = {<MainPage />}/>
+
                     <Route path='/main' element = {<MainPage />}/>
                     <Route path='/main/todayRecommend' element = {<TodayRecommendPage />}/>
                     <Route path='/main/liveList' element = {<LiveListPage />}/>
@@ -56,6 +57,9 @@ function App() {
                   <Route path="/login" element = {<LoginRoute />}>
                     <Route path="/login" element = {<LoginPage />}/>
                     <Route path="/login/oauth/kakao" element = {<LoginKakaoPage />}/>
+                    <Route path="/login/agree/:code" element = {<AgreePage />}/>
+                    <Route path="/login/submitInfo/:code" element = {<SubmitInfoPage />}/>
+                    
                   </Route>
                 <Route path="*" element = {<h1>Page Not Found</h1>}/>
               </Routes>

@@ -17,6 +17,7 @@ import { SearchCrateAction } from "../../pages/SearchPage/SearchActions";
 import { useNavigate } from "react-router-dom";
 import { ShareIconBlackComponent, ShareIconComponent } from "./ShareIcon/ShareIcon";
 import { MySettingComponent } from "./SettingIcon/Mysetting";
+import { searchTryAction } from "../../pages/SearchDetailPage/SearchDertailAction";
 
 // btn-search
 interface ScrollProps {
@@ -123,7 +124,7 @@ export const SearchInputText = styled.input`
 `
 
 
-export const AppBarComponentOnlyBack = (title: string) => {
+export const AppBarComponentOnlyBack = ({title}:StringTitleProps) => {
     const [isScrollDown, setIsScrollDown] = useState(false);
     const [topPosition, setTopPosition] = useState(0);
 
@@ -341,6 +342,8 @@ export const AppBarComponentSearch = () => {
                     search, ()=>{navigate(`/search/${search}`);}
                 )
             );
+
+            dispatch(searchTryAction(search));
             // setSearch("");
         }
     }

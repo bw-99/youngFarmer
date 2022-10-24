@@ -3,6 +3,10 @@ import { GET_PRODUCT, GET_PRODUCT_FAIL, GET_PRODUCT_LOADING, GET_PRODUCT_SUCCESS
 
 import { createStore } from 'redux';
 
+export interface ProductDataList {
+    products: ProductDataType[]
+}
+
 export interface ProductDataType {
     store_id: number,
     discount: number,
