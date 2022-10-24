@@ -283,7 +283,7 @@ export const AppBarComponentBack = (title: string) => {
     )
 }
 
-export const AppBarComponentNoBack = (title: string) => {
+export const AppBarComponentNoBack = ({title}:StringTitleProps) => {
     const [isScrollDown, setIsScrollDown] = useState(false);
     const [topPosition, setTopPosition] = useState(0);
 

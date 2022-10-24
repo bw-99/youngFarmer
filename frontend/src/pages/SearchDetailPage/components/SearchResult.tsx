@@ -3,12 +3,22 @@ import { DropDownBtn, FilterBackGround, FilterImage, FilterText, FilterName } fr
 import btnDropDown from "../../../assets/images/btn-dropdown-20-px@3x.png";
 import filterBtn from "../../../assets/images/filter-btn@3x.png";
 import React from "react";
+import { ProductDataType } from "../../../reducers/ProductReducer";
 export const SearchResultComp = () => {
     return(
         <div>
            <SearchResultFilterComp />
             <div style={{padding: "0 9.5px 0 9.5px"}}>
-                {ItemUnitListComp(165)}
+                <ItemUnitListComp image_width={165} product_list={
+                    [
+                        {
+                            product_id: 1
+                        } as ProductDataType,
+                        {
+                            product_id: 1
+                        } as ProductDataType
+                    ]
+                } />
             </div>
         </div>
     );

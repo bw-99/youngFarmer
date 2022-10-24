@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { Link, Navigate, Outlet, Route } from "react-router-dom";
 import { FirebaseAuth } from "..";
 import { AuthContext } from "../App";
+import { getLikeAction, likeAction } from "../pages/LikePage/LikeAction";
 import { GetUserInfoAction } from "../pages/LoginPage/LoginAction";
 import LoginPage from "../pages/LoginPage/LoginPage";
 import { getItemWithExpireTime, removeItem, setItemWithExpireTime } from "./localStorage";
@@ -34,11 +35,9 @@ export const AuthProvider:FC<Props> = ({children}) :React.ReactElement|null => {
          getItemWithExpireTime("user")? setUser(true) : setUser(false);
 
         FirebaseAuth.onAuthStateChanged((data)=> {
-            // dispatch(
-            //     GetUserInfoAction(data)
-            // );
             if(data){
                 setItemWithExpireTime("user", true, 1000*60*60);
+                dispatch(getLikeAction(data.uid));
                 setUser(true);
             }
             else{

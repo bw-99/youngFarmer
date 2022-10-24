@@ -18,7 +18,7 @@ import { FarmerInfoComp } from "./components/FarmerInfo";
 import { TopImageComp } from "./components/topImage";
 
 
-function ProductPage(props: any) {
+function StorePage(props: any) {
     const params = useParams();
     const location = useLocation();
     const navigate = useNavigate();
@@ -37,4 +37,4 @@ function ProductPage(props: any) {
     );
 }
 
-export default ProductPage;
+export default StorePage;

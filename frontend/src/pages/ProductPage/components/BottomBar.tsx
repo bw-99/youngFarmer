@@ -1,21 +1,44 @@
 import { BottomBoxAtom, BottomBoxBuy, BottomBoxLikeIcon, BottomBoxLikeText, BottomBoxShoppingCart } from "../atoms/BottomBar";
 import itemLikeOffIcon from "../../../assets/images/like-off@3x.png";
 import itemLikeOnIcon from "../../../assets/images/btn-heart-on@3x.png";
-import { storeLike} from "../../../reducers/ProductReducer";
 
-import React, {useState }  from "react";
+import React, {useEffect, useState }  from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../reducers";
+import { LikeData } from "../../../reducers/LikeReducer";
+import { likeAction, likeCancelAction } from "../../LikePage/LikeAction";
 
+// ! Like는 전역 상태 관리로 진행할거라 추후 수정
 export const BottomBarComp = () => {
-    const changeHeartIcon = (event: React.MouseEvent) => {
-        !storeLike.getState() ? storeLike.dispatch({ type: 'CHANGETRUE' }) : storeLike.dispatch({ type: 'CHANGEFALSE' });
-    }
+    // const changeHeartIcon = (event: React.MouseEvent) => {
+    //     !storeLike.getState() ? storeLike.dispatch({ type: 'CHANGETRUE' }) : storeLike.dispatch({ type: 'CHANGEFALSE' });
+    // }
+    const [isLiked, setIsLiked]  = useState(false);
+    const product_id = 1;
 
+    const likeselector: LikeData[] = useSelector((state:RootState) =>
+        state.LikeReducer.likes
+    );  
+
+    useEffect(() => {
+        if(likeselector){
+            setIsLiked(false);
+            likeselector.forEach((val) => {
+                if(val.product_id === product_id){
+                    setIsLiked(true);
+                }
+            })
+        }
+
+    }, [likeselector])
+    
+    const dispatch = useDispatch();
+    
     const BottomBoxLikeLikeFunc = () => {
-        let [imageSrc, setSrc] = useState(storeLike.getState() ? itemLikeOnIcon : itemLikeOffIcon);
-        storeLike.subscribe(() => {
-            setSrc(storeLike.getState() ? itemLikeOnIcon : itemLikeOffIcon);
-        });
-        return <BottomBoxLikeIcon onClick={changeHeartIcon} src={imageSrc} />
+        return isLiked? 
+                <BottomBoxLikeIcon src={itemLikeOnIcon} onClick={()=>{dispatch(likeCancelAction(product_id));}}/> 
+                :
+                <BottomBoxLikeIcon src={itemLikeOffIcon} onClick={()=>{dispatch(likeAction(product_id));}}/>
     }
 
     return (
