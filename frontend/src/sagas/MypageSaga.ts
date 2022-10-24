@@ -70,7 +70,7 @@ async function getProfileAPI(payload:any) {
 
 
 function* getProfile(action:any) {
-    console.log("get product" + action.payload);
+    console.log("get profile" + action.payload);
     
     const result:MyPageDataType = yield call(getProfileAPI, action.payload);
     

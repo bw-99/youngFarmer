@@ -27,21 +27,26 @@ function MyPage(props: any) {
     const location = useLocation();
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const [user,setUser] = useState(null);
 
     const selector: MyPageDataType = useSelector((state:RootState) =>
         state.ProfileReducer!.mypageInfo
     );      
 
     useEffect(() => {
-        if(!selector){
-            FirebaseAuth.onAuthStateChanged((data)=> {
-                if(data){
-                    console.log("dispatch!!");
+        FirebaseAuth.onAuthStateChanged((data)=> {
+            console.log(data);
+        })
+
+        // if(!selector){
+        //     FirebaseAuth.onAuthStateChanged((data)=> {
+        //         if(data && !selector){
+        //             console.log("dispatch!!");
                     
-                    dispatch(getProfileAction(data.uid));
-                }
-            })
-        }
+        //             dispatch(getProfileAction(data.uid));
+        //         }
+        //     })
+        // }
        
         
     }, []);

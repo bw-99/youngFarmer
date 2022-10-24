@@ -1,10 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import { call, delay, put, SagaReturnType, takeLatest } from "redux-saga/effects";
 import { LOGIN_FAIL, LOGIN_PAYLOAD, LOGIN_SUCCESS, LOGIN_TRY, LOGIN_WITH_ANONYMOUS, LOGIN_WITH_KAKAO, LOGIN_WITH_NAVER } from "../pages/LoginPage/LoginAction";
-import { kakaoConfig } from "..";
+import { db, kakaoConfig } from "..";
 import axios from 'axios'
 import { apiClient, get, post } from "../api/axios";
-import { getAuth, signInAnonymously, signInWithCustomToken } from "firebase/auth";
+import { getAuth, signInAnonymously, signInWithCustomToken, updateEmail, updateProfile } from "firebase/auth";
+import { collection, query, where, limit, getDocs, setDoc, doc, addDoc } from "firebase/firestore";
 
 type LoginServiceResponse = SagaReturnType<any>;
 
@@ -39,17 +40,21 @@ async function kakaoLoginAPI(payload:any) {
     
 
     const auth = getAuth();
-    signInWithCustomToken(auth, customToken.data.firebase_token)
-    .then((userCredential) => {
-        const user = userCredential.user;
-        console.log(user);
-        return true;
-    })
-    .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        return false;
-    });
+    const userCredential = await signInWithCustomToken(auth, customToken.data.firebase_token)
+    const user = userCredential.user;
+    console.log("kakao login result1 : " + JSON.stringify(user));
+    return user.uid;
+
+    // .then((userCredential) => {
+    //     const user = userCredential.user;
+    //     console.log(user.uid);
+    //     return user.uid;
+    // })
+    // .catch((error) => {
+    //     const errorCode = error.code;
+    //     const errorMessage = error.message;
+    //     return false;
+    // });
 }
 
 async function anonymousLoginAPI(payload:LOGIN_PAYLOAD) {
@@ -59,17 +64,55 @@ async function anonymousLoginAPI(payload:LOGIN_PAYLOAD) {
     return signinResult.user.uid;
 }
 
+async function createUserInfo(uid:string, is_guest:boolean) {
+    console.log("createUserInfo");
+    
+    const userRef = collection(db, "user");
+    const q = query(userRef, where("uid", "==", uid), limit(1));
+    const fbdata = await getDocs(q);
+
+    // 신규 가입
+    if(fbdata.empty){
+        const result = await addDoc(userRef, {
+            uid: uid,
+            is_guest:is_guest
+        });
+
+        const userProfileRef = collection(db, "user",result.id, "profile");
+        await addDoc(userProfileRef, {
+            profile_nickname: "Guest"+uid.substring(0,3),
+            profile_email: null,
+            profile_img: null
+        })
+    }
+    // 로그인
+    else{
+        const userProfileRef = collection(db, "user",fbdata.docs[0].id , "profile");
+        const qProfile = query(userProfileRef);
+        const profiledataBase = await getDocs(qProfile);
+        const profileData = profiledataBase.docs[0].data();
+
+        // console.log("login!!!!!!!!!!!!!!!!!!!!!!!!!!" + JSON.stringify(profileData));
+        const auth = getAuth();
+        await updateProfile(auth.currentUser!, {
+            displayName: "asdfdfasdf",
+            photoURL: profileData.profile_img
+        })
+        await updateEmail(auth.currentUser!, profileData.profile_email);
+    }
+}
 
 function* kakaoLogin(action:any) {
     console.log("kakao login");
     
     const result:LoginServiceResponse = yield call(kakaoLoginAPI, action.payload);
+    console.log("kakao login result2 : " + JSON.stringify(result));
     
-    console.log("kakao login result : " + JSON.stringify(result));
-    
-    if(result){
+    yield call(createUserInfo, result as string, false);
 
+    if(result){
         console.log(action);
+        console.log("sccess");
         
         yield put({
             type: LOGIN_SUCCESS,
@@ -87,6 +130,8 @@ function* kakaoLogin(action:any) {
 function* anonymousLogin(payload:LOGIN_PAYLOAD) {
     const result:LoginServiceResponse =  yield call(anonymousLoginAPI, payload);
     console.log(result);
+    yield call(createUserInfo, result as string, true);
+
     if(result) {
         yield put({
             type: LOGIN_SUCCESS,

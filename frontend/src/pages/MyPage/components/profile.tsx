@@ -45,11 +45,11 @@ const ProfilePersonalComp = () => {
             </ProfilePhotoAtom>
            
             <div style={{marginTop: "16px", display:"flex", alignItems:"flex-end"}}>
-                <ProfileNickname> {selector.profileData.profile_nickname} </ProfileNickname>
+                <ProfileNickname> {selector.profileData.profile_nickname? selector.profileData.profile_nickname : "guest"} </ProfileNickname>
                 <ProfileNicknameSub> 님 </ProfileNicknameSub>
             </div>
 
-            <ProfileEmail style={{marginTop: "8px"}}> {selector.profileData.profile_email} </ProfileEmail>
+            <ProfileEmail style={{marginTop: "8px"}}> {selector.profileData.profile_email? selector.profileData.profile_email : ""} </ProfileEmail>
 
         </div>
     );
