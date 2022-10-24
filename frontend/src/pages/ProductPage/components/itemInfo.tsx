@@ -1,23 +1,33 @@
 import recommendItemStawberry from "../../../assets/images/main_recommend_strawberry.png";
 import rightArrowIcon from "../../../assets/images/btn-arrow-r-14-px@3x.png";
-import itemLikeIcon from "../../../assets/images/like-off@3x.png";
+import itemLikeOffIcon from "../../../assets/images/like-off@3x.png";
+import itemLikeOnIcon from "../../../assets/images/btn-heart-on@3x.png";
 import rateStarIcon from "../../../assets/images/rate-star@3x.png";
 
 import { DeliveryInfoCategory, DeliveryInfoExplainMain, DeliveryInfoExplainSub, DeliveryInfoTitle, DeliverySepLine, FarmerArrow, FarmerNickname, FarmerProfile, ItemDiscount, ItemDiscountPrice, ItemLike, ItemLikeBg, ItemPriceDefault, ItemRateArrow, ItemRateStar, ItemRateText, ItemSepLine, ItemTitle } from "../atoms/itemInfo";
 import { ItemBestMark, ItemBestMarkRedBorder, ItemSaleMark } from "../../../common/ItemList/ItemList";
 import { LikeIconComp } from "../../MainPage/components/recommend";
 
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, Provider} from "react-redux";
 import { RootState } from "../../../reducers";
-import { ProductDataReviewType, ProductDataType } from "../../../reducers/ProductReducer";
+import { ProductDataReviewType, ProductDataType, storeLike } from "../../../reducers/ProductReducer";
 
 export const ItemInfoComp = () => {
 
     const selector: ProductDataType = useSelector((state:RootState) =>
         state.ProductInfoReducer!.productInfo
     ); 
+
+    const changeHeartIcon = (event: React.MouseEvent) => {
+        !storeLike.getState() ? storeLike.dispatch({ type: 'CHANGETRUE' }) : storeLike.dispatch({ type: 'CHANGEFALSE' });
+        return <ItemLike onClick={changeHeartIcon} src={storeLike.getState() ? itemLikeOnIcon : itemLikeOffIcon} />;
+    }
+
+    const ItemLikeFunc = () => {
+        return <ItemLike onClick={changeHeartIcon} src={storeLike.getState() ? itemLikeOnIcon : itemLikeOffIcon} />;
+    }
 
     return(
         <div style={{position: "relative", margin: "30px 0 0 0"}}>
@@ -51,11 +61,11 @@ export const ItemInfoComp = () => {
                    
                     </div>   
                 }
-
+                
                 <div style={{marginTop:"9px",marginBottom:"14px", display: "flex", alignItems:"center", justifyContent: "space-between"}}>
                     <ItemTitle> {selector.title} </ItemTitle> 
-                    <ItemLikeBg style={{display:"flex", alignItems:"center", justifyContent: "center"}}>
-                        <ItemLike src={itemLikeIcon}/>
+                    <ItemLikeBg style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+                        <ItemLike onClick={changeHeartIcon} src={storeLike.getState() ? itemLikeOnIcon : itemLikeOffIcon} />
                     </ItemLikeBg>   
                 </div>
 

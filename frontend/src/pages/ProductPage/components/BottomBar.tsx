@@ -1,15 +1,21 @@
 import { BottomBoxAtom, BottomBoxBuy, BottomBoxLikeIcon, BottomBoxLikeText, BottomBoxShoppingCart } from "../atoms/BottomBar";
-import itemLikeIcon from "../../../assets/images/like-off@3x.png";
+import itemLikeOffIcon from "../../../assets/images/like-off@3x.png";
+import itemLikeOnIcon from "../../../assets/images/btn-heart-on@3x.png";
+import { storeLike} from "../../../reducers/ProductReducer";
 
 import React from "react";
 
 export const BottomBarComp = () => {
-    return(
+    const changeHeartIcon = (event: React.MouseEvent) => {
+        !storeLike.getState() ? storeLike.dispatch({ type: 'CHANGETRUE' }) : storeLike.dispatch({ type: 'CHANGEFALSE' });
+    }
+
+    return (
         <div>
             <div style={{height: "100px"}}></div>
             <BottomBoxAtom style={{maxWidth: "625px", }}>
                 <div style={{marginLeft:"16px", display:"flex", alignItems:"center", flexDirection: "column"}}>
-                    <BottomBoxLikeIcon src={itemLikeIcon} />
+                    <BottomBoxLikeIcon onClick={changeHeartIcon} src={storeLike.getState() ? itemLikeOnIcon : itemLikeOffIcon} />
                     <BottomBoxLikeText> 20 </BottomBoxLikeText>
                 </div>
 

@@ -1,6 +1,7 @@
 import { Timestamp } from "firebase/firestore";
 import { GET_PRODUCT, GET_PRODUCT_FAIL, GET_PRODUCT_LOADING, GET_PRODUCT_SUCCESS } from "../pages/ProductPage/ProductAction";
 
+import { createStore } from 'redux';
 
 export interface ProductDataType {
     store_id: number,
@@ -75,3 +76,19 @@ export function ProductInfoReducer(state = productInfoInitState, action: any) {
             return state;
     }
 }
+
+export function likeReducer(currentState= true, action: any) {
+    const newState = currentState ? false : true;
+
+    if (action.type === 'CHANGETRUE') {
+        //좋아요 수 상승
+        console.log("change True");
+    }
+    else if (action.type === 'CHANGEFALSE') {
+        //좋아요 수 감소
+        console.log("change False");
+    }
+    return newState;
+}
+
+export const storeLike = createStore(likeReducer);
