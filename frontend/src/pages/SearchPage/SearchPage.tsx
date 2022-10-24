@@ -16,6 +16,7 @@ import { CategoryComponent } from "../../common/Category/category";
 import { RecentSearchComponent } from "./components/RecentSearch";
 import { RecommendStoreComponent } from "./components/RecommendStore";
 
+import {FilterComponent} from "./components/Filter"
 
 function SearchPage(props: any) {
     const params = useParams();
@@ -29,6 +30,7 @@ function SearchPage(props: any) {
             <RecentSearchComponent />
             <RecommendStoreComponent />
             <BottomNavigationBar />
+            <FilterComponent></FilterComponent>
         </AppFrame>
     );
 }
