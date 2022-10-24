@@ -49,9 +49,10 @@ export const BottomBarComp = () => {
                     <BottomBoxLikeLikeFunc />
                     <BottomBoxLikeText> 20 </BottomBoxLikeText>
                 </div>
-
-                <BottomBoxShoppingCart> 장바구니 </BottomBoxShoppingCart>
-                <BottomBoxBuy style={{marginRight: "16px"}}> 구매하기 </BottomBoxBuy>
+                <div style={{display: "flex"}}>
+                    <BottomBoxShoppingCart style={{marginRight: "9px"}}> 장바구니 </BottomBoxShoppingCart>
+                    <BottomBoxBuy style={{marginRight: "16px"}}> 구매하기 </BottomBoxBuy>
+                </div>
             </BottomBoxAtom>
         </div>
             

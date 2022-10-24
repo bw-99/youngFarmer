@@ -48,9 +48,9 @@ export const ItemInfoComp = () => {
 
     const ItemLikeFunc = () => {
         return isLiked? 
-        <ItemLike src={itemLikeOnIcon} onClick={()=>{dispatch(likeCancelAction(product_id));}}/> 
+        <ItemLike style={{width: "44px", height: "44px"}} src={itemLikeOnIcon} onClick={()=>{dispatch(likeCancelAction(product_id));}}/> 
         :
-        <ItemLike src={itemLikeOffIcon} onClick={()=>{dispatch(likeAction(product_id));}}/>
+        <ItemLike style={{width: "30px", height: "30px"}} src={itemLikeOffIcon} onClick={()=>{dispatch(likeAction(product_id));}}/>
     }
 
 
