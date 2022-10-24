@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import styled from "styled-components";
+import { FirebaseAuth } from "../..";
 import { AppFrame } from "../../App";
 
 
@@ -12,39 +14,69 @@ import { AppBarComponentMyPage, AppBarComponentNoBack } from "../../common/AppBa
 
 
 import { BottomNavigationBar } from "../../common/BottomNavigationBar/BottomNavigationBar";
+import { RootState } from "../../reducers";
+import { MyPageDataType } from "../../reducers/MypageReducer";
 import { ProfileComp } from "./components/profile";
 import { ServiceCenterComp } from "./components/serviceCenter";
 import { ShoppingComp } from "./components/shopping";
+import { getProfileAction } from "./MyAction";
 
 
 function MyPage(props: any) {
     const params = useParams();
     const location = useLocation();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
-    const [Email, setEmail] = useState("");
-    const [Password, setPassword] = useState("");
+    const selector: MyPageDataType = useSelector((state:RootState) =>
+        state.ProfileReducer!.mypageInfo
+    );      
 
-    const onEmailHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setEmail(e.currentTarget.value);
-    };
-    const onPasswordHanlder = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setPassword(e.currentTarget.value);
-    };  
+    useEffect(() => {
+        if(!selector){
+            FirebaseAuth.onAuthStateChanged((data)=> {
+                if(data){
+                    console.log("dispatch!!");
+                    
+                    dispatch(getProfileAction(data.uid));
+                }
+            })
+        }
+       
+        
+    }, []);
 
-    const onSubmitHandler = (e:React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-    };
+    // return (
+    //     <AppFrame>
+    //             <AppBarComponentMyPage title="마이페이지"/>
+    //             <ProfileComp />
+    //             <ShoppingComp />
+    //             <ServiceCenterComp />
+    //             <BottomNavigationBar />
+    //         </AppFrame>
+    // );
+    
+    if (selector) {
+        return(
+            <AppFrame>
+                <AppBarComponentMyPage title="마이페이지"/>
+                <ProfileComp />
+                <ShoppingComp />
+                <ServiceCenterComp />
+                <BottomNavigationBar />
+            </AppFrame>
+        );
+    }
+    else{
+        return (
+            <AppFrame>
+                <AppBarComponentMyPage title="마이페이지"/>
+                <BottomNavigationBar />
+            </AppFrame>  
+        );
+    }
 
-    return (
-        <AppFrame>
-            {AppBarComponentMyPage("마이페이지")}
-            <ProfileComp />
-            <ShoppingComp />
-            <ServiceCenterComp />
-            <BottomNavigationBar />
-        </AppFrame>
-    );
+   
 }
 
 export default MyPage;

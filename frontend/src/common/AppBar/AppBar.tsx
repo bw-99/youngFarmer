@@ -474,7 +474,11 @@ export const AppBarComponentMain = () => {
     );
 }
 
-export const AppBarComponentMyPage = (title: string) => {
+type StringTitleProps = {
+    title: string;
+  }; 
+
+export const AppBarComponentMyPage = ({title}:StringTitleProps) => {
     const [isScrollDown, setIsScrollDown] = useState(false);
     const [topPosition, setTopPosition] = useState(0);
 

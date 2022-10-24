@@ -1,6 +1,7 @@
 import {combineReducers} from "redux";
 import { BottomNavigationBarReducer } from "./BottomNavigationBarReducer";
 import { LoginReducer, UserInfoReducer } from "./LoginReducer";
+import { ProfileReducer } from "./MypageReducer";
 import { ProductInfoReducer } from "./ProductReducer";
 import { SearchReducer } from "./SearchReducer";
 
@@ -9,7 +10,8 @@ const rootReducer = combineReducers({
   SearchReducer,
   LoginReducer,
   UserInfoReducer,
-  ProductInfoReducer
+  ProductInfoReducer,
+  ProfileReducer
 });
 
 export default rootReducer;

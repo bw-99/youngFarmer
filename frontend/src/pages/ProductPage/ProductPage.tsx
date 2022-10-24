@@ -44,19 +44,10 @@ function ProductPage(props: any) {
         dispatch(GetProductInfo(params.productId));
     }, []);
 
-    const settings = {
-        dots: true,
-        infinite: false,
-        speed: 500,
-        slidesToShow: 1,
-        slidesToScroll: 1
-      };
-	
 
     if(selector) {
         return (
             <AppFrame>
-
                 <AppBarComponentProduct />
                 <TopImageComp />
                 <ItemInfoComp />
@@ -68,7 +59,11 @@ function ProductPage(props: any) {
     }
     else{
         return (
-            <></>
+            <AppFrame>
+                <AppBarComponentProduct />
+                <BottomBarComp />
+                {/* <BottomNavigationBar /> */}
+            </AppFrame>
         )
     }   
 

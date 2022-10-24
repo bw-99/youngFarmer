@@ -25,9 +25,7 @@ function SearchPage(props: any) {
     return (
         <AppFrame>
             <AppBarComponentSearch />
-            <div style={{marginTop: "56px"}}>
-                <CategoryComponent />
-            </div>
+            <CategoryComponent />
             <RecentSearchComponent />
             <RecommendStoreComponent />
             <BottomNavigationBar />

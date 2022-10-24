@@ -1,6 +1,7 @@
 import styled from "styled-components"
 
 export const ImageTop =  styled.div`
+    
     opacity: 0;
     transition-duration: 1s ease;
 `
