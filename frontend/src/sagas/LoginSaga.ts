@@ -85,21 +85,21 @@ async function createUserInfo(uid:string, is_guest:boolean) {
             profile_img: null
         })
     }
-    // 로그인
-    else{
-        const userProfileRef = collection(db, "user",fbdata.docs[0].id , "profile");
-        const qProfile = query(userProfileRef);
-        const profiledataBase = await getDocs(qProfile);
-        const profileData = profiledataBase.docs[0].data();
+    // // 로그인
+    // else{
+    //     const userProfileRef = collection(db, "user",fbdata.docs[0].id , "profile");
+    //     const qProfile = query(userProfileRef);
+    //     const profiledataBase = await getDocs(qProfile);
+    //     const profileData = profiledataBase.docs[0].data();
 
-        // console.log("login!!!!!!!!!!!!!!!!!!!!!!!!!!" + JSON.stringify(profileData));
-        const auth = getAuth();
-        await updateProfile(auth.currentUser!, {
-            displayName: "asdfdfasdf",
-            photoURL: profileData.profile_img
-        })
-        await updateEmail(auth.currentUser!, profileData.profile_email);
-    }
+    //     // console.log("login!!!!!!!!!!!!!!!!!!!!!!!!!!" + JSON.stringify(profileData));
+    //     const auth = getAuth();
+    //     await updateProfile(auth.currentUser!, {
+    //         displayName: "asdfdfasdf",
+    //         photoURL: profileData.profile_img
+    //     })
+    //     await updateEmail(auth.currentUser!, profileData.profile_email);
+    // }
 }
 
 function* kakaoLogin(action:any) {

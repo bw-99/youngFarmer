@@ -59,7 +59,11 @@ function ProductPage(props: any) {
     }
     else{
         return (
-            <></>
+            <AppFrame>
+                <AppBarComponentProduct />
+                <BottomBarComp />
+                {/* <BottomNavigationBar /> */}
+            </AppFrame>
         )
     }   
 
