@@ -11,12 +11,12 @@ import { SettingComponent } from "./SettingIcon/SettingIcon";
 import searchIconImage from "../../assets/images/btn-search@3x.png";
 
 
-
 import { useDispatch, useSelector } from "react-redux";
 import { SearchCrateAction } from "../../pages/SearchPage/SearchActions";
 import { useNavigate } from "react-router-dom";
 import { ShareIconBlackComponent, ShareIconComponent } from "./ShareIcon/ShareIcon";
 import { MySettingComponent } from "./SettingIcon/Mysetting";
+import { searchTryAction } from "../../pages/SearchDetailPage/SearchDertailAction";
 
 // btn-search
 interface ScrollProps {
@@ -123,7 +123,7 @@ export const SearchInputText = styled.input`
 `
 
 
-export const AppBarComponentOnlyBack = (title: string) => {
+export const AppBarComponentOnlyBack = ({title}:StringTitleProps) => {
     const [isScrollDown, setIsScrollDown] = useState(false);
     const [topPosition, setTopPosition] = useState(0);
 
@@ -283,7 +283,7 @@ export const AppBarComponentBack = (title: string) => {
     )
 }
 
-export const AppBarComponentNoBack = (title: string) => {
+export const AppBarComponentNoBack = ({title}:StringTitleProps) => {
     const [isScrollDown, setIsScrollDown] = useState(false);
     const [topPosition, setTopPosition] = useState(0);
 
@@ -338,9 +338,11 @@ export const AppBarComponentSearch = () => {
         if(e.key === "Enter" || e.key === 13){
             dispatch(
                 SearchCrateAction(
-                    search, ()=>{navigate(`/search/${search}`);}
+                    search
                 )
             );
+
+            dispatch(searchTryAction(search,  ()=>{navigate(`/search/${search}`)}));
             // setSearch("");
         }
     }

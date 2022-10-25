@@ -35,13 +35,11 @@ export const NavigationBox = styled.div `
 `
 
 export const AssignPage3Text1Box = styled.div`
-    width: 180px;
-    height: 68px;
     padding:0;
     margin-left: 16px;
     font-family: AppleSDGothicNeo;
     font-size: 20px;
-    font-weight: bold;
+    font-weight: 600;
     font-stretch: normal;
     font-style: normal;
     line-height: 1.42;
@@ -50,33 +48,37 @@ export const AssignPage3Text1Box = styled.div`
     color: #000;
 `
 
-export const AssignPage3Text1 = styled.span`
+export const AssignPage3Text1 = styled.div`
+  font-family: AppleSDGothicNeo;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 34px;
    
 `
 
 export const AssignPage3FormBox = styled.div`
-    
+    margin-top: 10px;
+    width: 100vw;
 `
 
 export const AssignPageForm = styled.div`
-    width: 343px;
     height: 78px;
-    align-itmes:center;
+    align-items:center;
     margin-left: 16px;
     margin-top:32px;
 `
 
-export const AssignPageFormLabel = styled.label`
-    width: 37px;
-    height: 17px;
+export const AssignPageFormLabel = styled.div`
     font-family: AppleSDGothicNeo;
     font-size: 14px;
-    font-weight: bold;
+    font-weight: 600;
     font-stretch: normal;
     font-style: normal;
     line-height: normal;
     letter-spacing: normal;
     color: #555969;
+    margin-bottom: 9px;
+    width: 100vw;
 `
 
 export const AssignPageFormSpan = styled.span`
@@ -90,9 +92,10 @@ export const AssignPageFormSpan = styled.span`
 `
 
 export const AssignPageFormInputForName = styled.input`
-    padding:0;
-    width: 341px;
     height: 48px;
+    max-width: 625px;
+    /* width: calc(100vw - 58px); */
+    margin-right: 16px;
     border-radius: 8px;
     border: solid 1px #dfdfdf;
     background-color: #fff;
@@ -109,15 +112,11 @@ export const AssignPageFormInputForEmail = styled.input`
 `
 
 export const AssignPageFormInputForNum = styled.input`
-    padding:0;
-    width: 257;
     height: 48px;
     border-radius: 8px;
-    padding:0px 65px 0px 16px;
     border: solid 1px #dfdfdf;
     background-color: #fff;
     margin-top:8px;
-    
 `
 
 export const AssignPageFormInputButton = styled.div`
@@ -132,7 +131,6 @@ export const AssignPageFormInputButton = styled.div`
 `
 
 export const ButtonText = styled.span`
-
     font-family: AppleSDGothicNeo;
     font-size: 15px;
     font-weight: 500;
@@ -141,9 +139,8 @@ export const ButtonText = styled.span`
     line-height: normal;
     letter-spacing: normal;
     color: #fff;
-    align-itmes:center;
-    justify-contents:center;
-}
+    align-items:center;
+    justify-content:center;
 `
 
 export const AssignPageFormInputForCertificationNum = styled.input`
@@ -162,7 +159,7 @@ export const AssignPageSubmitButton2 = styled.div`
     padding: 18px 120px 17px 160px;
     border-radius: 28px;
     margin-top:120px;
-    background-color: #c3c3c3;
+    background-color: #ed3e3e;
     text-align:center;
     vertical-align:center;
     display:flex;
@@ -173,14 +170,13 @@ export const SubmitButtonText = styled.span`
     height: 21px;
     font-family: AppleSDGothicNeo;
     font-size: 18px;
-    font-weight: bold;
+    font-weight: 600;
     font-stretch: normal;
     font-style: normal;
     line-height: normal;
     letter-spacing: normal;
     text-align: center;
     color: #fff;
-}
 `
 
 export const AssignBottomBox = styled.div`

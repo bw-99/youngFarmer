@@ -1,29 +1,42 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link, useLocation, useNavigate } from 'react-router-dom';
 import styled from "styled-components";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {btnBack} from "../../assets/images/btn-back@3x.png"
 
-import {NavigationBox,SubmitButtonText, AssignPageSubmitButton2,ButtonText,AssignPageFormInputButton, AssignBottomBox,AssignMainBox,AssignPage3FormBox,AssignPage3Text1Box,AssignPageForm,AssignPageFormInputForCertificationNum,AssignPageFormInputForEmail,AssignPageFormInputForName,AssignPageFormInputForNum,AssignPageFormLabel,AssignPageFormSpan,AssignPage3Text1} from '../atoms/Assignp2'
-import {NavigateComponent} from "./BackArrow"
-import {BottomBox,BottomImg} from "../atoms/Assignp1"
+import { AssignMainBox, BottomImg } from "./atoms/Assignp1";
+import { BottomBox } from "./atoms/Box";
+import { NavigateComponent } from "./components/BackArrow";
+import { NavigationBox, AssignPage3Text1Box, AssignPage3Text1, AssignPage3FormBox, AssignPageForm, AssignPageFormLabel, AssignPageFormSpan, AssignPageFormInputForName, AssignPageFormInputForEmail, AssignPageFormInputForNum, AssignPageFormInputButton, ButtonText, AssignPageFormInputForCertificationNum, AssignPageSubmitButton2, SubmitButtonText } from "./atoms/Assignp2";
+import { AppFrame } from "../../App";
+import { AppBarComponentOnlyBack } from "../../common/AppBar/AppBar";
+import { LoginWithKakaoAction } from "./LoginAction";
 
 
-export const AssignP2 = () => {
-    
+export const SubmitInfoPage = () => {
     const navigate = useNavigate();
+    const params = useParams();
+    const dispatch = useDispatch();
+    
+    const handleKakaoLogin = () => {
+        const code = params.code;
+            if(code){
+                // console.log(code);
+                dispatch(
+                    LoginWithKakaoAction(
+                        code, 
+                        () => {navigate("/");},
+                        () => {navigate("/");},
+                        ));
+            }   
+    }
 
     return (
-        <AssignMainBox>
-            <NavigationBox>
-                {/* 버튼 img 안보임 */}
-                <NavigateComponent></NavigateComponent>
-            </NavigationBox>
-
-
-
-            <AssignPage3Text1Box style={{marginTop:"30px"}}>
-                <AssignPage3Text1>당신의 식생활을 위해 큐레이션합니다</AssignPage3Text1>
+        <AppFrame>
+            <AppBarComponentOnlyBack title="회원가입"/>
+            <AssignPage3Text1Box style={{marginTop:"86px"}}>
+                <AssignPage3Text1>당신의 식생활을 위해</AssignPage3Text1>
+                <AssignPage3Text1>큐레이션합니다</AssignPage3Text1>
             </AssignPage3Text1Box>
 
             <AssignPage3FormBox>
@@ -32,7 +45,6 @@ export const AssignP2 = () => {
                         닉네임
                         <AssignPageFormSpan> *</AssignPageFormSpan>           
                     </AssignPageFormLabel>
-                    <br></br>
                     <AssignPageFormInputForName></AssignPageFormInputForName>             
                 </AssignPageForm>
 
@@ -41,7 +53,6 @@ export const AssignP2 = () => {
                         이메일
                         <AssignPageFormSpan> *</AssignPageFormSpan>           
                     </AssignPageFormLabel>
-                    <br></br>
                     <AssignPageFormInputForEmail></AssignPageFormInputForEmail>             
                 </AssignPageForm>
 
@@ -50,7 +61,6 @@ export const AssignP2 = () => {
                         휴대폰 번호
                         <AssignPageFormSpan> *</AssignPageFormSpan>           
                     </AssignPageFormLabel>
-                    <br></br>
                     <AssignPageFormInputForNum></AssignPageFormInputForNum>
                     <AssignPageFormInputButton>
                         <ButtonText>인증</ButtonText> 
@@ -67,16 +77,12 @@ export const AssignP2 = () => {
             
             </AssignPage3FormBox>
 
-            <AssignPageSubmitButton2>
+            <AssignPageSubmitButton2 onClick={handleKakaoLogin}>
                 <SubmitButtonText>회원가입</SubmitButtonText>
             </AssignPageSubmitButton2>
-            <BottomBox>
-                <BottomImg>
-                    
-                </BottomImg>
-            </BottomBox>
-        </AssignMainBox>
+
+        </AppFrame>
     );
 }
 
-export default AssignP2;
+export default SubmitInfoPage;

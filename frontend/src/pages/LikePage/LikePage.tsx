@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import styled from "styled-components";
@@ -12,6 +13,8 @@ import { AppBarComponentNoBack } from "../../common/AppBar/AppBar";
 
 
 import { BottomNavigationBar } from "../../common/BottomNavigationBar/BottomNavigationBar";
+import { RootState } from "../../reducers";
+import { LikeData } from "../../reducers/LikeReducer";
 import { ItemComponent } from "./components/item";
 
 
@@ -20,27 +23,32 @@ function LikePage(props: any) {
     const location = useLocation();
     const navigate = useNavigate();
 
-    const [Email, setEmail] = useState("");
-    const [Password, setPassword] = useState("");
-
-    const onEmailHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setEmail(e.currentTarget.value);
-    };
-    const onPasswordHanlder = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setPassword(e.currentTarget.value);
-    };  
-
-    const onSubmitHandler = (e:React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-    };
-
-    return (
-        <AppFrame>
-            {AppBarComponentNoBack("찜하기")}
-            <ItemComponent />
-            <BottomNavigationBar />
-        </AppFrame>
+    const selector: LikeData[] = useSelector((state:RootState) =>
+        state.LikeReducer.likes
     );
+
+
+    if(selector){
+        return (
+            <AppFrame>
+                <AppBarComponentNoBack title="찜하기"/>
+                <ItemComponent />
+                <BottomNavigationBar />
+            </AppFrame>
+        );
+    }
+    else{
+        return (
+            <AppFrame>
+                {/* <AppBarComponentNoBack title="찜하기"/>
+                <ItemComponent /> */}
+                <BottomNavigationBar />
+            </AppFrame>
+        );
+    }
+ 
+
+
 }
 
 export default LikePage;

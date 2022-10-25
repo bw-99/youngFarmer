@@ -4,13 +4,11 @@
     "\\frontend",
     "\\frontend\\src",
     "\\frontend\\src\\pages",
-    "\\frontend\\src\\pages\\MainPage",
-    "\\frontend\\src\\pages\\MainPage\\components",
+    "\\frontend\\src\\pages\\ProductPage",
     "\\frontend\\src\\pages\\ProductPage\\atoms",
     "\\frontend\\src\\pages\\ProductPage\\components",
-    "\\frontend\\src\\pages\\StorePage\\atoms",
-    "\\frontend\\src\\pages\\StorePage\\components"
+    "\\frontend\\src\\reducers"
   ],
-  "SelectedNode": "\\frontend\\src\\pages\\MainPage\\components\\recommend.tsx",
+  "SelectedNode": "\\frontend\\src\\pages\\ProductPage\\components\\BottomBar.tsx",
   "PreviewInSolutionExplorer": false
 }

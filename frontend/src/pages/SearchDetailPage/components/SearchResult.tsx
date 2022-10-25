@@ -3,12 +3,25 @@ import { DropDownBtn, FilterBackGround, FilterImage, FilterText, FilterName } fr
 import btnDropDown from "../../../assets/images/btn-dropdown-20-px@3x.png";
 import filterBtn from "../../../assets/images/filter-btn@3x.png";
 import React from "react";
+import { ProductDataType } from "../../../reducers/ProductReducer";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../reducers";
 export const SearchResultComp = () => {
+
+    const searchSelector: ProductDataType[] = useSelector((state:RootState) =>
+        state.SearchDetailReducer.products
+    );
+
+
     return(
         <div>
            <SearchResultFilterComp />
             <div style={{padding: "0 9.5px 0 9.5px"}}>
-                {ItemUnitListComp(165)}
+                <ItemUnitListComp image_width={165} product_list={
+                    searchSelector.map((product)=> {
+                        return product
+                    })
+                } />
             </div>
         </div>
     );

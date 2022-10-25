@@ -11,7 +11,7 @@ function LiveListPage(props: any) {
 
     return (
         <AppFrame>
-            {AppBarComponentOnlyBack("청년농부 라이브")}
+            <AppBarComponentOnlyBack title="청년농부 라이브"/>
             <div style={{padding: "10px 8px 24px 8px"}}>
                 <LiveTitleListComponent />
             </div>

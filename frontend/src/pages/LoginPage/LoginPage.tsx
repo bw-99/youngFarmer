@@ -26,19 +26,13 @@ function LoginPage(props: any) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const [searchParams, setSearchParams] = useSearchParams();
-
-    const onButtonClickHandler = (e: React.MouseEvent<HTMLInputElement>) => {
-        navigate('/');
-    };
-
     const handleAnonymousLogin = () => {
         dispatch(LoginWithAnonymous(()=>{navigate("/")}));
     }
 
     return (
         <AppFrame>
-            <div style={{position:"relative", top: "-31px", backgroundImage: `url(${bg})`,  backgroundRepeat: "no-repeat",  height:"100vh", backgroundSize: "cover"}}>
+            <div style={{position:"relative", top: "-56px", backgroundImage: `url(${bg})`,  backgroundRepeat: "no-repeat",  height:"100vh", backgroundSize: "cover"}}>
                 <MainBox>
                     <MainTextBox>
                         <div>
@@ -102,7 +96,3 @@ function LoginPage(props: any) {
 }
 
 export default LoginPage;
-
-function dispatch() {
-    throw new Error("Function not implemented.");
-}

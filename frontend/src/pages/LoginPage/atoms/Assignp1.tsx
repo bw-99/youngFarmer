@@ -10,10 +10,7 @@ export const AssignMainBox = styled.div `
     justify-content: space-between;
 `
 
-export const AssignText1= styled.span `
-width: 84px;
-height: 30px;
-margin: 0px 275px 10px 16px;
+export const AssignText1= styled.div `
 font-family: AppleSDGothicNeo;
 font-size: 24px;
 font-weight: 800;
@@ -24,10 +21,7 @@ letter-spacing: normal;
 color: #272727;
 `
 
-export const AssignText2 = styled.span`
-width: 270px;
-  height: 19px;
-  margin: 0px 89px 26px 16px;
+export const AssignText2 = styled.div`
   font-family: AppleSDGothicNeo;
   font-size: 16px;
   font-weight: 500;
@@ -38,23 +32,27 @@ width: 270px;
   color: #747474;
 
 `
-export const AssignText3 = styled.span`
-    width: 60px;
-    height: 30px;
+export const AssignText3 = styled.div`
     font-family: AppleSDGothicNeo;
     font-size: 16px;
-    font-weight: 800;
+    font-weight: 500;
     font-stretch: normal;
     font-style: normal;
     line-height: 1.88;
     letter-spacing: normal;
     color: #272727;
-
+    margin-left: 11px;
 `
 
-export const AssignTextRedSmall = styled.span`
-    width: 34px;
-    height: 20px;
+
+export const AssignText4 = styled.div`
+  font-family: AppleSDGothicNeo;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 30px;
+  color: #272727;
+`
+export const AssignTextRedSmall = styled.div`
     font-family: AppleSDGothicNeo;
     font-size: 14px;
     font-weight: 500;
@@ -65,9 +63,7 @@ export const AssignTextRedSmall = styled.span`
     color: #f14946;
 ` 
 
-export const AssignTextBlackSmall = styled.span`
-    width: 34px;
-    height: 20px;
+export const AssignTextBlackSmall = styled.div`
     font-family: AppleSDGothicNeo;
     font-size: 14px;
     font-weight: 500;
@@ -80,34 +76,33 @@ export const AssignTextBlackSmall = styled.span`
 
 
 export const AgreeBox1 = styled.div `
-    width: 327px;
     height: 30px;
-    margin-left:16px;
-    margin-top:8px;
     padding: 15px 0px 15px 16px;
     border-radius: 8px;
     background-color: #f0f0f0;
-`
-
-export const AgreeBox2 = styled.div`
-    width: 375px;
-    height: 20px;
-    margin: 0px 0px ;
-    padding: 16px 175px 14px 32px;
+    display: flex;
     align-items: center;
 `
 
+export const AgreeBox2 = styled.div`
+    height: 20px;
+    padding: 15px 16px 15px 16px;
+    align-items: center;
+    display: flex;
+`
+
 export const BtnBox = styled.div`
-    width: 83px;
     height: 22px;
-    padding: 17px 135px 17px;
+    padding: 17px 0px;
     border-radius: 28px;
     background-color: #c3c3c3;
-    margin: 0px 16px; 
+    min-width: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `
 
 export const BtnBoxInner = styled.span`
-    width: 63px;
     height: 24px;
     font-family: AppleSDGothicNeo;
     font-size: 18px;
@@ -134,4 +129,10 @@ export const BottomImg = styled.div`
     height: 5px;
     border-radius: 100px;
     background-color: #171717;
+`
+
+export const CheckBoxIcon = styled.img`
+    padding: 14px;
+    width: 20px;
+    height: 20px;
 `

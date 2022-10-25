@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import styled from "styled-components";
@@ -13,6 +14,8 @@ import { AppBarComponentNoBack, AppBarComponentSearch } from "../../common/AppBa
 
 import { BottomNavigationBar } from "../../common/BottomNavigationBar/BottomNavigationBar";
 import { CategoryComponent } from "../../common/Category/category";
+import { RootState } from "../../reducers";
+import { ProductDataType } from "../../reducers/ProductReducer";
 import { OtherChoiceComp } from "./components/OtherChoice";
 import { SearchResultComp } from "./components/SearchResult";
 import { ToggleComponent } from "./components/ToggleComponent";
@@ -25,16 +28,32 @@ function SearchDetailPage(props: any) {
 
     console.log(params);
 
-    return (
-        <AppFrame>
-             {AppBarComponentSearch()}
-            <ToggleComponent />
-            <OtherChoiceComp />
-            <SearchResultComp />
-            {/* <BottomNavigationBar /> */}
-        </AppFrame>
-           
+    const searchSelector: ProductDataType[] = useSelector((state:RootState) =>
+        state.SearchDetailReducer.products
     );
+
+    if(searchSelector) {
+        return (
+            <AppFrame>
+                <AppBarComponentSearch />
+                <ToggleComponent />
+                <OtherChoiceComp />
+                <SearchResultComp />
+                {/* <BottomNavigationBar /> */}
+            </AppFrame>
+               
+        );
+    }
+    else{
+        return (
+            <AppFrame>
+                <AppBarComponentSearch />
+            </AppFrame>
+               
+        );
+    }   
+
+
 }
 
 export default SearchDetailPage;

@@ -1,6 +1,11 @@
 import { Timestamp } from "firebase/firestore";
 import { GET_PRODUCT, GET_PRODUCT_FAIL, GET_PRODUCT_LOADING, GET_PRODUCT_SUCCESS } from "../pages/ProductPage/ProductAction";
 
+import { createStore } from 'redux';
+
+export interface ProductDataList {
+    products: ProductDataType[]
+}
 
 export interface ProductDataType {
     store_id: number,
@@ -75,3 +80,19 @@ export function ProductInfoReducer(state = productInfoInitState, action: any) {
             return state;
     }
 }
+
+// export function LikeReducer(currentState= true, action: any) {
+//     const newState = currentState ? false : true;
+
+//     if (action.type === 'CHANGETRUE') {
+//         //���ƿ� �� ���
+//         console.log("change True");
+//     }
+//     else if (action.type === 'CHANGEFALSE') {
+//         //���ƿ� �� ����
+//         console.log("change False");
+//     }
+//     return newState;
+// }
+
+// export const storeLike = createStore(LikeReducer);

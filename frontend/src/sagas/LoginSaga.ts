@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { call, delay, put, SagaReturnType, takeLatest } from "redux-saga/effects";
-import { LOGIN_FAIL, LOGIN_PAYLOAD, LOGIN_SUCCESS, LOGIN_TRY, LOGIN_WITH_ANONYMOUS, LOGIN_WITH_KAKAO, LOGIN_WITH_NAVER } from "../pages/LoginPage/LoginAction";
+import { LOGIN_FAIL, LOGIN_PAYLOAD, LOGIN_SUCCESS, LOGIN_SUCCESS_FIRST, LOGIN_TRY, LOGIN_WITH_ANONYMOUS, LOGIN_WITH_KAKAO, LOGIN_WITH_NAVER } from "../pages/LoginPage/LoginAction";
 import { db, kakaoConfig } from "..";
 import axios from 'axios'
 import { apiClient, get, post } from "../api/axios";
@@ -44,17 +44,6 @@ async function kakaoLoginAPI(payload:any) {
     const user = userCredential.user;
     console.log("kakao login result1 : " + JSON.stringify(user));
     return user.uid;
-
-    // .then((userCredential) => {
-    //     const user = userCredential.user;
-    //     console.log(user.uid);
-    //     return user.uid;
-    // })
-    // .catch((error) => {
-    //     const errorCode = error.code;
-    //     const errorMessage = error.message;
-    //     return false;
-    // });
 }
 
 async function anonymousLoginAPI(payload:LOGIN_PAYLOAD) {
@@ -70,8 +59,10 @@ async function createUserInfo(uid:string, is_guest:boolean) {
     const userRef = collection(db, "user");
     const q = query(userRef, where("uid", "==", uid), limit(1));
     const fbdata = await getDocs(q);
+    const isNew:boolean = fbdata.empty;
 
     // 신규 가입
+    // ! 회원가입 페이지에서 넘어오는 데이터로 구현 필요
     if(fbdata.empty){
         const result = await addDoc(userRef, {
             uid: uid,
@@ -85,21 +76,8 @@ async function createUserInfo(uid:string, is_guest:boolean) {
             profile_img: null
         })
     }
-    // 로그인
-    else{
-        const userProfileRef = collection(db, "user",fbdata.docs[0].id , "profile");
-        const qProfile = query(userProfileRef);
-        const profiledataBase = await getDocs(qProfile);
-        const profileData = profiledataBase.docs[0].data();
-
-        // console.log("login!!!!!!!!!!!!!!!!!!!!!!!!!!" + JSON.stringify(profileData));
-        const auth = getAuth();
-        await updateProfile(auth.currentUser!, {
-            displayName: "asdfdfasdf",
-            photoURL: profileData.profile_img
-        })
-        await updateEmail(auth.currentUser!, profileData.profile_email);
-    }
+    // SNS 연동 로그인 중 첫 로그인일 경우
+    return (isNew && !is_guest);
 }
 
 function* kakaoLogin(action:any) {
@@ -108,16 +86,25 @@ function* kakaoLogin(action:any) {
     const result:LoginServiceResponse = yield call(kakaoLoginAPI, action.payload);
     console.log("kakao login result2 : " + JSON.stringify(result));
     
-    yield call(createUserInfo, result as string, false);
+    const needSignUp:LoginServiceResponse = yield call(createUserInfo, result as string, false);
 
     if(result){
-        console.log(action);
-        console.log("sccess");
-        
         yield put({
             type: LOGIN_SUCCESS,
             callback: action.payload.callback
         }); 
+        // if(needSignUp) {
+        //     yield put({
+        //         type: LOGIN_SUCCESS_FIRST,
+        //         callback: action.payload.callback
+        //     });
+        // }
+        // else{
+        //     yield put({
+        //         type: LOGIN_SUCCESS,
+        //         callback: action.payload.callback
+        //     }); 
+        // }
     }
     else{
         yield put({
