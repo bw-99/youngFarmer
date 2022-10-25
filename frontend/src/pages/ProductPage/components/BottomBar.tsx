@@ -44,7 +44,7 @@ export const BottomBarComp = () => {
     return (
         <div>
             <div style={{height: "100px"}}></div>
-            <BottomBoxAtom style={{maxWidth: "625px",borderTopLeftRadius: props.topLeft, borderTopRightRadius: props.topRight }}>
+            <BottomBoxAtom style={{maxWidth: "625px", }}>
                 <div style={{marginLeft:"16px", display:"flex", alignItems:"center", flexDirection: "column"}}>
                     <BottomBoxLikeLikeFunc />
                     <BottomBoxLikeText> 20 </BottomBoxLikeText>
