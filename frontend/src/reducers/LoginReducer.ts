@@ -1,4 +1,4 @@
-import { LOGIN_FAIL, LOGIN_SUCCESS, GET_USER_INFO } from "../pages/LoginPage/LoginAction";
+import { LOGIN_FAIL, LOGIN_SUCCESS, GET_USER_INFO, LOGIN_SUCCESS_FIRST } from "../pages/LoginPage/LoginAction";
 import { SEARCH_CREATE, SEARCH_DELETE } from "../pages/SearchPage/SearchActions";
 import { SearchHistoryType, SearchHistoryTypeList } from "../pages/SearchPage/SearchConstants";
 import { setItemWithExpireTime } from "../services/localStorage";
@@ -43,8 +43,12 @@ export function LoginReducer(state = searchInitState, action: any) {
                 ...state
             };
 
+        case LOGIN_SUCCESS_FIRST:
+            return {
+                ...state
+            };
+
         case LOGIN_FAIL:
-            // alert("로그인 실패");
             console.log("로그인 실패");
             
             return {

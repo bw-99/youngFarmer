@@ -28,8 +28,6 @@ export const ItemTitle = styled.div`
 `
 
 export const ItemLike = styled.img`
-  width: 30px;
-  height: 30px;
   object-fit: contain;
 `
 

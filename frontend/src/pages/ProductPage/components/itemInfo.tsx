@@ -10,29 +10,47 @@ import { LikeIconComp } from "../../MainPage/components/recommend";
 
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSelector, Provider, connect} from "react-redux";
+import { useSelector, Provider, connect, useDispatch} from "react-redux";
 import { RootState } from "../../../reducers";
-import { ProductDataReviewType, ProductDataType, storeLike } from "../../../reducers/ProductReducer";
+import { ProductDataReviewType, ProductDataType } from "../../../reducers/ProductReducer";
+import { LikeData } from "../../../reducers/LikeReducer";
+import { likeCancelAction, likeAction } from "../../LikePage/LikeAction";
 
 
-connect()(ItemLike);
-
+// connect()(ItemLike);
+// TODO: Product id 받아오기
 export const ItemInfoComp = () => {
 
     const selector: ProductDataType = useSelector((state:RootState) =>
         state.ProductInfoReducer!.productInfo
     ); 
 
-    const changeHeartIcon = (event: React.MouseEvent) => {
-        !storeLike.getState() ? storeLike.dispatch({ type: 'CHANGETRUE' }) : storeLike.dispatch({ type: 'CHANGEFALSE' });
-    }
+    const [isLiked, setIsLiked]  = useState(false);
+    const product_id = 1;
+
+    const likeselector: LikeData[] = useSelector((state:RootState) =>
+        state.LikeReducer.likes
+    );  
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        if(likeselector){
+            setIsLiked(false);
+            likeselector.forEach((val) => {
+                if(val.product_id === product_id){
+                    setIsLiked(true);
+                }
+            })
+        }
+
+    }, [likeselector])
+    
 
     const ItemLikeFunc = () => {
-        let [imageSrc, setSrc] = useState(storeLike.getState() ? itemLikeOnIcon : itemLikeOffIcon);
-        storeLike.subscribe(() => {
-            setSrc(storeLike.getState() ? itemLikeOnIcon : itemLikeOffIcon);
-        });
-        return <ItemLike onClick={changeHeartIcon} src={imageSrc} />
+        return isLiked? 
+        <ItemLike style={{width: "44px", height: "44px"}} src={itemLikeOnIcon} onClick={()=>{dispatch(likeCancelAction(product_id));}}/> 
+        :
+        <ItemLike style={{width: "30px", height: "30px"}} src={itemLikeOffIcon} onClick={()=>{dispatch(likeAction(product_id));}}/>
     }
 
 

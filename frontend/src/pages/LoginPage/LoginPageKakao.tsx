@@ -37,9 +37,14 @@ function LoginKakaoPage(props: any) {
         () => {
             const code = searchParams.get("code");
             if(code){
-                dispatch(LoginWithKakaoAction(code, () => {
-                    navigate("/");
-                }));
+                navigate("/login/agree/"+code);
+                // dispatch(
+                //     LoginWithKakaoAction(
+                //         code, 
+                //         () => {navigate("/");},
+                //         () => {navigate("/");},
+                //         () => {navigate("/login/agree");},
+                //         ));
             }   
         }, [searchParams.get("code")]
     )

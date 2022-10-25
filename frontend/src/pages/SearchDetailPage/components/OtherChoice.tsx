@@ -2,6 +2,7 @@ import { ChoiceItem, ChoiceSepLine, OtherChoiceTitle } from "../atoms/OtherChoic
 import recommendItemStawberry from "../../../assets/images/main_recommend_strawberry.png";
 import { ItemUnitImgComp, ItemUnitListComp } from "../../../common/ItemList/ItemList";
 import React from "react";
+import { ProductDataType } from "../../../reducers/ProductReducer";
 
 export const OtherChoiceComp = () => {
     return(
@@ -24,7 +25,9 @@ export const OtherChoiceComp = () => {
 const ItemUnitDesign = () => {
     return (
         <div style={{padding:"0 6.5px"}}>
-            {ItemUnitImgComp(124, false)}
+            <ItemUnitImgComp image_width={124} bsFlag= {false} product={{
+                product_id: 1
+            } as ProductDataType}/>
         </div>
     );
 }

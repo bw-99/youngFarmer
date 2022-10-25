@@ -3,6 +3,10 @@ import { GET_PRODUCT, GET_PRODUCT_FAIL, GET_PRODUCT_LOADING, GET_PRODUCT_SUCCESS
 
 import { createStore } from 'redux';
 
+export interface ProductDataList {
+    products: ProductDataType[]
+}
+
 export interface ProductDataType {
     store_id: number,
     discount: number,
@@ -77,18 +81,18 @@ export function ProductInfoReducer(state = productInfoInitState, action: any) {
     }
 }
 
-export function LikeReducer(currentState= true, action: any) {
-    const newState = currentState ? false : true;
+// export function LikeReducer(currentState= true, action: any) {
+//     const newState = currentState ? false : true;
 
-    if (action.type === 'CHANGETRUE') {
-        //ÁÁ¾Æ¿ä ¼ö »ó½Â
-        console.log("change True");
-    }
-    else if (action.type === 'CHANGEFALSE') {
-        //ÁÁ¾Æ¿ä ¼ö °¨¼Ò
-        console.log("change False");
-    }
-    return newState;
-}
+//     if (action.type === 'CHANGETRUE') {
+//         //ï¿½ï¿½ï¿½Æ¿ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½
+//         console.log("change True");
+//     }
+//     else if (action.type === 'CHANGEFALSE') {
+//         //ï¿½ï¿½ï¿½Æ¿ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+//         console.log("change False");
+//     }
+//     return newState;
+// }
 
-export const storeLike = createStore(LikeReducer);
+// export const storeLike = createStore(LikeReducer);

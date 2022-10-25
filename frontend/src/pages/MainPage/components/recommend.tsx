@@ -7,6 +7,7 @@ import { RecommnedTitle, RecommnedTitleText, RecommnedTitleArrow, RecommendList,
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ItemUnitImgComp, ItemUnitListComp } from "../../../common/ItemList/ItemList";
+import { ProductDataType } from "../../../reducers/ProductReducer";
 
 export const RecommendComponent = () => {
     const navigate = useNavigate();
@@ -33,7 +34,9 @@ export const RecommendComponent = () => {
 const ItemUnitDesign = () => {
     return (
         <div style={{padding:"0 6.5px"}}>
-            {ItemUnitImgComp(154,false)}
+            <ItemUnitImgComp image_width={154} bsFlag={false}  product={{
+                product_id: 1
+            } as ProductDataType}/>
         </div>
     );
 }
