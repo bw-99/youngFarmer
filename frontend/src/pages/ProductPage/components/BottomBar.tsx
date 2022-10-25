@@ -1,4 +1,4 @@
-import { BottomBoxAtom, BottomBoxBuy, BottomBoxLikeIcon, BottomBoxLikeText, BottomBoxShoppingCart } from "../atoms/BottomBar";
+import { BottomBoxAtom, BottomBoxBuy, BottomBoxLikeIcon, BottomBoxLikeText, BottomBoxShoppingCart, } from "../atoms/BottomBar";
 import itemLikeOffIcon from "../../../assets/images/like-off@3x.png";
 import itemLikeOnIcon from "../../../assets/images/btn-heart-on@3x.png";
 
@@ -35,8 +35,8 @@ export const BottomBarComp = () => {
     const dispatch = useDispatch();
     
     const BottomBoxLikeLikeFunc = () => {
-        return isLiked? 
-                <BottomBoxLikeIcon src={itemLikeOnIcon} onClick={()=>{dispatch(likeCancelAction(product_id));}}/> 
+        return isLiked ?
+            <BottomBoxLikeIcon src={itemLikeOnIcon} onClick={()=>{dispatch(likeCancelAction(product_id));}}/> 
                 :
                 <BottomBoxLikeIcon src={itemLikeOffIcon} onClick={()=>{dispatch(likeAction(product_id));}}/>
     }
@@ -44,7 +44,7 @@ export const BottomBarComp = () => {
     return (
         <div>
             <div style={{height: "100px"}}></div>
-            <BottomBoxAtom style={{maxWidth: "625px", }}>
+            <BottomBoxAtom style={{maxWidth: "625px",borderTopLeftRadius: props.topLeft, borderTopRightRadius: props.topRight }}>
                 <div style={{marginLeft:"16px", display:"flex", alignItems:"center", flexDirection: "column"}}>
                     <BottomBoxLikeLikeFunc />
                     <BottomBoxLikeText> 20 </BottomBoxLikeText>

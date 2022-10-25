@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React from "react";
+import React, { MouseEventHandler } from "react";
 
 export const BottomBoxAtom = styled.div`
   height: 82px;
