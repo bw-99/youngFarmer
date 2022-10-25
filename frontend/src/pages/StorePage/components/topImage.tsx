@@ -6,8 +6,8 @@ import React from "react";
 
 export const TopImageComp = () => {
     return (
-        <div style={{ display: "flex", height: "310px", alignItems: "center", justifyContent: "center"}}>
-            <ImageSize style={{maxWidth: "625px", }} src={topExampleIcon} />
+        <div style={{ display: "flex", height: "310px", alignItems: "center", justifyContent: "center",zIndex: "0" }}>
+            <ImageSize style={{ maxWidth: "625px", }} src={topExampleIcon} />
             <ImageCover style={{maxWidth: "625px", }}/>
         </div>
     )

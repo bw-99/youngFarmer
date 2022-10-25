@@ -12,7 +12,7 @@ import React from "react";
 
 export const FarmerInfoComp = () => {
     return (
-        <div style={{position: "relative", padding: "34px 0 0 0", borderTopRightRadius: "12px", borderTopLeftRadius: " 12px" }}>
+        <div style={{ position: "relative",padding: "34px 0 0 0",borderTopRightRadius: "12px", borderTopLeftRadius: " 12px", zIndex: "1", backgroundColor:"white"}}>
             <div style={{ padding: "0 16px", display: "flex", alignItems: "center", justifyContent: "space-between" } }>
                 <div style={{ display: "flex" }}>
                     <FarmerProfileImage src={recommendItemStawberry} />

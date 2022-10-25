@@ -45,16 +45,16 @@ function ProductPage(props: any) {
     }, []);
 
 
-    if(selector) {
+    if (selector) {
         return (
             <AppFrame>
-                <AppBarComponentProduct />
-                <TopImageComp />
-                <ItemInfoComp />
-                <ItemDetailComp />
-                <BottomBarComp />
-                {/* <BottomNavigationBar /> */}
-            </AppFrame>
+                    <AppBarComponentProduct />
+                    <TopImageComp />
+                    <ItemInfoComp />
+                    <ItemDetailComp />
+                    <BottomBarComp />
+                    {/* <BottomNavigationBar /> */}
+                </AppFrame>
         );
     }
     else{

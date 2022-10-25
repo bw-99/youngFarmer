@@ -17,7 +17,7 @@ export const ItemDetailComp = () => {
     }
 
     return(
-        <div style={{marginLeft: "16px", padding: "0 0 20px 0"}}>
+        <div style={{ marginLeft: "16px", padding: "0 0 20px 0"}}>
             <div style={{ display: "flex", marginBottom: "22px" }}>
                 <div onClick={clickHandler(0)} style={{ flex: 1 }}>
                     {
