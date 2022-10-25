@@ -16,6 +16,7 @@ import { BottomNavigationBar } from "../../common/BottomNavigationBar/BottomNavi
 import { CategoryComponent } from "../../common/Category/category";
 import { RootState } from "../../reducers";
 import { ProductDataType } from "../../reducers/ProductReducer";
+import { FilterComponent } from "../SearchPage/components/Filter";
 import { OtherChoiceComp } from "./components/OtherChoice";
 import { SearchResultComp } from "./components/SearchResult";
 import { ToggleComponent } from "./components/ToggleComponent";
@@ -39,6 +40,8 @@ function SearchDetailPage(props: any) {
                 <ToggleComponent />
                 <OtherChoiceComp />
                 <SearchResultComp />
+                <FilterComponent></FilterComponent>
+
                 {/* <BottomNavigationBar /> */}
             </AppFrame>
                

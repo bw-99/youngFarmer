@@ -9,8 +9,6 @@ import MultiRangeSlider from "./MultiRangeSlider"
 
 
 export const FilterComponent = () => {
-
-    
     return(
         <FilterBox>
             <FilterTitleBox>
@@ -28,7 +26,7 @@ export const FilterComponent = () => {
             </div>
 
 
-            <div style={{display:"flex",width:"359px",flexWrap:"wrap"}}>
+            <div style={{display:"flex",flexWrap:"wrap"}}>
                 <FilterCategoryBox>
                     <FilterCategoryBoxSpan>
                         전체
@@ -65,7 +63,7 @@ export const FilterComponent = () => {
                     <FilterLabelBoxSpan>
                         가격
                     </FilterLabelBoxSpan>
-                    <div style={{width:"359px",height:"auto", display:"flex"}}>
+                    <div style={{height:"auto", display:"flex",flexWrap:"wrap", alignItems:"center"}}>
                         <FilterPriceBox>
                             <FilterpriceBoxInner>
                                 <FilterPriceInput></FilterPriceInput>
@@ -89,13 +87,13 @@ export const FilterComponent = () => {
                 </FilterLabelBox>
             </div>
 
-            <div style={{display:"flex",backgroundColor:"#efefef", width:"343px", height: "1px", marginTop:"24px",marginBottom:"24px"}}>
+            <div style={{display:"flex",backgroundColor:"#efefef",  height: "1px", marginTop:"24px",marginBottom:"24px"}}>
                 <span></span>
             </div>
-            <div style={{ width:"359px",height:"15px"}}>
+            <div style={{ height:"15px"}}>
                 <MultiRangeSlider min={0} max={500000} />
             </div>
-            <div style={{display:"flex", width:"375px",height:"auto",marginTop:"50px"}}>
+            <div style={{display:"flex",height:"auto",marginTop:"50px"}}>
                 <FilterButtonResetBox>
                     {/* Resetimg */}
                     <FilterButtonResetSpan>
@@ -109,9 +107,6 @@ export const FilterComponent = () => {
                 </FilterButtonApplyBox>
             </div>
 
-            <BottomBox>
-                <BottomImg></BottomImg>
-            </BottomBox>
         </FilterBox>
         
     )
