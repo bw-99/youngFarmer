@@ -26,7 +26,7 @@ export const LiveTitleComponent = () => {
 
 const LiveItemComponent = () => {
     return (
-        <div style={{position:"relative", margin: "15px -8px 15px -8px"}}>
+        <div style={{position:"relative", margin: "15px 8px 15px 8px"}}>
             <LiveItemImage style={{maxWidth: "625px", }} src={liveFruitMarket} />    
             <LiveItemCoverComponent/>
         </div>
