@@ -27,6 +27,8 @@ const searchDetailInitState : ProductDataList = {
 export function SearchDetailReducer(state = searchDetailInitState, action: any) {
     switch (action.type) {
         case SEARCH_SUCCESS:
+            action.callback();
+
             return {
                 ...state,
                 products: action.payload
@@ -58,7 +60,6 @@ export function SearchReducer(state = searchInitState, action: any) {
                     text: action.payload
                 });
             }
-            action.callback();
             localStorage.setItem("searchHistory", JSON.stringify(history));
             return {
                 ...state,

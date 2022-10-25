@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link, useLocation, useNavigate } from 'react-router-dom';
 import styled from "styled-components";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {btnBack} from "../../assets/images/btn-back@3x.png"
 
 import { AssignMainBox, BottomImg } from "./atoms/Assignp1";
@@ -10,10 +10,26 @@ import { NavigateComponent } from "./components/BackArrow";
 import { NavigationBox, AssignPage3Text1Box, AssignPage3Text1, AssignPage3FormBox, AssignPageForm, AssignPageFormLabel, AssignPageFormSpan, AssignPageFormInputForName, AssignPageFormInputForEmail, AssignPageFormInputForNum, AssignPageFormInputButton, ButtonText, AssignPageFormInputForCertificationNum, AssignPageSubmitButton2, SubmitButtonText } from "./atoms/Assignp2";
 import { AppFrame } from "../../App";
 import { AppBarComponentOnlyBack } from "../../common/AppBar/AppBar";
+import { LoginWithKakaoAction } from "./LoginAction";
 
 
 export const SubmitInfoPage = () => {
     const navigate = useNavigate();
+    const params = useParams();
+    const dispatch = useDispatch();
+    
+    const handleKakaoLogin = () => {
+        const code = params.code;
+            if(code){
+                // console.log(code);
+                dispatch(
+                    LoginWithKakaoAction(
+                        code, 
+                        () => {navigate("/");},
+                        () => {navigate("/");},
+                        ));
+            }   
+    }
 
     return (
         <AppFrame>
@@ -61,7 +77,7 @@ export const SubmitInfoPage = () => {
             
             </AssignPage3FormBox>
 
-            <AssignPageSubmitButton2>
+            <AssignPageSubmitButton2 onClick={handleKakaoLogin}>
                 <SubmitButtonText>회원가입</SubmitButtonText>
             </AssignPageSubmitButton2>
 

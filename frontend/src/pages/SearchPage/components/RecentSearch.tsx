@@ -10,6 +10,8 @@ import { RootState } from "../../../reducers";
 import { SearchHistoryType, SearchHistoryTypeList } from "../SearchConstants";
 import { json } from "stream/consumers";
 import { SearchDeleteAction } from "../SearchActions";
+import { searchTryAction } from "../../SearchDetailPage/SearchDertailAction";
+import { useNavigate } from "react-router-dom";
 
 export const RecentSearchComponent = () => {
 
@@ -30,7 +32,7 @@ export const RecentSearchComponent = () => {
                 {RecentSearchHistoryItemComponent("샤인머스켓")}
                 {RecentSearchHistoryItemComponent("사과")}
                 {RecentSearchHistoryItemComponent("시나몬 골드")} */}
-                {searchHistoryList.map(item => RecentSearchHistoryItemComponent(item.text))}
+                {searchHistoryList.map(item => <RecentSearchHistoryItemComponent text={item.text}/>)}
 
             </div>
             <div style={{margin:"22px 16px 0px 16px"}}>
@@ -54,12 +56,18 @@ export const RecentSearchComponent = () => {
 
 //     return rows
 // }
+type StringProp = {
+    text: string
+}
 
-export const RecentSearchHistoryItemComponent = (text: string) => {
+export const RecentSearchHistoryItemComponent = ({text}:StringProp) => {
     const dispatch = useDispatch();
-
+    const navigate = useNavigate();
+    
     return(
-        <RecentSearchHistoryBg key={text} style={{margin: "8px 6px"}}>
+        <RecentSearchHistoryBg onClick={() => {
+            dispatch(searchTryAction(text,  ()=>{navigate(`/search/${text}`)}));
+        }} key={text} style={{margin: "8px 6px"}}>
             <div style={{display:"flex", padding: "10px 7px 12px 10px"}}>
                 <RecentSearchHistoryText> {text} </RecentSearchHistoryText>
                 <div style={{width:"10px"}}></div>

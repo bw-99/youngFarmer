@@ -67,6 +67,7 @@ function* getSearch(action:any) {
         yield put({
             type: SEARCH_SUCCESS,
             payload: result,
+            callback: action.payload.callback
         }); 
     }
     else{

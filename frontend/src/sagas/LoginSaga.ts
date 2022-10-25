@@ -62,6 +62,7 @@ async function createUserInfo(uid:string, is_guest:boolean) {
     const isNew:boolean = fbdata.empty;
 
     // 신규 가입
+    // ! 회원가입 페이지에서 넘어오는 데이터로 구현 필요
     if(fbdata.empty){
         const result = await addDoc(userRef, {
             uid: uid,
@@ -88,18 +89,22 @@ function* kakaoLogin(action:any) {
     const needSignUp:LoginServiceResponse = yield call(createUserInfo, result as string, false);
 
     if(result){
-        if(needSignUp) {
-            yield put({
-                type: LOGIN_SUCCESS_FIRST,
-                callback: action.payload.callback
-            });
-        }
-        else{
-            yield put({
-                type: LOGIN_SUCCESS,
-                callback: action.payload.callback
-            }); 
-        }
+        yield put({
+            type: LOGIN_SUCCESS,
+            callback: action.payload.callback
+        }); 
+        // if(needSignUp) {
+        //     yield put({
+        //         type: LOGIN_SUCCESS_FIRST,
+        //         callback: action.payload.callback
+        //     });
+        // }
+        // else{
+        //     yield put({
+        //         type: LOGIN_SUCCESS,
+        //         callback: action.payload.callback
+        //     }); 
+        // }
     }
     else{
         yield put({

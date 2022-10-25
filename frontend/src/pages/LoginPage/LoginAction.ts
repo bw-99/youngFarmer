@@ -29,7 +29,6 @@ export const LoginWithKakaoAction = (
     code:string, 
     sCallback:Function, 
     fCallback:Function, 
-    sfCallback:Function
     ) => {
     return(
         {
@@ -39,7 +38,6 @@ export const LoginWithKakaoAction = (
                 code: code,
                 sCallback: sCallback,
                 fCallback: fCallback,
-                sfCallback: sfCallback
             }
         }
     );

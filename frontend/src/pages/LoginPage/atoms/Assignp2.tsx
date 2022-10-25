@@ -159,7 +159,7 @@ export const AssignPageSubmitButton2 = styled.div`
     padding: 18px 120px 17px 160px;
     border-radius: 28px;
     margin-top:120px;
-    background-color: #c3c3c3;
+    background-color: #ed3e3e;
     text-align:center;
     vertical-align:center;
     display:flex;

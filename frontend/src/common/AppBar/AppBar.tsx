@@ -11,7 +11,6 @@ import { SettingComponent } from "./SettingIcon/SettingIcon";
 import searchIconImage from "../../assets/images/btn-search@3x.png";
 
 
-
 import { useDispatch, useSelector } from "react-redux";
 import { SearchCrateAction } from "../../pages/SearchPage/SearchActions";
 import { useNavigate } from "react-router-dom";
@@ -339,11 +338,11 @@ export const AppBarComponentSearch = () => {
         if(e.key === "Enter" || e.key === 13){
             dispatch(
                 SearchCrateAction(
-                    search, ()=>{navigate(`/search/${search}`);}
+                    search
                 )
             );
 
-            dispatch(searchTryAction(search));
+            dispatch(searchTryAction(search,  ()=>{navigate(`/search/${search}`)}));
             // setSearch("");
         }
     }

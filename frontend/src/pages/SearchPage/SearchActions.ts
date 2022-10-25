@@ -4,11 +4,10 @@ export const SEARCH_DELETE = "SEARCH_DELETE";
 export const SEARCH_CREATE_SUCCESS = "SEARCH_CREATE_SUCCESS";
 export const SEARCH_CREATE_FAIL = "SEARCH_CREATE_FAIL";
 
-export const SearchCrateAction = (searchWord: string, callback:Function) => {
+export const SearchCrateAction = (searchWord: string) => {
     return {
         type: SEARCH_CREATE,
         payload: searchWord,
-        callback: callback
     };
 }
 
