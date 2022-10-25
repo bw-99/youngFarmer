@@ -1,17 +1,13 @@
 import styled from "styled-components";
 
 export const FilterBox = styled.div`
-    width: 359px;
-    height: 630px;
     border-radius: 12px;
     background-color: #fff;
     text-align:center;
-    padding-left:16px;
+    padding: 0px 16px;
     margin-bottom:16px;
 `
 export const FilterBoxSpan = styled.span`
-    width: 68px;
-    height: 21px;
     font-family: AppleSDGothicNeo;
     font-size: 18px;
     font-weight: 600;
@@ -25,21 +21,16 @@ export const FilterBoxSpan = styled.span`
 
 
 export const FilterTitleBox = styled.div`
-    width: 375px;
-    height: 56px;
     text-align : center;
 
 `
 
 export const FilterLabelBox = styled.div`
-    width: 375px;
     height: auto;
     text-align:left;
 `
 
 export const FilterLabelBoxSpan = styled.span`
-    width: 49px;
-    height: 17px;
     font-family: AppleSDGothicNeo;
     font-size: 14px;
     font-weight: 500;
@@ -77,7 +68,7 @@ export const FilterPriceBox= styled.div`
     height: 19px;
     padding: 15px 0px 16px 0px;
     background-color: #f5f5f5;
-    justify-contents:center;
+    justify-content:center;
     align-items:center;
     border-radius: 8px;
 `
@@ -121,22 +112,26 @@ export const FilterButtonResetBox = styled.div`
     width: 109px;
     height: 24px;
     margin: 0 10px 0 0;
-    padding: 12px 0px 16px 0px;
+    padding: 16px 0px 16px 0px;
     border-radius: 28px;
     border: solid 1px #dfdfdf;
     background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `
 export const FilterButtonApplyBox = styled.div`
-    width: 224px;
+    flex:1;
     height: 24px;
-    padding: 12px 0px 16px 0px;
+    padding: 16px 0px 16px 0px;
     border-radius: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-image: linear-gradient(to bottom, #fb6159, #ed3e3e);
 `
 
 export const FilterButtonResetSpan = styled.span`
-    width: 42px;
-    height: 19px;
     font-family: AppleSDGothicNeo;
     font-size: 16px;
     font-weight: 600;
@@ -148,8 +143,6 @@ export const FilterButtonResetSpan = styled.span`
     color: #6b6b6b;
 `
 export const FilterButtonApplySpan = styled.span`
-    width: 56px;
-    height: 19px;
     font-family: AppleSDGothicNeo;
     font-size: 16px;
     font-weight: 600;
@@ -179,7 +172,7 @@ export const BottomImg = styled.div`
 `
 
 export const FlowSpan = styled.span`
-width: 12px;
+    width: 12px;
   height: 24px;
   font-family: AppleSDGothicNeo;
   font-size: 20px;

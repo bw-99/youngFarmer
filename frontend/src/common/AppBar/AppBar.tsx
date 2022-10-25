@@ -337,9 +337,7 @@ export const AppBarComponentSearch = () => {
     const handleUserKeyPress = (e: any) => {
         if(e.key === "Enter" || e.key === 13){
             dispatch(
-                SearchCrateAction(
-                    search
-                )
+                SearchCrateAction(search)
             );
 
             dispatch(searchTryAction(search,  ()=>{navigate(`/search/${search}`)}));
