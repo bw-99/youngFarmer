@@ -7,9 +7,10 @@
     "\\frontend\\src\\pages\\ProductPage",
     "\\frontend\\src\\pages\\ProductPage\\atoms",
     "\\frontend\\src\\pages\\ProductPage\\components",
+    "\\frontend\\src\\pages\\StorePage",
     "\\frontend\\src\\pages\\StorePage\\atoms",
     "\\frontend\\src\\pages\\StorePage\\components"
   ],
-  "SelectedNode": "\\frontend\\src\\pages\\ProductPage\\components\\BottomBar.tsx",
+  "SelectedNode": "\\frontend\\src\\pages\\ProductPage\\atoms\\BottomBar.tsx",
   "PreviewInSolutionExplorer": false
 }

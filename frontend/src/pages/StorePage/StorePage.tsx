@@ -10,6 +10,7 @@ import shopping_bag from "../../assets/images/shopping_bag@3x.png";
 import { AppBarComponentNoBack, AppBarComponentStore, AppBarComponentSearch } from "../../common/AppBar/AppBar";
 
 
+import {PurchaseComp } from "../ProductPage/components/purchase"
 
 import { BottomNavigationBar } from "../../common/BottomNavigationBar/BottomNavigationBar";
 import { CategoryComponent } from "../../common/Category/category";
@@ -31,7 +32,7 @@ function StorePage(props: any) {
             <TopImageComp />
             <FarmerInfoComp />
             <ItemDetailComp />
-
+            <PurchaseComp />
             {/* <BottomNavigationBar /> */}
         </AppFrame>
     );

@@ -10,16 +10,16 @@ import { likeAction, likeCancelAction } from "../../LikePage/LikeAction";
 export const PurchaseComp = () => {
     return (
         <div>
-            <PurchaseBackGround style={{maxWidth: "625px"} }>
+            <PurchaseBackGround style={{maxWidth: "625px", } }>
                 <PurchaseBoxAtom style={{ maxWidth: "625px", }}>
-                    <div style={{ display: "flex", alignItems: "center", flexDirection: "column", margin: "32px 0 0 16px" }}>
-                        <PurchaseText>무게 선택</PurchaseText>
+                   {/* <div style={{ display: "flex", alignItems: "center", flexDirection: "column", margin: "32px 0 0 16px" }}>
+                        <PurchaseText> 무게 선택 </PurchaseText>
                         <PurchaseDetailBox style={{ display: "flex", alignItems: "center", }}>
-                            <PurchaseDetailText>무게를 선택해주세요</PurchaseDetailText>
+                            <PurchaseDetailText> 무게를 선택해주세요 </PurchaseDetailText>
                             <PurchaseDetailArrow src={rightArrowIcon} />
                         </PurchaseDetailBox>
                         <SepLine />
-                    </div>
+                    </div>*/}
                 </PurchaseBoxAtom>
             </PurchaseBackGround>
         </div>            

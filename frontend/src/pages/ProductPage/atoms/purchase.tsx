@@ -7,16 +7,17 @@ export const PurchaseBackGround = styled.div`
   padding: 0 0 24px;
   opacity: 0.5;
   background-color: #000;
+  position: absolute
 `
 
 export const PurchaseBoxAtom = styled.div`
-  width: 100vw;
+  width: 343px;
   height: 485px;
   margin: 301px 0 0;
   padding: 32px 16px 0;
   border-radius: 12px;
   background-color: #fff;
-
+ 
   display: flex;
   align-items: center;
   justify-content: space-between;
