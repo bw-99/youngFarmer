@@ -2,25 +2,21 @@ import styled from "styled-components";
 
 export const PurchaseBackGround = styled.div`
   width: 100vw;
-  height: 810px;
+  height: 301px;
   margin: 0 0 2px;
   padding: 0 0 24px;
   opacity: 0.5;
   background-color: #000;
-  position: absolute
+  position: absolute;
 `
 
 export const PurchaseBoxAtom = styled.div`
-  width: 343px;
-  height: 485px;
-  margin: 301px 0 0;
-  padding: 32px 16px 0;
+  width: 100%;
+  /*height: 485px;*/
+  /*margin: 301px 0 0;*/
   border-radius: 12px;
-  background-color: #fff;
- 
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  /*background-color: #fff;*/
+  /*padding: 32px 16px 0 16px*/
 `
 
 export const PurchaseText = styled.div`
@@ -38,10 +34,9 @@ export const PurchaseText = styled.div`
 `
 
 export const PurchaseDetailBox = styled.div`
-  width: 100vw;
+  width: 100%;
   height: 50px;
   margin: 5px 0 0;
-  padding: 15px 12px 15px 16px;
   border-radius: 8px;
   background-color: #f5f5f5;
 `
@@ -63,9 +58,7 @@ export const PurchaseDetailText = styled.div`
 export const PurchaseDetailArrow = styled.img`
   width: 20px;
   height: 20px;
-  margin: 0 0 0 166px;
   object-fit: contain;
-  background-color: #979797;
 `
 
 export const SepLine = styled.div`  

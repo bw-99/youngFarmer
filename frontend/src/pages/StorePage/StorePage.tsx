@@ -32,7 +32,6 @@ function StorePage(props: any) {
             <TopImageComp />
             <FarmerInfoComp />
             <ItemDetailComp />
-            <PurchaseComp />
             {/* <BottomNavigationBar /> */}
         </AppFrame>
     );
