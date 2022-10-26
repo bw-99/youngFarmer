@@ -3,14 +3,14 @@
     "",
     "\\frontend",
     "\\frontend\\src",
-    "\\frontend\\src\\assets",
+    "\\frontend\\src\\common",
+    "\\frontend\\src\\common\\AppBar",
     "\\frontend\\src\\pages",
-    "\\frontend\\src\\pages\\ProductPage",
-    "\\frontend\\src\\pages\\ProductPage\\components",
+    "\\frontend\\src\\pages\\ProductPage\\atoms",
     "\\frontend\\src\\pages\\StorePage",
     "\\frontend\\src\\pages\\StorePage\\atoms",
     "\\frontend\\src\\pages\\StorePage\\components"
   ],
-  "SelectedNode": "\\frontend\\src\\pages\\ProductPage\\atoms\\purchase.tsx",
+  "SelectedNode": "\\frontend\\src\\pages\\StorePage\\StorePage.tsx",
   "PreviewInSolutionExplorer": false
 }
