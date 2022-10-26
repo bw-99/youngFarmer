@@ -28,11 +28,11 @@ function StorePage(props: any) {
 
     return (
         <AppFrame>
-            <AppBarComponentStore />
+            <AppBarComponentStore />    
             <TopImageComp />
             <FarmerInfoComp />
             <ItemDetailComp />
-            {/*<PurchaseComp/>*/}
+            {/*<PurchaseComp />*/}
             {/* <BottomNavigationBar /> */}
         </AppFrame>
     );

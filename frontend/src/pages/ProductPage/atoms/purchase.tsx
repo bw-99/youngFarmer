@@ -12,11 +12,7 @@ export const PurchaseBackGround = styled.div`
 
 export const PurchaseBoxAtom = styled.div`
   width: 100%;
-  /*height: 485px;*/
-  /*margin: 301px 0 0;*/
   border-radius: 12px;
-  /*background-color: #fff;*/
-  /*padding: 32px 16px 0 16px*/
 `
 
 export const PurchaseText = styled.div`
