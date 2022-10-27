@@ -27,8 +27,8 @@ export const PurchaseComp = () => {
                 </div>
                 <SepLine style={{ marginTop: "24px" }} />
             </div>
-        </div> 
-     );
+        </div>
+    );
 
 }
 

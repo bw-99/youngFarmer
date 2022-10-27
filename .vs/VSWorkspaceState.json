@@ -11,6 +11,6 @@
     "\\frontend\\src\\pages\\StorePage\\atoms",
     "\\frontend\\src\\pages\\StorePage\\components"
   ],
-  "SelectedNode": "\\frontend\\src\\pages\\StorePage\\StorePage.tsx",
+  "SelectedNode": "\\frontend\\src\\pages\\ProductPage\\atoms\\itemInfo.tsx",
   "PreviewInSolutionExplorer": false
 }
