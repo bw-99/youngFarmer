@@ -24,6 +24,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { GetProductInfo } from "./ProductAction";
 import { ProductDataType } from "../../reducers/ProductReducer";
 import { RootState } from "../../reducers";
+import { PurchaseComp } from "./components/purchase";
 
 function ProductPage(props: any) {
     const params = useParams();
@@ -52,6 +53,8 @@ function ProductPage(props: any) {
                 <TopImageComp />
                 <ItemInfoComp />
                 <ItemDetailComp />
+                <PurchaseComp />
+
                 <BottomBarComp />
                     {/* <BottomNavigationBar /> */}
             </AppFrame>

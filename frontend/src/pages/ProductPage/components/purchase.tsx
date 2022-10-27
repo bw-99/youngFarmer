@@ -9,24 +9,22 @@ import { likeAction, likeCancelAction } from "../../LikePage/LikeAction";
 
 export const PurchaseComp = () => {
     return (
-        <div>
-            <div style={{ display: "flex", flexDirection: "column", position: "fixed", bottom: "0", zIndex: "10000", width: "100vw", maxWidth:"625px" }}>
-                <div style={{ zIndex: "0", height: "301px" }}>
-                    <PurchaseBackGround style={{ maxWidth: "625px" }} />
-                </div>
-                <div style={{ zIndex: "1",maxWidth: "625px", padding: " 0 16px", backgroundColor: "white", borderTopLeftRadius: "12px", borderTopRightRadius: "12px" }}>
-                    <PurchaseBoxAtom style={{ maxWidth: "625px", flexDirection: "column" }}>
-                        <PurchaseSelectComp marginTop={"32px"} purchaseText={"Weight"} purchaseDetailText={"Select Weight"} />
-                        <SepLine style={{ marginTop: "24px" }} />
-
-                        <PurchaseSelectComp marginTop={"24px"} purchaseText={"Many"} purchaseDetailText={"number of item"} />
-                        <SepLine style={{ marginTop: "24px" }} />
-
-                        <PurchaseSelectComp marginTop={"24px"} purchaseText={"Pave"} purchaseDetailText={"Wanna pave"} />
-                    </PurchaseBoxAtom>
-                </div>
-                <SepLine style={{ marginTop: "24px" }} />
+        <div style={{ display: "flex",height: "100vh", flexDirection: "column", position: "fixed", bottom: "0", zIndex: "10000", width: "100vw", maxWidth:"625px" }}>
+            <div style={{ zIndex: "0", height: "100vh" }}>
+                <PurchaseBackGround style={{ maxWidth: "625px" }} />
             </div>
+            <div style={{ zIndex: "1",maxWidth: "625px", padding: " 0 16px", backgroundColor: "white", borderTopLeftRadius: "12px", borderTopRightRadius: "12px" }}>
+                <PurchaseBoxAtom style={{ maxWidth: "625px", flexDirection: "column" }}>
+                    <PurchaseSelectComp marginTop={"32px"} purchaseText={"Weight"} purchaseDetailText={"Select Weight"} />
+                    <SepLine style={{ marginTop: "24px" }} />
+
+                    <PurchaseSelectComp marginTop={"24px"} purchaseText={"Many"} purchaseDetailText={"number of item"} />
+                    <SepLine style={{ marginTop: "24px" }} />
+
+                    <PurchaseSelectComp marginTop={"24px"} purchaseText={"Pave"} purchaseDetailText={"Wanna pave"} />
+                </PurchaseBoxAtom>
+            </div>
+            <SepLine style={{ marginTop: "24px" }} />
         </div>
     );
 
