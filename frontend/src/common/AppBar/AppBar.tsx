@@ -339,7 +339,6 @@ export const AppBarComponentSearch = () => {
             dispatch(
                 SearchCrateAction(search)
             );
-
             dispatch(searchTryAction(search,  ()=>{navigate(`/search/${search}`)}));
             // setSearch("");
         }

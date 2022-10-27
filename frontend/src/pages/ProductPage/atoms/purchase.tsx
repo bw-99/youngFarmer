@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const PurchaseBackGround = styled.div`
   width: 100vw;
-  height: 301px;
+  height: 100vh;
   margin: 0 0 2px;
   padding: 0 0 24px;
   opacity: 0.5;
