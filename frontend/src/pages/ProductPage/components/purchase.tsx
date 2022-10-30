@@ -13,9 +13,9 @@ import { LikeData } from "../../../reducers/LikeReducer";
 import { likeAction, likeCancelAction } from "../../LikePage/LikeAction";
 
 //컴포넌트에 필요한 선언
-/*interface PurchaseMainCompProps {
+interface SelectCompProps {
     setIndexFn: Dispatch<SetStateAction<number>>,
-}*/
+}
 
 interface PurchaseMainSelectCompProps {
     setIndexFn: Dispatch<SetStateAction<number>>,
@@ -64,68 +64,26 @@ export const PurchaseComp = () => {
                             </div>
                         </div>
                         :
-                        /*<SelectWeight />*/
-                        <div style={{ display: "flex", flexDirection: "column",backgroundColor: "white", top: "82px", maxWidth: "625px", borderTopLeftRadius: "12px", borderTopRightRadius: "12px" }} >
-                            <div style={{ display: "flex", height: "56px", width: "100vw", maxWidth: "625px", marginLeft: "16px", alignItems: "center" }}>
-                                <BackIconArrow onClick={(e: React.MouseEvent) => { e.preventDefault(); SetIndex(0); }} src={backIcon} />
-                                <SelectTitleText style={{ marginLeft: "calc(50% - 40px - 34px)" }}>Weight</SelectTitleText>
-                            </div>
-                            <SepLine />
+                    purchaseIndex === 1 ?
+                        <SelectComp setIndexFn={SetIndex} />
 
-                            <div style={{ display: "flex", height: "64px", width: "100vw", maxWidth: "625px",marginLeft: "16px", alignItems: "center", }}>
-                                <SelectContentText> 10kg </SelectContentText>
-                            </div>
-                            <SepLine />
-
-                            <div style={{ display: "flex", height: "64px", width: "100vw", maxWidth: "625px", marginLeft: "16px", alignItems: "center", }}>
-                                <SelectContentText> 15kg </SelectContentText>
-                            </div>
-                            <SepLine />
-
-                            <div style={{ display: "flex", height: "64px", width: "100vw", maxWidth: "625px", marginLeft: "16px", alignItems: "center", }}>
-                                <SelectContentText> 20kg </SelectContentText>
-                            </div>
-                            <SepLine />
-
-                            <div style={{ display: "flex", height: "64px", width: "100vw", maxWidth: "625px", marginLeft: "16px", alignItems: "center", }}>
-                                <SelectContentText> 25kg </SelectContentText>
-                            </div>
-                        </div>
-                }
+                    :
+                    purchaseIndex === 2 ?
+                        <SelectComp setIndexFn={SetIndex} />
+                    :
+                        <SelectComp setIndexFn={SetIndex} />
+            }
             </div>
         </div>
     );
 }
 
 //!메인함수에 필요한 컴포넌트
-/*const SelectWeight = () => {
-    return (
-        
-     );
-}*/
-
-const SelectNumberOf = () => {
-    return (
-        <div>
-            2
-        </div>
-    );
-}
-
-const SelectWannaPave = () => {
-    return (
-        <div>
-            3
-        </div>
-    );
-}
-
-//컴포넌트에 필요한 컴포넌트
 const PurchaseMainSelectComp = (props: PurchaseMainSelectCompProps) => {
     return (
         <div>
             <PurchaseText style={{ marginTop: props.marginTop }}>
-                { props.purchaseText }
+                {props.purchaseText}
             </PurchaseText>
             <PurchaseDetailBox onClick={() => { props.setIndexFn(props.setIndexNum); }} style={{ display: "flex", alignItems: "center", maxWidth: "625px", justifyContent: "space-between" }}>
                 <PurchaseDetailText style={{ marginLeft: "16px" }}>
@@ -134,5 +92,38 @@ const PurchaseMainSelectComp = (props: PurchaseMainSelectCompProps) => {
                 <PurchaseDetailArrow style={{ marginRight: "12px" }} src={rightArrowIcon} />
             </PurchaseDetailBox>
         </div>
+    );
+}
+
+const SelectComp = (props: SelectCompProps) => {
+    return (
+        <div style={{ display: "flex", flexDirection: "column", backgroundColor: "white", top: "82px", maxWidth: "625px", borderTopLeftRadius: "12px", borderTopRightRadius: "12px" }} >
+            <div style={{ display: "flex", height: "56px", width: "100vw", maxWidth: "625px", marginLeft: "16px", alignItems: "center" }}>
+                <BackIconArrow onClick={(e: React.MouseEvent) => { e.preventDefault(); props.setIndexFn(0); }} src={backIcon} />
+                <SelectTitleText style={{ marginLeft: "calc(50% - 40px - 34px)" }}>
+                    Weight
+                </SelectTitleText>
+            </div>
+            <SepLine />
+
+            <div style={{ display: "flex", height: "64px", width: "100vw", maxWidth: "625px", marginLeft: "16px", alignItems: "center", }}>
+                <SelectContentText> 10kg </SelectContentText>
+            </div>
+            <SepLine />
+
+            <div style={{ display: "flex", height: "64px", width: "100vw", maxWidth: "625px", marginLeft: "16px", alignItems: "center", }}>
+                <SelectContentText> 15kg </SelectContentText>
+            </div>
+            <SepLine />
+
+            <div style={{ display: "flex", height: "64px", width: "100vw", maxWidth: "625px", marginLeft: "16px", alignItems: "center", }}>
+                <SelectContentText> 20kg </SelectContentText>
+            </div>
+            <SepLine />
+
+            <div style={{ display: "flex", height: "64px", width: "100vw", maxWidth: "625px", marginLeft: "16px", alignItems: "center", }}>
+                <SelectContentText> 25kg </SelectContentText>
+            </div>
+        </div>  
     );
 }
