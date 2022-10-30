@@ -23,6 +23,11 @@ import { AuthProvider, LoginRoute, PrivateRoute } from './services/firebase';
 import LoginKakaoPage from './pages/LoginPage/LoginPageKakao';
 import AgreePage from './pages/LoginPage/AgreePage';
 import SubmitInfoPage from './pages/LoginPage/SubmitInfoPage';
+import MyAlarmSettingpage from './pages/MyPage/MyAlarmSettingPage';
+import MySettingPage from './pages/MyPage/MySettingPage';
+import MyAlarmpage from './pages/MyPage/MyAlramPage';
+import MyInfoRevisePage from './pages/MyPage/MyInfoRevisePage';
+
 
 export const AuthContext = createContext(false);
 
@@ -52,6 +57,11 @@ function App() {
                     <Route path='/mypage' element = {<MyPage />}/>
                     <Route path='/product/:productId' element = {<ProductPage />}/>
                     <Route path='/store' element={<StorePage />} />
+                    <Route path='/mypage/setting' element={<MySettingPage />} />
+                    <Route path='/mypage/setting/alarm' element={<MyAlarmSettingpage />} />
+                    <Route path='/mypage/alarm' element={<MyAlarmpage />} />
+                    <Route path='/mypage/setting/info' element={<MyInfoRevisePage />} />
+
                   </Route>
 
                   <Route path="/login" element = {<LoginRoute />}>
