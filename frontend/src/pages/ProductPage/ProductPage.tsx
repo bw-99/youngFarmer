@@ -17,6 +17,7 @@ import { BottomBarComp } from "./components/BottomBar";
 import { ItemDetailComp } from "./components/itemDetail";
 import { ItemInfoComp } from "./components/itemInfo";
 import { TopImageComp } from "./components/topImage";
+import { PaymentPageComp } from "./components/PaymentPage"
 
 import { collection, doc, setDoc, getDoc, query, orderBy, limit, getDocs, where } from "firebase/firestore";
 import { db } from "../..";
@@ -49,22 +50,14 @@ function ProductPage(props: any) {
     if (selector) {
         return (
             <AppFrame>
-                <AppBarComponentProduct />
-                <TopImageComp />
-                <ItemInfoComp />
-                <ItemDetailComp />
-                <PurchaseComp />
-                <BottomBarComp />
-                    {/* <BottomNavigationBar /> */}
+                <PaymentPageComp />
             </AppFrame>
         );
     }
     else{
         return (
             <AppFrame>
-                <AppBarComponentProduct />
-                <BottomBarComp />
-                {/* <BottomNavigationBar /> */}
+                <PaymentPageComp />
             </AppFrame>
         )
     }   
