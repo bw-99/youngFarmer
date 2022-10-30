@@ -3,15 +3,11 @@
     "",
     "\\frontend",
     "\\frontend\\src",
-    "\\frontend\\src\\assets",
-    "\\frontend\\src\\assets\\images",
-    "\\frontend\\src\\common",
-    "\\frontend\\src\\common\\AppBar",
-    "\\frontend\\src\\common\\AppBar\\BackIcon",
     "\\frontend\\src\\pages",
-    "\\frontend\\src\\pages\\StorePage",
-    "\\frontend\\src\\pages\\StorePage\\components"
+    "\\frontend\\src\\pages\\ProductPage",
+    "\\frontend\\src\\pages\\ProductPage\\components",
+    "\\frontend\\src\\reducers"
   ],
-  "SelectedNode": "\\frontend\\src\\pages\\StorePage\\components\\itemDetail.tsx",
+  "SelectedNode": "\\frontend\\src\\pages\\ProductPage",
   "PreviewInSolutionExplorer": false
 }

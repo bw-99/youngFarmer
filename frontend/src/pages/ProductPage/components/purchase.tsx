@@ -9,8 +9,8 @@ import backIcon from "../../../assets/images/btn-back@3x.png";
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../reducers";
-import { LikeData } from "../../../reducers/LikeReducer";
 import { likeAction, likeCancelAction } from "../../LikePage/LikeAction";
+import { closeModalAction } from "../PurchaseAction"
 
 //컴포넌트에 필요한 선언
 interface SelectCompProps {
@@ -30,6 +30,10 @@ export const PurchaseComp = () => {
     const [purchaseIndex, SetIndex] = useState(0);
     const [parentBottomState, ChangeState] = useState("82px");
 
+    const modalselector: any = useSelector((state: RootState) =>
+        state.PurchaseReducer.purchaseInfo
+    );
+
     useEffect(() => {
         if (purchaseIndex != 0) {
             ChangeState("0px");
@@ -48,7 +52,10 @@ export const PurchaseComp = () => {
                 {
                     purchaseIndex === 0 ?
                         <div style={{backgroundColor: "white", borderTopLeftRadius: "12px", borderTopRightRadius: "12px", }} >
-                            <div style={{ maxWidth: "625px", padding: " 32px 16px 0 16px", }}>
+                            <div style={{ maxWidth: "625px", /*padding: " 32px 16px 0 16px"*/ padding:"0 16px", }}>
+                                <div style={{ maxWidth: "625px", display: "flex", alignItems: "center", height: "32px", }}>
+                                    <BackIconArrow onClick={(e: React.MouseEvent) => { e.preventDefault(); closeModalAction(modalselector) }} src={backIcon} />
+                                </div>
                                 <PurchaseBoxAtom style={{ maxWidth: "625px", flexDirection: "column" }}>
                                     <PurchaseMainSelectComp setIndexFn={SetIndex} setIndexNum={1} marginTop={"0px"} purchaseText={"Weight"} purchaseDetailText={"Select Weight"} />
                                     <SepLine style={{ marginTop: "24px" }} />
