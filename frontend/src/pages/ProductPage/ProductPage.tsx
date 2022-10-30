@@ -54,7 +54,6 @@ function ProductPage(props: any) {
                 <ItemInfoComp />
                 <ItemDetailComp />
                 <PurchaseComp />
-
                 <BottomBarComp />
                     {/* <BottomNavigationBar /> */}
             </AppFrame>
