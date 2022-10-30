@@ -3,8 +3,6 @@ import styled from "styled-components";
 export const PurchaseBackGround = styled.div`
   width: 100vw;
   height: 100vh;
-  margin: 0 0 2px;
-  padding: 0 0 24px;
   opacity: 0.5;
   background-color: #000;
   position: absolute;
@@ -60,4 +58,37 @@ export const PurchaseDetailArrow = styled.img`
 export const SepLine = styled.div`  
   height: 1px;
   background-color: #efefef;
+`
+
+export const BackIconArrow = styled.img`
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+`
+
+export const SelectTitleText = styled.div`
+  width: 68px;
+  height: 21px;
+  font-family: AppleSDGothicNeo;
+  font-size: 18px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #272727;
+`
+
+export const SelectContentText = styled.div`
+  width: 43px;
+  height: 19px;
+  font-family: AppleSDGothicNeo;
+  font-size: 16px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: var(--grapefruit);
 `
