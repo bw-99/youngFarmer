@@ -17,6 +17,8 @@ import { BottomBarComp } from "./components/BottomBar";
 import { ItemDetailComp } from "./components/itemDetail";
 import { ItemInfoComp } from "./components/itemInfo";
 import { TopImageComp } from "./components/topImage";
+import { closeModalAction } from "./PurchaseAction"
+/*import { PaymentPageComp } from "./components/PaymentPage"*/
 
 import { collection, doc, setDoc, getDoc, query, orderBy, limit, getDocs, where } from "firebase/firestore";
 import { db } from "../..";
@@ -37,23 +39,35 @@ function ProductPage(props: any) {
     const selector: any = useSelector((state:RootState) =>
         state.ProductInfoReducer!.productInfo
     );  
+
+    const modalselector: any = useSelector((state: RootState) =>
+        state.PurchaseReducer.purchaseInfo
+    );
+
     
     // const productRef = collection(db, "product");
     // const q = query(productRef, where("product_id", "==", params.productId), orderBy("title"), limit(1));
 
+    const [isOpen, setOpen] = useState(false);
+
     useEffect(() => {
         dispatch(GetProductInfo(params.productId));
-    }, []);
 
+        dispatch(closeModalAction(modalselector));
+        console.log("why is change");
+    }, []);
 
     if (selector) {
         return (
             <AppFrame>
+                {/*<PaymentPageComp />*/}
                 <AppBarComponentProduct />
                 <TopImageComp />
                 <ItemInfoComp />
                 <ItemDetailComp />
-                <PurchaseComp />
+                {
+                    modalselector.open_modal/*isOpen*/  ? <PurchaseComp /> : null
+                }
                 <BottomBarComp />
                     {/* <BottomNavigationBar /> */}
             </AppFrame>
@@ -62,9 +76,7 @@ function ProductPage(props: any) {
     else{
         return (
             <AppFrame>
-                <AppBarComponentProduct />
-                <BottomBarComp />
-                {/* <BottomNavigationBar /> */}
+                {/*<PaymentPageComp />*/}
             </AppFrame>
         )
     }   

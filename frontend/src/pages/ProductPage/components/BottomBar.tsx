@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../reducers";
 import { LikeData } from "../../../reducers/LikeReducer";
 import { likeAction, likeCancelAction } from "../../LikePage/LikeAction";
+import { openModalAction } from "../PurchaseAction"
 
 // ! Like는 전역 상태 관리로 진행할거라 추후 수정
 export const BottomBarComp = () => {
@@ -19,6 +20,10 @@ export const BottomBarComp = () => {
     const likeselector: LikeData[] = useSelector((state:RootState) =>
         state.LikeReducer.likes
     );  
+
+    const modalselector: any = useSelector((state: RootState) =>
+        state.PurchaseReducer.purchaseInfo
+    );
 
     useEffect(() => {
         if(likeselector){
@@ -38,7 +43,7 @@ export const BottomBarComp = () => {
         return isLiked ?
             <BottomBoxLikeIcon src={itemLikeOnIcon} onClick={()=>{dispatch(likeCancelAction(product_id));}}/> 
                 :
-                <BottomBoxLikeIcon src={itemLikeOffIcon} onClick={()=>{dispatch(likeAction(product_id));}}/>
+            <BottomBoxLikeIcon src={itemLikeOffIcon} onClick={()=>{dispatch(likeAction(product_id));}}/>
     }
 
     return (
@@ -51,7 +56,7 @@ export const BottomBarComp = () => {
                 </div>
                 <div style={{display: "flex"}}>
                     <BottomBoxShoppingCart style={{marginRight: "9px"}}> 장바구니 </BottomBoxShoppingCart>
-                    <BottomBoxBuy style={{ marginRight: "16px" }}> 구매하기 </BottomBoxBuy>
+                    <BottomBoxBuy onClick={() => { dispatch(openModalAction(modalselector)); } } style={{ marginRight: "16px" }}> 구매하기 </BottomBoxBuy>
                 </div>
             </BottomBoxAtom>
         </div>
