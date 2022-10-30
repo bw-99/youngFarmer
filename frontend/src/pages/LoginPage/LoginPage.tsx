@@ -11,12 +11,14 @@ import apple from "../../assets/images/icon-sns-apple@3x.png";
 
 import { AppleBox, BottomBox, KakaoBox, LookAround, LookAroundBeforeLogin, MainBox, MainTextBold, MainTextBox, MainTextLight, NaverBox, SnsText } from "./atoms/Box";
 import { LoginWithAnonymous, LoginWithKakaoAction, LoginWithNaverAction } from "./LoginAction";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { get, post } from "../../api/axios";
 import { kakaoConfig } from "../..";
 
 import { getAuth, signInAnonymously } from "firebase/auth";
 import { AppFrame } from "../../App";
+import { RootState } from "../../reducers";
+import { BackgroundWrapper } from "../../common/BackgroundWrapper/BackgroundWrapper";
 
 
   
@@ -29,6 +31,8 @@ function LoginPage(props: any) {
     const handleAnonymousLogin = () => {
         dispatch(LoginWithAnonymous(()=>{navigate("/")}));
     }
+
+    
 
     return (
         <AppFrame>
@@ -91,6 +95,7 @@ function LoginPage(props: any) {
                 </BottomBox>
             </MainBox>
          </div>
+
         </AppFrame>
     );
 }

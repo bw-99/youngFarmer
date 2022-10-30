@@ -1,10 +1,15 @@
-import { LOGIN_FAIL, LOGIN_SUCCESS, GET_USER_INFO, LOGIN_SUCCESS_FIRST } from "../pages/LoginPage/LoginAction";
+import { LOGIN_FAIL, LOGIN_SUCCESS, GET_USER_INFO, LOGIN_SUCCESS_FIRST, LOGIN_LOADING, login_result_loading } from "../pages/LoginPage/LoginAction";
 import { SEARCH_CREATE, SEARCH_DELETE } from "../pages/SearchPage/SearchActions";
 import { SearchHistoryType, SearchHistoryTypeList } from "../pages/SearchPage/SearchConstants";
 import { setItemWithExpireTime } from "../services/localStorage";
 
-const searchInitState : SearchHistoryTypeList = {
-    history: []
+
+interface LoginResult {
+    result: string | null
+}
+
+const loginInfoInitState : LoginResult = {
+    result: null
 }
 
 interface UserData {
@@ -31,14 +36,9 @@ export function UserInfoReducer(state = userInfoInitState, action: any) {
 }
 
 
-export function LoginReducer(state = searchInitState, action: any) {
+export function LoginReducer(state = loginInfoInitState, action: any) {
     switch (action.type) {
         case LOGIN_SUCCESS:
-            // 한 시간 유효기간 설정
-            console.log("set item with expire");
-            
-            // setItemWithExpireTime('user','true',1000* 60 * 60);
-            action.callback();
             return {
                 ...state
             };
@@ -47,6 +47,11 @@ export function LoginReducer(state = searchInitState, action: any) {
             return {
                 ...state
             };
+
+        case LOGIN_LOADING:
+            return {
+                result: login_result_loading
+            }
 
         case LOGIN_FAIL:
             console.log("로그인 실패");

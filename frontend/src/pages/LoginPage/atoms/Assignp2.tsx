@@ -55,7 +55,7 @@ export const AssignPage3Text1 = styled.div`
   font-size: 24px;
   font-weight: 600;
   line-height: 34px;
-   
+  word-break: keep-all;
 `
 
 export const AssignPage3FormBox = styled.div`
@@ -65,8 +65,7 @@ export const AssignPage3FormBox = styled.div`
 export const AssignPageForm = styled.div`
     height: 78px;
     align-items:center;
-    margin-left: 16px;
-    margin-top:32px;
+    margin-top:42px;
 `
 
 export const AssignPageFormLabel = styled.div`
@@ -79,7 +78,7 @@ export const AssignPageFormLabel = styled.div`
     letter-spacing: normal;
     color: #555969;
     margin-bottom: 9px;
-    width: 100vw;
+    /* width: 100vw; */
 `
 
 export const AssignPageFormSpan = styled.span`
@@ -96,37 +95,55 @@ export const AssignPageFormSpan = styled.span`
 /* max-width: 625px; */
 /* width: calc(100vw - 58px); */
 export const AssignPageFormInputForName = styled.input`
-    width:95%;
+    width: 100%;
     height: 48px;
-    margin-right: 16px;
     border-radius: 8px;
     border: solid 1px #dfdfdf;
     background-color: #fff;
+    font-family: AppleSDGothicNeo;
+    font-size: 15px;
+    font-weight: 500;
+    color: #b5b5b5;
+    padding-left: 16px;
 `
 
 //width: 341px;
 export const AssignPageFormInputForEmail = styled.input`
     padding:0;
-    width:95%;
+    width:100%;
     height: 48px;
     border-radius: 8px;
     border: solid 1px #dfdfdf;
     background-color: #fff;
+    font-family: AppleSDGothicNeo;
+    font-size: 15px;
+    font-weight: 500;
+    color: #b5b5b5;
+    padding-left: 16px;
 `
 
 export const AssignPageFormInputForNum = styled.input`
-    width:85%;
+    /* width:85%; */
+    flex: 1;
+    /* width: calc(100vw - 116px); */
     height: 48px;
     border-radius: 8px;
     border: solid 1px #dfdfdf;
     background-color: #fff;
-    margin-top:8px;
+
+    font-family: AppleSDGothicNeo;
+    font-size: 15px;
+    font-weight: 500;
+    color: #b5b5b5;
+    padding-left: 16px;
+    /* margin-top:8px; */
 `
 
 export const AssignPageFormInputButton = styled.div`
-    width: 82px;
+    width: 72px;
     height: 50px;
-    margin: 8px 0 0px 10px;
+    /* margin: 8px 16px 0px 10px; */
+    margin-left: 12px;
     border-radius: 8px;
     background-color: #c3c3c3;
     text-align:center;
@@ -157,22 +174,33 @@ export const ButtonText = styled.span`
 `
 
 export const AssignPageFormInputForCertificationNum = styled.input`
-    width:95%;
+    width:100%;
     padding:0;
     height: 48px;
     border-radius: 8px;
     border: solid 1px #dfdfdf;
     background-color: #fff;
     margin-top:12px;
+
+    font-family: AppleSDGothicNeo;
+    font-size: 15px;
+    font-weight: 500;
+    color: #b5b5b5;
+    padding-left: 16px;
 `
 
 export const AssignPageSubmitButton2 = styled.div`
+    position: fixed;
+    bottom: 0;
+    max-width: calc(625px);
+    margin: 0 16px 16px 16px;
+
     display:flex;
     justify-content:center;
     align-items:center;
     height: 56px;
+    width: calc(100% - 32px);
     border-radius: 28px;
-    margin-top:120px;
     background-color: #ed3e3e;
     font-family: AppleSDGothicNeo;
     font-size: 18px;
