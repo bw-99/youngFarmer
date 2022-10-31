@@ -32,7 +32,7 @@ export const IndexSelectedLine = styled.div`
 export const ImageBox = styled.img`
   object-fit: contain;
   width: calc(100vw - 32px);
-  margin: 8px -16px;
+  margin: 8px 0;
 `
 
 export const ItemReviewTitle = styled.div`

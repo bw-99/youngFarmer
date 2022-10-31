@@ -95,8 +95,6 @@ async function createUserInfo(uid:string, is_guest:boolean, data:loginData | nul
 
 function* kakaoLogin(action:any) {
     console.log("kakao login");
-
-
     
     const result:LoginServiceResponse = yield call(kakaoLoginAPI, action.payload);
     console.log("kakao login result2 : " + JSON.stringify(result));
@@ -150,6 +148,7 @@ function* anonymousLogin(payload:LOGIN_PAYLOAD) {
 
 
 function* loginIndex(action: any) {
+    // loading start
     yield put({
         type: LOGIN_LOADING,
     }); 
