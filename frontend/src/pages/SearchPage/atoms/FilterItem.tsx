@@ -1,11 +1,15 @@
 import styled from "styled-components";
 
 export const FilterBox = styled.div`
-    border-radius: 12px;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
     background-color: #fff;
     text-align:center;
-    padding: 0px 16px;
-    margin-bottom:16px;
+    padding: 0px 16px 30px 16px;
+    /* margin-bottom:16px; */
+    position: fixed;
+    bottom: 0;
+    max-width: 625px;
 `
 export const FilterBoxSpan = styled.span`
     font-family: AppleSDGothicNeo;
@@ -22,6 +26,10 @@ export const FilterBoxSpan = styled.span`
 
 export const FilterTitleBox = styled.div`
     text-align : center;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
 `
 
@@ -42,17 +50,20 @@ export const FilterLabelBoxSpan = styled.span`
   `
 
 export const FilterCategoryBox = styled.div`
-    width: 75px;
-    height: 19px;
-    margin: 6px 6px 6px 0px;
-    padding: 16px 45px 15px;
+    width: 155px;
+    height: 50px;
+    margin: 6px 6px 6px 6px;
+    /* padding: 16px 45px 15px; */
     border-radius: 8px;
     background-color: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `
 
 export const FilterCategoryBoxSpan = styled.span`
-    width: 28px;
-    height: 19px;
+    /* width: 28px; */
+    /* height: 19px; */
     font-family: AppleSDGothicNeo;
     font-size: 16px;
     font-weight: 500;

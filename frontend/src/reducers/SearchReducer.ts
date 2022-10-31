@@ -1,7 +1,16 @@
 import { SEARCH_FAIL, SEARCH_LIKE_SUCCESS, SEARCH_RECOMMNEND_SUCCESS, SEARCH_SUCCESS } from "../pages/SearchPage/SearchDertailAction";
-import { SEARCH_CREATE, SEARCH_DELETE } from "../pages/SearchPage/SearchActions";
+import { FILTER_CLOSE, FILTER_OPEN, SEARCH_CREATE, SEARCH_DELETE } from "../pages/SearchPage/SearchActions";
 import { SearchHistoryType, SearchHistoryTypeList } from "../pages/SearchPage/SearchConstants";
 import { ProductDataList } from "./ProductReducer";
+
+export interface SEARCH_FILTER {
+    entire: boolean,
+    best: boolean,
+    discount:boolean,
+    ontimeFruit: boolean,
+    vegatable: boolean,
+    nonPesticide: boolean
+}
 
 const searchInitState : SearchHistoryTypeList = {
     history: []
@@ -116,4 +125,22 @@ export function SearchReducer(state = searchInitState, action: any) {
             return state;
     }
 }
+
+
+const fiterFlagInitState : boolean = false;
+
+
+export function SearchFilterReducer(state = fiterFlagInitState, action: any) {
+    switch (action.type) {
+        case FILTER_OPEN:
+            return true;
+
+        case FILTER_CLOSE:
+            return false;
+
+        default:
+            return state;
+    }
+}
+
 

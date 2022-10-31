@@ -37,7 +37,7 @@ export  const BottomNavBarChanger:FC<Props> = ({ children, ...props }) => {
         dispatch(GOTO_HOME_PAGE());
         break;
     }
-  }, [])
+  })
   
 
 

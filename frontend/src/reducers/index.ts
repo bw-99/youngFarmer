@@ -5,7 +5,7 @@ import { LoginReducer, UserInfoReducer } from "./LoginReducer";
 import { ProfileReducer } from "./MypageReducer";
 import { ProductInfoReducer } from "./ProductReducer";
 import { PurchaseReducer } from "./PurchaseReducer";
-import { SearchDetailReducer, SearchReducer } from "./SearchReducer";
+import { SearchDetailReducer, SearchFilterReducer, SearchReducer } from "./SearchReducer";
 
 const rootReducer = combineReducers({
   BottomNavigationBarReducer,
@@ -16,7 +16,8 @@ const rootReducer = combineReducers({
   ProductInfoReducer,
   PurchaseReducer,
   ProfileReducer,
-  LikeReducer
+  LikeReducer,
+  SearchFilterReducer
 });
 
 export default rootReducer;
