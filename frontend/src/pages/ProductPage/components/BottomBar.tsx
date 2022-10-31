@@ -14,6 +14,7 @@ export const BottomBarComp = () => {
     // const changeHeartIcon = (event: React.MouseEvent) => {
     //     !storeLike.getState() ? storeLike.dispatch({ type: 'CHANGETRUE' }) : storeLike.dispatch({ type: 'CHANGEFALSE' });
     // }
+    const dispatch = useDispatch();
     const [isLiked, setIsLiked]  = useState(false);
     const product_id = 1;
 
@@ -36,9 +37,19 @@ export const BottomBarComp = () => {
         }
 
     }, [likeselector])
-    
-    const dispatch = useDispatch();
-    
+
+    const purchaseClickEvent = (e: React.MouseEvent) => {
+        e.preventDefault();
+        if (modalselector.open_modal) {
+            //when modal open
+            console.log("here")
+        }
+        else {
+            //when modal close
+            dispatch(openModalAction(modalselector));
+        }
+    }
+
     const BottomBoxLikeLikeFunc = () => {
         return isLiked ?
             <BottomBoxLikeIcon src={itemLikeOnIcon} onClick={()=>{dispatch(likeCancelAction(product_id));}}/> 
@@ -56,7 +67,7 @@ export const BottomBarComp = () => {
                 </div>
                 <div style={{display: "flex"}}>
                     <BottomBoxShoppingCart style={{marginRight: "9px"}}> 장바구니 </BottomBoxShoppingCart>
-                    <BottomBoxBuy onClick={() => { dispatch(openModalAction(modalselector)); } } style={{ marginRight: "16px" }}> 구매하기 </BottomBoxBuy>
+                    <BottomBoxBuy onClick={purchaseClickEvent} style={{ marginRight: "16px" }}> 구매하기 </BottomBoxBuy>
                 </div>
             </BottomBoxAtom>
         </div>
