@@ -51,11 +51,16 @@ function ProductPage(props: any) {
     const [isOpen, setOpen] = useState(false);
 
     useEffect(() => {
-        dispatch(GetProductInfo(params.productId));
-
         dispatch(closeModalAction(modalselector));
+        dispatch(GetProductInfo(params.productId));
+    }, [])
+
+    useEffect(() => {
+        if (modalselector) {
+            setOpen(modalselector.open_modal);
+        }
         console.log("why is change");
-    }, []);
+    }, [modalselector.open_modal]);
 
     if (selector) {
         return (
@@ -66,7 +71,7 @@ function ProductPage(props: any) {
                 <ItemInfoComp />
                 <ItemDetailComp />
                 {
-                    modalselector.open_modal/*isOpen*/  ? <PurchaseComp /> : null
+                    isOpen  ? <PurchaseComp /> : null
                 }
                 <BottomBarComp />
                     {/* <BottomNavigationBar /> */}

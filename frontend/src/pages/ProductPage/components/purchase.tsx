@@ -27,6 +27,8 @@ interface PurchaseMainSelectCompProps {
 
 //메인함수
 export const PurchaseComp = () => {
+    const dispatch = useDispatch();
+
     const [purchaseIndex, SetIndex] = useState(0);
     const [parentBottomState, ChangeState] = useState("82px");
 
@@ -54,7 +56,7 @@ export const PurchaseComp = () => {
                         <div style={{backgroundColor: "white", borderTopLeftRadius: "12px", borderTopRightRadius: "12px", }} >
                             <div style={{ maxWidth: "625px", /*padding: " 32px 16px 0 16px"*/ padding:"0 16px", }}>
                                 <div style={{ maxWidth: "625px", display: "flex", alignItems: "center", height: "32px", }}>
-                                    <BackIconArrow onClick={(e: React.MouseEvent) => { e.preventDefault(); closeModalAction(modalselector) }} src={backIcon} />
+                                    <BackIconArrow onClick={(e: React.MouseEvent) => { e.preventDefault(); dispatch(closeModalAction(modalselector)) }} src={backIcon} />
                                 </div>
                                 <PurchaseBoxAtom style={{ maxWidth: "625px", flexDirection: "column" }}>
                                     <PurchaseMainSelectComp setIndexFn={SetIndex} setIndexNum={1} marginTop={"0px"} purchaseText={"Weight"} purchaseDetailText={"Select Weight"} />
