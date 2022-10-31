@@ -464,10 +464,13 @@ export const AppBarComponentMain = () => {
 
     return (
         <AppBarAtom topPosition={topPosition}>
-            <AppBarMain>
+            <div style={{width: "100vw", display:"flex", justifyContent: "flex-end", alignItems:"center"}   }>
                 <NotiComponent />
                 <ShoppingBagIconComponent />
-            </AppBarMain>
+            </div>
+            {/* <AppBarMain> */}
+
+            {/* </AppBarMain> */}
         </AppBarAtom>
 
     );

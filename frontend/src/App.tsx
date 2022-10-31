@@ -24,9 +24,10 @@ import AgreePage from './pages/LoginPage/AgreePage';
 import SubmitInfoPage from './pages/LoginPage/SubmitInfoPage';
 import MyAlarmSettingpage from './pages/MyPage/MyAlarmSettingPage';
 import MySettingPage from './pages/MyPage/MySettingPage';
-import MyAlarmpage from './pages/MyPage/MyAlramPage';
+import Notipage from './pages/NotiPage/NotiPage';
 import MyInfoRevisePage from './pages/MyPage/MyInfoRevisePage';
 import SearchDetailPage from './pages/SearchPage/SearchDetailPage';
+import CartPage from './pages/CartPage/CartPage';
 
 
 export const AuthContext = createContext(false);
@@ -59,7 +60,8 @@ function App() {
                     <Route path='/store' element={<StorePage />} />
                     <Route path='/mypage/setting' element={<MySettingPage />} />
                     <Route path='/mypage/setting/alarm' element={<MyAlarmSettingpage />} />
-                    <Route path='/mypage/alarm' element={<MyAlarmpage />} />
+                    <Route path='/noti' element={<Notipage />} />
+                    <Route path='/cart' element={<CartPage />} />
                     <Route path='/mypage/setting/info' element={<MyInfoRevisePage />} />
 
                   </Route>

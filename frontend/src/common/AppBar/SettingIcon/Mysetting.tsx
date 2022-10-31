@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import setting from "../../../assets/images/btn-mysetting@3x.png";
 import React from "react";
+import { Link } from "react-router-dom";
 
 const AppBarIcon = styled.img`
   width: 24px;
@@ -12,6 +13,8 @@ const AppBarIcon = styled.img`
 
 export const MySettingComponent = () => {
     return (
+      <Link to={"/mypage/setting"}>
         <AppBarIcon src={setting} alt="" />
+      </Link>
     );
 }
