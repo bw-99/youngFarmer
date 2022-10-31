@@ -55,7 +55,7 @@ function SearchDetailPage(props: any) {
                     <FilterComponent></FilterComponent>
                 </BackgroundWrapper>
 
-                {/* <BottomNavigationBar /> */}
+                <BottomNavigationBar />
             </AppFrame>
                
         );
@@ -64,6 +64,7 @@ function SearchDetailPage(props: any) {
         return (
             <AppFrame>
                 <AppBarComponentSearch />
+                <BottomNavigationBar />
             </AppFrame>
                
         );

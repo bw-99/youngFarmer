@@ -199,15 +199,9 @@ export const FlowSpan = styled.span`
   `
 
 export const WonSpan = styled.span`
-    width: 14px;
-    height: 19px;
-    font-family: AppleSDGothicNeo;
-    font-size: 16px;
-    font-weight: 500;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: right;
-    color: #6b6b6b;
+  font-family: AppleSDGothicNeo;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: right;
+  color: #6b6b6b;
 `

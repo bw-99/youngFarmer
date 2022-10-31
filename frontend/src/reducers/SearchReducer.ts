@@ -1,5 +1,5 @@
 import { SEARCH_FAIL, SEARCH_LIKE_SUCCESS, SEARCH_RECOMMNEND_SUCCESS, SEARCH_SUCCESS } from "../pages/SearchPage/SearchDertailAction";
-import { FILTER_CLOSE, FILTER_OPEN, SEARCH_CREATE, SEARCH_DELETE } from "../pages/SearchPage/SearchActions";
+import { FILTER_CLOSE, FILTER_OPEN, SEARCH_CREATE, SEARCH_DELETE, TOGGLE_PRODUCT, TOGGLE_STORE } from "../pages/SearchPage/SearchActions";
 import { SearchHistoryType, SearchHistoryTypeList } from "../pages/SearchPage/SearchConstants";
 import { ProductDataList } from "./ProductReducer";
 
@@ -137,6 +137,23 @@ export function SearchFilterReducer(state = fiterFlagInitState, action: any) {
 
         case FILTER_CLOSE:
             return false;
+
+        default:
+            return state;
+    }
+}
+
+
+const toggleFlagInitState : number = 0;
+
+
+export function SearchToggleReducer(state = toggleFlagInitState, action: any) {
+    switch (action.type) {
+        case TOGGLE_PRODUCT:
+            return 0;
+
+        case TOGGLE_STORE:
+            return 1;
 
         default:
             return state;

@@ -18,8 +18,59 @@ export const FilterComponent = () => {
     //     vegatable: false,
     //     nonPesticide: false
     // });
-
     const [entire, setEntire] = useState(false);
+    const [best, setBest] = useState(false);
+    const [discount, setDiscount] = useState(false);
+    const [ontimeFruit, setOntimeFruit] = useState(false);
+    const [vegatable, setVegatable] = useState(false);
+    const [nonPesticide, setNonPesticide] = useState(false);
+
+
+    const filterList =[
+        {
+            title: "전체",
+            isActive: entire,
+            onclick: () => {
+                setEntire(!entire);
+            }
+        },
+        {   
+            title: "BEST",
+            isActive: best,
+            onclick: () => {
+                setBest(!best);
+            }
+        },
+        {   
+            title: "할인중",
+            isActive: discount,
+            onclick: () => {
+                setDiscount(!discount);
+            }
+        },
+        {   
+            title: "제철과일",
+            isActive: ontimeFruit,
+            onclick: () => {
+                setOntimeFruit(!ontimeFruit);
+            }
+        },
+        {   
+            title: "채소",
+            isActive: vegatable,
+            onclick: () => {
+                setVegatable(!vegatable);
+            }
+        },
+        {   
+            title: "무농약",
+            isActive: nonPesticide,
+            onclick: () => {
+                setNonPesticide(!nonPesticide);
+            }
+        }
+    ]
+
 
     return(
         <FilterBox onClick={(e) => {
@@ -41,40 +92,25 @@ export const FilterComponent = () => {
 
 
             <div style={{display:"flex",flexWrap:"wrap"}}>
-                <FilterCategoryBox style={{backgroundColor: entire? "red" : "#f5f5f5"}} onClick={()=>{
-                // filter
-                // setFilter(filter.best=true);
-                setEntire(!entire);
-                }}>
-                    <FilterCategoryBoxSpan>
-                        전체
-                    </FilterCategoryBoxSpan>
-                </FilterCategoryBox>
-                <FilterCategoryBox >
-                    <FilterCategoryBoxSpan>
-                        BEST
-                    </FilterCategoryBoxSpan>
-                </FilterCategoryBox>
-                <FilterCategoryBox>
-                    <FilterCategoryBoxSpan>
-                        할인중                     
-                    </FilterCategoryBoxSpan>
-                </FilterCategoryBox>
-                <FilterCategoryBox >
-                    <FilterCategoryBoxSpan>
-                        제철과일
-                    </FilterCategoryBoxSpan>
-                </FilterCategoryBox>
-                <FilterCategoryBox>
-                    <FilterCategoryBoxSpan>
-                        채소
-                    </FilterCategoryBoxSpan>
-                </FilterCategoryBox>
-                <FilterCategoryBox >
-                    <FilterCategoryBoxSpan>
-                        무농약
-                    </FilterCategoryBoxSpan>
-                </FilterCategoryBox>
+                {
+                    filterList.map((value) => {
+                        return(
+                            <FilterCategoryBox 
+                            style=
+                            
+                            {{
+                                border:  value.isActive ? "solid 1px #fb6159": "solid 1px #f5f5f5",
+                                backgroundColor: value.isActive ? "#ffffff" : "#f5f5f5"}}
+                            onClick={()=>{
+                                value.onclick();
+                            }}>
+                                <FilterCategoryBoxSpan>
+                                    {value.title}
+                                </FilterCategoryBoxSpan>
+                            </FilterCategoryBox>
+                        )
+                    })
+                }
             </div>
 
             <FilterLabelBox style={{marginTop:"24px", marginBottom: "16px"}}>
@@ -130,3 +166,9 @@ export const FilterComponent = () => {
     )
 }
 
+
+const FilterBoxComp = () => {
+    return (
+        <></>
+    )   
+}

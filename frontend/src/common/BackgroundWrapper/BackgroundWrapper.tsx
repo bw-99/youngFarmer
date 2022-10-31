@@ -23,7 +23,7 @@ export const BackgroundWrapper = ({backgroundColor, isActive,children,onClose}: 
                 onClose();
             }
             }}
-        style={{backgroundColor: backgroundColor, height: "100vh", width: "100vw", maxWidth:"625px", position: "absolute", zIndex:"10000", top:0}}>
+        style={{backgroundColor: backgroundColor, height: "100vh", width: "100vw", maxWidth:"625px", position: "absolute", zIndex:"1000000", top:0}}>
             {children}
         </div>
     );
