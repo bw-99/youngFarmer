@@ -26,4 +26,41 @@ export const openModalAction = (data: any) => {
     }
 }
 
+export const selectWeight = (data: any, num: number) => {
+    return {
+        type: SELECT_WEIGHT,
+        payload: {
+            ...data,
+            select_item_info: {
+                ...data.select_item_info,
+                item_weight: num
+            }
+        }
+    }
+}
 
+export const selectNumberOfItem = (data: any, num: number) => {
+    return {
+        type: SELECT_WEIGHT,
+        payload: {
+            ...data,
+            select_item_info: {
+                ...data.select_item_info,
+                number_of_item: num
+            }
+        }
+    }
+}
+
+export const selectWannaPave = (data: any, num: number) => {
+    return {
+        type: SELECT_WEIGHT,
+        payload: {
+            ...data,
+            select_item_info: {
+                ...data.select_item_info,
+                wanna_pave: num
+            }
+        }
+    }
+}

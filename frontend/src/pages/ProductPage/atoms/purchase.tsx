@@ -80,6 +80,19 @@ export const SelectTitleText = styled.div`
   color: #272727;
 `
 
+export const NonSelectContentText = styled.div`
+  width: 43px;
+  height: 19px;
+  font-family: AppleSDGothicNeo;
+  font-size: 16px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #444;
+`
+
 export const SelectContentText = styled.div`
   width: 43px;
   height: 19px;
@@ -90,5 +103,11 @@ export const SelectContentText = styled.div`
   font-style: normal;
   line-height: normal;
   letter-spacing: normal;
-  color: var(--grapefruit);
+  color: red /*var(--grapefruit)*/;
+`
+
+export const SelectCheckImg = styled.img`
+      width: 16px;
+  height: 16px;
+  object-fit: contain;
 `

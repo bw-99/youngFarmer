@@ -1,19 +1,26 @@
 import {
     PurchaseBoxAtom, PurchaseText, PurchaseDetailBox, PurchaseDetailText,
     SepLine, PurchaseDetailArrow, PurchaseBackGround, BackIconArrow, SelectTitleText,
-    SelectContentText
+    NonSelectContentText, SelectContentText, SelectCheckImg,
+
 } from "../atoms/purchase";
 import rightArrowIcon from "../../../assets/images/btn-arrow-r-20-px@3x.png";
 import backIcon from "../../../assets/images/btn-back@3x.png";
+import checkIcon from "../../../assets/images/btn-checkbox-1@3x.png";
 
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../reducers";
 import { likeAction, likeCancelAction } from "../../LikePage/LikeAction";
-import { closeModalAction } from "../PurchaseAction"
+import { closeModalAction, selectWeight, selectNumberOfItem, selectWannaPave } from "../PurchaseAction"
 
-//������Ʈ�� �ʿ��� ����
+const ITEM_WEIGHT = "item_weight";
+const NUMBER_OF_ITEM = "number_of_item";
+const WANNA_PAVE = "wanna_pave";
+
+//필요한 선언
 interface SelectCompProps {
+    actionType: string;
     setIndexFn: Dispatch<SetStateAction<number>>,
 }
 
@@ -25,7 +32,7 @@ interface PurchaseMainSelectCompProps {
     purchaseDetailText: string,
 }
 
-//�����Լ�
+//main 함수
 export const PurchaseComp = () => {
     const dispatch = useDispatch();
 
@@ -74,20 +81,20 @@ export const PurchaseComp = () => {
                         </div>
                         :
                     purchaseIndex === 1 ?
-                        <SelectComp setIndexFn={SetIndex} />
+                        <SelectComp actionType={ITEM_WEIGHT} setIndexFn={SetIndex} />
 
                     :
                     purchaseIndex === 2 ?
-                        <SelectComp setIndexFn={SetIndex} />
+                        <SelectComp actionType={NUMBER_OF_ITEM}  setIndexFn={SetIndex} />
                     :
-                        <SelectComp setIndexFn={SetIndex} />
+                        <SelectComp actionType={WANNA_PAVE} setIndexFn={SetIndex} />
             }
             </div>
         </div>
     );
 }
 
-//!�����Լ��� �ʿ��� ������Ʈ
+//메인 함수를 위한 component
 const PurchaseMainSelectComp = (props: PurchaseMainSelectCompProps) => {
     return (
         <div>
@@ -105,6 +112,36 @@ const PurchaseMainSelectComp = (props: PurchaseMainSelectCompProps) => {
 }
 
 const SelectComp = (props: SelectCompProps) => {
+    const [selectItem, setSelectItem] = useState(0);
+
+    const itemSelector = useSelector((state: RootState) =>
+        state.PurchaseReducer.purchaseInfo
+    )
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        console.log(itemSelector.select_item_info);
+        if (itemSelector.select_item_info[props.actionType]) {
+            console.log("성공");
+            setSelectItem(itemSelector.select_item_info[props.actionType]);
+        }
+    }, [])
+
+    useEffect(() => {
+        switch (props.actionType) {
+            case ITEM_WEIGHT:
+                dispatch(selectWeight(itemSelector, selectItem));
+                break;
+            case NUMBER_OF_ITEM:
+                dispatch(selectNumberOfItem(itemSelector, selectItem));
+                break;
+            case WANNA_PAVE:
+                dispatch(selectWannaPave(itemSelector, selectItem));
+        }
+    }, [selectItem])
+
+
     return (
         <div style={{ display: "flex", flexDirection: "column", backgroundColor: "white", top: "82px", maxWidth: "625px", borderTopLeftRadius: "12px", borderTopRightRadius: "12px" }} >
             <div style={{ display: "flex", height: "56px", width: "100vw", maxWidth: "625px", marginLeft: "16px", alignItems: "center" }}>
@@ -115,24 +152,57 @@ const SelectComp = (props: SelectCompProps) => {
             </div>
             <SepLine />
 
-            <div style={{ display: "flex", height: "64px", width: "100vw", maxWidth: "625px", marginLeft: "16px", alignItems: "center", }}>
-                <SelectContentText> 10kg </SelectContentText>
+            <div onClick={() => { if (selectItem === 1) { setSelectItem(0); } else { setSelectItem(1); } }}
+                style={{ display: "flex", height: "64px", width: "100vw", maxWidth: "625px", marginLeft: "16px", alignItems: "center", }}>
+                {
+                    selectItem === 1 ?
+                        <>
+                        <SelectContentText> 10kg </SelectContentText>
+                        <SelectCheckImg src={checkIcon} />
+                        </>
+                        :
+                        <NonSelectContentText> 10kg </NonSelectContentText>
+                }
             </div>
             <SepLine />
 
-            <div style={{ display: "flex", height: "64px", width: "100vw", maxWidth: "625px", marginLeft: "16px", alignItems: "center", }}>
-                <SelectContentText> 15kg </SelectContentText>
+            <div onClick={() => { if (selectItem === 2) { setSelectItem(0); } else { setSelectItem(2); } }} style={{ display: "flex", height: "64px", width: "100vw", maxWidth: "625px", marginLeft: "16px", alignItems: "center", }}>
+                {
+                    selectItem === 2 ?
+                        <>
+                            <SelectContentText> 15kg </SelectContentText>
+                            <SelectCheckImg src={checkIcon} />
+                        </>
+                        :
+                        <NonSelectContentText> 15kg </NonSelectContentText>
+                }
             </div>
             <SepLine />
 
-            <div style={{ display: "flex", height: "64px", width: "100vw", maxWidth: "625px", marginLeft: "16px", alignItems: "center", }}>
-                <SelectContentText> 20kg </SelectContentText>
+            <div onClick={() => { if (selectItem === 3) { setSelectItem(0); } else { setSelectItem(3); } }} style={{ display: "flex", height: "64px", width: "100vw", maxWidth: "625px", marginLeft: "16px", alignItems: "center", }}>
+                {
+                    selectItem === 3 ?
+                        <>
+                            <SelectContentText> 20kg </SelectContentText>
+                            <SelectCheckImg src={checkIcon} />
+                        </>
+                        :
+                        <NonSelectContentText> 20kg </NonSelectContentText>
+                }
             </div>
             <SepLine />
 
-            <div style={{ display: "flex", height: "64px", width: "100vw", maxWidth: "625px", marginLeft: "16px", alignItems: "center", }}>
-                <SelectContentText> 25kg </SelectContentText>
+            <div onClick={() => { if (selectItem === 4) { setSelectItem(0); } else { setSelectItem(4); } }} style={{ display: "flex", height: "64px", width: "100vw", maxWidth: "625px", marginLeft: "16px", alignItems: "center", }}>
+                {
+                    selectItem === 4 ?
+                        <>
+                            <SelectContentText> 25kg </SelectContentText>
+                            <SelectCheckImg src={checkIcon} />
+                        </>
+                        :
+                        <NonSelectContentText> 25kg </NonSelectContentText>
+                }
             </div>
-        </div>  
+        </div>
     );
 }

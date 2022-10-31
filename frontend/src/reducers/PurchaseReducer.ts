@@ -5,13 +5,13 @@ import { createStore } from 'redux';
 
 export interface PurchaseDataType {
     open_modal: boolean,
-    select: PurchaseDetail | null,
+    select_item_info: PurchaseDetail | null,
 }
 
 export interface PurchaseDetail {
     item_weight: number | null,
     number_of_item: number | null,
-    wanna_pave: string | null,
+    wanna_pave: number | null,
 }
 
 export interface PurchaseDataObjectType {
@@ -20,7 +20,11 @@ export interface PurchaseDataObjectType {
 
 const purchaseInfoInit: PurchaseDataType  = {
     open_modal: false,
-    select: null,
+    select_item_info: {
+        item_weight: null,
+        number_of_item: null,
+        wanna_pave: null
+    },
 }
 
 const purchaseInitState: PurchaseDataObjectType = {
@@ -30,7 +34,7 @@ const purchaseInitState: PurchaseDataObjectType = {
 export function PurchaseReducer(state = purchaseInitState, action: any) {
     switch (action.type) {
         case CLOSE_MODAL:
-            console.log("success close modal");
+            console.log("success close modal", action.payload);
             return {
                 ...state,
                 purchaseInfo: action.payload,
@@ -45,17 +49,17 @@ export function PurchaseReducer(state = purchaseInitState, action: any) {
         case SELECT_WEIGHT:
             return {
                 ...state,
-                productInfo: action.payload,
+                purchaseInfo: action.payload,
             };
         case SELECT_NUMBER_OF_ITEM:
             return {
                 ...state,
-                productInfo: action.payload,
+                purchaseInfo: action.payload,
             };
         case SELECT_WANNA_PAVE:
             return {
                 ...state,
-
+                purchaseInfo: action.payload,
 			}
         default:
             return state;
