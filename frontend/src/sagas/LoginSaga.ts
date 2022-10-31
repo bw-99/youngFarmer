@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { call, delay, put, SagaReturnType, takeLatest } from "redux-saga/effects";
-import { LOGIN_FAIL, LOGIN_PAYLOAD, LOGIN_SUCCESS, LOGIN_SUCCESS_FIRST, LOGIN_TRY, LOGIN_WITH_ANONYMOUS, LOGIN_WITH_KAKAO, LOGIN_WITH_NAVER } from "../pages/LoginPage/LoginAction";
+import { loginData, LOGIN_FAIL, LOGIN_LOADING, LOGIN_PAYLOAD, LOGIN_SUCCESS, LOGIN_SUCCESS_FIRST, LOGIN_TRY, LOGIN_WITH_ANONYMOUS, LOGIN_WITH_KAKAO, LOGIN_WITH_NAVER } from "../pages/LoginPage/LoginAction";
 import { db, kakaoConfig } from "..";
 import axios from 'axios'
 import { apiClient, get, post } from "../api/axios";
@@ -12,7 +12,10 @@ type LoginServiceResponse = SagaReturnType<any>;
 
 async function kakaoLoginAPI(payload:any) {
     const isLocal:boolean =  window.location.hostname == "localhost" && window.location.origin != process.env.REACT_APP_FIREBASE_LOCAL;
-    const code:string = payload.code;
+    
+    const data: loginData = payload.data;
+
+    const code:string = data.code;
     
     const result = await post(
         `${isLocal? "/kakaoLogin" : "https://kauth.kakao.com"}/oauth/token?grant_type=${encodeURI("authorization_code")}&client_id=${encodeURIComponent(kakaoConfig.restAPIKey)}&redirect_uri=${encodeURI(window.location.origin + "/login/oauth/kakao")}&code=${encodeURI(code)}`, 
@@ -53,7 +56,7 @@ async function anonymousLoginAPI(payload:LOGIN_PAYLOAD) {
     return signinResult.user.uid;
 }
 
-async function createUserInfo(uid:string, is_guest:boolean) {
+async function createUserInfo(uid:string, is_guest:boolean, data:loginData | null) {
     console.log("createUserInfo");
     
     const userRef = collection(db, "user");
@@ -70,11 +73,21 @@ async function createUserInfo(uid:string, is_guest:boolean) {
         });
 
         const userProfileRef = collection(db, "user",result.id, "profile");
-        await addDoc(userProfileRef, {
-            profile_nickname: "Guest"+uid.substring(0,3),
-            profile_email: null,
-            profile_img: null
-        })
+        if(data) {
+            await addDoc(userProfileRef, {
+                profile_nickname: data.nickname,
+                profile_email: data.email,
+                profile_img: null
+            })
+        }
+        else{
+            await addDoc(userProfileRef, {
+                profile_nickname: "Guest"+uid.substring(0,3),
+                profile_email: null,
+                profile_img: null
+            })
+        }
+        
     }
     // SNS 연동 로그인 중 첫 로그인일 경우
     return (isNew && !is_guest);
@@ -82,11 +95,13 @@ async function createUserInfo(uid:string, is_guest:boolean) {
 
 function* kakaoLogin(action:any) {
     console.log("kakao login");
+
+
     
     const result:LoginServiceResponse = yield call(kakaoLoginAPI, action.payload);
     console.log("kakao login result2 : " + JSON.stringify(result));
     
-    const needSignUp:LoginServiceResponse = yield call(createUserInfo, result as string, false);
+    const needSignUp:LoginServiceResponse = yield call(createUserInfo, result as string, false, action.payload.data);
 
     if(result){
         yield put({
@@ -117,7 +132,7 @@ function* kakaoLogin(action:any) {
 function* anonymousLogin(payload:LOGIN_PAYLOAD) {
     const result:LoginServiceResponse =  yield call(anonymousLoginAPI, payload);
     console.log(result);
-    yield call(createUserInfo, result as string, true);
+    yield call(createUserInfo, result as string, true, null);
 
     if(result) {
         yield put({
@@ -135,6 +150,10 @@ function* anonymousLogin(payload:LOGIN_PAYLOAD) {
 
 
 function* loginIndex(action: any) {
+    yield put({
+        type: LOGIN_LOADING,
+    }); 
+    
     switch (action.payload.type) {
         case LOGIN_WITH_KAKAO:
             yield kakaoLogin(action); 

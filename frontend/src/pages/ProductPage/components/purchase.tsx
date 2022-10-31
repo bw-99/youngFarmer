@@ -12,7 +12,7 @@ import { RootState } from "../../../reducers";
 import { likeAction, likeCancelAction } from "../../LikePage/LikeAction";
 import { closeModalAction } from "../PurchaseAction"
 
-//ÄÄÆ÷³ÍÆ®¿¡ ÇÊ¿äÇÑ ¼±¾ð
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ê¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 interface SelectCompProps {
     setIndexFn: Dispatch<SetStateAction<number>>,
 }
@@ -25,7 +25,7 @@ interface PurchaseMainSelectCompProps {
     purchaseDetailText: string,
 }
 
-//¸ÞÀÎÇÔ¼ö
+//ï¿½ï¿½ï¿½ï¿½ï¿½Ô¼ï¿½
 export const PurchaseComp = () => {
     const dispatch = useDispatch();
 
@@ -87,7 +87,7 @@ export const PurchaseComp = () => {
     );
 }
 
-//!¸ÞÀÎÇÔ¼ö¿¡ ÇÊ¿äÇÑ ÄÄÆ÷³ÍÆ®
+//!ï¿½ï¿½ï¿½ï¿½ï¿½Ô¼ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
 const PurchaseMainSelectComp = (props: PurchaseMainSelectCompProps) => {
     return (
         <div>

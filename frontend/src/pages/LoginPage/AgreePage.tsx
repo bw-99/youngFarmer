@@ -22,7 +22,7 @@ export const AgreePage = () => {
             setIschecked(ischecked);
             setIschecked2(ischecked);
             setIschecked3(ischecked);
-            setIschecked4(ischecked);
+            setIschecked4(ischecked); 
             setIschecked5(ischecked);
         },
         [ischecked]
