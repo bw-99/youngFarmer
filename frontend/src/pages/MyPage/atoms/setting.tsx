@@ -49,13 +49,13 @@ export const ProfileBoxSmall2 = styled.div`
 `
 
 export const ProfileBoxSmallSmall2 = styled.div`
-    heigth:40px;
+    height:40px;
 `
 
 export const ProfileBtnBox = styled.div`
     height:80px;
     display:flex;
-    align-itmes:center;
+    align-items:center;
     justify-content:center;
 `
 

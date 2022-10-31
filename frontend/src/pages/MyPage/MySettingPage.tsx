@@ -4,6 +4,7 @@ import {AppColorBig,AppColorSmall,ProfileBoxSmallSmall2,ProfileBoxSmall1,Profile
 import { AppFrame } from "../../App";
 import rightArrow from "../../assets/images/btn-arrow-r-14-px@3x.png"
 import leftArrow from "../../assets/images/btn-back@3x.png"
+import { AppBarComponentOnlyBack } from "../../common/AppBar/AppBar";
 
 
 export const MySettingPage = () => {
@@ -12,17 +13,14 @@ export const MySettingPage = () => {
     return(
         <AppFrame>
             
-                {/* status bar */}   
-                <TitleBox>
+                {/* <TitleBox>
                     <div style={{float:"left"}}><BigBtn src={leftArrow}/></div>
-                    
                     <div>환경설정</div>  
-                    
-                    {/* 정렬위한 허수 */}
                     <div style={{borderStyle:"none"}}></div> 
-
-                </TitleBox>
-                <ProfileBox style={{marginTop:"25px"}}>
+                </TitleBox> */}
+                {/* // ! app bar 재활용 */}
+                <AppBarComponentOnlyBack title={"환경설정"} /> 
+                <ProfileBox style={{marginTop:"80px"}}>
                     
                         <ProfileBoxSmall1>
                             <ProfileImgBox style={{marginLeft:"16px"}}>

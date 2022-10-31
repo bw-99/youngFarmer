@@ -33,6 +33,7 @@ function MyPage(props: any) {
     );      
 
     useEffect(() => {
+        
         if(!selector){
             FirebaseAuth.onAuthStateChanged((data)=> {
                 if(data){
@@ -44,7 +45,9 @@ function MyPage(props: any) {
         }
        
         
-    }, []);
+    }, [selector]);
+
+    
 
     // return (
     //     <AppFrame>
