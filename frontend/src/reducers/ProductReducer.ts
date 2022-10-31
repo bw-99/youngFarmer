@@ -4,7 +4,9 @@ import { GET_PRODUCT, GET_PRODUCT_FAIL, GET_PRODUCT_LOADING, GET_PRODUCT_SUCCESS
 import { createStore } from 'redux';
 
 export interface ProductDataList {
-    products: ProductDataType[]
+    products: ProductDataType[],
+    recommendResult: ProductDataType[],
+    likeProducts: ProductDataType[],
 }
 
 export interface ProductDataType {
@@ -18,6 +20,7 @@ export interface ProductDataType {
     delivery_charge: number,
     delivery_remain: number,
     delivery_start: string,
+    photo: string,
     reviewDataList: ProductDataReviewType[],
     photoDataList: ProductDataPhotoType,
     questionDataList: ProductDataQuestionType[]
@@ -66,16 +69,19 @@ export function ProductInfoReducer(state = productInfoInitState, action: any) {
                 ...state,
                 productInfo: action.payload,
             };
+
         case GET_PRODUCT_FAIL:
             return {
                 ...state,
                 productInfo: action.payload,
             };
+
         case GET_PRODUCT_LOADING:
             return {
                 ...state,
                 productInfo: action.payload,
             };
+
         default:
             return state;
     }

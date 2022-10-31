@@ -11,7 +11,7 @@ export const BackgroundWrapper = ({backgroundColor, isActive}: backgroundColorPa
     }
     
     return(
-        <div style={{backgroundColor: backgroundColor, height: "500vh", width: "100vw", position: "absolute", zIndex:"10000", top:0}}>
+        <div style={{backgroundColor: backgroundColor, height: "100vh", width: "100vw", position: "absolute", zIndex:"10000", top:0}}>
 
         </div>
     );

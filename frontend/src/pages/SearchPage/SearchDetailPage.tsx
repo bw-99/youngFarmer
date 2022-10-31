@@ -15,7 +15,7 @@ import { AppBarComponentNoBack, AppBarComponentSearch } from "../../common/AppBa
 import { BottomNavigationBar } from "../../common/BottomNavigationBar/BottomNavigationBar";
 import { CategoryComponent } from "../../common/Category/category";
 import { RootState } from "../../reducers";
-import { ProductDataType } from "../../reducers/ProductReducer";
+import { ProductDataList, ProductDataType } from "../../reducers/ProductReducer";
 import { FilterComponent } from "../SearchPage/components/Filter";
 import { OtherChoiceComp } from "./components/OtherChoice";
 import { SearchResultComp } from "./components/SearchResult";
@@ -29,8 +29,8 @@ function SearchDetailPage(props: any) {
 
     console.log(params);
 
-    const searchSelector: ProductDataType[] = useSelector((state:RootState) =>
-        state.SearchDetailReducer.products
+    const searchSelector: ProductDataList = useSelector((state:RootState) =>
+        state.SearchDetailReducer
     );
 
     if(searchSelector) {

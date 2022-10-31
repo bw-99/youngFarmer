@@ -49,24 +49,24 @@ export const SubmitInfoPage = () => {
     }
 
     const handlePhoneAuth = () => {
-        //@ts-ignore 
-        const appVerifier = window.recaptchaVerifier;
+        // @ts-ignore 
+        // const appVerifier = window.recaptchaVerifier;
         setTimeout(()=> {
             let random = Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000;
             setCode(`${random}`);
         }, 1000)
     }
 
-    useEffect(() => {
-        const auth = getAuth();
-        //@ts-ignore 
-        window.recaptchaVerifier  = new RecaptchaVerifier('recaptcha-container', {
-        'size': 'invisible',
-        'callback': (response: any) => {
-            console.log(response);
-        }
-        }, auth);
-    }, [])
+    // useEffect(() => {
+    //     const auth = getAuth();
+    //     //@ts-ignore 
+    //     window.recaptchaVerifier  = new RecaptchaVerifier('recaptcha-container', {
+    //     'size': 'invisible',
+    //     'callback': (response: any) => {
+    //         console.log(response);
+    //     }
+    //     }, auth);
+    // }, [])
 
     useEffect(() => {
         if(nickname && email && phoneNumber && code) {

@@ -9,8 +9,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../reducers";
 import { SearchHistoryType, SearchHistoryTypeList } from "../SearchConstants";
 import { json } from "stream/consumers";
-import { SearchDeleteAction } from "../SearchActions";
-import { searchTryAction } from "../../SearchDetailPage/SearchDertailAction";
+import { SearchCrateAction, SearchDeleteAction } from "../SearchActions";
+import { searchTryAction } from "../SearchDertailAction";
 import { useNavigate } from "react-router-dom";
 
 export const RecentSearchComponent = () => {

@@ -15,15 +15,15 @@ export const TopImageComp = () => {
         state.ProductInfoReducer!.productInfo
     );  
 
-    const length = selector.photoDataList.photos.length;
+    // const length = selector.photoDataList.photos.length;
 
-    const nextSlide = () => {
-        setCurrent(current === length - 1 ? 0 : current + 1);
-    };
+    // const nextSlide = () => {
+    //     setCurrent(current === length - 1 ? 0 : current + 1);
+    // };
 
-    const prevSlide = () => {
-        setCurrent(current === 0 ? length - 1 : current - 1);
-    };
+    // const prevSlide = () => {
+    //     setCurrent(current === 0 ? length - 1 : current - 1);
+    // };
 
     return (
         <div style={{paddingTop:"0px", display: "flex", height: "310px", alignItems: "center", justifyContent: "center"}}>

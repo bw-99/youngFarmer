@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ReactNode, FC } from "react";
 import { useDispatch } from "react-redux";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
@@ -16,27 +16,31 @@ export  const BottomNavBarChanger:FC<Props> = ({ children, ...props }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  switch (location.pathname.split("/")[1]) {
-    case "main":
-      dispatch(GOTO_HOME_PAGE());
-      break;
-    case "search":
-      dispatch(GOTO_SEARCH_PAGE());
-      break;
-    case "like":
-      dispatch(GOTO_LIKE_PAGE());
-      break;
-    case "chat":
-      dispatch(GOTO_CHAT_PAGE());
-      break;
-    case "mypage":
-      dispatch(GOTO_MY_PAGE());
-      break;
-    default:
-      dispatch(GOTO_HOME_PAGE());
-      break;
-  }
+  useEffect(() => {
+    switch (location.pathname.split("/")[1]) {
+      case "main":
+        dispatch(GOTO_HOME_PAGE());
+        break;
+      case "search":
+        dispatch(GOTO_SEARCH_PAGE());
+        break;
+      case "like":
+        dispatch(GOTO_LIKE_PAGE());
+        break;
+      case "chat":
+        dispatch(GOTO_CHAT_PAGE());
+        break;
+      case "mypage":
+        dispatch(GOTO_MY_PAGE());
+        break;
+      default:
+        dispatch(GOTO_HOME_PAGE());
+        break;
+    }
+  }, [])
   
+
+
   
   return (
     <div {...props}>

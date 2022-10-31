@@ -11,9 +11,8 @@ import { useDispatch } from 'react-redux';
 import { GOTO_CHAT_PAGE, GOTO_HOME_PAGE, GOTO_LIKE_PAGE, GOTO_MY_PAGE, GOTO_SEARCH_PAGE } from './common/BottomNavigationBar/BottomNavigationBarActions';
 import ChatPage from './pages/ChatPage/ChatPage';
 import SearchPage from './pages/SearchPage/SearchPage';
-import TodayRecommendPage from './pages/TodayRecommendPage/TodayRecommendPage';
-import LiveListPage from './pages/LiveListPage/LiveListPage';
-import SearchDetailPage from './pages/SearchDetailPage/SearchDetailPage';
+import TodayRecommendPage from './pages/MainPage/TodayRecommendPage';
+import LiveListPage from './pages/MainPage/LiveListPage';
 import ProductPage from './pages/ProductPage/ProductPage';
 import { BottomNavBarChanger } from './services/BottomNavBarChanger';
 import { ScrollToTop } from './services/ScrollToTop';
@@ -27,6 +26,7 @@ import MyAlarmSettingpage from './pages/MyPage/MyAlarmSettingPage';
 import MySettingPage from './pages/MyPage/MySettingPage';
 import MyAlarmpage from './pages/MyPage/MyAlramPage';
 import MyInfoRevisePage from './pages/MyPage/MyInfoRevisePage';
+import SearchDetailPage from './pages/SearchPage/SearchDetailPage';
 
 
 export const AuthContext = createContext(false);

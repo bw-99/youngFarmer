@@ -16,7 +16,7 @@ import { SearchCrateAction } from "../../pages/SearchPage/SearchActions";
 import { useNavigate } from "react-router-dom";
 import { ShareIconBlackComponent, ShareIconComponent } from "./ShareIcon/ShareIcon";
 import { MySettingComponent } from "./SettingIcon/Mysetting";
-import { searchTryAction } from "../../pages/SearchDetailPage/SearchDertailAction";
+import { searchTryAction } from "../../pages/SearchPage/SearchDertailAction";
 
 // btn-search
 interface ScrollProps {

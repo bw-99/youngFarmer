@@ -11,6 +11,7 @@ import { RootState } from "../../reducers";
 import { LikeData, LikeDataList } from "../../reducers/LikeReducer";
 import { FirebaseAuth } from "../..";
 import { ProductDataType } from "../../reducers/ProductReducer";
+import { searchLikeTryAction } from "../../pages/SearchPage/SearchDertailAction";
 
 
 type itemListProps = {
@@ -73,34 +74,43 @@ type itemUnitProps = {
 }
 
 export const ItemUnitImgComp = ({image_width ,bsFlag= true, product}:itemUnitProps) => {
+    // * 좋아요 최신화 안되는 문제 해결
+    const selector: LikeData[] = useSelector((state:RootState) =>
+        state.LikeReducer.likes
+    );  
+
     const [isLiked, setIsLiked]  = useState(false);
     const isBest = true&&bsFlag;
     const isSale = true&&bsFlag;
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const product_id = product.product_id? product.product_id: 1;
-    const targetUrl = "/product/"+product_id;
+    const targetUrl = "/product/"+product.product_id;
     
-    const selector: LikeData[] = useSelector((state:RootState) =>
-        state.LikeReducer.likes
-    );  
 
     useEffect(() => {
         if(selector){
-            setIsLiked(false);
-            selector.forEach((val) => {
-                if(val.product_id === product_id){
-                    setIsLiked(true);
+            let likeVal = false;
+            console.log("트리거");
+            for (const val of selector) {
+                console.log(val.product_id, product.product_id);
+                if(val.product_id === product.product_id){
+                    console.log(product.product_id + " set like true");
+                    likeVal = true;
+                    console.log(isLiked);
                 }
-            })
+            }
+            setIsLiked(likeVal);
         }
 
-    }, [selector])
+    }, [selector,product])
+
+
+    
     
     return(
         <div >
             <div style={{position: "relative", width:  `${image_width}px`}}>
-                <ItemImage  onClick={()=>{navigate(targetUrl)}} src={recommendItemStawberry} width={image_width+"px"} height={image_width+"px"}/>
+                <ItemImage  onClick={()=>{navigate(targetUrl)}} src={product.photo? product.photo :recommendItemStawberry} width={image_width+"px"} height={image_width+"px"}/>
                 <ItemCover onClick={()=>{navigate(targetUrl)}} style={{width: `${image_width}px`, height: "60px"}}/>
                 
                 {isBest? 
@@ -119,12 +129,20 @@ export const ItemUnitImgComp = ({image_width ,bsFlag= true, product}:itemUnitPro
                 width={isLiked? "44px":"30px"}
                 height={isLiked? "44px":"30px"}
                 onClick={() => {
+                    setIsLiked(!isLiked);
+
                     if(isLiked){
-                        dispatch(likeCancelAction(product_id));
+                        dispatch(likeCancelAction(product.product_id));
                     }
                     else{
-                        dispatch(likeAction(product_id));
+                        dispatch(likeAction(product.product_id));
                     }
+                    // let pidList: number[] = [];
+                    // selector.forEach((value) => {
+                    //     pidList.push(value.product_id);
+                    // })
+                    
+                    // dispatch(searchLikeTryAction(pidList));
                 }} 
                 src={isLiked? recommendItemLikeIcon: recommendItemLikeNotIcon}/>
             </div>

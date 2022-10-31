@@ -8,9 +8,13 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ItemUnitImgComp, ItemUnitListComp } from "../../../common/ItemList/ItemList";
 import { ProductDataType } from "../../../reducers/ProductReducer";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../reducers";
 
 export const RecommendComponent = () => {
     const navigate = useNavigate();
+    const recommendData:ProductDataType[] = useSelector((state : RootState) => state.SearchDetailReducer.recommendResult);
+
     
     return (
        <div style={{padding: "38px 0 0 0 "}}>
@@ -20,46 +24,41 @@ export const RecommendComponent = () => {
             </RecommnedTitle>
 
             <div style={{padding: "15px 9.5px 42px 9.5px",display:"flex", flexDirection: "row",flexWrap:"nowrap", overflow: "auto"}}>
-                <ItemUnitDesign />
-                <ItemUnitDesign />
-                <ItemUnitDesign />
-                <ItemUnitDesign />
-                <ItemUnitDesign />
+                {
+                    recommendData.map((value) => {
+                        return (
+                            <div style={{padding:"0 6.5px"}}>
+                                <ItemUnitImgComp image_width={154} bsFlag={false}  product={value}/>
+                            </div>
+                        )
+                    })
+                }
+
             </div>
             
        </div>
     );
 }
 
-const ItemUnitDesign = () => {
-    return (
-        <div style={{padding:"0 6.5px"}}>
-            <ItemUnitImgComp image_width={154} bsFlag={false}  product={{
-                product_id: 1
-            } as ProductDataType}/>
-        </div>
-    );
-}
-
-const RecommentUnit = () => {
-    return (
-        <RecommendItem>
-            <RecommendItemBox>
-                <RecommendItemImage src={recommendItemStawberry}/>
-                <RecommendItemCover />
-                <LikeIconComp />
-            </RecommendItemBox>
-            <div>
-                <RecommendItemTextInfoSource>산천</RecommendItemTextInfoSource>
-                <RecommendItemTextInfoTitle> 친환경 복숭아 5kg/10kg </RecommendItemTextInfoTitle>
-                <div style={{display: "flex", alignItems: "flex-start", marginTop: "8px"}}>
-                    <RecommendItemTextInfoPrice> 29,000원 </RecommendItemTextInfoPrice>
-                    <RecommendItemTextInfoPriceDiscount> 20% </RecommendItemTextInfoPriceDiscount>
-                </div>
-            </div>
-        </RecommendItem>
-    );
-}
+// const RecommentUnit = () => {
+//     return (
+//         <RecommendItem>
+//             <RecommendItemBox>
+//                 <RecommendItemImage src={recommendItemStawberry}/>
+//                 <RecommendItemCover />
+//                 <LikeIconComp />
+//             </RecommendItemBox>
+//             <div>
+//                 <RecommendItemTextInfoSource>산천</RecommendItemTextInfoSource>
+//                 <RecommendItemTextInfoTitle> 친환경 복숭아 5kg/10kg </RecommendItemTextInfoTitle>
+//                 <div style={{display: "flex", alignItems: "flex-start", marginTop: "8px"}}>
+//                     <RecommendItemTextInfoPrice> 29,000원 </RecommendItemTextInfoPrice>
+//                     <RecommendItemTextInfoPriceDiscount> 20% </RecommendItemTextInfoPriceDiscount>
+//                 </div>
+//             </div>
+//         </RecommendItem>
+//     );
+// }
 
 export const LikeIconComp = () => {
     const [isLiked, setIsLiked]  = useState(false);

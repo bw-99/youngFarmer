@@ -36,7 +36,7 @@ function ProductPage(props: any) {
 
     console.log(params.productId);
 
-    const selector: any = useSelector((state:RootState) =>
+    const selector: ProductDataType = useSelector((state:RootState) =>
         state.ProductInfoReducer!.productInfo
     );  
 
