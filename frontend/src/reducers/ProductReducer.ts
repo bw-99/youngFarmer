@@ -3,10 +3,18 @@ import { GET_PRODUCT, GET_PRODUCT_FAIL, GET_PRODUCT_LOADING, GET_PRODUCT_SUCCESS
 
 import { createStore } from 'redux';
 
+export interface StoreDataType {
+    store_id: number,
+    name: string,
+    photo: string,
+    cateogry : string[]
+}
+
 export interface ProductDataList {
     products: ProductDataType[],
     recommendResult: ProductDataType[],
     likeProducts: ProductDataType[],
+    storeList?: StoreDataType[],
 }
 
 export interface ProductDataType {

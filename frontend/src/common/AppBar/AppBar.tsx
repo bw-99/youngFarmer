@@ -13,10 +13,11 @@ import searchIconImage from "../../assets/images/btn-search@3x.png";
 
 import { useDispatch, useSelector } from "react-redux";
 import { SearchCrateAction } from "../../pages/SearchPage/SearchActions";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { ShareIconBlackComponent, ShareIconComponent } from "./ShareIcon/ShareIcon";
 import { MySettingComponent } from "./SettingIcon/Mysetting";
 import { searchTryAction } from "../../pages/SearchPage/SearchDertailAction";
+import { RootState } from "../../reducers";
 
 // btn-search
 interface ScrollProps {
@@ -329,6 +330,11 @@ export const AppBarComponentSearch = () => {
     const dispatch = useDispatch();
     const [search, setSearch] = useState("");
     const navigate = useNavigate();
+    const params = useParams();
+
+    const toggleSelector: number = useSelector((state:RootState) =>
+        state.SearchToggleReducer
+    );
 
     const handleInputChange = (e:ChangeEvent<HTMLInputElement>) => {
         setSearch(e.target.value);
@@ -339,8 +345,7 @@ export const AppBarComponentSearch = () => {
             dispatch(
                 SearchCrateAction(search)
             );
-            dispatch(searchTryAction(search,  ()=>{navigate(`/search/${search}`)}));
-            // setSearch("");
+            navigate(`/search/${search}`);
         }
     }
 
@@ -358,9 +363,19 @@ export const AppBarComponentSearch = () => {
       }
 
 
+    const handleInitSearch = (search:string) => {
+        dispatch(searchTryAction(search));
+    }
+
+    useEffect(() => {
+        setSearch(params.search!);
+        handleInitSearch(params.search!);
+    }, [params.search]);
+    
 
     useEffect(
         ()=>{
+
             window.addEventListener('scroll', pop);
             window.addEventListener('keyup', handleUserKeyPress);
             return () => {

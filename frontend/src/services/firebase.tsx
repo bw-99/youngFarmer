@@ -16,24 +16,17 @@ interface Props {
     children?: ReactNode,
   }
   
-  
+/**
+ * * 변경 1 -> 2
+ * 1. user가 reload될 때마다 null로 설정됨 -> auth 받아오는 중 -> login 페이지로 이동 -> auth 받아옴 -> main 페이지로 이동
+ * 2. user가 reload될 때마다 null -> 렌더링 직전 localstorage 값 비교 -> true -> 바로 main -> 이후 auth 변경 때마다 localstorage 변경
+ */
 export const AuthProvider:FC<Props> = ({children}) :React.ReactElement|null => {
-    
     const [user, setUser] = useState<null | boolean>(getItemWithExpireTime("user")? true : false);
     const dispatch = useDispatch();
 
-    console.log("get item : " + user);
-
     useEffect(()=>{
-        console.log("auth change use effect");
-
-        /**
-         * * 변경 1 -> 2
-         * 1. user가 reload될 때마다 null로 설정됨 -> auth 받아오는 중 -> login 페이지로 이동 -> auth 받아옴 -> main 페이지로 이동
-         * 2. user가 reload될 때마다 null -> 렌더링 직전 localstorage 값 비교 -> true -> 바로 main -> 이후 auth 변경 때마다 localstorage 변경
-         */
-         getItemWithExpireTime("user")? setUser(true) : setUser(false);
-
+        getItemWithExpireTime("user")? setUser(true) : setUser(false);
         FirebaseAuth.onAuthStateChanged((data)=> {
             if(data){
                 setItemWithExpireTime("user", true, 1000*60*60);
@@ -46,7 +39,6 @@ export const AuthProvider:FC<Props> = ({children}) :React.ReactElement|null => {
             }
         })
     }, []);
-
     return (
         <AuthContext.Provider 
             value={user!}
