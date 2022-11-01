@@ -15,10 +15,25 @@ export const BottomBarComp = () => {
     // const changeHeartIcon = (event: React.MouseEvent) => {
     //     !storeLike.getState() ? storeLike.dispatch({ type: 'CHANGETRUE' }) : storeLike.dispatch({ type: 'CHANGEFALSE' });
     // }
+    interface BottomBarTopUi {
+        borderTopLeftRad: string,
+        borderTopRightRad: string,
+    }
+
+    const barTopUiOpen: BottomBarTopUi = {
+        borderTopLeftRad: "0px",
+        borderTopRightRad: "0px",
+    }
+
+    const barTopUiClose: BottomBarTopUi = {
+        borderTopLeftRad: "12px",
+        borderTopRightRad: "12px",
+    }
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [isLiked, setIsLiked]  = useState(false);
+    const [barTopUI, setbarTopUI] = useState(barTopUiClose);
     const product_id = 1;
 
     const likeselector: LikeData[] = useSelector((state:RootState) =>
@@ -40,6 +55,17 @@ export const BottomBarComp = () => {
         }
 
     }, [likeselector])
+
+    useEffect(() => {
+        if (modalselector.open_modal) {
+            //모달 열려있을 때 바텀바 UI
+            setbarTopUI(barTopUiOpen);
+        }
+        else {
+            //닫혀있을 때
+            setbarTopUI(barTopUiClose);
+        }
+    }, [modalselector.open_modal]);
 
     const purchaseClickEvent = (e: React.MouseEvent) => {
         e.preventDefault();
@@ -63,7 +89,7 @@ export const BottomBarComp = () => {
     return (
         <div>
             <div style={{height: "100px"}}></div>
-            <BottomBoxAtom style={{maxWidth: "625px", }}>
+            <BottomBoxAtom style={{ maxWidth: "625px", borderTopLeftRadius: barTopUI.borderTopLeftRad, borderTopRightRadius: barTopUI.borderTopRightRad, }}>
                 <div style={{marginLeft:"16px", display:"flex", alignItems:"center", flexDirection: "column"}}>
                     <BottomBoxLikeLikeFunc />
                     <BottomBoxLikeText> 20 </BottomBoxLikeText>

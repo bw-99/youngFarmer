@@ -36,7 +36,7 @@ export const PurchaseDetailBox = styled.div`
 `
 
 export const PurchaseDetailText = styled.div`
-  width: 129px;
+  width: 250px;
   height: 19px;
   margin: 1px 166px 0 0;
   font-family: AppleSDGothicNeo;
