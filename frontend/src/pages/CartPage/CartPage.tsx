@@ -12,6 +12,8 @@ import shopping_bag from "../../assets/images/shopping_bag@3x.png";
 import { AppBarComponentMyPage, AppBarComponentNoBack, AppBarComponentOnlyBack } from "../../common/AppBar/AppBar";
 
 
+import {CartProductComponent} from "./component/CartProduct"
+
 
 import { BottomNavigationBar } from "../../common/BottomNavigationBar/BottomNavigationBar";
 import { RootState } from "../../reducers";
@@ -19,6 +21,8 @@ import { CartData } from "../../reducers/CartReducer";
 import { MyPageDataType } from "../../reducers/MypageReducer";
 import { ProductDataType } from "../../reducers/ProductReducer";
 import { cartCancelAction, getCartAction } from "./CartAction";
+
+import {PaymentBtn} from "./atom/CartProduct"
 
 
 function CartPage(props: any) {
@@ -73,6 +77,14 @@ function CartPage(props: any) {
     return (
         <AppFrame>
             <AppBarComponentOnlyBack title={"장바구니"} />
+<<<<<<< HEAD
+            <CartProductComponent/>
+            <CartProductComponent/>
+            <div style={{ height:"88px"}}>
+                <PaymentBtn>결제하기</PaymentBtn>
+            </div>
+=======
+>>>>>>> f771c7c35cecb5419c9cc450b1f108796e4dca41
         </AppFrame>
     )
 
