@@ -47,22 +47,27 @@ margin:0px 16px;
 export const CartProductBoxPart2S1 = styled.div`
 width:25%;
 display:flex;
-align-itmes:center;
+align-items:center;
 `
 export const CartProductBoxPart2S2 = styled.div`
 width:75%;
 `
 
-export const CartProductBoxPart2Img = styled.div`
+export const CartProductBoxPart2Img = styled.img`
 width: 88px;
 height: 88px;
 border-radius: 12px;
-background-color:black;
+object-fit: cover;
+/* background-color:black; */
 `
 export const CartProductBoxPart2SmallBox = styled.div`
 height:29px;
 display:flex;
 justify-content:space-between;
+font-family: AppleSDGothicNeo;
+  font-size: 15px;
+  font-weight: 500;
+  color: #444444;
 
 `
 
@@ -125,18 +130,20 @@ export const CartProductBoxPart5 = styled.div`
 height:85px;
 display:flex;
 margin:0px 16px;
+justify-content: flex-start;
 `
 
 export const CartBtn1 = styled.div`
 
-    width:45%;
+    /* width: 45%; */
+    flex: 1;
     height: 48px;
     border-radius: 8px;
     border: solid 1px #dfdfdf;
-    background-color: #fff;
+    background-color: #ffffff;
     display:flex;
-    align-itmes:center;
-    justify-content:center
+    align-items:center;
+    justify-content:center;
     font-family: AppleSDGothicNeo;
     font-size: 16px;
     font-weight: 600;
@@ -148,10 +155,34 @@ export const CartBtn1 = styled.div`
     color: #6b6b6b;
     justify-content:center;
     align-items:center;
-    margin:0px 10px;
+    /* margin:0px 10px; */
   `
 
+export const CartBtn2 = styled.div`
 
+    /* width: 45%;  */
+    flex: 1;
+    height: 48px;
+    border-radius: 8px;
+    border: solid 1px #fb6159;
+    background-color: #ffffff;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family: AppleSDGothicNeo;
+    font-size: 16px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #6b6b6b;
+    justify-content:center;
+    align-items:center;
+    /* margin:0px 10px; */
+  `
 
 
 

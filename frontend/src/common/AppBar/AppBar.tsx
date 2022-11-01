@@ -52,7 +52,7 @@ const AppBarAtom = styled.div<ScrollPositionProps>`
     height: 56px;
     /* transition: background-color 200ms cubic-bezier(0.4, 0, 0.2, 1); */
     top: 0;
-    background-color: ${props => `rgba(255,255,255,calc(${props.topPosition/100}))`};
+    background-color: ${props => `rgba(255,255,255,calc(${props.topPosition/50}))`};
     width: 100vw;
     max-width: 625px;
     display: flex;

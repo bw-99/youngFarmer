@@ -55,21 +55,21 @@ function CartPage(props: any) {
         return (
             <AppFrame>
                 <AppBarComponentOnlyBack title={"장바구니"} />
+                
+                <div style={{paddingBottom: "88px",}}>
                 {
                     pidSelector.map((product) => {
                         return(
-                            <div key={product.product_id} style={{width: "200px", height: "100px", backgroundColor:"yellow"}}>
-                                <h3>{product.title}</h3>
-                                <div>
-                                    <button onClick={()=> {
-                                        dispatch(cartCancelAction(product.product_id));
-                                    }}> 삭제하기 </button>
-                                    <button> 바로 구매 </button>
-                                </div>
-                            </div>
+                            <CartProductComponent product={product}/>
                         )
                     })
                 }
+
+                </div>
+                
+                <div style={{position:"fixed", bottom: 0, maxWidth:"625px", width:"100%",height:"88px"}}>
+                    <PaymentBtn style={{margin:"0 16px"}}>결제하기</PaymentBtn>
+                </div>
             </AppFrame>
         )
     }
@@ -77,14 +77,7 @@ function CartPage(props: any) {
     return (
         <AppFrame>
             <AppBarComponentOnlyBack title={"장바구니"} />
-<<<<<<< HEAD
-            <CartProductComponent/>
-            <CartProductComponent/>
-            <div style={{ height:"88px"}}>
-                <PaymentBtn>결제하기</PaymentBtn>
-            </div>
-=======
->>>>>>> f771c7c35cecb5419c9cc450b1f108796e4dca41
+
         </AppFrame>
     )
 
