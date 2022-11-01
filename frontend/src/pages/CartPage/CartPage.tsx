@@ -12,10 +12,14 @@ import shopping_bag from "../../assets/images/shopping_bag@3x.png";
 import { AppBarComponentMyPage, AppBarComponentNoBack, AppBarComponentOnlyBack } from "../../common/AppBar/AppBar";
 
 
+import {CartProductComponent} from "./component/CartProduct"
+
 
 import { BottomNavigationBar } from "../../common/BottomNavigationBar/BottomNavigationBar";
 import { RootState } from "../../reducers";
 import { MyPageDataType } from "../../reducers/MypageReducer";
+
+import {PaymentBtn} from "./atom/CartProduct"
 
 
 function CartPage(props: any) {
@@ -30,7 +34,12 @@ function CartPage(props: any) {
 
     return (
         <AppFrame>
-            <AppBarComponentOnlyBack title={"주문 / 결제"} />
+            <AppBarComponentOnlyBack title={"장바구니"} />
+            <CartProductComponent/>
+            <CartProductComponent/>
+            <div style={{ height:"88px"}}>
+                <PaymentBtn>결제하기</PaymentBtn>
+            </div>
         </AppFrame>
     )
 
