@@ -37,15 +37,16 @@ export const ProfileBox   = styled.div`
     width:inherit;
     display:flex;
     background-color:white;
+    max-width:625px;
     
 `
 
 export const ProfileBoxSmall1 = styled.div`
-    width:20vw;
+    width:20%;
 `
 
 export const ProfileBoxSmall2 = styled.div`
-    width:80vw;
+    width:80%;
 `
 
 export const ProfileBoxSmallSmall2 = styled.div`
