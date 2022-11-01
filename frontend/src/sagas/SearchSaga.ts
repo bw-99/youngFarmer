@@ -2,13 +2,13 @@ import { call, delay, put, SagaReturnType, takeLatest } from "redux-saga/effects
 import { LOGIN_FAIL, LOGIN_PAYLOAD, LOGIN_SUCCESS, LOGIN_TRY, LOGIN_WITH_ANONYMOUS, LOGIN_WITH_KAKAO, LOGIN_WITH_NAVER } from "../pages/LoginPage/LoginAction";
 import { db, kakaoConfig } from "..";
 import { GET_PRODUCT, GET_PRODUCT_SUCCESS } from "../pages/ProductPage/ProductAction";
-import { collection, DocumentData, endAt, getDoc, getDocs, limit, orderBy, query, QueryConstraint, startAt, where } from "firebase/firestore";
+import { collection, DocumentData, endAt, getDoc, getDocs, limit, orderBy, query,  QueryConstraint, startAt, where } from "firebase/firestore";
 import { AxiosResponse } from "axios";
 import { ProductDataType, StoreDataType } from "../reducers/ProductReducer";
 import { GET_PROFILE, GET_PROFILE_SUCCESS } from "../pages/MyPage/MyAction";
 import { MyPageDataType } from "../reducers/MypageReducer";
 import { getAuth } from "firebase/auth";
-import { SEARCH_FAIL, SEARCH_PID_FAIL, SEARCH_PID_SUCCESS, SEARCH_PID_TRY, SEARCH_RECOMMNEND_SUCCESS, SEARCH_RECOMMNEND_TRY, SEARCH_STORE_SUCCESS, SEARCH_STORE_TRY, SEARCH_SUCCESS, SEARCH_TRY } from "../pages/SearchPage/SearchDertailAction";
+import { FILTER_TYPE, SEARCH_FAIL, SEARCH_FILTER_TRY, SEARCH_PID_FAIL, SEARCH_PID_SUCCESS, SEARCH_PID_TRY, SEARCH_RECOMMNEND_SUCCESS, SEARCH_RECOMMNEND_TRY, SEARCH_STORE_SUCCESS, SEARCH_STORE_TRY, SEARCH_SUCCESS, SEARCH_TRY } from "../pages/SearchPage/SearchDertailAction";
 
 
 
@@ -53,6 +53,47 @@ async function getSearchStoreAPI(searchResult:ProductDataType[], payload:any) {
     return dataList;
 }
 
+async function getSearchFilterAPI(payload:any) {
+    let search = payload.search;
+    let filter: any = payload.filter;
+    let priceRange:any = payload.priceRange;
+    console.log(filter);
+    console.log(priceRange);
+
+    const productRef = collection(db, "product");
+
+    let queryTemp = query(productRef);
+
+    Object.keys(filter).map((key) => {
+        if(key){
+            console.log(key + " : " + filter[key]);
+            queryTemp = query(queryTemp, where(key, "==", filter[key]))
+            // queryList.push(
+            //     query(productRef, where(key, "==", filter[key]))
+            // );
+        }
+    })
+
+    queryTemp = query(queryTemp,  where("price", ">=", priceRange.minPrice));
+    queryTemp = query(queryTemp,  where("price", "<=", priceRange.maxPrice));
+    
+    let dataList = [];
+    const fbdata = await getDocs(queryTemp);
+    dataList = fbdata.docs.map((doc) => {
+        return doc.data();
+    })
+
+    let searchDataList:any = [];
+
+    dataList.map((data:any) => {
+        if(`${data.title}`.includes(search)){
+            console.log("inlcude");
+            searchDataList.push(data);
+        }
+    })
+
+    return searchDataList;
+}
 
 
 async function getSearchAPI(payload:any) {
@@ -147,6 +188,34 @@ function* getSearch(action:any) {
     }
 }
 
+function* getSearchFilter(action:any) {
+    console.log("get profile" + action.payload);
+    
+    const searchResult:ProductDataType[] = yield call(getSearchFilterAPI, action.payload);
+    const recommendResult:ProductDataType[] = yield call(getSearchOtherAPI, action.payload);
+    const storeResult:StoreDataType[] = yield call(getSearchStoreAPI, searchResult, action.payload);
+    
+    if(searchResult ){        
+        // console.log("result" + JSON.stringify(otherResult));
+        yield put({
+            type: SEARCH_SUCCESS,
+            payload: {
+                products: searchResult,
+                recommendResult: recommendResult,
+                storeList: storeResult
+            },
+            callback: action.payload.callback
+        }); 
+    }
+    else{
+        yield put({
+            type: SEARCH_FAIL,
+            callback: action.payload.callback
+        }); 
+    }
+}
+
+
 
 
 function* getSearchRecommend(action:any) {
@@ -192,6 +261,10 @@ function* searchIndex(action: any) {
     switch (action.payload.type) {
         case SEARCH_TRY:
             yield getSearch(action); 
+            break;
+
+        case SEARCH_FILTER_TRY:
+            yield getSearchFilter(action); 
             break;
 
         case SEARCH_RECOMMNEND_TRY:

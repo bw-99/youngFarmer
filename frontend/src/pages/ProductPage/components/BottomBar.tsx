@@ -99,8 +99,10 @@ export const BottomBarComp = ({product_id}:bottomBarCompParam) => {
                     <BottomBoxLikeText> 20 </BottomBoxLikeText>
                 </div>
                 <div style={{display: "flex"}}>
-                    <BottomBoxShoppingCart onClick={() => {
-                        dispatch(cartAddAction(product_id));
+                    {/* // ! 무게, 개수, 포장 선택 유무에 따라 팝업 창 띄울지 결제/장바구니로 갈지 결정 */}
+                    <BottomBoxShoppingCart onClick={(e) => {
+                        purchaseClickEvent(e);
+                        // dispatch(cartAddAction(product_id));
                     }} style={{marginRight: "9px"}}> 장바구니 </BottomBoxShoppingCart>
                     <BottomBoxBuy onClick={purchaseClickEvent} style={{ marginRight: "16px" }}> 구매하기 </BottomBoxBuy>
                 </div>

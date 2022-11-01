@@ -62,7 +62,7 @@ export const ItemUnitComp = ({image_width, product}:itemProps) => {
     return (
         <Item>
             <ItemUnitImgComp image_width={image_width} bsFlag={false} product={product}/>
-            <ItemUnitShoppingBagComp product={product}/>
+            {/* <ItemUnitShoppingBagComp product={product}/> */}
         </Item>
     );
 }

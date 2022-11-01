@@ -28,7 +28,6 @@ function SearchPage(props: any) {
             <AppBarComponentSearch />
             <CategoryComponent />
             <RecentSearchComponent />
-            <RecommendStoreComponent />
             <BottomNavigationBar />
         </AppFrame>
     );

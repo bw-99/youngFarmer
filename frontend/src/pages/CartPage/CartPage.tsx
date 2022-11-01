@@ -12,6 +12,8 @@ import shopping_bag from "../../assets/images/shopping_bag@3x.png";
 import { AppBarComponentMyPage, AppBarComponentNoBack, AppBarComponentOnlyBack } from "../../common/AppBar/AppBar";
 
 
+import {CartProductComponent} from "./component/CartProduct"
+
 
 import { BottomNavigationBar } from "../../common/BottomNavigationBar/BottomNavigationBar";
 import { RootState } from "../../reducers";
@@ -19,6 +21,8 @@ import { CartData } from "../../reducers/CartReducer";
 import { MyPageDataType } from "../../reducers/MypageReducer";
 import { ProductDataType } from "../../reducers/ProductReducer";
 import { cartCancelAction, getCartAction } from "./CartAction";
+
+import {PaymentBtn} from "./atom/CartProduct"
 
 
 function CartPage(props: any) {
@@ -51,21 +55,21 @@ function CartPage(props: any) {
         return (
             <AppFrame>
                 <AppBarComponentOnlyBack title={"장바구니"} />
+                
+                <div style={{paddingBottom: "88px",}}>
                 {
                     pidSelector.map((product) => {
                         return(
-                            <div key={product.product_id} style={{width: "200px", height: "100px", backgroundColor:"yellow"}}>
-                                <h3>{product.title}</h3>
-                                <div>
-                                    <button onClick={()=> {
-                                        dispatch(cartCancelAction(product.product_id));
-                                    }}> 삭제하기 </button>
-                                    <button> 바로 구매 </button>
-                                </div>
-                            </div>
+                            <CartProductComponent product={product}/>
                         )
                     })
                 }
+
+                </div>
+                
+                <div style={{position:"fixed", bottom: 0, maxWidth:"625px", width:"100%",height:"88px"}}>
+                    <PaymentBtn style={{margin:"0 16px"}}>결제하기</PaymentBtn>
+                </div>
             </AppFrame>
         )
     }
@@ -73,6 +77,7 @@ function CartPage(props: any) {
     return (
         <AppFrame>
             <AppBarComponentOnlyBack title={"장바구니"} />
+
         </AppFrame>
     )
 

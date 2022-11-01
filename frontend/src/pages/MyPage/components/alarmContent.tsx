@@ -1,5 +1,5 @@
 
-import React from "react";
+import React  from "react";
 
 import { useSelector } from "react-redux";
 import { RootState } from "../../../reducers";
@@ -11,7 +11,7 @@ export const AlramContentComp = () => {
     // title("오픈이벤트!")
     // date ("2022 12 29")
     // 데이터 정보를 받고 박스내용만 생성
-    
+
     // 테스트용을 변수 설정
     const data = {
         category : "이벤트",

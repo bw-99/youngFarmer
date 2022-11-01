@@ -85,24 +85,27 @@ export const FilterPriceBox= styled.div`
 `
 
 export const FilterpriceBoxInner = styled.div`
-    width:149px;
+    /* width:149px; */
     height:20px;
     align-items:center;
+    display: flex;
+    justify-content: space-between;
+    margin: 0px 16px;
 `
 
 export const FilterPriceInput = styled.input`
-    width: 56px;
-    height: 19px;
-    font-family: AppleSDGothicNeo;
-    font-size: 16px;
-    font-weight: 500;
     font-stretch: normal;
     font-style: normal;
     line-height: normal;
     letter-spacing: normal;
-    color: #b5b5b5;
     border: none;
     background:transparent;
+    width: 100px ;
+    
+    font-family: AppleSDGothicNeo;
+    font-size: 16px;
+    font-weight: 600;
+    color: #272727;
 `
 
 export const FilterPriceWonLabel = styled.span`
