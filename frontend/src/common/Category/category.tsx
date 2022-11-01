@@ -26,6 +26,7 @@ const CategoryIconBox = styled.div`
 
 
 const CategoryIcon = styled.img`
+max-width: calc(625px - 16px - 16px);
     width: 34px;
     height: 34px;
     padding: 13px;

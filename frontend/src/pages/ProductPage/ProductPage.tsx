@@ -71,7 +71,7 @@ function ProductPage(props: any) {
                 <ItemInfoComp />
                 <ItemDetailComp />
                 {
-                    isOpen  ? <PurchaseComp /> : null
+                    isOpen  ? <PurchaseComp /> : <></>
                 }
                 <BottomBarComp product_id={selector.product_id} />
                     {/* <BottomNavigationBar /> */}

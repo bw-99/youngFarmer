@@ -30,8 +30,10 @@ export const IndexSelectedLine = styled.div`
 
 
 export const ImageBox = styled.img`
+  /* max-width: calc(625px - 16px - 16px); */
   object-fit: contain;
-  width: calc(100vw - 32px);
+  width: 100%;
+  /* width: calc(100vw - 32px); */
   margin: 8px 0;
 `
 

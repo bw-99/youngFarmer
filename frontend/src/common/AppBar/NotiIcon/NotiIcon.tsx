@@ -4,6 +4,7 @@ import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const AppBarIcon = styled.img`
+  max-width: 625px;
   width: 24px;
   height: 24px;
   object-fit: contain;

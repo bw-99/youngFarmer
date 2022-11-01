@@ -55,15 +55,18 @@ export const PurchaseComp = () => {
     return (
         <div style={{ display: "flex", height: "100vh", flexDirection: "column", position: "fixed", bottom: parentBottomState, zIndex: "10000", width: "100vw", maxWidth: "625px", }}>
             <div style={{ zIndex: "0", height: "100vh" }}>
-                <PurchaseBackGround style={{ maxWidth: "625px" }} />
+                <PurchaseBackGround onClick={()=> {
+                    dispatch(closeModalAction(modalselector));
+                }} style={{ maxWidth: "625px" }} />
             </div>
             <div style={{ zIndex: "2", } }>
                 {
                     purchaseIndex === 0 ?
+
                         <div style={{backgroundColor: "white", borderTopLeftRadius: "12px", borderTopRightRadius: "12px", }} >
                             <div style={{ maxWidth: "625px", /*padding: " 32px 16px 0 16px"*/ padding:"0 16px", }}>
                                 <div style={{ maxWidth: "625px", display: "flex", alignItems: "center", height: "32px", }}>
-                                    <BackIconArrow onClick={(e: React.MouseEvent) => { e.preventDefault(); dispatch(closeModalAction(modalselector)) }} src={backIcon} />
+                                    {/* <BackIconArrow onClick={(e: React.MouseEvent) => { e.preventDefault(); dispatch(closeModalAction(modalselector)) }} src={backIcon} /> */}
                                 </div>
                                 <PurchaseBoxAtom style={{ maxWidth: "625px", flexDirection: "column" }}>
                                     <PurchaseMainSelectComp setIndexFn={SetIndex} setIndexNum={1} marginTop={"0px"} purchaseText={"무게 선택"} purchaseDetailText={"무게를 선택해주세요"} />

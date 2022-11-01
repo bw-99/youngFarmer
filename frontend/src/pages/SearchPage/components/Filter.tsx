@@ -3,13 +3,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../reducers";
 import { SearchHistoryType, SearchHistoryTypeList } from "../SearchConstants";
 import { json } from "stream/consumers";
-import { SearchDeleteAction } from "../SearchActions";
+import { SearchDeleteAction, SearchFilterCloseAction } from "../SearchActions";
 import {BottomImg, WonSpan,FlowSpan,FilterBoxSpan,BottomBox,FilterBox,FilterButtonApplyBox,FilterButtonApplySpan,FilterButtonResetBox,FilterButtonResetSpan,FilterCategoryBox,FilterCategoryBoxSpan,FilterLabelBox,FilterLabelBoxSpan,FilterPriceBox,FilterPriceInput,FilterPriceWonLabel,FilterTitleBox,FilterpriceBoxInner} from "../atoms/FilterItem"
 import MultiRangeSlider from "./MultiRangeSlider"
 import { SEARCH_FILTER } from "../../../reducers/SearchReducer";
+import { searchFilterTryAction } from "../SearchDertailAction";
+import { useParams } from "react-router-dom";
 
 
 export const FilterComponent = () => {
+    const params = useParams();
     // const [filter, setFilter] = useState<SEARCH_FILTER>({
     //     entire: false,
     //     best: false,
@@ -18,22 +21,56 @@ export const FilterComponent = () => {
     //     vegatable: false,
     //     nonPesticide: false
     // });
+    const dispatch = useDispatch();
+
     const [entire, setEntire] = useState(false);
     const [best, setBest] = useState(false);
-    const [discount, setDiscount] = useState(false);
-    const [ontimeFruit, setOntimeFruit] = useState(false);
+    const [sale, setSale] = useState(false);
+    const [ontime, setOntime] = useState(false);
     const [vegatable, setVegatable] = useState(false);
     const [nonPesticide, setNonPesticide] = useState(false);
 
+    // const [maxLimit, setMaxLimit] = useState(100000);
+
+    const [minPrice, setMinPrice] = useState(0);
+    const [maxPrice, setMaxPrice] = useState(100000);
+
+    const makeFilter = () => {
+        let obj:any = {};
+        if(best){
+            obj["is_best"] = best;
+        }
+        if(sale){
+            obj["is_sale"] = sale;
+        }
+        if(nonPesticide) {
+            obj["is_nonpesticide"] = nonPesticide;
+        }
+        if(ontime) {
+            obj["is_ontime"] =ontime;
+        }
+        if(vegatable){
+            obj["is_vegitable"] = vegatable;
+        }
+        return obj;
+    }
+
+    const makePriceRange = () => {
+        return {
+            minPrice: minPrice,
+            maxPrice: maxPrice
+        }
+    }
+
 
     const filterList =[
-        {
-            title: "전체",
-            isActive: entire,
-            onclick: () => {
-                setEntire(!entire);
-            }
-        },
+        // {
+        //     title: "전체",
+        //     isActive: entire,
+        //     onclick: () => {
+        //         setEntire(!entire);
+        //     }
+        // },
         {   
             title: "BEST",
             isActive: best,
@@ -43,16 +80,16 @@ export const FilterComponent = () => {
         },
         {   
             title: "할인중",
-            isActive: discount,
+            isActive: sale,
             onclick: () => {
-                setDiscount(!discount);
+                setSale(!sale);
             }
         },
         {   
             title: "제철과일",
-            isActive: ontimeFruit,
+            isActive: ontime,
             onclick: () => {
-                setOntimeFruit(!ontimeFruit);
+                setOntime(!ontime);
             }
         },
         {   
@@ -120,9 +157,9 @@ export const FilterComponent = () => {
             </FilterLabelBox>
 
             <div style={{height:"auto", display:"flex",flexWrap:"wrap", alignItems:"center"}}>
-                <FilterPriceBox>
+                <FilterPriceBox style={{marginLeft: "6px"}}>
                     <FilterpriceBoxInner>
-                        <FilterPriceInput></FilterPriceInput>
+                        <FilterPriceInput  placeholder="최소금액" disabled={true} value={minPrice.toLocaleString("kr")}></FilterPriceInput>
                         <WonSpan>
                             원
                         </WonSpan>
@@ -133,7 +170,7 @@ export const FilterComponent = () => {
                 </FlowSpan>
                 <FilterPriceBox>
                     <FilterpriceBoxInner>
-                        <FilterPriceInput></FilterPriceInput>
+                        <FilterPriceInput placeholder="최대금액" disabled={true} value={maxPrice.toLocaleString("kr")}></FilterPriceInput>
                         <WonSpan>
                             원
                         </WonSpan>
@@ -145,7 +182,8 @@ export const FilterComponent = () => {
                 <span></span>
             </div>
             <div style={{ height:"15px"}}>
-                <MultiRangeSlider min={0} max={500000} />
+                {/* <h1> {minPrice} </h1> */}
+                <MultiRangeSlider minPrice={0} maxPrice={100000} setMinPrice={setMinPrice} setMaxPrice = {setMaxPrice} />
             </div>
             <div style={{display:"flex",height:"auto",marginTop:"50px"}}>
                 <FilterButtonResetBox>
@@ -154,7 +192,12 @@ export const FilterComponent = () => {
                         초기화
                     </FilterButtonResetSpan>
                 </FilterButtonResetBox>
-                <FilterButtonApplyBox>
+                <FilterButtonApplyBox onClick={()=> {
+                    let filter = makeFilter();
+                    let priceRange = makePriceRange();
+                    dispatch(searchFilterTryAction(params.search!, filter, priceRange));
+                    dispatch(SearchFilterCloseAction());
+                }}>
                     <FilterButtonApplySpan>
                         적용하기
                     </FilterButtonApplySpan>

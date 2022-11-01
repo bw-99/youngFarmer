@@ -27,6 +27,7 @@ const IconItem = styled.div`
 `
 
 const IconImage = styled.img`
+    max-width: calc(625px - 16px - 16px);
   width: 24px;
   height: 24px;
   padding: 10px 25px 7px 25px;

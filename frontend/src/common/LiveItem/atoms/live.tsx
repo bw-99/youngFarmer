@@ -10,6 +10,7 @@ line-height: normal;
 
 
 export const LiveTitleArrow = styled.img`
+max-width: calc(625px - 16px - 16px);
 width: 20px;
 height: 20px;
 `
@@ -25,6 +26,7 @@ padding: 0 8px 0 8px;
 
 
 export const LiveItemImage = styled.img`
+   max-width: calc(625px - 16px - 16px);
     width: calc(100vw - 32px);
     height: 400px;
     border-radius: 12px;
@@ -41,7 +43,8 @@ export const LiveItemCoverTextDate = styled.div`
 `
 
 export const LiveItemCover = styled.div`
-    width: calc(100vw - 32px);
+    /* width: calc(100vw - 32px); */
+    width: 100%;
     height: 400px;
     border-radius: 12px;
     background-image: linear-gradient(to top, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, 0.7));
@@ -78,6 +81,7 @@ export const LiveItemCoverBottom = styled.div`
 `
 
 export const LiveItemCoverBottomImage = styled.img`
+  max-width: calc(625px - 16px - 16px);
   width: 66px;
   height: 66px;
   object-fit: cover;
