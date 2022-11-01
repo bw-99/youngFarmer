@@ -1,4 +1,4 @@
-import { SEARCH_FAIL, SEARCH_LIKE_SUCCESS, SEARCH_RECOMMNEND_SUCCESS, SEARCH_STORE_SUCCESS, SEARCH_SUCCESS } from "../pages/SearchPage/SearchDertailAction";
+import { SEARCH_FAIL, SEARCH_PID_SUCCESS, SEARCH_RECOMMNEND_SUCCESS, SEARCH_STORE_SUCCESS, SEARCH_SUCCESS } from "../pages/SearchPage/SearchDertailAction";
 import { FILTER_CLOSE, FILTER_OPEN, SEARCH_CREATE, SEARCH_DELETE, TOGGLE_PRODUCT, TOGGLE_STORE } from "../pages/SearchPage/SearchActions";
 import { SearchHistoryType, SearchHistoryTypeList } from "../pages/SearchPage/SearchConstants";
 import { ProductDataList } from "./ProductReducer";
@@ -31,7 +31,7 @@ const checkDuplicate = (stateHistory: SearchHistoryType[], payload: string) => {
 const searchDetailInitState : ProductDataList = {
     products: [],
     recommendResult: [],
-    likeProducts: [],
+    pidProducts: [],
     storeList: []
 }
 
@@ -53,17 +53,17 @@ export function SearchDetailReducer(state = searchDetailInitState, action: any) 
                 recommendResult: action.payload.recommendResult,
             };
 
-        case SEARCH_LIKE_SUCCESS:
+        case SEARCH_PID_SUCCESS:
             return {
                 ...state,
-                likeProducts: action.payload.likeProducts,
+                pidProducts: action.payload.pidProducts,
             };
 
         case SEARCH_FAIL:
             return {
                 ...state,
                 products: action.payload.products,
-                likeProducts: action.payload.recommendResult,
+                pidProducts: action.payload.recommendResult,
             };
 
         // case SEARCH_OTHER_SUCCESS:

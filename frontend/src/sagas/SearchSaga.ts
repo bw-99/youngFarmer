@@ -8,7 +8,7 @@ import { ProductDataType, StoreDataType } from "../reducers/ProductReducer";
 import { GET_PROFILE, GET_PROFILE_SUCCESS } from "../pages/MyPage/MyAction";
 import { MyPageDataType } from "../reducers/MypageReducer";
 import { getAuth } from "firebase/auth";
-import { SEARCH_FAIL, SEARCH_LIKE_FAIL, SEARCH_LIKE_SUCCESS, SEARCH_LIKE_TRY, SEARCH_RECOMMNEND_SUCCESS, SEARCH_RECOMMNEND_TRY, SEARCH_STORE_SUCCESS, SEARCH_STORE_TRY, SEARCH_SUCCESS, SEARCH_TRY } from "../pages/SearchPage/SearchDertailAction";
+import { SEARCH_FAIL, SEARCH_PID_FAIL, SEARCH_PID_SUCCESS, SEARCH_PID_TRY, SEARCH_RECOMMNEND_SUCCESS, SEARCH_RECOMMNEND_TRY, SEARCH_STORE_SUCCESS, SEARCH_STORE_TRY, SEARCH_SUCCESS, SEARCH_TRY } from "../pages/SearchPage/SearchDertailAction";
 
 
 
@@ -169,19 +169,19 @@ function* getSearchRecommend(action:any) {
 
 
 function* getSearchByPid(action:any) {
-    const likeProducts:ProductDataType[] = yield call(getSearchByPidAPI, action.payload);
+    const pidProducts:ProductDataType[] = yield call(getSearchByPidAPI, action.payload);
 
-    if(likeProducts ){        
+    if(pidProducts ){        
         yield put({
-            type: SEARCH_LIKE_SUCCESS,
+            type: SEARCH_PID_SUCCESS,
             payload: {
-                likeProducts: likeProducts
+                pidProducts: pidProducts
             },
         }); 
     }
     else{
         yield put({
-            type: SEARCH_LIKE_FAIL,
+            type: SEARCH_PID_FAIL,
         }); 
     }
 }
@@ -198,7 +198,7 @@ function* searchIndex(action: any) {
             yield getSearchRecommend(action);
             break;
 
-        case SEARCH_LIKE_TRY:
+        case SEARCH_PID_TRY:
             yield getSearchByPid(action);
             break;
 

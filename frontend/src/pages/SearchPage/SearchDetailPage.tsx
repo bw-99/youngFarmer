@@ -46,7 +46,6 @@ function SearchDetailPage(props: any) {
             <AppFrame>
                 <AppBarComponentSearch />
                 <ToggleComponent />
-                <OtherChoiceComp />
                 <SearchResultComp />
 
                 <BackgroundWrapper 

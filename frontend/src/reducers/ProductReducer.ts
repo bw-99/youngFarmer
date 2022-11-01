@@ -13,7 +13,7 @@ export interface StoreDataType {
 export interface ProductDataList {
     products: ProductDataType[],
     recommendResult: ProductDataType[],
-    likeProducts: ProductDataType[],
+    pidProducts: ProductDataType[],
     storeList?: StoreDataType[],
 }
 

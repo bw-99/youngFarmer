@@ -1,5 +1,5 @@
 import { children } from "cheerio/lib/api/traversing";
-import { browserSessionPersistence, getAuth, setPersistence } from "firebase/auth";
+import { browserSessionPersistence, getAuth, setPersistence, User } from "firebase/auth";
 import React, { useState, useEffect, ReactNode, FC, createContext, useContext } from "react";
 import { render } from "react-dom";
 import { useDispatch } from "react-redux";
@@ -22,7 +22,7 @@ interface Props {
  * 2. user가 reload될 때마다 null -> 렌더링 직전 localstorage 값 비교 -> true -> 바로 main -> 이후 auth 변경 때마다 localstorage 변경
  */
 export const AuthProvider:FC<Props> = ({children}) :React.ReactElement|null => {
-    const [user, setUser] = useState<null | boolean>(getItemWithExpireTime("user")? true : false);
+    const [user, setUser] = useState<null | any>(getItemWithExpireTime("user")? true : false);
     const dispatch = useDispatch();
 
     useEffect(()=>{
@@ -31,7 +31,7 @@ export const AuthProvider:FC<Props> = ({children}) :React.ReactElement|null => {
             if(data){
                 setItemWithExpireTime("user", true, 1000*60*60);
                 dispatch(getLikeAction(data.uid));
-                setUser(true);
+                setUser(user);
             }
             else{
                 removeItem("user");

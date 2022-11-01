@@ -12,9 +12,9 @@ export const SEARCH_RECOMMNEND_SUCCESS = "SEARCH_RECOMMNEND_SUCCESS";
 export const SEARCH_RECOMMNEND_FAIL = "SEARCH_RECOMMNEND_FAIL";
 
 
-export const SEARCH_LIKE_TRY = "SEARCH_LIKE_TRY";
-export const SEARCH_LIKE_SUCCESS = "SEARCH_LIKE_SUCCESS";
-export const SEARCH_LIKE_FAIL = "SEARCH_LIKE_FAIL";
+export const SEARCH_PID_TRY = "SEARCH_PID_TRY";
+export const SEARCH_PID_SUCCESS = "SEARCH_PID_SUCCESS";
+export const SEARCH_PID_FAIL = "SEARCH_PID_FAIL";
 
 export const searchTryAction = (search:string) => {
     console.log("searchTryAction");
@@ -51,7 +51,7 @@ export const searchLikeTryAction = (pidList: number[]) => {
     return {
         type: SEARCH_TRY,
         payload: {
-            type: SEARCH_LIKE_TRY,
+            type: SEARCH_PID_TRY,
             pidList: pidList
         }
     }

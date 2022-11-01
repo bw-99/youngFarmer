@@ -32,7 +32,7 @@ export const RecentSearchComponent = () => {
                 {RecentSearchHistoryItemComponent("샤인머스켓")}
                 {RecentSearchHistoryItemComponent("사과")}
                 {RecentSearchHistoryItemComponent("시나몬 골드")} */}
-                {searchHistoryList.map(item => <RecentSearchHistoryItemComponent text={item.text}/>)}
+                {searchHistoryList.map(item => <RecentSearchHistoryItemComponent key={item.text} text={item.text}/>)}
 
             </div>
             <div style={{margin:"22px 16px 0px 16px"}}>
@@ -66,7 +66,8 @@ export const RecentSearchHistoryItemComponent = ({text}:StringProp) => {
     
     return(
         <RecentSearchHistoryBg onClick={() => {
-            dispatch(searchTryAction(text));
+            // dispatch(searchTryAction(text));
+            navigate(`/search/${text}`);
         }} key={text} style={{margin: "8px 6px"}}>
             <div style={{display:"flex", padding: "10px 7px 12px 10px"}}>
                 <RecentSearchHistoryText> {text} </RecentSearchHistoryText>
