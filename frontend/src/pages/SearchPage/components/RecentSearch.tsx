@@ -66,7 +66,7 @@ export const RecentSearchHistoryItemComponent = ({text}:StringProp) => {
     
     return(
         <RecentSearchHistoryBg onClick={() => {
-            dispatch(searchTryAction(text,  ()=>{navigate(`/search/${text}`)}));
+            dispatch(searchTryAction(text));
         }} key={text} style={{margin: "8px 6px"}}>
             <div style={{display:"flex", padding: "10px 7px 12px 10px"}}>
                 <RecentSearchHistoryText> {text} </RecentSearchHistoryText>

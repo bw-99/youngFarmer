@@ -4,11 +4,11 @@ import { db, kakaoConfig } from "..";
 import { GET_PRODUCT, GET_PRODUCT_SUCCESS } from "../pages/ProductPage/ProductAction";
 import { collection, DocumentData, endAt, getDoc, getDocs, limit, orderBy, query, QueryConstraint, startAt, where } from "firebase/firestore";
 import { AxiosResponse } from "axios";
-import { ProductDataType } from "../reducers/ProductReducer";
+import { ProductDataType, StoreDataType } from "../reducers/ProductReducer";
 import { GET_PROFILE, GET_PROFILE_SUCCESS } from "../pages/MyPage/MyAction";
 import { MyPageDataType } from "../reducers/MypageReducer";
 import { getAuth } from "firebase/auth";
-import { SEARCH_FAIL, SEARCH_LIKE_FAIL, SEARCH_LIKE_SUCCESS, SEARCH_LIKE_TRY, SEARCH_RECOMMNEND_SUCCESS, SEARCH_RECOMMNEND_TRY, SEARCH_SUCCESS, SEARCH_TRY } from "../pages/SearchPage/SearchDertailAction";
+import { SEARCH_FAIL, SEARCH_LIKE_FAIL, SEARCH_LIKE_SUCCESS, SEARCH_LIKE_TRY, SEARCH_RECOMMNEND_SUCCESS, SEARCH_RECOMMNEND_TRY, SEARCH_STORE_SUCCESS, SEARCH_STORE_TRY, SEARCH_SUCCESS, SEARCH_TRY } from "../pages/SearchPage/SearchDertailAction";
 
 
 
@@ -19,6 +19,40 @@ import { SEARCH_FAIL, SEARCH_LIKE_FAIL, SEARCH_LIKE_SUCCESS, SEARCH_LIKE_TRY, SE
 //     title: string,
 //     price: number
 // }
+
+async function getSearchStoreAPI(searchResult:ProductDataType[], payload:any) {
+    let queryList = [];
+    const storeRef = collection(db, "store");
+     
+    // * product의 store_id를 바탕으로 store 불러옴
+    for (const product of searchResult) {
+        queryList.push(query(storeRef, where("store_id", "==", product.store_id)));
+    }
+
+    let dataList = [];
+
+    for (const q of queryList) {
+        const fbdata = await getDocs(q);
+        dataList.push(fbdata.docs[0].data());
+    }
+
+
+    // * store의 name으로 검색
+    let search = payload.search;
+    const q = query(storeRef);
+    const fbdata = await getDocs(q);
+
+    fbdata.docs.forEach((doc) => {
+        const data = doc.data();
+        if(`${data.name}`.includes(search)){
+            console.log("inlcude");
+            dataList.push(data);
+        }
+    })
+
+    return dataList;
+}
+
 
 
 async function getSearchAPI(payload:any) {
@@ -91,6 +125,7 @@ function* getSearch(action:any) {
     
     const searchResult:ProductDataType[] = yield call(getSearchAPI, action.payload);
     const recommendResult:ProductDataType[] = yield call(getSearchOtherAPI, action.payload);
+    const storeResult:StoreDataType[] = yield call(getSearchStoreAPI, searchResult, action.payload);
     
     if(searchResult ){        
         // console.log("result" + JSON.stringify(otherResult));
@@ -98,7 +133,8 @@ function* getSearch(action:any) {
             type: SEARCH_SUCCESS,
             payload: {
                 products: searchResult,
-                recommendResult: recommendResult
+                recommendResult: recommendResult,
+                storeList: storeResult
             },
             callback: action.payload.callback
         }); 
@@ -110,6 +146,7 @@ function* getSearch(action:any) {
         }); 
     }
 }
+
 
 
 function* getSearchRecommend(action:any) {
