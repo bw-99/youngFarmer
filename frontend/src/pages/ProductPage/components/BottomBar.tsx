@@ -3,6 +3,7 @@ import itemLikeOffIcon from "../../../assets/images/like-off@3x.png";
 import itemLikeOnIcon from "../../../assets/images/btn-heart-on@3x.png";
 
 import React, {useEffect, useState }  from "react";
+import {useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../reducers";
 import { LikeData } from "../../../reducers/LikeReducer";
@@ -14,6 +15,8 @@ export const BottomBarComp = () => {
     // const changeHeartIcon = (event: React.MouseEvent) => {
     //     !storeLike.getState() ? storeLike.dispatch({ type: 'CHANGETRUE' }) : storeLike.dispatch({ type: 'CHANGEFALSE' });
     // }
+
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const [isLiked, setIsLiked]  = useState(false);
     const product_id = 1;
@@ -42,7 +45,7 @@ export const BottomBarComp = () => {
         e.preventDefault();
         if (modalselector.open_modal) {
             //when modal open
-            console.log("here")
+            navigate(`/purchase`);
         }
         else {
             //when modal close

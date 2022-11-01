@@ -28,6 +28,7 @@ import Notipage from './pages/NotiPage/NotiPage';
 import MyInfoRevisePage from './pages/MyPage/MyInfoRevisePage';
 import SearchDetailPage from './pages/SearchPage/SearchDetailPage';
 import CartPage from './pages/CartPage/CartPage';
+import PurchasePage from './pages/PurchasePage/ProductPage';
 
 
 export const AuthContext = createContext(false);
@@ -63,6 +64,8 @@ function App() {
                     <Route path='/noti' element={<Notipage />} />
                     <Route path='/cart' element={<CartPage />} />
                     <Route path='/mypage/setting/info' element={<MyInfoRevisePage />} />
+                    <Route path='/purchase' element={<PurchasePage />} />
+
 
                   </Route>
 

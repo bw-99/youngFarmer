@@ -66,13 +66,13 @@ export const PurchaseComp = () => {
                                     <BackIconArrow onClick={(e: React.MouseEvent) => { e.preventDefault(); dispatch(closeModalAction(modalselector)) }} src={backIcon} />
                                 </div>
                                 <PurchaseBoxAtom style={{ maxWidth: "625px", flexDirection: "column" }}>
-                                    <PurchaseMainSelectComp setIndexFn={SetIndex} setIndexNum={1} marginTop={"0px"} purchaseText={"Weight"} purchaseDetailText={"Select Weight"} />
+                                    <PurchaseMainSelectComp setIndexFn={SetIndex} setIndexNum={1} marginTop={"0px"} purchaseText={"무게 선택"} purchaseDetailText={"무게를 선택해주세요"} />
                                     <SepLine style={{ marginTop: "24px" }} />
 
-                                    <PurchaseMainSelectComp setIndexFn={SetIndex} setIndexNum={2} marginTop={"24px"} purchaseText={"Many"} purchaseDetailText={"number of item"} />
+                                    <PurchaseMainSelectComp setIndexFn={SetIndex} setIndexNum={2} marginTop={"24px"} purchaseText={"개수 선택"} purchaseDetailText={"개수를 선택해주세요"} />
                                     <SepLine style={{ marginTop: "24px" }} />
 
-                                    <PurchaseMainSelectComp setIndexFn={SetIndex} setIndexNum={3} marginTop={"24px"} purchaseText={"Pave"} purchaseDetailText={"Wanna pave"} />
+                                    <PurchaseMainSelectComp setIndexFn={SetIndex} setIndexNum={3} marginTop={"24px"} purchaseText={"포장 선택"} purchaseDetailText={"포장 여부를 선택해주세요"} />
                                 </PurchaseBoxAtom>
                             </div>
                             <div style={{ zIndex: "1", paddingTop: "23px", backgroundColor: "white", }} >

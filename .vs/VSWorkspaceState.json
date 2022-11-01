@@ -3,10 +3,13 @@
     "",
     "\\frontend",
     "\\frontend\\src",
+    "\\frontend\\src\\assets",
     "\\frontend\\src\\pages",
     "\\frontend\\src\\pages\\ProductPage",
+    "\\frontend\\src\\pages\\ProductPage\\atoms",
     "\\frontend\\src\\pages\\ProductPage\\components",
     "\\frontend\\src\\reducers"
   ],
+  "SelectedNode": "\\frontend\\src\\pages\\ProductPage\\components\\BottomBar.tsx",
   "PreviewInSolutionExplorer": false
 }
