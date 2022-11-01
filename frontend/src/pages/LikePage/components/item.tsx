@@ -14,8 +14,8 @@ export const ItemComponent = () => {
         state.LikeReducer.likes
     );
 
-    const likeProductsSelector : ProductDataType[] =useSelector((state:RootState) =>
-        state.SearchDetailReducer.likeProducts
+    const pidProductsSelector : ProductDataType[] =useSelector((state:RootState) =>
+        state.SearchDetailReducer.pidProducts
     );
     
     useEffect(() => {
@@ -32,7 +32,7 @@ export const ItemComponent = () => {
     }, [selector])
 
     // useEffect(() => {
-    //     likeProductsSelector.filter(
+    //     pidProductsSelector.filter(
     //         (pr) => {
     //             let pidList = selector.map((like) => {
     //                 return like.product_id
@@ -40,16 +40,16 @@ export const ItemComponent = () => {
     //             return pidList.includes(pr.pr);
     //         }
     //     )
-    //     likeProductsSelector.forEach((val) => {
+    //     pidProductsSelector.forEach((val) => {
     //         if(val.product_id === sele)
     //     })
-    // },[likeProductsSelector])
+    // },[pidProductsSelector])
     
 
     return(
         <div style={{padding: "20px 9.5px 20px 9.5px"}}>
-            <ItemCountText> {likeProductsSelector.length}개 </ItemCountText>
-            <ItemUnitListComp image_width={165} product_list={likeProductsSelector}/>
+            <ItemCountText> {pidProductsSelector.length}개 </ItemCountText>
+            <ItemUnitListComp image_width={165} product_list={pidProductsSelector}/>
         </div>
     );
 }

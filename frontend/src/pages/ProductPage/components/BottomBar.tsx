@@ -9,9 +9,14 @@ import { RootState } from "../../../reducers";
 import { LikeData } from "../../../reducers/LikeReducer";
 import { likeAction, likeCancelAction } from "../../LikePage/LikeAction";
 import { openModalAction } from "../PurchaseAction"
+import { cartAddAction } from "../../CartPage/CartAction";
+
+type bottomBarCompParam = {
+    product_id : number
+}
 
 // ! Like는 전역 상태 관리로 진행할거라 추후 수정
-export const BottomBarComp = () => {
+export const BottomBarComp = ({product_id}:bottomBarCompParam) => {
     // const changeHeartIcon = (event: React.MouseEvent) => {
     //     !storeLike.getState() ? storeLike.dispatch({ type: 'CHANGETRUE' }) : storeLike.dispatch({ type: 'CHANGEFALSE' });
     // }
@@ -34,7 +39,6 @@ export const BottomBarComp = () => {
     const dispatch = useDispatch();
     const [isLiked, setIsLiked]  = useState(false);
     const [barTopUI, setbarTopUI] = useState(barTopUiClose);
-    const product_id = 1;
 
     const likeselector: LikeData[] = useSelector((state:RootState) =>
         state.LikeReducer.likes
@@ -95,7 +99,9 @@ export const BottomBarComp = () => {
                     <BottomBoxLikeText> 20 </BottomBoxLikeText>
                 </div>
                 <div style={{display: "flex"}}>
-                    <BottomBoxShoppingCart style={{marginRight: "9px"}}> 장바구니 </BottomBoxShoppingCart>
+                    <BottomBoxShoppingCart onClick={() => {
+                        dispatch(cartAddAction(product_id));
+                    }} style={{marginRight: "9px"}}> 장바구니 </BottomBoxShoppingCart>
                     <BottomBoxBuy onClick={purchaseClickEvent} style={{ marginRight: "16px" }}> 구매하기 </BottomBoxBuy>
                 </div>
             </BottomBoxAtom>

@@ -12,6 +12,7 @@ import { LikeData, LikeDataList } from "../../reducers/LikeReducer";
 import { FirebaseAuth } from "../..";
 import { ProductDataType } from "../../reducers/ProductReducer";
 import { searchLikeTryAction } from "../../pages/SearchPage/SearchDertailAction";
+import { cartAddAction } from "../../pages/CartPage/CartAction";
 
 
 type itemListProps = {
@@ -61,7 +62,7 @@ export const ItemUnitComp = ({image_width, product}:itemProps) => {
     return (
         <Item>
             <ItemUnitImgComp image_width={image_width} bsFlag={false} product={product}/>
-            <ItemUnitShoppingBagComp />
+            <ItemUnitShoppingBagComp product={product}/>
         </Item>
     );
 }
@@ -163,9 +164,22 @@ export const ItemUnitImgComp = ({image_width ,bsFlag= true, product}:itemUnitPro
     );
 }
 
-export const ItemUnitShoppingBagComp = () => {
+
+type shoppingBagProps = {
+    product: ProductDataType
+}
+
+export const ItemUnitShoppingBagComp = ({product}:shoppingBagProps) => {
+    const dispatch = useDispatch();
+
+    const handleAddCart = () => {
+        dispatch(
+            cartAddAction(product.product_id)
+        );
+    }
+    
     return(
-        <ItemOrderShoppingBagButton >
+        <ItemOrderShoppingBagButton onClick={()=> {handleAddCart();}}>
             <ItemOrderShoppingBagButtonIcon src={shoppingBag}/>
             <ItemOrderShoppingBagButtonText> 담기 </ItemOrderShoppingBagButtonText>
         </ItemOrderShoppingBagButton>

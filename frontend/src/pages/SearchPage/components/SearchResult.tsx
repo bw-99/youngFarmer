@@ -7,8 +7,12 @@ import { ProductDataType, StoreDataType } from "../../../reducers/ProductReducer
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../reducers";
 import { SearchFilterOpenAction } from "../SearchActions";
+import { OtherChoiceComp } from "./OtherChoice";
 export const SearchResultComp = () => {
-
+    const toggleSelector: number = useSelector((state:RootState) =>
+        state.SearchToggleReducer
+    );
+    
     const searchSelector: ProductDataType[] = useSelector((state:RootState) =>
         state.SearchDetailReducer.products
     );
@@ -17,16 +21,25 @@ export const SearchResultComp = () => {
         state.SearchDetailReducer.storeList
     );
 
-    return(
-        <div>
-           <SearchResultFilterComp />
-            <div style={{padding: "0 9.5px 0 9.5px"}}>
-                <ItemUnitListComp image_width={165} product_list={
-                    searchSelector.map((product)=> {
-                        return product
-                    })
-                } />
+    if(toggleSelector == 0) {
+        return(
+            <div style={{marginTop: "30px"}}>
+                <OtherChoiceComp />
+                <SearchResultFilterComp />
+                <div style={{padding: "0 9.5px 0 9.5px"}}>
+                    <ItemUnitListComp image_width={165} product_list={
+                        searchSelector.map((product)=> {
+                            return product
+                        })
+                    } />
+                </div>
             </div>
+        );
+    }
+
+    return(
+        <div style={{marginTop: "30px"}}>
+            {JSON.stringify(storeSelector)}
         </div>
     );
 }

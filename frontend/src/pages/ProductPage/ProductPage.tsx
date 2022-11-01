@@ -73,7 +73,7 @@ function ProductPage(props: any) {
                 {
                     isOpen  ? <PurchaseComp /> : null
                 }
-                <BottomBarComp />
+                <BottomBarComp product_id={selector.product_id} />
                     {/* <BottomNavigationBar /> */}
             </AppFrame>
         );

@@ -14,7 +14,7 @@ export const OtherChoiceComp = () => {
 
 
     return(
-        <div style={{padding: "30px 0px"}}>
+        <div style={{paddingBottom: "30px"}}>
             <OtherChoiceTitle> 다른 사람들이 많이 구매한 상품 </OtherChoiceTitle>
 
             <div style={{padding: "16px 9.5px 30px 9.5px",display:"flex", flexDirection: "row",flexWrap:"nowrap", overflow: "auto"}}>
