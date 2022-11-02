@@ -32,10 +32,10 @@ export async function convertOrder2Product(orderList:OrderDataType[]) {
         
             dataList.push({
                 count: orderList[index].count,
-                product: product
+                product: product,
+                option: orderList[index].option
             });
         }
-        
     }
 
     return dataList;

@@ -5,6 +5,7 @@ import Peach from "../../../assets/images/peach.png";
 import Check from "../../../assets/images/btn-checkbox-2.png";
 import React, { useEffect, useState } from "react";
 import { OrderProductDataType, ProductDataType } from "../../../reducers/ProductReducer";
+import { Spantemp2 } from "../../CartPage/atoms/CartProduct";
 
 export type OrderProductParam = {
     orderProduct: OrderProductDataType
@@ -34,7 +35,17 @@ export const ProductComp = ({orderProduct}:OrderProductParam) => {
                                         <SaleRate style = {{display: "flex", margin: "0 0 2px 0"}}> {orderProduct.product.discount}% </SaleRate>
                                     </div>
                                 </div>
-                                <Package style = {{display: "flex", margin: "8px 0 0 0"}}> 12개입•10kg•선물용 포장 </Package>
+                                <Package style = {{display: "flex", margin: "8px 0 0 0"}}> 
+                                {
+                                    // JSON.stringify(orderProduct.option)
+                                    Object.keys(JSON.parse(orderProduct.option)).map((key:any) => {
+                                        return <Spantemp2 key={key}>
+                                            {JSON.parse(orderProduct.option)[key]} •&nbsp;
+                                        </Spantemp2>
+                                    })
+                                }
+
+                                </Package>
                             </div>
                         </div>
                     </div>
@@ -44,3 +55,13 @@ export const ProductComp = ({orderProduct}:OrderProductParam) => {
                 </Sector>
     );
 }
+
+// {
+//     "count":1,
+//     "product":{
+//         "photo":"https://src.hidoc.co.kr/image/lib/2021/6/24/1624517344477_0.jpg","is_nonpesticide":true,"price":34000,"delivery_charge":3200,"store_id":1,"discount":20,"is_ontime":true,"is_best":true,"is_sale":true,"title":"친환경 복숭아 5kg/10kg","delivery_remain":340,"is_vegitable":false,"delivery_start":"7일 이내","product_id":1
+//     },
+//     "option":{
+//         "item_weight":"3kg","number_of_item":"12개입","wanna_pave":"선물용 포장"
+//     }
+// }

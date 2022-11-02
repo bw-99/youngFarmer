@@ -19,7 +19,7 @@ import { BottomNavigationBar } from "../../common/BottomNavigationBar/BottomNavi
 import { RootState } from "../../reducers";
 import { CartData } from "../../reducers/CartReducer";
 import { MyPageDataType } from "../../reducers/MypageReducer";
-import { ProductDataType } from "../../reducers/ProductReducer";
+import { CartProductDataType, ProductDataType } from "../../reducers/ProductReducer";
 import { cartCancelAction, getCartAction } from "./CartAction";
 
 import {PaymentBtn} from "./atoms/CartProduct"
@@ -34,7 +34,7 @@ function CartPage(props: any) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const cartSelector: ProductDataType[] = useSelector((state:RootState) =>
+    const cartSelector: CartProductDataType[] = useSelector((state:RootState) =>
         state.SearchDetailReducer.cartProducts
     );      
 
@@ -64,9 +64,9 @@ function CartPage(props: any) {
                 
                 <div style={{paddingBottom: "88px",}}>
                 {
-                    cartSelector.map((product) => {
+                    cartSelector.map((cartProduct) => {
                         return(
-                            <CartProductComponent allCheck={allCheck} product={product} order={order}/>
+                            <CartProductComponent allCheck={allCheck} cartProduct={cartProduct} order={order}/>
                         )
                     })
                 }
@@ -93,7 +93,6 @@ function CartPage(props: any) {
     return (
         <AppFrame>
             <AppBarComponentOnlyBack title={"장바구니"} />
-
         </AppFrame>
     )
 

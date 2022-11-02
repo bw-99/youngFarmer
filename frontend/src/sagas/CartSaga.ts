@@ -2,9 +2,9 @@ import { call, delay, put, SagaReturnType, takeLatest } from "redux-saga/effects
 import { LOGIN_FAIL, LOGIN_PAYLOAD, LOGIN_SUCCESS, LOGIN_TRY, LOGIN_WITH_ANONYMOUS, LOGIN_WITH_KAKAO, LOGIN_WITH_NAVER } from "../pages/LoginPage/LoginAction";
 import { db, FirebaseAuth, kakaoConfig } from "..";
 import { GET_PRODUCT, GET_PRODUCT_SUCCESS } from "../pages/ProductPage/ProductAction";
-import { addDoc, collection, deleteDoc, DocumentData, getDoc, getDocs, limit, orderBy, query, where } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, DocumentData, getDoc, getDocs, limit, orderBy, query, updateDoc, where } from "firebase/firestore";
 import { AxiosResponse } from "axios";
-import { ProductDataType } from "../reducers/ProductReducer";
+import { CartProductDataType, ProductDataType } from "../reducers/ProductReducer";
 import { GET_LIKE, GET_LIKE_FAIL, GET_LIKE_SUCCESS, LIKE_CANCEL_FAIL, LIKE_CANCEL_SUCCESS, LIKE_CANCEL_TRY, LIKE_FAIL, LIKE_SUCCESS, LIKE_TRY } from "../pages/LikePage/LikeAction";
 import { LikeDataList } from "../reducers/LikeReducer";
 import { CART_ADD_TRY, CART_CANCEL_TRY, GET_CART, CART_TRY, GET_CART_SUCCESS, GET_CART_FAIL, CART_CANCEL_SUCCESS, CART_CANCEL_FAIL, CART_ADD_SUCCESS, CART_ADD_FAIL } from "../pages/CartPage/CartAction";
@@ -22,27 +22,36 @@ async function addCartAPI(payload:any) {
     const cartRef = collection(db, "cart");
     const q = query(cartRef, where("product_id", "==", product_id),where("uid", "==", uid));
     const fbdata = await getDocs(q);
+
     
     // 장바구니 담기 가능
     if(fbdata.empty){
-        console.log("장바구니 담은 적 없음");
+        console.log("장바구니 담을 수 있음");
         const result = await addDoc(cartRef, {
             uid: uid,
-            product_id:product_id
+            product_id:product_id,
+            option: JSON.stringify(payload.sub_info)
         });
-
-        const cartfbDataList = await getDocs(
-            query(cartRef, where("uid", "==", uid))
-        );
-        
-        const cartDataList = cartfbDataList.docs.map((doc) => {
-            return doc.data();
+    }
+    // 장바구니 수정
+    else {
+        console.log("장바구니 수정 가능");
+        const result = await updateDoc(fbdata.docs[0].ref, {
+            uid: uid,
+            product_id:product_id,
+            option: JSON.stringify(payload.sub_info)
         });
-        
-        return cartDataList;
     }
 
-    return false;
+    const cartfbDataList = await getDocs(
+        query(cartRef, where("uid", "==", uid))
+    );
+    
+    const cartDataList = cartfbDataList.docs.map((doc) => {
+        return doc.data();
+    });
+    
+    return cartDataList;
 }
 
 
@@ -56,8 +65,7 @@ function* addCart(action:any) {
             return val.product_id
         });
     
-        const pidResult: ProductDataType[] = yield call(convertCart2Product, pidList);
-        console.log(pidResult);
+        const pidResult: CartProductDataType[] = yield call(convertCart2Product, result);
 
         console.log("result" + JSON.stringify(result));
         yield put({
@@ -81,20 +89,25 @@ function* addCart(action:any) {
     }
 }
 
-export async function convertCart2Product(pidList:number[]) {
+async function convertCart2Product(cartList:CartData[]) {
 
     const productRef = collection(db, "product");
     let queryList: any[] = [];
 
-    pidList.forEach((element: number) => {
-        queryList.push(query(productRef, where("product_id", "==", element)))
+    cartList.forEach((element: CartData) => {
+        queryList.push(
+            query(productRef, where("product_id", "==", element.product_id))
+        );
     });
 
     let dataList = [];
 
-    for (const q of queryList) {
-        const fbdata = await getDocs(q);
-        dataList.push(fbdata.docs[0].data());
+    for (const index in queryList) {
+        const fbdata = await getDocs(queryList[index]);
+        dataList.push({
+            product: fbdata.docs[0].data(),
+            option: cartList[index].option
+        });
     }
 
     return dataList;
@@ -128,7 +141,7 @@ function* getCart(action:any) {
             return val.product_id
         });
     
-        const pidResult: ProductDataType[] = yield call(convertCart2Product, pidList);
+        const pidResult: CartProductDataType[] = yield call(convertCart2Product, result);
         console.log(pidResult);
 
         console.log("result" + JSON.stringify(result));
@@ -194,7 +207,7 @@ function* cancelCart(action:any) {
             return val.product_id
         });
     
-        const pidResult: ProductDataType[] = yield call(convertCart2Product, pidList);
+        const pidResult:  CartProductDataType[] = yield call(convertCart2Product, result);
         console.log(pidResult);
 
         console.log("result" + JSON.stringify(result));

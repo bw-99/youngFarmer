@@ -8,9 +8,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../reducers";
 import { LikeData } from "../../../reducers/LikeReducer";
 import { likeAction, likeCancelAction } from "../../LikePage/LikeAction";
-import { openModalAction } from "../PurchaseAction"
+import { closeModalAction, openModalAction } from "../PurchaseAction"
 import { cartAddAction } from "../../CartPage/CartAction";
 import { object } from "prop-types";
+import { setOrderTry } from "../../OrderPage/OrderAction";
 
 type bottomBarCompParam = {
     product_id : number
@@ -112,10 +113,26 @@ export const BottomBarComp = ({product_id}:bottomBarCompParam) => {
                 <div style={{display: "flex"}}>
                     {/* // ! 무게, 개수, 포장 선택 유무에 따라 팝업 창 띄울지 결제/장바구니로 갈지 결정 */}
                     <BottomBoxShoppingCart onClick={(e) => {
-                        // purchaseClickEvent(e);
-                        dispatch(cartAddAction(product_id));
-                    }} style={{marginRight: "9px"}}> 장바구니 </BottomBoxShoppingCart>
-                    <BottomBoxBuy onClick={purchaseClickEvent} style={{ marginRight: "16px" }}> 구매하기 </BottomBoxBuy>
+                        if(modalselector.open_modal) {
+                            dispatch(cartAddAction(product_id, modalselector.select_item_info));
+                            // alert("장바구니에 담겼습니다." + JSON.stringify(modalselector.select_item_info));
+                            dispatch(closeModalAction(modalselector));
+                        }
+                        else{
+                            dispatch(openModalAction(modalselector));
+                        }
+                    }} style={{marginRight: "9px"}}> 
+                    장바구니 </BottomBoxShoppingCart>
+                    <BottomBoxBuy onClick={(e) => {
+                        purchaseClickEvent(e);
+                        dispatch(setOrderTry([{
+                            count: 1,
+                            product_id: product_id,
+                            option: JSON.stringify(modalselector.select_item_info)
+                        }]));
+                        navigate("/order");
+                        
+                    }} style={{ marginRight: "16px" }}> 구매하기 </BottomBoxBuy>
                 </div>
             </BottomBoxAtom>
         </div>

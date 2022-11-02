@@ -12,19 +12,19 @@ import {CheckBoxIcon} from "../../LoginPage/atoms/Assignp1"
 import {CartP1T1,Border8px,Temp1, Temp2,Spantemp2,Spantemp1,CartProductBox,CartProductBoxBorder,CartProductBoxPart1,CartBtn1,CartProductBoxPart2,CartProductBoxPart2Img,CartProductBoxPart2S1,CartProductBoxPart2S2,CartProductBoxPart2SmallBox,CartProductBoxPart2SmallBoxBtn,CartProductBoxPart3,CartProductBoxPart3Small,CartProductBoxPart3SmallPart1,CartProductBoxPart3SmallPart2,CartProductBoxPart4,CartProductBoxPart5, CartP1I1, CartP1T2, CartBtn2} from "../atoms/CartProduct"
 import checkIcon from "../../../assets/images/btn-checkbox-1@3x.png";
 import checkNotIcon from "../../../assets/images/btn-checkbox-2@3x.png";
-import { ProductDataType } from "../../../reducers/ProductReducer";
+import { CartProductDataType, ProductDataType } from "../../../reducers/ProductReducer";
 import { cartCancelAction } from "../CartAction";
 import { OrderDataType } from "../../../reducers/OrderReducer";
 import { addOrderTry, cancelOrderTry, setOrderTry } from "../../OrderPage/OrderAction";
 import { useNavigate } from "react-router-dom";
 
-type ProductCheckParmas = {
-    product: ProductDataType
+type CartProductCheckParmas = {
+    cartProduct: CartProductDataType
     allCheck: boolean,
     order: boolean
 }
 
-export const CartProductComponent = ({product, allCheck, order}:ProductCheckParmas) => {
+export const CartProductComponent = ({cartProduct, allCheck, order}:CartProductCheckParmas) => {
     const dispatch = useDispatch();
     const [ischecked, setIschecked] = useState(false);
     const [count, setCount] = React.useState<number>(1);
@@ -38,7 +38,8 @@ export const CartProductComponent = ({product, allCheck, order}:ProductCheckParm
     const handleDirectOrder = () => {
         dispatch(setOrderTry([{
             count: count,
-            product_id: product.product_id
+            product_id: cartProduct.product.product_id,
+            option: cartProduct.option
         }]));
         navigate("/order");
     }
@@ -49,13 +50,15 @@ export const CartProductComponent = ({product, allCheck, order}:ProductCheckParm
             
             dispatch(addOrderTry({
                 count: count,
-                product_id: product.product_id
+                product_id: cartProduct.product.product_id,
+                option: cartProduct.option
             }));
         }
         else{
             dispatch(cancelOrderTry({
                 count: count,
-                product_id: product.product_id
+                product_id: cartProduct.product.product_id,
+                option: cartProduct.option
             }));
         }
     }, [ischecked])
@@ -69,7 +72,7 @@ export const CartProductComponent = ({product, allCheck, order}:ProductCheckParm
                 <CartP1T1> 청년농부 </CartP1T1>
                 <div style={{display:"flex"}}>
                     <img style={{width:"16px", height:"16px", marginRight:"4px"}} src={transforimg}/> 
-                    <CartP1T2>{product.delivery_charge.toLocaleString("kr")}원</CartP1T2>
+                    <CartP1T2>{cartProduct.product.delivery_charge.toLocaleString("kr")}원</CartP1T2>
                 </div>
             </CartProductBoxPart1>
             <CartProductBoxBorder></CartProductBoxBorder>
@@ -77,11 +80,11 @@ export const CartProductComponent = ({product, allCheck, order}:ProductCheckParm
             <CartProductBoxPart2>
                 <div style={{display: "flex", alignItems: "flex-start"}}>
                     <CartProductBoxPart2S1>
-                        <CartProductBoxPart2Img src={product.photo} />
+                        <CartProductBoxPart2Img src={cartProduct.product.photo} />
                     </CartProductBoxPart2S1>
                     <CartProductBoxPart2S2 style={{marginLeft: "16px"}}>
                         <CartProductBoxPart2SmallBox>
-                            {product.title}
+                            {cartProduct.product.title}
                         </CartProductBoxPart2SmallBox>
                         <CartProductBoxPart2SmallBox  
                         style={{marginTop: "4px"}}
@@ -92,9 +95,9 @@ export const CartProductComponent = ({product, allCheck, order}:ProductCheckParm
                                   fontWeight: "800",
                                   color: "#272727",
                             }}>
-                                {product.price.toLocaleString("kr")}원
+                                {cartProduct.product.price.toLocaleString("kr")}원
                                 
-                                <Spantemp1>{product.discount}%</Spantemp1>
+                                <Spantemp1>{cartProduct.product.discount}%</Spantemp1>
                             </div>
 
                             
@@ -106,7 +109,18 @@ export const CartProductComponent = ({product, allCheck, order}:ProductCheckParm
                         e.stopPropagation();
                         e.preventDefault();
                         }}>
-                            <Spantemp2>12개입·10kg·선물용 포장</Spantemp2>
+                            <div style={{display: "flex", justifyContent: "flex-start"}}>
+                                {
+                                    Object.keys(JSON.parse(cartProduct.option)).map((key:any) => {
+                                        return <Spantemp2 key={key}>
+                                            {JSON.parse(cartProduct.option)[key]} •&nbsp;
+                                        </Spantemp2>
+                                    })
+                                }
+                            {/* <Spantemp2>{cartProduct.option}</Spantemp2> */}
+                            {/* <Spantemp2>{cartProduct.option}</Spantemp2> */}
+
+                            </div>
                         </CartProductBoxPart2SmallBox>
 
                         <div style={{marginTop: "10px", marginBottom:"16px"}}>
@@ -133,12 +147,12 @@ export const CartProductComponent = ({product, allCheck, order}:ProductCheckParm
             <CartProductBoxPart3>
                 <CartProductBoxPart3Small>
                     <CartProductBoxPart3SmallPart1>상품금액</CartProductBoxPart3SmallPart1>
-                    <CartProductBoxPart3SmallPart2>{(product.price * (1 - product.discount / 100)*count).toLocaleString("kr")}원</CartProductBoxPart3SmallPart2>
+                    <CartProductBoxPart3SmallPart2>{(cartProduct.product.price * (1 - cartProduct.product.discount / 100)*count).toLocaleString("kr")}원</CartProductBoxPart3SmallPart2>
                 </CartProductBoxPart3Small>
 
                 <CartProductBoxPart3Small style={{marginTop: "14px"}}>
                     <CartProductBoxPart3SmallPart1>배송비</CartProductBoxPart3SmallPart1>
-                    <CartProductBoxPart3SmallPart2>{product.delivery_charge.toLocaleString("kr")}원</CartProductBoxPart3SmallPart2>
+                    <CartProductBoxPart3SmallPart2>{cartProduct.product.delivery_charge.toLocaleString("kr")}원</CartProductBoxPart3SmallPart2>
                 </CartProductBoxPart3Small>
             </CartProductBoxPart3>
 
@@ -147,14 +161,14 @@ export const CartProductComponent = ({product, allCheck, order}:ProductCheckParm
 
             <CartProductBoxPart4>
                 <Temp1>총 결제금액</Temp1>
-                <Temp2>{((product.price * (1 - product.discount / 100))*count + product.delivery_charge).toLocaleString("kr")}원</Temp2>
+                <Temp2>{((cartProduct.product.price * (1 - cartProduct.product.discount / 100))*count + cartProduct.product.delivery_charge).toLocaleString("kr")}원</Temp2>
                 
             </CartProductBoxPart4>        
 
             <CartProductBoxPart5>
                 {/* 리덕스필요 */}
                 <CartBtn1 onClick={()=>{
-                    dispatch(cartCancelAction(product.product_id));
+                    dispatch(cartCancelAction(cartProduct.product.product_id));
                 }}>삭제하기</CartBtn1>
                 <CartBtn2 
                 onClick={() => {

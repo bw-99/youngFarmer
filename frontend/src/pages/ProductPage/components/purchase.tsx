@@ -46,7 +46,7 @@ interface selectListProps {
 }
 
 const selectList: selectListProps = {
-    item_weight: [null, "10kg", "15kg", "20kg", "25kg" ],
+    item_weight: [null, "3kg", "5kg", "10kg", "20kg" ],
     number_of_item: [null,"12개입", "18개입", "20개입", "24개입",],
     wanna_pave: [null, "안함", "선물용 포장", "단순 포장", "테스트용"],
 }
@@ -230,7 +230,7 @@ const SelectComp = (props: SelectCompProps) => {
             <div style={{ display: "flex", height: "56px", width: "100vw", maxWidth: "625px", marginLeft: "16px", alignItems: "center" }}>
                 <BackIconArrow onClick={(e: React.MouseEvent) => { e.preventDefault(); props.setIndexFn(0); }} src={backIcon} />
                 <SelectTitleText style={{ marginLeft: "calc(50% - 40px - 34px)" }}>
-                    Weight
+                    무게 선택
                 </SelectTitleText>
             </div>
             <SepLine />

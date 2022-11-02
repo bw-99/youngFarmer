@@ -5,7 +5,8 @@ import { ProductDataType } from "./ProductReducer";
 
 export interface OrderDataType {
     count: number,
-    product_id: number
+    product_id: number,
+    option: string
 }
 
 

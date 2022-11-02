@@ -23,9 +23,9 @@ const purchaseInfoInit: PurchaseDataType  = {
     open_modal: false,
     select_num: 0,
     select_item_info: {
-        item_weight: null,
-        number_of_item: null,
-        wanna_pave: null
+        item_weight: "3kg",
+        number_of_item: "12개입",
+        wanna_pave: "선물용 포장"
     },
 }
 

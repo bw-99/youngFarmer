@@ -13,7 +13,15 @@ export interface StoreDataType {
 export interface OrderProductDataType {
     product: ProductDataType,
     count: number,
+    option: string,
 }
+
+
+export interface CartProductDataType {
+    product: ProductDataType,
+    option: string,
+}
+
 
 export interface ProductDataList {
     products: ProductDataType[],

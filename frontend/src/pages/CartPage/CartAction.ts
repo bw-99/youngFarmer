@@ -12,12 +12,13 @@ export const GET_CART = "GET_CART";
 export const GET_CART_SUCCESS = "GET_CART_SUCCESS";
 export const GET_CART_FAIL = "GET_CART_FAIL";
 
-export const cartAddAction = (product_id:number) => {
+export const cartAddAction = (product_id:number, sub_info: any) => {
     return {
         type: CART_TRY,
         payload: {
             type: CART_ADD_TRY,
             product_id: product_id,
+            sub_info: sub_info
         }
     };
 }

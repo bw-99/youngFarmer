@@ -22,6 +22,7 @@ import { OrderProductDataType } from "../../reducers/ProductReducer";
 
 function OrderPage(props: any) {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const orderSelector: OrderDataType[] = useSelector((state:RootState) =>
         state.OrderReducer.orders
@@ -39,6 +40,12 @@ function OrderPage(props: any) {
     //   dispatch(clearOrder());
     // }, [])
     
+    useEffect(() => {
+        if(orderProductSelector.length == 0){
+            alert("주문 예정인 상품이 없습니다.")
+            navigate(-1);
+        }
+    })
     
     return(
         <AppFrame>

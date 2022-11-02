@@ -7,9 +7,27 @@ import { AxiosResponse } from "axios";
 import { ProductDataType } from "../reducers/ProductReducer";
 import { GET_LIKE, GET_LIKE_FAIL, GET_LIKE_SUCCESS, LIKE_CANCEL_FAIL, LIKE_CANCEL_SUCCESS, LIKE_CANCEL_TRY, LIKE_FAIL, LIKE_SUCCESS, LIKE_TRY } from "../pages/LikePage/LikeAction";
 import { LikeData, LikeDataList } from "../reducers/LikeReducer";
-import { convertCart2Product } from "./CartSaga";
 import { SEARCH_LIKE_SUCCESS, SEARCH_PID_SUCCESS } from "../pages/SearchPage/SearchDertailAction";
 
+
+async function convertLike2Product(pidList:number[]) {
+
+    const productRef = collection(db, "product");
+    let queryList: any[] = [];
+
+    pidList.forEach((element: number) => {
+        queryList.push(query(productRef, where("product_id", "==", element)))
+    });
+
+    let dataList = [];
+
+    for (const q of queryList) {
+        const fbdata = await getDocs(q);
+        dataList.push(fbdata.docs[0].data());
+    }
+
+    return dataList;
+}
 
 async function likeAPI(payload:any) {
     console.log("like api");
@@ -56,7 +74,7 @@ function* like(action:any) {
             return val.product_id
         });
     
-        const pidResult: ProductDataType[] = yield call(convertCart2Product, pidList);
+        const pidResult: ProductDataType[] = yield call(convertLike2Product, pidList);
         console.log(pidResult);
 
         console.log("result" + JSON.stringify(result));
@@ -111,7 +129,7 @@ function* getLike(action:any) {
             return val.product_id
         });
     
-        const pidResult: ProductDataType[] = yield call(convertCart2Product, pidList);
+        const pidResult: ProductDataType[] = yield call(convertLike2Product, pidList);
         console.log(pidResult);
 
         console.log("result" + JSON.stringify(result));
@@ -179,7 +197,7 @@ function* likeCacncel(action:any) {
             return val.product_id
         });
     
-        const pidResult: ProductDataType[] = yield call(convertCart2Product, pidList);
+        const pidResult: ProductDataType[] = yield call(convertLike2Product, pidList);
         console.log(pidResult);
 
         console.log("result" + JSON.stringify(result));
