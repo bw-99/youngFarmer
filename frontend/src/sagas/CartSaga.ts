@@ -9,22 +9,9 @@ import { GET_LIKE, GET_LIKE_FAIL, GET_LIKE_SUCCESS, LIKE_CANCEL_FAIL, LIKE_CANCE
 import { LikeDataList } from "../reducers/LikeReducer";
 import { CART_ADD_TRY, CART_CANCEL_TRY, GET_CART, CART_TRY, GET_CART_SUCCESS, GET_CART_FAIL, CART_CANCEL_SUCCESS, CART_CANCEL_FAIL, CART_ADD_SUCCESS, CART_ADD_FAIL } from "../pages/CartPage/CartAction";
 import { CartData, CartDataList } from "../reducers/CartReducer";
-import { SEARCH_PID_SUCCESS } from "../pages/SearchPage/SearchDertailAction";
+import { SEARCH_CART_SUCCESS, SEARCH_PID_SUCCESS } from "../pages/SearchPage/SearchDertailAction";
 
 
-
-// type ProductDataType=  {
-//     store_id: number,
-//     discount: number,
-//     product_id: number,
-//     title: string,
-//     price: number
-// }
-
-
-// type LikeResponseType = {
-//     is_success: boolean   
-// }
 
 async function addCartAPI(payload:any) {
     console.log("addCartAPI");
@@ -65,20 +52,6 @@ function* addCart(action:any) {
     const result:CartData[] = yield call(addCartAPI, action.payload);
     
     if(result){     
-        let pidList = result.map((val) => {
-            return val.product_id
-        });
-    
-        const pidResult: ProductDataType[] = yield call(convertCart2Product, pidList);
-        console.log(pidResult);
-        
-        yield put({
-            type: SEARCH_PID_SUCCESS,
-            payload: {
-                pidProducts: pidResult
-            },
-        }); 
-         
         yield put({
             type: CART_ADD_SUCCESS,
             payload: result,
@@ -92,7 +65,7 @@ function* addCart(action:any) {
     }
 }
 
-async function convertCart2Product(pidList:number[]) {
+export async function convertCart2Product(pidList:number[]) {
 
     const productRef = collection(db, "product");
     let queryList: any[] = [];
@@ -134,19 +107,19 @@ function* getCart(action:any) {
     const result:CartData[] = yield call(getCartAPI, action.payload);
     console.log("result = = " + result);
     
-    let pidList = result.map((val) => {
-        return val.product_id
-    });
-
-    const pidResult: ProductDataType[] = yield call(convertCart2Product, pidList);
-    console.log(pidResult);
+    if(result){       
+        let pidList = result.map((val) => {
+            return val.product_id
+        });
     
-    if(result){        
+        const pidResult: ProductDataType[] = yield call(convertCart2Product, pidList);
+        console.log(pidResult);
+
         console.log("result" + JSON.stringify(result));
         yield put({
-            type: SEARCH_PID_SUCCESS,
+            type: SEARCH_CART_SUCCESS,
             payload: {
-                pidProducts: pidResult
+                cartProducts: pidResult
             },
         }); 
 
@@ -200,23 +173,7 @@ function* cancelCart(action:any) {
     const result:CartData[] = yield call(cancelCartAPI, action.payload);
     console.log("result = = " + result);
     
-    
-
     if(result){    
-        console.log("카트 취소 성공");
-        let pidList = result.map((val) => {
-            return val.product_id
-        });
-    
-        const pidResult: ProductDataType[] = yield call(convertCart2Product, pidList);
-        
-        yield put({
-            type: SEARCH_PID_SUCCESS,
-            payload: {
-                pidProducts: pidResult
-            },
-        }); 
-
         yield put({
             type: CART_CANCEL_SUCCESS,
             payload: result,
@@ -239,8 +196,6 @@ function* cartIndex(action: any) {
             break;
         
         case CART_CANCEL_TRY:
-            console.log(CART_CANCEL_TRY);
-            
             yield call(cancelCart,action); 
             break;
 

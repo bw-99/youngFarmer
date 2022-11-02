@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { Link, Navigate, Outlet, Route } from "react-router-dom";
 import { FirebaseAuth } from "..";
 import { AuthContext } from "../App";
+import { getCartAction } from "../pages/CartPage/CartAction";
 import { getLikeAction, likeAction } from "../pages/LikePage/LikeAction";
 import { GetUserInfoAction } from "../pages/LoginPage/LoginAction";
 import LoginPage from "../pages/LoginPage/LoginPage";
@@ -31,6 +32,7 @@ export const AuthProvider:FC<Props> = ({children}) :React.ReactElement|null => {
             if(data){
                 setItemWithExpireTime("user", true, 1000*60*60);
                 dispatch(getLikeAction(data.uid));
+                dispatch(getCartAction(data.uid));
                 setUser(true);
             }
             else{

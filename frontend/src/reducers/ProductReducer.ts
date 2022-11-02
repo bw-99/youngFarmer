@@ -14,6 +14,8 @@ export interface ProductDataList {
     products: ProductDataType[],
     recommendResult: ProductDataType[],
     pidProducts: ProductDataType[],
+    likeProducts: ProductDataType[],
+    cartProducts: ProductDataType[],
     storeList?: StoreDataType[],
 }
 

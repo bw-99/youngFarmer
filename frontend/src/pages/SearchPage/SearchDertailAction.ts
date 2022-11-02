@@ -19,6 +19,14 @@ export const SEARCH_PID_SUCCESS = "SEARCH_PID_SUCCESS";
 export const SEARCH_PID_FAIL = "SEARCH_PID_FAIL";
 
 
+export const SEARCH_LIKE_TRY = "SEARCH_LIKE_TRY";
+export const SEARCH_LIKE_SUCCESS = "SEARCH_LIKE_SUCCESS";
+export const SEARCH_LIKE_FAIL = "SEARCH_LIKE_FAIL";
+
+export const SEARCH_CART_TRY = "SEARCH_CART_TRY";
+export const SEARCH_CART_SUCCESS = "SEARCH_CART_SUCCESS";
+export const SEARCH_CART_FAIL = "SEARCH_CART_FAIL";
+
 export type FILTER_TYPE = {
     is_best?: boolean,
     is_sale?: boolean,

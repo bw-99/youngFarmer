@@ -10,26 +10,26 @@ import { searchLikeTryAction } from "../../SearchPage/SearchDertailAction";
 export const ItemComponent = () => {
     const dispatch = useDispatch();
     const [prList, setPrList] = useState([]);
-    const selector: LikeData[] = useSelector((state:RootState) =>
-        state.LikeReducer.likes
-    );
+    // const selector: LikeData[] = useSelector((state:RootState) =>
+    //     state.LikeReducer.likes
+    // );
 
     const pidProductsSelector : ProductDataType[] =useSelector((state:RootState) =>
-        state.SearchDetailReducer.pidProducts
+        state.SearchDetailReducer.likeProducts
     );
     
-    useEffect(() => {
-        // selector.map((val) => {
-        //      console.log(val.product_id);
-        //   })
-        let pidList: number[] = [];
-        selector.forEach((value) => {
-            pidList.push(value.product_id);
-        })
+    // useEffect(() => {
+    //     // selector.map((val) => {
+    //     //      console.log(val.product_id);
+    //     //   })
+    //     let pidList: number[] = [];
+    //     selector.forEach((value) => {
+    //         pidList.push(value.product_id);
+    //     })
         
-        dispatch(searchLikeTryAction(pidList));
+    //     dispatch(searchLikeTryAction(pidList));
     
-    }, [selector])
+    // }, [selector])
 
     // useEffect(() => {
     //     pidProductsSelector.filter(

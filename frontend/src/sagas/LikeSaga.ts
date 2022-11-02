@@ -6,22 +6,10 @@ import { addDoc, collection, deleteDoc, DocumentData, getDoc, getDocs, limit, or
 import { AxiosResponse } from "axios";
 import { ProductDataType } from "../reducers/ProductReducer";
 import { GET_LIKE, GET_LIKE_FAIL, GET_LIKE_SUCCESS, LIKE_CANCEL_FAIL, LIKE_CANCEL_SUCCESS, LIKE_CANCEL_TRY, LIKE_FAIL, LIKE_SUCCESS, LIKE_TRY } from "../pages/LikePage/LikeAction";
-import { LikeDataList } from "../reducers/LikeReducer";
+import { LikeData, LikeDataList } from "../reducers/LikeReducer";
+import { convertCart2Product } from "./CartSaga";
+import { SEARCH_LIKE_SUCCESS, SEARCH_PID_SUCCESS } from "../pages/SearchPage/SearchDertailAction";
 
-
-
-// type ProductDataType=  {
-//     store_id: number,
-//     discount: number,
-//     product_id: number,
-//     title: string,
-//     price: number
-// }
-
-
-// type LikeResponseType = {
-//     is_success: boolean   
-// }
 
 async function likeAPI(payload:any) {
     console.log("like api");
@@ -99,11 +87,27 @@ async function getLikeAPI(payload:any) {
 function* getLike(action:any) {
     console.log("getlike" + action.payload);
     
-    const result:LikeDataList = yield call(getLikeAPI, action.payload);
+    const result:LikeData[] = yield call(getLikeAPI, action.payload);
     console.log(result);
     
-    if(result){        
+    if(result){  
+        let pidList = result.map((val) => {
+            return val.product_id
+        });
+    
+        const pidResult: ProductDataType[] = yield call(convertCart2Product, pidList);
+        console.log(pidResult);
+
         console.log("result" + JSON.stringify(result));
+
+        yield put({
+            type: SEARCH_LIKE_SUCCESS,
+            payload: {
+                likeProducts: pidResult
+            },
+        }); 
+
+        
         yield put({
             type: GET_LIKE_SUCCESS,
             payload: result,
@@ -193,8 +197,4 @@ function* likeIndex(action: any) {
 
 export function* getLikeSignal() {
     yield takeLatest(LIKE_TRY, likeIndex);
-}
-
-export function* getLikeGetSignal() {
-    yield takeLatest(GET_LIKE, likeIndex);
 }

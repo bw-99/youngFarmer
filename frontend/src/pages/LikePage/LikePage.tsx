@@ -15,6 +15,7 @@ import { AppBarComponentNoBack } from "../../common/AppBar/AppBar";
 import { BottomNavigationBar } from "../../common/BottomNavigationBar/BottomNavigationBar";
 import { RootState } from "../../reducers";
 import { LikeData } from "../../reducers/LikeReducer";
+import { ProductDataType } from "../../reducers/ProductReducer";
 import { ItemComponent } from "./components/item";
 
 
@@ -23,12 +24,12 @@ function LikePage(props: any) {
     const location = useLocation();
     const navigate = useNavigate();
 
-    const selector: LikeData[] = useSelector((state:RootState) =>
-        state.LikeReducer.likes
+    const productSelector: ProductDataType[] = useSelector((state:RootState) =>
+        state.SearchDetailReducer.likeProducts
     );
 
 
-    if(selector){
+    if(productSelector){
         return (
             <AppFrame>
                 <AppBarComponentNoBack title="찜하기"/>

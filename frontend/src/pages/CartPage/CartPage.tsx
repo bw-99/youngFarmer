@@ -31,8 +31,8 @@ function CartPage(props: any) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const pidSelector: ProductDataType[] = useSelector((state:RootState) =>
-        state.SearchDetailReducer.pidProducts
+    const cartSelector: ProductDataType[] = useSelector((state:RootState) =>
+        state.SearchDetailReducer.cartProducts
     );      
 
     // const cartSelector: CartData[] = useSelector((state:RootState) =>
@@ -40,25 +40,25 @@ function CartPage(props: any) {
     // );     
     // const currentUser = useContext(AuthContext);
 
-    useEffect(
-        () => {
-            FirebaseAuth.onAuthStateChanged((user) => {
-                let uid = user!.uid;
-                console.log("uid" + uid);
-                dispatch(getCartAction(uid));
-            })
+    // useEffect(
+    //     () => {
+    //         FirebaseAuth.onAuthStateChanged((user) => {
+    //             let uid = user!.uid;
+    //             console.log("uid" + uid);
+    //             dispatch(getCartAction(uid));
+    //         })
             
-        },
-    [])
+    //     },
+    // [])
 
-    if(pidSelector) {
+    if(cartSelector) {
         return (
             <AppFrame>
                 <AppBarComponentOnlyBack title={"장바구니"} />
                 
                 <div style={{paddingBottom: "88px",}}>
                 {
-                    pidSelector.map((product) => {
+                    cartSelector.map((product) => {
                         return(
                             <CartProductComponent product={product}/>
                         )
