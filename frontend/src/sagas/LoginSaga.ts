@@ -81,6 +81,8 @@ async function createUserInfo(uid:string, is_guest:boolean, data:loginData | nul
             })
         }
         else{
+            console.log("user 데이터 삽입 중");
+
             await addDoc(userProfileRef, {
                 profile_nickname: "Guest-"+uid.substring(0,3),
                 profile_email: null,
@@ -136,12 +138,17 @@ function* anonymousLogin(payload:LOGIN_PAYLOAD) {
     yield call(createUserInfo, result as string, true, null);
 
     if(result) {
+        console.log("login success");
+        
         yield put({
             type: LOGIN_SUCCESS,
             callback: payload.callback
         }); 
     }
     else{
+
+        console.log("login fail");
+
         yield put({
             type: LOGIN_FAIL,
             callback: payload.callback

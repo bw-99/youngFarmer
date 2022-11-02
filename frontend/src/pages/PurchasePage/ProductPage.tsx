@@ -21,6 +21,7 @@ function PurchasePage(props: any) {
     return(
         <AppFrame>
             <AppBarComponentOnlyBack title={"주문/결제"}/>
+            
             <SectorTitle style = {{display: "fixed", marginLeft: "16px", marginTop:"80px"}}> 
                 <span> 총 </span>
                 <span style={{color:"#fb6159"}}>2</span>
