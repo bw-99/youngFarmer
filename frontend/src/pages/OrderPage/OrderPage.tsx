@@ -17,7 +17,7 @@ import { AppBarComponentOnlyBack } from "../../common/AppBar/AppBar";
 import { Sector, SectorTitle, StoreName, DeliveryCharge, Line, ProductName, ProductCost, SaleRate, Package, SeparateSectorLine } from "./atoms/product";
 import { ProductComp } from "./components/product";
 
-function PurchasePage(props: any) {
+function OrderPage(props: any) {
     return(
         <AppFrame>
             <AppBarComponentOnlyBack title={"주문/결제"}/>
@@ -37,5 +37,5 @@ function PurchasePage(props: any) {
    
 }
 
-export default PurchasePage;
+export default OrderPage;
 

@@ -59,7 +59,7 @@ function CartPage(props: any) {
                 {
                     cartSelector.map((product) => {
                         return(
-                            <CartProductComponent allCheck={allCheck}product={product}/>
+                            <CartProductComponent allCheck={allCheck} product={product}/>
                         )
                     })
                 }
