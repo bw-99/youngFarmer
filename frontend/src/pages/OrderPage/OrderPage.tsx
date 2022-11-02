@@ -16,21 +16,48 @@ import { RootState } from "../../reducers";
 import { AppBarComponentOnlyBack } from "../../common/AppBar/AppBar";
 import { Sector, SectorTitle, StoreName, DeliveryCharge, Line, ProductName, ProductCost, SaleRate, Package, SeparateSectorLine } from "./atoms/product";
 import { ProductComp } from "./components/product";
+import { OrderDataType } from "../../reducers/OrderReducer";
+import { clearOrder, getOrderAction } from "./OrderAction";
+import { OrderProductDataType } from "../../reducers/ProductReducer";
 
 function OrderPage(props: any) {
+    const dispatch = useDispatch();
+
+    const orderSelector: OrderDataType[] = useSelector((state:RootState) =>
+        state.OrderReducer.orders
+    );     
+
+    const orderProductSelector: OrderProductDataType[] = useSelector((state:RootState) =>
+        state.SearchDetailReducer.orderProducts
+    );     
+
+    // useEffect(() => {
+    //   dispatch(getOrderAction(orderSelector))
+    // }, [])
+
+    // useEffect(() => {
+    //   dispatch(clearOrder());
+    // }, [])
+    
+    
     return(
         <AppFrame>
             <AppBarComponentOnlyBack title={"주문/결제"}/>
             
             <SectorTitle style = {{display: "fixed", marginLeft: "16px", marginTop:"80px"}}> 
                 <span> 총 </span>
-                <span style={{color:"#fb6159"}}>2</span>
+                <span style={{color:"#fb6159"}}>{orderProductSelector.length}</span>
                 <span>개의 상품</span>
             </SectorTitle>
 
             <div style={{marginTop: "20px"}}>
-                <ProductComp />
-                <ProductComp />
+                {
+                    orderProductSelector.map((orderProduct) => {
+                        return (
+                            <ProductComp orderProduct={orderProduct} />
+                        )
+                    })
+                }
             </div>
         </AppFrame>
     )

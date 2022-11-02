@@ -1,5 +1,6 @@
 import { GET_CART_SUCCESS, GET_CART_FAIL, CART_CANCEL_SUCCESS, CART_CANCEL_FAIL, CART_ADD_FAIL, CART_ADD_SUCCESS } from "../pages/CartPage/CartAction";
 import { GET_LIKE_FAIL, GET_LIKE_SUCCESS, LIKE_CANCEL_FAIL, LIKE_CANCEL_SUCCESS, LIKE_FAIL, LIKE_SUCCESS } from "../pages/LikePage/LikeAction";
+import { SET_ORDER, CANCEL_ORDER, SET_ORDER_SUCCESS, ADD_ORDER, ADD_ORDER_SUCCESS, CLEAR_ORDER } from "../pages/OrderPage/OrderAction";
 import { ProductDataType } from "./ProductReducer";
 
 export interface OrderDataType {
@@ -7,53 +8,62 @@ export interface OrderDataType {
     product_id: number
 }
 
- interface CartData {
-    uid: string,
-    product_id: number
+
+
+ interface OrderDataListType {
+    orders: OrderDataType[]
 }
 
-
- interface CartDataList {
-    carts: CartData[]
+const orderInitState : OrderDataListType = {
+    orders: []
 }
 
-const cartInitState : CartDataList = {
-    carts: []
-}
-
-
-export function OrderReducer(state = cartInitState, action: any) {
+export function OrderReducer(state = orderInitState, action: any) {
+    let orderProductList:OrderDataType[] = [];
+    
     switch (action.type) {
-        case GET_CART_SUCCESS:
-            return {
-                ...state,
-                carts: action.payload,
-            };
-        case GET_CART_FAIL:
-            return {
-                ...state,
-                carts: action.payload,
-            };  
-        case CART_ADD_SUCCESS:
-            return {
-                ...state,
-                carts: action.payload,
-            };
-        case CART_ADD_FAIL:
-            return {
-                ...state,
-            };
-        case CART_CANCEL_SUCCESS:
-            return {
-                ...state,
-                carts: action.payload,
-            };
-        case CART_CANCEL_FAIL:
-            return {
-                ...state,
-                // likes: action.payload,
-            };
 
+        case SET_ORDER_SUCCESS:
+            return {
+                ...state,
+                orders: action.payload,
+            };
+        
+
+        case ADD_ORDER:
+            orderProductList = [action.payload];
+
+            for (const order of state.orders) {
+                if(order.product_id === action.payload.product_id) {
+                    continue;
+                }
+                else{
+                    orderProductList.push(order);
+                }
+            }
+            
+            return {
+                ...state,
+                orders: orderProductList,
+            };       
+
+        case CANCEL_ORDER:
+            orderProductList = [];
+
+            for (const order of state.orders) {
+                if(order.product_id === action.payload.product_id) {
+                    continue;
+                }
+                else{
+                    orderProductList.push(order);
+                }
+            }
+            
+            return {
+                ...state,
+                orders: orderProductList,
+            };  
+      
         default:
             return state;
     }

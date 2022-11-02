@@ -24,6 +24,8 @@ import { cartCancelAction, getCartAction } from "./CartAction";
 
 import {PaymentBtn} from "./atoms/CartProduct"
 import { CartTopComp } from "./components/CartTop";
+import { OrderDataType } from "../../reducers/OrderReducer";
+import { setOrderTry } from "../OrderPage/OrderAction";
 
 
 function CartPage(props: any) {
@@ -44,6 +46,11 @@ function CartPage(props: any) {
     //     })
     // }, [])
     const [allCheck, setAllCheck] = useState(false);
+    const [order, setOrder] = useState(false);
+
+    const orderSelector: OrderDataType[] = useSelector((state:RootState) =>
+        state.OrderReducer.orders
+    );    
 
 
     if(cartSelector) {
@@ -59,7 +66,7 @@ function CartPage(props: any) {
                 {
                     cartSelector.map((product) => {
                         return(
-                            <CartProductComponent allCheck={allCheck} product={product}/>
+                            <CartProductComponent allCheck={allCheck} product={product} order={order}/>
                         )
                     })
                 }
@@ -69,7 +76,15 @@ function CartPage(props: any) {
                 <div style={{
                     backgroundColor: "white",
                     position:"fixed", bottom: 0, maxWidth:"625px", width:"100%",height:"56px", paddingBottom: "16px"}}>
-                    <PaymentBtn style={{margin:"0 16px"}}>결제하기</PaymentBtn>
+                    <PaymentBtn 
+                    onClick={()=>{
+                        setOrder(true);
+                        dispatch(setOrderTry(orderSelector));
+                        navigate("/order");
+                    }}
+                    style={{
+                        margin:"0 16px"
+                        }}>결제하기</PaymentBtn>
                 </div>
             </AppFrame>
         )

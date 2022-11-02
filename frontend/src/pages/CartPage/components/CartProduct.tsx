@@ -15,29 +15,51 @@ import checkNotIcon from "../../../assets/images/btn-checkbox-2@3x.png";
 import { ProductDataType } from "../../../reducers/ProductReducer";
 import { cartCancelAction } from "../CartAction";
 import { OrderDataType } from "../../../reducers/OrderReducer";
+import { addOrderTry, cancelOrderTry, setOrderTry } from "../../OrderPage/OrderAction";
+import { useNavigate } from "react-router-dom";
 
 type ProductCheckParmas = {
     product: ProductDataType
-    allCheck: boolean
+    allCheck: boolean,
+    order: boolean
 }
 
-export const CartProductComponent = ({product, allCheck}:ProductCheckParmas) => {
+export const CartProductComponent = ({product, allCheck, order}:ProductCheckParmas) => {
     const dispatch = useDispatch();
     const [ischecked, setIschecked] = useState(false);
     const [count, setCount] = React.useState<number>(1);
+    const navigate = useNavigate();
 
     useEffect(() => {
         setIschecked(allCheck);
     }, [allCheck])
 
-    const handleDirectOrder = (count: number, product_id:number) => {
-        let data :OrderDataType = {
-            count: 1,
-            product_id: product_id
-        } 
-
-        alert(JSON.stringify(data));
+   
+    const handleDirectOrder = () => {
+        dispatch(setOrderTry([{
+            count: count,
+            product_id: product.product_id
+        }]));
+        navigate("/order");
     }
+
+    useEffect(() => {
+        if(ischecked) {
+            console.log("add order");
+            
+            dispatch(addOrderTry({
+                count: count,
+                product_id: product.product_id
+            }));
+        }
+        else{
+            dispatch(cancelOrderTry({
+                count: count,
+                product_id: product.product_id
+            }));
+        }
+    }, [ischecked])
+    
 
 
     return(
@@ -136,7 +158,7 @@ export const CartProductComponent = ({product, allCheck}:ProductCheckParmas) => 
                 }}>삭제하기</CartBtn1>
                 <CartBtn2 
                 onClick={() => {
-                    handleDirectOrder(count, product.product_id);
+                    handleDirectOrder();
                 }}
                 style={{marginLeft:"9px"}}>바로구매</CartBtn2>
             </CartProductBoxPart5>       
