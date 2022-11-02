@@ -82,13 +82,16 @@ async function createUserInfo(uid:string, is_guest:boolean, data:loginData | nul
         }
         else{
             await addDoc(userProfileRef, {
-                profile_nickname: "Guest"+uid.substring(0,3),
+                profile_nickname: "Guest-"+uid.substring(0,3),
                 profile_email: null,
                 profile_img: null
             })
         }
         
     }
+
+    console.log("create user info 완료");
+    
     // SNS 연동 로그인 중 첫 로그인일 경우
     return (isNew && !is_guest);
 }
