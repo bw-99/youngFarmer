@@ -52,6 +52,22 @@ function* addCart(action:any) {
     const result:CartData[] = yield call(addCartAPI, action.payload);
     
     if(result){     
+        let pidList = result.map((val) => {
+            return val.product_id
+        });
+    
+        const pidResult: ProductDataType[] = yield call(convertCart2Product, pidList);
+        console.log(pidResult);
+
+        console.log("result" + JSON.stringify(result));
+        yield put({
+            type: SEARCH_CART_SUCCESS,
+            payload: {
+                cartProducts: pidResult
+            },
+        }); 
+
+        
         yield put({
             type: CART_ADD_SUCCESS,
             payload: result,
@@ -174,6 +190,22 @@ function* cancelCart(action:any) {
     console.log("result = = " + result);
     
     if(result){    
+        let pidList = result.map((val) => {
+            return val.product_id
+        });
+    
+        const pidResult: ProductDataType[] = yield call(convertCart2Product, pidList);
+        console.log(pidResult);
+
+        console.log("result" + JSON.stringify(result));
+        yield put({
+            type: SEARCH_CART_SUCCESS,
+            payload: {
+                cartProducts: pidResult
+            },
+        }); 
+
+
         yield put({
             type: CART_CANCEL_SUCCESS,
             payload: result,

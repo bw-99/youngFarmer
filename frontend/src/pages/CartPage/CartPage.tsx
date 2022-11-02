@@ -12,7 +12,7 @@ import shopping_bag from "../../assets/images/shopping_bag@3x.png";
 import { AppBarComponentMyPage, AppBarComponentNoBack, AppBarComponentOnlyBack } from "../../common/AppBar/AppBar";
 
 
-import {CartProductComponent} from "./component/CartProduct"
+import {CartProductComponent} from "./components/CartProduct"
 
 
 import { BottomNavigationBar } from "../../common/BottomNavigationBar/BottomNavigationBar";
@@ -22,7 +22,8 @@ import { MyPageDataType } from "../../reducers/MypageReducer";
 import { ProductDataType } from "../../reducers/ProductReducer";
 import { cartCancelAction, getCartAction } from "./CartAction";
 
-import {PaymentBtn} from "./atom/CartProduct"
+import {PaymentBtn} from "./atoms/CartProduct"
+import { CartTopComp } from "./components/CartTop";
 
 
 function CartPage(props: any) {
@@ -35,39 +36,39 @@ function CartPage(props: any) {
         state.SearchDetailReducer.cartProducts
     );      
 
-    // const cartSelector: CartData[] = useSelector((state:RootState) =>
-    //     state.CartReducer.carts
-    // );     
-    // const currentUser = useContext(AuthContext);
+    // useEffect(() => {
+    //     FirebaseAuth.onAuthStateChanged((user) => {
+    //         if(user){
+    //             dispatch(getCartAction(user.uid));
+    //         }
+    //     })
+    // }, [])
+    const [allCheck, setAllCheck] = useState(false);
 
-    // useEffect(
-    //     () => {
-    //         FirebaseAuth.onAuthStateChanged((user) => {
-    //             let uid = user!.uid;
-    //             console.log("uid" + uid);
-    //             dispatch(getCartAction(uid));
-    //         })
-            
-    //     },
-    // [])
 
     if(cartSelector) {
         return (
             <AppFrame>
                 <AppBarComponentOnlyBack title={"장바구니"} />
+
+                <div style={{margin: "80px 16px 20px 16px"}}>
+                    <CartTopComp allCheck={allCheck} setAllCheck={setAllCheck}/>
+                </div>
                 
                 <div style={{paddingBottom: "88px",}}>
                 {
                     cartSelector.map((product) => {
                         return(
-                            <CartProductComponent product={product}/>
+                            <CartProductComponent allCheck={allCheck}product={product}/>
                         )
                     })
                 }
 
                 </div>
                 
-                <div style={{position:"fixed", bottom: 0, maxWidth:"625px", width:"100%",height:"88px"}}>
+                <div style={{
+                    backgroundColor: "white",
+                    position:"fixed", bottom: 0, maxWidth:"625px", width:"100%",height:"56px", paddingBottom: "16px"}}>
                     <PaymentBtn style={{margin:"0 16px"}}>결제하기</PaymentBtn>
                 </div>
             </AppFrame>

@@ -30,6 +30,7 @@ export const AuthProvider:FC<Props> = ({children}) :React.ReactElement|null => {
         getItemWithExpireTime("user")? setUser(true) : setUser(false);
         FirebaseAuth.onAuthStateChanged((data)=> {
             if(data){
+                console.log("auth provider use effect");
                 setItemWithExpireTime("user", true, 1000*60*60);
                 dispatch(getLikeAction(data.uid));
                 dispatch(getCartAction(data.uid));
@@ -59,18 +60,14 @@ interface NavigateProps {
 export const PrivateRoute:FC<NavigateProps> = ({children, ...props}):any => {
     const currentUser = useContext(AuthContext);
 
-    // console.log("++====================++" + currentUser + "++====================++");
-
     return (
         currentUser?  <Outlet/> 
-        // :  <LoginPage /> 
         : <Navigate to={"/login"}/> 
     );
 }
 
 export const LoginRoute:FC<NavigateProps> = ({children, ...props}):any => {
     let currentUser = useContext(AuthContext);
-    console.log("currentUser = " + currentUser);
 
     return (
         currentUser? 

@@ -10,46 +10,15 @@ import { searchLikeTryAction } from "../../SearchPage/SearchDertailAction";
 export const ItemComponent = () => {
     const dispatch = useDispatch();
     const [prList, setPrList] = useState([]);
-    // const selector: LikeData[] = useSelector((state:RootState) =>
-    //     state.LikeReducer.likes
-    // );
 
-    const pidProductsSelector : ProductDataType[] =useSelector((state:RootState) =>
+    const likeSelector: ProductDataType[] = useSelector((state:RootState) =>
         state.SearchDetailReducer.likeProducts
     );
     
-    // useEffect(() => {
-    //     // selector.map((val) => {
-    //     //      console.log(val.product_id);
-    //     //   })
-    //     let pidList: number[] = [];
-    //     selector.forEach((value) => {
-    //         pidList.push(value.product_id);
-    //     })
-        
-    //     dispatch(searchLikeTryAction(pidList));
-    
-    // }, [selector])
-
-    // useEffect(() => {
-    //     pidProductsSelector.filter(
-    //         (pr) => {
-    //             let pidList = selector.map((like) => {
-    //                 return like.product_id
-    //             });
-    //             return pidList.includes(pr.pr);
-    //         }
-    //     )
-    //     pidProductsSelector.forEach((val) => {
-    //         if(val.product_id === sele)
-    //     })
-    // },[pidProductsSelector])
-    
-
     return(
         <div style={{padding: "20px 9.5px 20px 9.5px"}}>
-            <ItemCountText> {pidProductsSelector.length}개 </ItemCountText>
-            <ItemUnitListComp image_width={165} product_list={pidProductsSelector}/>
+            <ItemCountText> {likeSelector.length}개 </ItemCountText>
+            <ItemUnitListComp image_width={165} product_list={likeSelector}/>
         </div>
     );
 }

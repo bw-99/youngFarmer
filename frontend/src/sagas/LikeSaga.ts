@@ -49,9 +49,25 @@ async function likeAPI(payload:any) {
 function* like(action:any) {
     console.log("like product_id" + action.payload);
     
-    const result:LikeDataList = yield call(likeAPI, action.payload);
+    const result:LikeData[] = yield call(likeAPI, action.payload);
     
-    if(result){        
+    if(result){    
+        let pidList = result.map((val) => {
+            return val.product_id
+        });
+    
+        const pidResult: ProductDataType[] = yield call(convertCart2Product, pidList);
+        console.log(pidResult);
+
+        console.log("result" + JSON.stringify(result));
+
+        yield put({
+            type: SEARCH_LIKE_SUCCESS,
+            payload: {
+                likeProducts: pidResult
+            },
+        }); 
+
         yield put({
             type: LIKE_SUCCESS,
             payload: result,
@@ -155,10 +171,25 @@ async function likeCancelAPI(payload:any) {
 function* likeCacncel(action:any) {
     console.log("like product_id" + action.payload);
     
-    const result:LikeDataList = yield call(likeCancelAPI, action.payload);
+    const result:LikeData[] = yield call(likeCancelAPI, action.payload);
     
     if(result){    
         console.log("좋아요 취소 성공");
+        let pidList = result.map((val) => {
+            return val.product_id
+        });
+    
+        const pidResult: ProductDataType[] = yield call(convertCart2Product, pidList);
+        console.log(pidResult);
+
+        console.log("result" + JSON.stringify(result));
+
+        yield put({
+            type: SEARCH_LIKE_SUCCESS,
+            payload: {
+                likeProducts: pidResult
+            },
+        }); 
             
         yield put({
             type: LIKE_CANCEL_SUCCESS,
