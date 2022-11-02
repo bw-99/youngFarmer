@@ -1,6 +1,6 @@
 // 만료 시간과 함께 데이터를 저장
 export function setItemWithExpireTime(keyName:string, keyValue:any, tts:number) {
-    window.localStorage.removeItem("user");
+    window.localStorage.removeItem(keyName);
     // localStorage에 저장할 객체
     const obj = {
       value : keyValue,
