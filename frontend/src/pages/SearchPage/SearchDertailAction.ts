@@ -27,6 +27,11 @@ export const SEARCH_CART_TRY = "SEARCH_CART_TRY";
 export const SEARCH_CART_SUCCESS = "SEARCH_CART_SUCCESS";
 export const SEARCH_CART_FAIL = "SEARCH_CART_FAIL";
 
+export const SEARCH_ORDER_TRY = "SEARCH_ORDER_TRY";
+export const SEARCH_ORDER_SUCCESS = "SEARCH_ORDER_SUCCESS";
+export const SEARCH_ORDER_FAIL = "SEARCH_ORDER_FAIL";
+
+
 export type FILTER_TYPE = {
     is_best?: boolean,
     is_sale?: boolean,

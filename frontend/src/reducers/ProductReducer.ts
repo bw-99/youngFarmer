@@ -10,12 +10,18 @@ export interface StoreDataType {
     category : string[]
 }
 
+export interface OrderProductDataType {
+    product: ProductDataType,
+    count: number,
+}
+
 export interface ProductDataList {
     products: ProductDataType[],
     recommendResult: ProductDataType[],
     pidProducts: ProductDataType[],
     likeProducts: ProductDataType[],
     cartProducts: ProductDataType[],
+    orderProducts: OrderProductDataType[],
     storeList?: StoreDataType[],
 }
 

@@ -34,18 +34,16 @@ function MyPage(props: any) {
 
     useEffect(() => {
         
-        if(!selector){
-            FirebaseAuth.onAuthStateChanged((data)=> {
-                if(data){
-                    console.log("dispatch!!");
-                    
-                    dispatch(getProfileAction(data.uid));
-                }
-            })
-        }
+        FirebaseAuth.onAuthStateChanged((data)=> {
+            if(data){
+                console.log("dispatch!!");
+                
+                dispatch(getProfileAction(data.uid));
+            }
+        })
        
         
-    }, [selector]);
+    }, []);
 
     
 
@@ -74,6 +72,7 @@ function MyPage(props: any) {
         return (
             <AppFrame>
                 <AppBarComponentMyPage title="마이페이지"/>
+                {/* {JSON.stringify(selector)} */}
                 <BottomNavigationBar />
             </AppFrame>  
         );
