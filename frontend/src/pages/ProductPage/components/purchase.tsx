@@ -112,7 +112,7 @@ export const PurchaseComp = () => {
 
                             <div>
                                 {
-                                    modalselector.select_num === 3 ?
+                                    modalselector.select_num === 0 ?
                                         <div style={{ padding: "0 16px", marginTop: "24px", /*display: "flex", flexDirection: "column",*/ maxWidth: "625px" , } }>
                                             <SelectCompleteBox style={{maxWidth: "625px"} }>
                                                 <div style={{ marginTop: "20px", marginLeft: "16px" }}>
