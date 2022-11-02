@@ -59,7 +59,6 @@ function ProductPage(props: any) {
         if (modalselector) {
             setOpen(modalselector.open_modal);
         }
-        console.log("why is change");
     }, [modalselector.open_modal]);
 
     if (selector) {

@@ -10,6 +10,7 @@ import { LikeData } from "../../../reducers/LikeReducer";
 import { likeAction, likeCancelAction } from "../../LikePage/LikeAction";
 import { openModalAction } from "../PurchaseAction"
 import { cartAddAction } from "../../CartPage/CartAction";
+import { object } from "prop-types";
 
 type bottomBarCompParam = {
     product_id : number
@@ -75,7 +76,17 @@ export const BottomBarComp = ({product_id}:bottomBarCompParam) => {
         e.preventDefault();
         if (modalselector.open_modal) {
             //when modal open
-            navigate(`/purchase`);
+            let canNext: boolean = true;
+            Object.keys(modalselector.select_item_info).forEach(key => {
+                if (!modalselector.select_item_info[key] && canNext) {
+                    canNext = false;
+                }
+            })
+            if (canNext) {
+                navigate(`/order`);
+            } else {
+                console.log("추가해세요");
+            }
         }
         else {
             //when modal close

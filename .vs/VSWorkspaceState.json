@@ -8,8 +8,9 @@
     "\\frontend\\src\\pages\\ProductPage",
     "\\frontend\\src\\pages\\ProductPage\\atoms",
     "\\frontend\\src\\pages\\ProductPage\\components",
+    "\\frontend\\src\\pages\\PurchasePage",
     "\\frontend\\src\\reducers"
   ],
-  "SelectedNode": "\\frontend\\src\\pages\\ProductPage\\components\\BottomBar.tsx",
+  "SelectedNode": "\\frontend\\src\\pages\\ProductPage\\PurchaseAction.tsx",
   "PreviewInSolutionExplorer": false
 }
