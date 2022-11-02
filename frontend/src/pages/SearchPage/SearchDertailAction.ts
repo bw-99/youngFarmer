@@ -57,7 +57,9 @@ export const searchTryAction = (search:string) => {
     }
 }
 
-export const searchFilterTryAction = (search: string, filter: FILTER_TYPE, priceRange: PRICE_RANGE_TYPE) => {
+export const searchFilterTryAction = (search: string, filter: FILTER_TYPE, priceRange?: PRICE_RANGE_TYPE) => {
+    console.log("searchFilterTryAction");
+    
     return {
         type: SEARCH_TRY,
         payload: {

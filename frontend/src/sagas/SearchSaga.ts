@@ -33,7 +33,9 @@ async function getSearchStoreAPI(searchResult:ProductDataType[], payload:any) {
 
     for (const q of queryList) {
         const fbdata = await getDocs(q);
-        dataList.push(fbdata.docs[0].data());
+        if(!fbdata.empty){
+            dataList.push(fbdata.docs[0].data());
+        }
     }
 
 
@@ -42,19 +44,26 @@ async function getSearchStoreAPI(searchResult:ProductDataType[], payload:any) {
     const q = query(storeRef);
     const fbdata = await getDocs(q);
 
-    fbdata.docs.forEach((doc) => {
-        const data = doc.data();
-        if(`${data.name}`.includes(search)){
-            console.log("inlcude");
-            dataList.push(data);
-        }
-    })
+    if(!fbdata.empty) {
+        fbdata.docs.forEach((doc) => {
+            const data = doc.data();
+            if(`${data.name}`.includes(search)){
+                console.log("inlcude");
+                dataList.push(data);
+            }
+        })
+    }
+
+    
 
     return dataList;
 }
 
 async function getSearchFilterAPI(payload:any) {
-    let search = payload.search;
+    let search:string = payload.search ? payload.search : " ";
+    search = search.trim()
+
+    
     let filter: any = payload.filter;
     let priceRange:any = payload.priceRange;
     console.log(filter);
@@ -64,18 +73,25 @@ async function getSearchFilterAPI(payload:any) {
 
     let queryTemp = query(productRef);
 
-    Object.keys(filter).map((key) => {
-        if(key){
-            console.log(key + " : " + filter[key]);
-            queryTemp = query(queryTemp, where(key, "==", filter[key]))
-            // queryList.push(
-            //     query(productRef, where(key, "==", filter[key]))
-            // );
-        }
-    })
+    if(filter){
+        Object.keys(filter).map((key) => {
+            if(key){
+                console.log(key + " : " + filter[key]);
+                queryTemp = query(queryTemp, where(key, "==", filter[key]))
+                // queryList.push(
+                //     query(productRef, where(key, "==", filter[key]))
+                // );
+            }
+        })
+    }
 
-    queryTemp = query(queryTemp,  where("price", ">=", priceRange.minPrice));
-    queryTemp = query(queryTemp,  where("price", "<=", priceRange.maxPrice));
+
+    if(priceRange){
+        queryTemp = query(queryTemp,  where("price", ">=", priceRange.minPrice));
+        queryTemp = query(queryTemp,  where("price", "<=", priceRange.maxPrice));
+    }
+
+
     
     let dataList = [];
     const fbdata = await getDocs(queryTemp);
@@ -85,12 +101,19 @@ async function getSearchFilterAPI(payload:any) {
 
     let searchDataList:any = [];
 
-    dataList.map((data:any) => {
-        if(`${data.title}`.includes(search)){
-            console.log("inlcude");
-            searchDataList.push(data);
-        }
-    })
+    if(search){
+        dataList.map((data:any) => {
+            if(`${data.title}`.includes(search)){
+                console.log("inlcude");
+                searchDataList.push(data);
+            }
+        })
+    }
+    else{
+        
+        searchDataList = dataList;
+    }
+    console.log("?????!!!!!" + JSON.stringify(searchDataList));
 
     return searchDataList;
 }

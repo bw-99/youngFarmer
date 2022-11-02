@@ -65,14 +65,15 @@ export const RecentSearchHistoryItemComponent = ({text}:StringProp) => {
     const navigate = useNavigate();
     
     return(
-        <RecentSearchHistoryBg onClick={() => {
+        <RecentSearchHistoryBg onClick={(e) => {
             // dispatch(searchTryAction(text));
             navigate(`/search/${text}`);
         }} key={text} style={{margin: "8px 6px"}}>
             <div style={{display:"flex", padding: "10px 7px 12px 10px"}}>
                 <RecentSearchHistoryText> {text} </RecentSearchHistoryText>
                 <div style={{width:"10px"}}></div>
-                <RecentSearchHistoryClose onClick={() => {
+                <RecentSearchHistoryClose onClick={(e) => {
+                    e.stopPropagation();
                     dispatch(SearchDeleteAction(text));
                 }} src={closeIcon}/>
             </div>

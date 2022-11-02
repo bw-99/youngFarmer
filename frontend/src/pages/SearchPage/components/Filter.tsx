@@ -8,11 +8,12 @@ import {BottomImg, WonSpan,FlowSpan,FilterBoxSpan,BottomBox,FilterBox,FilterButt
 import MultiRangeSlider from "./MultiRangeSlider"
 import { SEARCH_FILTER } from "../../../reducers/SearchReducer";
 import { searchFilterTryAction } from "../SearchDertailAction";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 
 export const FilterComponent = () => {
     const params = useParams();
+    const navigate = useNavigate();
     // const [filter, setFilter] = useState<SEARCH_FILTER>({
     //     entire: false,
     //     best: false,
@@ -195,7 +196,15 @@ export const FilterComponent = () => {
                 <FilterButtonApplyBox onClick={()=> {
                     let filter = makeFilter();
                     let priceRange = makePriceRange();
-                    dispatch(searchFilterTryAction(params.search!, filter, priceRange));
+                    let searchFilter = {
+                        filter: filter,
+                        priceRange: priceRange
+                    }
+                    
+                    console.log(searchFilter);
+                    navigate(`/search/${params.search}?searchFilter=${JSON.stringify(searchFilter)}`)
+                    
+                    // dispatch(searchFilterTryAction(params.search!, filter, priceRange));
                     dispatch(SearchFilterCloseAction());
                 }}>
                     <FilterButtonApplySpan>
