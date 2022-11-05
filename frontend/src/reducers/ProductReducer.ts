@@ -60,7 +60,12 @@ export interface ProductDataReviewType {
     score: number,
     time_created: Timestamp,
     uid: string,
-    photos: string[]
+    photos: string[],
+    writer: {
+        profile_email: string,
+        profile_img: string,
+        profile_nickname: string
+    }
 }
 
 export interface ProductDataQuestionType {

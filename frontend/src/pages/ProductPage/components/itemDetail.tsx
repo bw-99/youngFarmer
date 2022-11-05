@@ -77,61 +77,78 @@ export const ItemDetailComp = () => {
             </div>
             {
                 index == 0?
-                ItemDetailPhotoComp(selector.photoDataList.photos):
+                <ItemDetailPhotoComp photos={selector.photoDataList.photos}/>:
 
                 index == 1 ?
-                ItemReviewComp(selector.reviewDataList):
-                ItemQuestionComp(selector.questionDataList)
+                <ItemReviewComp reviewList={selector.reviewDataList}/>:
+                <ItemQuestionComp questionDataList={selector.questionDataList} />
 
             }
         </div>
     );
 }
 
-const ItemQuestionComp = (questionList:ProductDataQuestionType[]) => (
-    <div>
-        <div style={{ marginBottom:"24px", display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
-            <ItemReviewTitle> 상품 Q&A </ItemReviewTitle>
-            <ItemReviewButton> 문의작성 </ItemReviewButton>
-        </div>
+
+type QuestionDataListProps = {
+    questionDataList:ProductDataQuestionType[]
+}
+
+const ItemQuestionComp = ({questionDataList}:QuestionDataListProps) => {
+
+    if(questionDataList.length) {
+        return (
+            <div>
+                <div style={{ marginBottom:"24px", display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+                    <ItemReviewTitle> 상품 Q&A </ItemReviewTitle>
+                    <ItemReviewButton> 문의작성 </ItemReviewButton>
+                </div>
+                
+                {
+                    questionDataList.map((question) => {
+                        return <ItemQuestionDetailComp question={question}/>
+                    })
+                }
         
-        {
-            questionList.map((question) => {
-                return ItemQuestionDetailComp(question)
-            })
-        }
+            </div>
+        );
+    }
 
-    </div>
-)
+    return <div></div>
+    
+}
+
+type QuestionDataProps = {
+    question:ProductDataQuestionType
+}
 
 
-const ItemQuestionDetailComp = (review: ProductDataQuestionType) => {
+const ItemQuestionDetailComp = ({question}:QuestionDataProps) => {
     return (
         <div>
             <SepLine />
             <div style={{padding: "24px 0"}}>
                 <div style={{display: "flex", alignItems:"center", justifyContent:"space-between", }}>
                     <QuestionNickname> 청년농부 </QuestionNickname>
-                    <ContentDate > {`${review.time_created.toDate().toLocaleDateString("kr-KR")}`} </ContentDate>
+                    <ContentDate > {`${question.time_created.toDate().toLocaleDateString("kr-KR")}`} </ContentDate>
                 </div>
 
                 <div style={{marginTop:"15px", display: "flex", justifyContent: "space-between", alignItems:"center"}}>
                     <div style={{display: "flex", alignItems:"center"}}>
                         {
-                            review.is_secret?
+                            question.is_secret?
                             <>
                                 <QuestionLockIcon src={iconLock}/>
                                 <QuestionContent style={{marginLeft: "6px"}}> 비밀 글입니다. </QuestionContent>
                             </>
                             :
                             <>
-                                <QuestionContent> {review.content} </QuestionContent>
+                                <QuestionContent> {question.content} </QuestionContent>
                             </>
                         }
                         
                     </div>
                     {
-                        review.is_answered?
+                        question.is_answered?
                         <QuestionUnansweredButton> 답변예정 </QuestionUnansweredButton>
                         :
                         <QuestionUnansweredButton> 답변완료 </QuestionUnansweredButton>
@@ -142,54 +159,82 @@ const ItemQuestionDetailComp = (review: ProductDataQuestionType) => {
     );
 }
 
-
-const ItemDetailPhotoComp = (photos:string[] ) => {
-    return photos.map((photo) => {
-        return(
-            <ImageBox style={{maxWidth: "625px", }} src={photo} key={photo} />
-        );
-    })
+type photoProps = {
+    photos:string[]
 }
 
-const ItemReviewComp = (reviewList:ProductDataReviewType[]) => (
-    <div>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
-            <ItemReviewTitle> 상품리뷰 {reviewList.length} </ItemReviewTitle>
-            <ItemReviewButton> 리뷰작성 </ItemReviewButton>
-        </div>
-
-        <div style={{ display: "flex", justifyContent: "flex-start", marginBottom: "30px" }}>
-            <ItemReviewStar src={rateStarOn} />
-            <ItemReviewStar src={rateStarOn} />
-            <ItemReviewStar src={rateStarOn} />
-            <ItemReviewStar src={rateStarOn} />
-            <ItemReviewStar src={rateStarOff} />
-            <ItemReviewScore style={{ marginLeft: "8px" }}> {getAverageReviewScore(reviewList)} </ItemReviewScore>
-        </div>
-        
+const ItemDetailPhotoComp = ({photos}:photoProps) => {
+    return (
+        <>
         {
-            reviewList.map((review) => {
-                return ItemReivewDetailComp(review)
+            photos.map((photo) => {
+                return(
+                    <ImageBox style={{maxWidth: "625px", }} src={photo} key={photo} />
+                );
             })
         }
+        </>
+        )
+}
 
-    </div>
-)
+type ReviewDataProps = {
+    reviewList:ProductDataReviewType[]
+}
 
-const ItemReivewDetailComp = (review: ProductDataReviewType) => {
+const ItemReviewComp = ({reviewList}:ReviewDataProps) => {
+    if(reviewList.length) {
+        return (
+            <div>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+                    <ItemReviewTitle> 상품리뷰 {reviewList.length} </ItemReviewTitle>
+                    <ItemReviewButton> 리뷰작성 </ItemReviewButton>
+                </div>
+    
+                <div style={{ display: "flex", justifyContent: "flex-start", marginBottom: "30px" }}>
+                    <ItemReviewStar src={rateStarOn} />
+                    <ItemReviewStar src={rateStarOn} />
+                    <ItemReviewStar src={rateStarOn} />
+                    <ItemReviewStar src={rateStarOn} />
+                    <ItemReviewStar src={rateStarOff} />
+                    <ItemReviewScore style={{ marginLeft: "8px" }}> {getAverageReviewScore(reviewList)} </ItemReviewScore>
+                </div>
+                
+                {
+                    reviewList.map((review) => {
+                        return <ItemReivewDetailComp review={review}/>
+                    })
+                }
+    
+            </div>
+        );
+    }
+
+    return <div></div>
+
+
+}
+
+type reviewDataType = {
+    review: ProductDataReviewType
+}
+
+const ItemReivewDetailComp = ({review}:reviewDataType) => {
     return (
         <div>
             <SepLine />
             <div style={{padding: "24px 0"}}>
                 <div style={{display: "flex", justifyContent:"space-between", alignItems:"center"}}>
                     <div style={{display: "flex", alignItems:"center"}}>
-                        <ReviewerPhoto  src={productExThree}/>
-                        <ReviewerNickname style={{marginLeft: "10px"}}> 청년농부 </ReviewerNickname>
+                        <ReviewerPhoto  src={
+                            review.writer.profile_img ?
+                            review.writer.profile_img :
+                            productExThree}/>
+                        <ReviewerNickname style={{marginLeft: "10px"}}> {review.writer.profile_nickname} </ReviewerNickname>
                     </div>
 
                     <div style={{display: "flex", alignItems:"center"}}> 
                         <EachRateStar style={{marginRight: "4px"}} src={rateStarOn}/>
-                        <EachRateStarScore> 4.5 </EachRateStarScore>
+                        <EachRateStarScore> {review.score} </EachRateStarScore>
                     </div>
                 </div>
 
