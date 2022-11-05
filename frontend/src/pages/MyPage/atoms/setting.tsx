@@ -33,20 +33,18 @@ export const TitleBox = styled.div`
 export const ProfileBox   = styled.div`
     height: 80px;  
     text-align:center;
-    display:inline-flex;
-    width:inherit;
     display:flex;
     background-color:white;
     max-width:625px;
-    
 `
 
 export const ProfileBoxSmall1 = styled.div`
-    width:20%;
+
 `
 
 export const ProfileBoxSmall2 = styled.div`
-    width:80%;
+    /* width:80%; */
+    margin-left: 0px;
 `
 
 export const ProfileBoxSmallSmall2 = styled.div`
@@ -87,7 +85,7 @@ export const SmallBtn = styled.img`
 `
 
 export const ProfileBoxSmallSmall1 = styled.div`
-    height : 46px;
+    /* height : 46px; */
     font-family: AppleSDGothicNeo;
     font-size: 20px;
     font-weight: 800;
@@ -99,9 +97,10 @@ export const ProfileBoxSmallSmall1 = styled.div`
     display:flex;
 `
 
-export const ProfileImgBox = styled.div`
+export const ProfileImgBox = styled.img`
     width: 48px;
     height: 48px;
+    object-fit: cover;
     background-color:black;
     border-radius:50%;
     float:left;
@@ -128,4 +127,10 @@ export const ProfileExitBtn = styled.div`
   border: solid 1px #dfdfdf;
   text-align:center;
   padding:18px 0;
+
+  font-family: AppleSDGothicNeo;
+  font-size: 17px;
+  font-weight: 500;
+  text-align: center;
+  color: #444444;
 `

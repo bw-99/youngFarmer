@@ -10,8 +10,13 @@ import followIcon from "../../../assets/images/btn-follow@3x.png";
 
 import { ProfileEmail, ProfileFuncMenu, ProfileFuncMenuDivider, ProfileFuncMenuIcon, ProfileFuncMenuText, ProfileNickname, ProfileNicknameSub, ProfilePhoto, ProfilePhotoAtom, ProfilePhotoChange, ProfilePhotoChangeIcon } from "../atoms/profile";
 import { MyPageDataType } from "../../../reducers/MypageReducer";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../reducers";
+import { db, storage } from "../../..";
+import { getDownloadURL, ref, StorageReference, uploadBytes, uploadBytesResumable } from "firebase/storage";
+import { collection, query, where, limit, getDocs, updateDoc, addDoc } from "firebase/firestore";
+import { data } from "cheerio/lib/api/attributes";
+import { getProfileAction } from "../MyAction";
 
 export const ProfileComp = () => {
     const selector: MyPageDataType = useSelector((state:RootState) =>
@@ -32,6 +37,48 @@ const ProfilePersonalComp = () => {
         state.ProfileReducer!.mypageInfo
     );   
 
+    const dispatch = useDispatch();
+
+    const photoUploadHandler = (e: any) => {
+        const img = e.target.files[0];
+        console.log(img);
+
+        const storageRef:StorageReference = ref(storage, `/${img.name}`)!;
+          
+        const uploadTask = uploadBytesResumable(storageRef, img);
+
+        uploadTask.on(
+            "state_changed",
+            (snapshot) => {
+                const percent = Math.round(
+                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                );
+            },
+            (err) => console.log(err),
+            () => {
+                // download url
+                getDownloadURL(uploadTask.snapshot.ref).then( async (url) => {
+
+                    const userRef = collection(db, "user");
+                    const q = query(userRef, where("uid", "==", selector.uid), limit(1));
+                    const fbdata = await getDocs(q);
+
+                    const profileRef = collection(fbdata.docs[0].ref, "profile");
+                    const q2 = query(profileRef);
+                    const fbdata2 = await getDocs(q2);
+
+                    await updateDoc(fbdata2.docs[0].ref, {
+                        profile_img: url
+                    });
+
+                    dispatch(getProfileAction(selector.uid));
+                    console.log(url);
+                });
+            }
+        ); 
+
+    }
+
     return(
         <div style={{display:"flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
             <ProfilePhotoAtom>
@@ -39,9 +86,20 @@ const ProfilePersonalComp = () => {
                     selector.profileData.profile_img ?
                     selector.profileData.profile_img
                     : defaultPhoto}/>
+
+            <label>
                 <ProfilePhotoChange >
                     <ProfilePhotoChangeIcon src={cameraIcon} />
                 </ProfilePhotoChange>
+
+                <input type='file' 
+                    accept='image/jpg,impge/png,image/jpeg,image/gif' 
+                    name='profile_img' 
+                    style={{display:"none"}}
+                    onChange={photoUploadHandler}>
+                </input>
+                </label>
+
             </ProfilePhotoAtom>
            
             <div style={{marginTop: "16px", display:"flex", alignItems:"flex-end"}}>

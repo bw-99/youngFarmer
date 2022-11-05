@@ -27,6 +27,7 @@ import { GetProductInfo } from "./ProductAction";
 import { ProductDataType } from "../../reducers/ProductReducer";
 import { RootState } from "../../reducers";
 import { PurchaseComp } from "./components/purchase";
+import { CircularProgress } from '@mui/material';
 
 function ProductPage(props: any) {
     const params = useParams();

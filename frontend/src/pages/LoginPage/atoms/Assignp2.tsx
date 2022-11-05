@@ -59,13 +59,16 @@ export const AssignPage3Text1 = styled.div`
 `
 
 export const AssignPage3FormBox = styled.div`
-    margin-top: 10px;
+    margin-top: 78px;
+    margin-left: 16px;
+    margin-right: 16px;
 `
 
 export const AssignPageForm = styled.div`
     height: 78px;
     align-items:center;
     margin-top:42px;
+    max-width: 625px;
 `
 
 export const AssignPageFormLabel = styled.div`
@@ -95,7 +98,10 @@ export const AssignPageFormSpan = styled.span`
 /* max-width: 625px; */
 /* width: calc(100vw - 58px); */
 export const AssignPageFormInputForName = styled.input`
-    width: 100%;
+    /* max-width: 625px; */
+    /* width: 100%; */
+    /* width: calc(100% - 32px); */
+    flex: 1;
     height: 48px;
     border-radius: 8px;
     border: solid 1px #dfdfdf;
@@ -110,7 +116,8 @@ export const AssignPageFormInputForName = styled.input`
 //width: 341px;
 export const AssignPageFormInputForEmail = styled.input`
     padding:0;
-    width:100%;
+    /* width: calc(100% - 32px); */
+    flex: 1;
     height: 48px;
     border-radius: 8px;
     border: solid 1px #dfdfdf;
@@ -126,6 +133,7 @@ export const AssignPageFormInputForNum = styled.input`
     /* width:85%; */
     flex: 1;
     /* width: calc(100vw - 116px); */
+    /* width: calc(100% - 116px); */
     height: 48px;
     border-radius: 8px;
     border: solid 1px #dfdfdf;
@@ -174,8 +182,9 @@ export const ButtonText = styled.span`
 `
 
 export const AssignPageFormInputForCertificationNum = styled.input`
-    width:100%;
+    /* width:100%; */
     padding:0;
+    flex: 1;
     height: 48px;
     border-radius: 8px;
     border: solid 1px #dfdfdf;
@@ -192,7 +201,7 @@ export const AssignPageFormInputForCertificationNum = styled.input`
 export const AssignPageSubmitButton2 = styled.div`
     position: fixed;
     bottom: 0;
-    max-width: calc(625px);
+    max-width: calc(625px - 32px);
     margin: 0 16px 16px 16px;
 
     display:flex;
