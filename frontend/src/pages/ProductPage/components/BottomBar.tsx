@@ -115,7 +115,6 @@ export const BottomBarComp = ({product_id}:bottomBarCompParam) => {
                     <BottomBoxShoppingCart onClick={(e) => {
                         if(modalselector.open_modal) {
                             dispatch(cartAddAction(product_id, modalselector.select_item_info));
-                            // alert("장바구니에 담겼습니다." + JSON.stringify(modalselector.select_item_info));
                             dispatch(closeModalAction(modalselector));
                         }
                         else{

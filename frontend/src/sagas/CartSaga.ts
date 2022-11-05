@@ -23,10 +23,8 @@ async function addCartAPI(payload:any) {
     const q = query(cartRef, where("product_id", "==", product_id),where("uid", "==", uid));
     const fbdata = await getDocs(q);
 
-    
     // 장바구니 담기 가능
     if(fbdata.empty){
-        console.log("장바구니 담을 수 있음");
         const result = await addDoc(cartRef, {
             uid: uid,
             product_id:product_id,
@@ -35,7 +33,6 @@ async function addCartAPI(payload:any) {
     }
     // 장바구니 수정
     else {
-        console.log("장바구니 수정 가능");
         const result = await updateDoc(fbdata.docs[0].ref, {
             uid: uid,
             product_id:product_id,

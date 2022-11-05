@@ -34,8 +34,6 @@ function ProductPage(props: any) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    console.log(params.productId);
-
     const selector: ProductDataType = useSelector((state:RootState) =>
         state.ProductInfoReducer!.productInfo
     );  
@@ -43,10 +41,6 @@ function ProductPage(props: any) {
     const modalselector: any = useSelector((state: RootState) =>
         state.PurchaseReducer.purchaseInfo
     );
-
-    
-    // const productRef = collection(db, "product");
-    // const q = query(productRef, where("product_id", "==", params.productId), orderBy("title"), limit(1));
 
     const [isOpen, setOpen] = useState(false);
 

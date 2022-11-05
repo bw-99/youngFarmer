@@ -38,13 +38,6 @@ function CartPage(props: any) {
         state.SearchDetailReducer.cartProducts
     );      
 
-    // useEffect(() => {
-    //     FirebaseAuth.onAuthStateChanged((user) => {
-    //         if(user){
-    //             dispatch(getCartAction(user.uid));
-    //         }
-    //     })
-    // }, [])
     const [allCheck, setAllCheck] = useState(false);
     const [order, setOrder] = useState(false);
 
@@ -52,16 +45,13 @@ function CartPage(props: any) {
         state.OrderReducer.orders
     );    
 
-
     if(cartSelector) {
         return (
             <AppFrame>
                 <AppBarComponentOnlyBack title={"장바구니"} />
-
                 <div style={{margin: "80px 16px 20px 16px"}}>
                     <CartTopComp allCheck={allCheck} setAllCheck={setAllCheck}/>
                 </div>
-                
                 <div style={{paddingBottom: "88px",}}>
                 {
                     cartSelector.map((cartProduct) => {
@@ -70,7 +60,6 @@ function CartPage(props: any) {
                         )
                     })
                 }
-
                 </div>
                 
                 <div style={{
