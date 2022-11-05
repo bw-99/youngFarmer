@@ -82,6 +82,8 @@ function CartPage(props: any) {
     return (
         <AppFrame>
             <AppBarComponentOnlyBack title={"장바구니"} />
+
+
         </AppFrame>
     )
 
