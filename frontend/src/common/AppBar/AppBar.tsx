@@ -13,10 +13,10 @@ import searchIconImage from "../../assets/images/btn-search@3x.png";
 
 import { useDispatch, useSelector } from "react-redux";
 import { SearchCrateAction } from "../../pages/SearchPage/SearchActions";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { ShareIconBlackComponent, ShareIconComponent } from "./ShareIcon/ShareIcon";
 import { MySettingComponent } from "./SettingIcon/Mysetting";
-import { searchTryAction } from "../../pages/SearchPage/SearchDertailAction";
+import { searchFilterTryAction, searchTryAction } from "../../pages/SearchPage/SearchDertailAction";
 import { RootState } from "../../reducers";
 
 // btn-search
@@ -52,7 +52,7 @@ const AppBarAtom = styled.div<ScrollPositionProps>`
     height: 56px;
     /* transition: background-color 200ms cubic-bezier(0.4, 0, 0.2, 1); */
     top: 0;
-    background-color: ${props => `rgba(255,255,255,calc(${props.topPosition/100}))`};
+    background-color: ${props => `rgba(255,255,255,calc(${props.topPosition/50}))`};
     width: 100vw;
     max-width: 625px;
     display: flex;
@@ -331,6 +331,7 @@ export const AppBarComponentSearch = () => {
     const [search, setSearch] = useState("");
     const navigate = useNavigate();
     const params = useParams();
+    const [searchParams, setSearchParams] = useSearchParams();
 
     const toggleSelector: number = useSelector((state:RootState) =>
         state.SearchToggleReducer
@@ -363,19 +364,29 @@ export const AppBarComponentSearch = () => {
       }
 
 
-    const handleInitSearch = (search:string) => {
-        dispatch(searchTryAction(search));
-    }
+    // const handleInitSearch = (search:string) => {
+    //     dispatch(searchTryAction(search));
+    // }
 
     useEffect(() => {
         setSearch(params.search!);
-        handleInitSearch(params.search!);
-    }, [params.search]);
+        let searchFilterParam = searchParams.get("searchFilter");
+        if(searchFilterParam) {
+            let searchFilter = JSON.parse(searchFilterParam);
+            let filter = searchFilter.filter;
+            let priceRange = searchFilter.priceRange;
+            dispatch(searchFilterTryAction(params.search!, filter, priceRange));
+        }
+        else{
+            dispatch(searchTryAction(params.search!));
+        }
+    }, [params.search, searchParams.get("searchFilter")]);
     
 
     useEffect(
         ()=>{
 
+            // alert(searchParams.get("priceRange"));
             window.addEventListener('scroll', pop);
             window.addEventListener('keyup', handleUserKeyPress);
             return () => {

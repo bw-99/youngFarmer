@@ -62,7 +62,7 @@ export const ItemUnitComp = ({image_width, product}:itemProps) => {
     return (
         <Item>
             <ItemUnitImgComp image_width={image_width} bsFlag={false} product={product}/>
-            <ItemUnitShoppingBagComp product={product}/>
+            {/* <ItemUnitShoppingBagComp product={product}/> */}
         </Item>
     );
 }
@@ -172,14 +172,16 @@ type shoppingBagProps = {
 export const ItemUnitShoppingBagComp = ({product}:shoppingBagProps) => {
     const dispatch = useDispatch();
 
-    const handleAddCart = () => {
-        dispatch(
-            cartAddAction(product.product_id)
-        );
-    }
+    // const handleAddCart = () => {
+    //     dispatch(
+    //         cartAddAction(product.product_id)
+    //     );
+    // }
     
     return(
-        <ItemOrderShoppingBagButton onClick={()=> {handleAddCart();}}>
+        <ItemOrderShoppingBagButton onClick={()=> {
+            // handleAddCart();
+            }}>
             <ItemOrderShoppingBagButtonIcon src={shoppingBag}/>
             <ItemOrderShoppingBagButtonText> 담기 </ItemOrderShoppingBagButtonText>
         </ItemOrderShoppingBagButton>

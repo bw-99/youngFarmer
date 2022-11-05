@@ -39,6 +39,7 @@ export function UserInfoReducer(state = userInfoInitState, action: any) {
 export function LoginReducer(state = loginInfoInitState, action: any) {
     switch (action.type) {
         case LOGIN_SUCCESS:
+            // action.callback();
             return {
                 ...state
             };

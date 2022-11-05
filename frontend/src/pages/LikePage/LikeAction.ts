@@ -34,7 +34,7 @@ export const likeCancelAction = (product_id:number) => {
 
 export const getLikeAction = (uid:string) => {
     return {
-        type: GET_LIKE,
+        type: LIKE_TRY,
         payload: {
             type: GET_LIKE,
             uid: uid

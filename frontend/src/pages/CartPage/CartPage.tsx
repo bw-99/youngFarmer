@@ -12,17 +12,20 @@ import shopping_bag from "../../assets/images/shopping_bag@3x.png";
 import { AppBarComponentMyPage, AppBarComponentNoBack, AppBarComponentOnlyBack } from "../../common/AppBar/AppBar";
 
 
-import {CartProductComponent} from "./component/CartProduct"
+import {CartProductComponent} from "./components/CartProduct"
 
 
 import { BottomNavigationBar } from "../../common/BottomNavigationBar/BottomNavigationBar";
 import { RootState } from "../../reducers";
 import { CartData } from "../../reducers/CartReducer";
 import { MyPageDataType } from "../../reducers/MypageReducer";
-import { ProductDataType } from "../../reducers/ProductReducer";
+import { CartProductDataType, ProductDataType } from "../../reducers/ProductReducer";
 import { cartCancelAction, getCartAction } from "./CartAction";
 
-import {PaymentBtn} from "./atom/CartProduct"
+import {PaymentBtn} from "./atoms/CartProduct"
+import { CartTopComp } from "./components/CartTop";
+import { OrderDataType } from "../../reducers/OrderReducer";
+import { setOrderTry } from "../OrderPage/OrderAction";
 
 
 function CartPage(props: any) {
@@ -31,45 +34,58 @@ function CartPage(props: any) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const pidSelector: ProductDataType[] = useSelector((state:RootState) =>
-        state.SearchDetailReducer.pidProducts
+    const cartSelector: CartProductDataType[] = useSelector((state:RootState) =>
+        state.SearchDetailReducer.cartProducts
     );      
 
-    // const cartSelector: CartData[] = useSelector((state:RootState) =>
-    //     state.CartReducer.carts
-    // );     
-    // const currentUser = useContext(AuthContext);
+    // useEffect(() => {
+    //     FirebaseAuth.onAuthStateChanged((user) => {
+    //         if(user){
+    //             dispatch(getCartAction(user.uid));
+    //         }
+    //     })
+    // }, [])
+    const [allCheck, setAllCheck] = useState(false);
+    const [order, setOrder] = useState(false);
 
-    useEffect(
-        () => {
-            FirebaseAuth.onAuthStateChanged((user) => {
-                let uid = user!.uid;
-                console.log("uid" + uid);
-                dispatch(getCartAction(uid));
-            })
-            
-        },
-    [])
+    const orderSelector: OrderDataType[] = useSelector((state:RootState) =>
+        state.OrderReducer.orders
+    );    
 
-    if(pidSelector) {
+
+    if(cartSelector) {
         return (
             <AppFrame>
                 <AppBarComponentOnlyBack title={"장바구니"} />
+
+                <div style={{margin: "80px 16px 20px 16px"}}>
+                    <CartTopComp allCheck={allCheck} setAllCheck={setAllCheck}/>
+                </div>
+                
+                <div style={{paddingBottom: "88px",}}>
                 {
-                    pidSelector.map((product) => {
+                    cartSelector.map((cartProduct) => {
                         return(
-                            <div key={product.product_id} style={{width: "200px", height: "100px", backgroundColor:"yellow"}}>
-                                <h3>{product.title}</h3>
-                                <div>
-                                    <button onClick={()=> {
-                                        dispatch(cartCancelAction(product.product_id));
-                                    }}> 삭제하기 </button>
-                                    <button> 바로 구매 </button>
-                                </div>
-                            </div>
+                            <CartProductComponent allCheck={allCheck} cartProduct={cartProduct} order={order}/>
                         )
                     })
                 }
+
+                </div>
+                
+                <div style={{
+                    backgroundColor: "white",
+                    position:"fixed", bottom: 0, maxWidth:"625px", width:"100%",height:"56px", paddingBottom: "16px"}}>
+                    <PaymentBtn 
+                    onClick={()=>{
+                        setOrder(true);
+                        dispatch(setOrderTry(orderSelector));
+                        navigate("/order");
+                    }}
+                    style={{
+                        margin:"0 16px"
+                        }}>결제하기</PaymentBtn>
+                </div>
             </AppFrame>
         )
     }
@@ -77,11 +93,8 @@ function CartPage(props: any) {
     return (
         <AppFrame>
             <AppBarComponentOnlyBack title={"장바구니"} />
-            <CartProductComponent/>
-            <CartProductComponent/>
-            <div style={{ height:"88px"}}>
-                <PaymentBtn>결제하기</PaymentBtn>
-            </div>
+
+
         </AppFrame>
     )
 

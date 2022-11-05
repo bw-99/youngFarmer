@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../reducers";
 import { SearchFilterOpenAction } from "../SearchActions";
 import { OtherChoiceComp } from "./OtherChoice";
+import { RecommendStoreComponent } from "./RecommendStore";
 export const SearchResultComp = () => {
     const toggleSelector: number = useSelector((state:RootState) =>
         state.SearchToggleReducer
@@ -17,9 +18,7 @@ export const SearchResultComp = () => {
         state.SearchDetailReducer.products
     );
 
-    const storeSelector: StoreDataType[] = useSelector((state:RootState) =>
-        state.SearchDetailReducer.storeList
-    );
+
 
     if(toggleSelector == 0) {
         return(
@@ -39,7 +38,7 @@ export const SearchResultComp = () => {
 
     return(
         <div style={{marginTop: "30px"}}>
-            {JSON.stringify(storeSelector)}
+            <RecommendStoreComponent />
         </div>
     );
 }

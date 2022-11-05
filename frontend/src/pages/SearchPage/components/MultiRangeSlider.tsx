@@ -2,20 +2,22 @@ import React, { ChangeEvent, FC, useCallback, useEffect, useState, useRef } from
 import './css/multiRangeSlider.css';
 
 interface MultiRangeSliderProps {
-  min: number;
-  max: number;
+  minPrice: number;
+  maxPrice: number;
+  setMinPrice: any;
+  setMaxPrice: any;
 }
 
-const MultiRangeSlider: FC<MultiRangeSliderProps> = ({ min, max }) => {
-  const [minVal, setMinVal] = useState(min);
-  const [maxVal, setMaxVal] = useState(max);
-  const minValRef = useRef(min);
-  const maxValRef = useRef(max);
+const MultiRangeSlider: FC<MultiRangeSliderProps> = ({ minPrice, maxPrice,setMinPrice,setMaxPrice  }) => {
+  const [minVal, setMinVal] = useState(minPrice);
+  const [maxVal, setMaxVal] = useState(maxPrice);
+  const minValRef = useRef(minPrice);
+  const maxValRef = useRef(maxPrice);
   const range = useRef<HTMLDivElement>(null); 
 
   // Convert to percentage
   const getPercent = useCallback((value: number) =>
-    Math.round(((value - min) / (max - min)) * 100), [min, max])
+    Math.round(((value - minPrice) / (maxPrice - minPrice)) * 100), [minPrice, maxPrice])
 
   // Set width of the range to decrease from the left side
   useEffect(() => {
@@ -25,6 +27,7 @@ const MultiRangeSlider: FC<MultiRangeSliderProps> = ({ min, max }) => {
     if (range.current) {
       range.current.style.left = `${minPercent}%`;
       range.current.style.width = `${maxPercent - minPercent}%`;
+      setMinPrice(minVal);
     }
   }, [minVal, getPercent]);
 
@@ -35,6 +38,7 @@ const MultiRangeSlider: FC<MultiRangeSliderProps> = ({ min, max }) => {
 
     if (range.current) {
       range.current.style.width = `${maxPercent - minPercent}%`;
+      setMaxPrice(maxVal);
     }
   }, [maxVal, getPercent]);
 
@@ -42,8 +46,8 @@ const MultiRangeSlider: FC<MultiRangeSliderProps> = ({ min, max }) => {
     <div className="container">
         <input
           type="range"
-          min={min}
-          max={max}
+          min={minPrice}
+          max={maxPrice}
           value={minVal}
           step={1000}
           onChange={(event: ChangeEvent<HTMLInputElement>) => { 
@@ -56,8 +60,8 @@ const MultiRangeSlider: FC<MultiRangeSliderProps> = ({ min, max }) => {
         />
         <input
           type="range"
-          min={min}
-          max={max}
+          min={minPrice}
+          max={maxPrice}
           value={maxVal}
           step={1000}
           onChange={(event: ChangeEvent<HTMLInputElement>) => {  
@@ -71,8 +75,8 @@ const MultiRangeSlider: FC<MultiRangeSliderProps> = ({ min, max }) => {
         <div className="slider">
           <div className="slider__track"></div>
           <div ref={range} className="slider__range"></div>
-          <div className="slider__left-value">{minVal}원</div>
-          <div className="slider__right-value">{maxVal}원</div>
+          <div className="slider__left-value">{minPrice}원</div>
+          <div className="slider__right-value">{maxPrice}원</div>
         </div>
       </div>
   );

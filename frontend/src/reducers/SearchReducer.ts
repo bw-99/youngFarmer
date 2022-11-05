@@ -1,4 +1,4 @@
-import { SEARCH_FAIL, SEARCH_PID_SUCCESS, SEARCH_RECOMMNEND_SUCCESS, SEARCH_STORE_SUCCESS, SEARCH_SUCCESS } from "../pages/SearchPage/SearchDertailAction";
+import { SEARCH_CART_SUCCESS, SEARCH_FAIL, SEARCH_LIKE_SUCCESS, SEARCH_ORDER_SUCCESS, SEARCH_PID_SUCCESS, SEARCH_RECOMMNEND_SUCCESS, SEARCH_STORE_SUCCESS, SEARCH_SUCCESS } from "../pages/SearchPage/SearchDertailAction";
 import { FILTER_CLOSE, FILTER_OPEN, SEARCH_CREATE, SEARCH_DELETE, TOGGLE_PRODUCT, TOGGLE_STORE } from "../pages/SearchPage/SearchActions";
 import { SearchHistoryType, SearchHistoryTypeList } from "../pages/SearchPage/SearchConstants";
 import { ProductDataList } from "./ProductReducer";
@@ -32,7 +32,10 @@ const searchDetailInitState : ProductDataList = {
     products: [],
     recommendResult: [],
     pidProducts: [],
-    storeList: []
+    storeList: [],
+    likeProducts: [],
+    cartProducts: [],
+    orderProducts: []
 }
 
 
@@ -58,6 +61,25 @@ export function SearchDetailReducer(state = searchDetailInitState, action: any) 
                 ...state,
                 pidProducts: action.payload.pidProducts,
             };
+
+        case SEARCH_LIKE_SUCCESS:
+            return {
+                ...state,
+                likeProducts: action.payload.likeProducts,
+            };
+
+        case SEARCH_CART_SUCCESS:
+            return {
+                ...state,
+                cartProducts: action.payload.cartProducts,
+            };
+
+        case SEARCH_ORDER_SUCCESS:
+            return {
+                ...state,
+                orderProducts: action.payload.orderProducts,
+            };
+    
 
         case SEARCH_FAIL:
             return {

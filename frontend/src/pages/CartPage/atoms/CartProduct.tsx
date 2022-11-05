@@ -22,9 +22,10 @@ height: 8px;
 `
 
 export const CartProductBox = styled.div`
-height:397px;
+/* height:397px; */
 display:flex;
 flex-direction:column;
+padding-bottom: 24px;
 `
 
 
@@ -39,30 +40,36 @@ margin:0px 16px;
 
 export const CartProductBoxPart2 = styled.div`
 padding-top:12px;
-height:131px;
+/* height:131px; */
 display:flex;
+justify-content: space-between;
 margin:0px 16px;
 `
 
 export const CartProductBoxPart2S1 = styled.div`
-width:25%;
+/* width:25%; */
 display:flex;
-align-itmes:center;
+align-items:center;
 `
 export const CartProductBoxPart2S2 = styled.div`
-width:75%;
+/* width:75%; */
 `
 
-export const CartProductBoxPart2Img = styled.div`
+export const CartProductBoxPart2Img = styled.img`
 width: 88px;
 height: 88px;
 border-radius: 12px;
-background-color:black;
+object-fit: cover;
+/* background-color:black; */
 `
 export const CartProductBoxPart2SmallBox = styled.div`
-height:29px;
+/* height:29px; */
 display:flex;
 justify-content:space-between;
+font-family: AppleSDGothicNeo;
+  font-size: 15px;
+  font-weight: 500;
+  color: #444444;
 
 `
 
@@ -76,12 +83,12 @@ background-color: #efefef;
 
 
 export const CartProductBoxPart3 = styled.div`
-height:78px;
-margin:0px 16px;
+/* height:78px; */
+margin:16px 16px 16px 16px;
 
 `
 export const CartProductBoxPart3Small = styled.div`
-height:39px;
+/* height:39px; */
 display:flex;
 justify-content:space-between;
 align-items:center;
@@ -117,26 +124,28 @@ export const CartProductBoxPart4 = styled.div`
 display:flex;
 justify-content:space-between;
 align-items:center;
-height:50px;
-margin:0px 16px;
+/* height:50px; */
+margin:21px 16px 25px 16px;
 `
 
 export const CartProductBoxPart5 = styled.div`
-height:85px;
+/* height:85px; */
 display:flex;
 margin:0px 16px;
+justify-content: flex-start;
 `
 
 export const CartBtn1 = styled.div`
 
-    width:45%;
+    /* width: 45%; */
+    flex: 1;
     height: 48px;
     border-radius: 8px;
     border: solid 1px #dfdfdf;
-    background-color: #fff;
+    background-color: #ffffff;
     display:flex;
-    align-itmes:center;
-    justify-content:center
+    align-items:center;
+    justify-content:center;
     font-family: AppleSDGothicNeo;
     font-size: 16px;
     font-weight: 600;
@@ -148,10 +157,30 @@ export const CartBtn1 = styled.div`
     color: #6b6b6b;
     justify-content:center;
     align-items:center;
-    margin:0px 10px;
+    /* margin:0px 10px; */
   `
 
+export const CartBtn2 = styled.div`
 
+    /* width: 45%;  */
+    flex: 1;
+    height: 48px;
+    border-radius: 8px;
+    border: solid 1px #fb6159;
+    background-color: #ffffff;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family: AppleSDGothicNeo;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    color: #fb6159;
+    justify-content:center;
+    align-items:center;
+    /* margin:0px 10px; */
+  `
 
 
 
@@ -165,7 +194,7 @@ margin:0px 16px;
 export const CartP1T1 = styled.div`
     font-family: AppleSDGothicNeo;
     font-size: 14px;
-    font-weight: bold;
+    font-weight: 600;
     font-stretch: normal;
     font-style: normal;
     line-height: normal;
@@ -191,8 +220,8 @@ export const CartP1I1 = styled.div`
 `
 
 export const Spantemp1 = styled.span`
-margin-left:10px;
-font-family: AppleSDGothicNeo;
+  margin-left:10px;
+  font-family: AppleSDGothicNeo;
   font-size: 14px;
   font-weight: bold;
   font-stretch: normal;

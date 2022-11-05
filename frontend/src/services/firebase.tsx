@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { Link, Navigate, Outlet, Route } from "react-router-dom";
 import { FirebaseAuth } from "..";
 import { AuthContext } from "../App";
+import { getCartAction } from "../pages/CartPage/CartAction";
 import { getLikeAction, likeAction } from "../pages/LikePage/LikeAction";
 import { GetUserInfoAction } from "../pages/LoginPage/LoginAction";
 import LoginPage from "../pages/LoginPage/LoginPage";
@@ -22,16 +23,18 @@ interface Props {
  * 2. user가 reload될 때마다 null -> 렌더링 직전 localstorage 값 비교 -> true -> 바로 main -> 이후 auth 변경 때마다 localstorage 변경
  */
 export const AuthProvider:FC<Props> = ({children}) :React.ReactElement|null => {
-    const [user, setUser] = useState<null | any>(getItemWithExpireTime("user")? true : false);
+    const [user, setUser] = useState<null | boolean>(getItemWithExpireTime("user")? true : false);
     const dispatch = useDispatch();
 
     useEffect(()=>{
         getItemWithExpireTime("user")? setUser(true) : setUser(false);
         FirebaseAuth.onAuthStateChanged((data)=> {
             if(data){
+                console.log("auth provider use effect");
                 setItemWithExpireTime("user", true, 1000*60*60);
                 dispatch(getLikeAction(data.uid));
-                setUser(user);
+                dispatch(getCartAction(data.uid));
+                setUser(true);
             }
             else{
                 removeItem("user");
@@ -57,18 +60,14 @@ interface NavigateProps {
 export const PrivateRoute:FC<NavigateProps> = ({children, ...props}):any => {
     const currentUser = useContext(AuthContext);
 
-    // console.log("++====================++" + currentUser + "++====================++");
-
     return (
         currentUser?  <Outlet/> 
-        // :  <LoginPage /> 
         : <Navigate to={"/login"}/> 
     );
 }
 
 export const LoginRoute:FC<NavigateProps> = ({children, ...props}):any => {
     let currentUser = useContext(AuthContext);
-    console.log("currentUser = " + currentUser);
 
     return (
         currentUser? 

@@ -6,22 +6,28 @@ import { addDoc, collection, deleteDoc, DocumentData, getDoc, getDocs, limit, or
 import { AxiosResponse } from "axios";
 import { ProductDataType } from "../reducers/ProductReducer";
 import { GET_LIKE, GET_LIKE_FAIL, GET_LIKE_SUCCESS, LIKE_CANCEL_FAIL, LIKE_CANCEL_SUCCESS, LIKE_CANCEL_TRY, LIKE_FAIL, LIKE_SUCCESS, LIKE_TRY } from "../pages/LikePage/LikeAction";
-import { LikeDataList } from "../reducers/LikeReducer";
+import { LikeData, LikeDataList } from "../reducers/LikeReducer";
+import { SEARCH_LIKE_SUCCESS, SEARCH_PID_SUCCESS } from "../pages/SearchPage/SearchDertailAction";
 
 
+async function convertLike2Product(pidList:number[]) {
 
-// type ProductDataType=  {
-//     store_id: number,
-//     discount: number,
-//     product_id: number,
-//     title: string,
-//     price: number
-// }
+    const productRef = collection(db, "product");
+    let queryList: any[] = [];
 
+    pidList.forEach((element: number) => {
+        queryList.push(query(productRef, where("product_id", "==", element)))
+    });
 
-// type LikeResponseType = {
-//     is_success: boolean   
-// }
+    let dataList = [];
+
+    for (const q of queryList) {
+        const fbdata = await getDocs(q);
+        dataList.push(fbdata.docs[0].data());
+    }
+
+    return dataList;
+}
 
 async function likeAPI(payload:any) {
     console.log("like api");
@@ -61,9 +67,25 @@ async function likeAPI(payload:any) {
 function* like(action:any) {
     console.log("like product_id" + action.payload);
     
-    const result:LikeDataList = yield call(likeAPI, action.payload);
+    const result:LikeData[] = yield call(likeAPI, action.payload);
     
-    if(result){        
+    if(result){    
+        let pidList = result.map((val) => {
+            return val.product_id
+        });
+    
+        const pidResult: ProductDataType[] = yield call(convertLike2Product, pidList);
+        console.log(pidResult);
+
+        console.log("result" + JSON.stringify(result));
+
+        yield put({
+            type: SEARCH_LIKE_SUCCESS,
+            payload: {
+                likeProducts: pidResult
+            },
+        }); 
+
         yield put({
             type: LIKE_SUCCESS,
             payload: result,
@@ -99,11 +121,27 @@ async function getLikeAPI(payload:any) {
 function* getLike(action:any) {
     console.log("getlike" + action.payload);
     
-    const result:LikeDataList = yield call(getLikeAPI, action.payload);
+    const result:LikeData[] = yield call(getLikeAPI, action.payload);
     console.log(result);
     
-    if(result){        
+    if(result){  
+        let pidList = result.map((val) => {
+            return val.product_id
+        });
+    
+        const pidResult: ProductDataType[] = yield call(convertLike2Product, pidList);
+        console.log(pidResult);
+
         console.log("result" + JSON.stringify(result));
+
+        yield put({
+            type: SEARCH_LIKE_SUCCESS,
+            payload: {
+                likeProducts: pidResult
+            },
+        }); 
+
+        
         yield put({
             type: GET_LIKE_SUCCESS,
             payload: result,
@@ -151,10 +189,25 @@ async function likeCancelAPI(payload:any) {
 function* likeCacncel(action:any) {
     console.log("like product_id" + action.payload);
     
-    const result:LikeDataList = yield call(likeCancelAPI, action.payload);
+    const result:LikeData[] = yield call(likeCancelAPI, action.payload);
     
     if(result){    
         console.log("좋아요 취소 성공");
+        let pidList = result.map((val) => {
+            return val.product_id
+        });
+    
+        const pidResult: ProductDataType[] = yield call(convertLike2Product, pidList);
+        console.log(pidResult);
+
+        console.log("result" + JSON.stringify(result));
+
+        yield put({
+            type: SEARCH_LIKE_SUCCESS,
+            payload: {
+                likeProducts: pidResult
+            },
+        }); 
             
         yield put({
             type: LIKE_CANCEL_SUCCESS,
@@ -193,8 +246,4 @@ function* likeIndex(action: any) {
 
 export function* getLikeSignal() {
     yield takeLatest(LIKE_TRY, likeIndex);
-}
-
-export function* getLikeGetSignal() {
-    yield takeLatest(GET_LIKE, likeIndex);
 }

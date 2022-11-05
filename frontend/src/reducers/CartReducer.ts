@@ -3,7 +3,8 @@ import { GET_LIKE_FAIL, GET_LIKE_SUCCESS, LIKE_CANCEL_FAIL, LIKE_CANCEL_SUCCESS,
 
 export interface CartData {
     uid: string,
-    product_id: number
+    product_id: number,
+    option: string
 }
 
 

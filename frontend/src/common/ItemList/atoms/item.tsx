@@ -30,6 +30,7 @@ export const Item = styled.div`
 
 
 export const ItemImage = styled.img`
+max-width: calc(625px - 16px - 16px);
   border-radius: 12px;
   object-fit: cover;
 `
@@ -38,7 +39,7 @@ export const ItemCover = styled.div`
   background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
   position: absolute;
   border-radius: 12px;
-  z-idnex: 10;
+  z-index: 10;
   top: 0px;
   `
 
@@ -89,6 +90,7 @@ export const ItemOrderShoppingBagButton = styled.div`
 `
 
 export const ItemOrderShoppingBagButtonIcon = styled.img`
+max-width: calc(625px - 16px - 16px);
   width: 20px;
   height: 20px;
   object-fit: contain;
@@ -104,6 +106,7 @@ export const ItemOrderShoppingBagButtonText = styled.div`
 `
 
 export const ItemLike = styled.img`
+max-width: calc(625px - 16px - 16px);
   object-fit: cover;
   position: absolute;
   top: 0px;

@@ -33,22 +33,11 @@ function MainPage(props: any) {
 
     useEffect(
         () => {
-            console.log("dispatch!!");
-            
             dispatch(searchRecommendTryAction());
-            // const auth = getAuth();
-            // const user = auth.currentUser;
-
-            // console.log(user);
-            // console.log(getUserInfo());
-
-            // console.log(FirebaseAuth.currentUser);
-            
-            // console.log(userInfo);
         }
         , []
     )
-    if(recommendData) {
+    if(recommendData && recommendData.length) {
         return (
             <div style={{maxWidth:"625px", position: "relative", width: "100vw", height:"100vh" }}>
                 <AppBarComponentMain />
@@ -70,15 +59,7 @@ function MainPage(props: any) {
     return (
         <div style={{maxWidth:"625px", position: "relative", width: "100vw", height:"100vh" }}>
             <AppBarComponentMain />
-            <h1>{JSON.stringify(recommendData)}</h1>
-            {/* <DiscountComponent />
-            <CategoryComponent />
-            <RecommendComponent />
-            <LookEntireBannerComponent />
-            <div style={{position: "relative", top:"0px", padding: "43px 8px 24px 8px"}}>
-                <LiveTitleComponent />
-                <LiveTitleListComponent/>
-            </div> */}
+            
 
             <BottomNavigationBar />
            

@@ -59,7 +59,6 @@ function ProductPage(props: any) {
         if (modalselector) {
             setOpen(modalselector.open_modal);
         }
-        console.log("why is change");
     }, [modalselector.open_modal]);
 
     if (selector) {
@@ -71,7 +70,7 @@ function ProductPage(props: any) {
                 <ItemInfoComp />
                 <ItemDetailComp />
                 {
-                    isOpen  ? <PurchaseComp /> : null
+                    isOpen  ? <PurchaseComp /> : <></>
                 }
                 <BottomBarComp product_id={selector.product_id} />
                     {/* <BottomNavigationBar /> */}

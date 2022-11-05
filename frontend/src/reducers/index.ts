@@ -4,6 +4,7 @@ import { CartReducer } from "./CartReducer";
 import { LikeReducer } from "./LikeReducer";
 import { LoginReducer, UserInfoReducer } from "./LoginReducer";
 import { ProfileReducer } from "./MypageReducer";
+import { OrderReducer } from "./OrderReducer";
 import { ProductInfoReducer } from "./ProductReducer";
 import { PurchaseReducer } from "./PurchaseReducer";
 import { SearchDetailReducer, SearchFilterReducer, SearchReducer, SearchToggleReducer } from "./SearchReducer";
@@ -20,7 +21,8 @@ const rootReducer = combineReducers({
   LikeReducer,
   SearchFilterReducer,
   SearchToggleReducer,
-  CartReducer
+  CartReducer,
+  OrderReducer
 });
 
 export default rootReducer;

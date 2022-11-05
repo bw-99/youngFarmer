@@ -7,13 +7,29 @@ export interface StoreDataType {
     store_id: number,
     name: string,
     photo: string,
-    cateogry : string[]
+    category : string[]
 }
+
+export interface OrderProductDataType {
+    product: ProductDataType,
+    count: number,
+    option: string,
+}
+
+
+export interface CartProductDataType {
+    product: ProductDataType,
+    option: string,
+}
+
 
 export interface ProductDataList {
     products: ProductDataType[],
     recommendResult: ProductDataType[],
     pidProducts: ProductDataType[],
+    likeProducts: ProductDataType[],
+    cartProducts: ProductDataType[],
+    orderProducts: OrderProductDataType[],
     storeList?: StoreDataType[],
 }
 
@@ -23,8 +39,13 @@ export interface ProductDataType {
     product_id: number,
     title: string,
     price: number,
+    
     is_best: boolean,
     is_sale: boolean,
+    is_nonpesticide: boolean,
+    is_ontime: boolean,
+    is_vegitable: boolean,
+
     delivery_charge: number,
     delivery_remain: number,
     delivery_start: string,

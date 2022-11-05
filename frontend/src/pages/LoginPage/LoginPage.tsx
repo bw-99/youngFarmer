@@ -29,7 +29,7 @@ function LoginPage(props: any) {
     const dispatch = useDispatch();
 
     const handleAnonymousLogin = () => {
-        dispatch(LoginWithAnonymous(()=>{navigate("/")}));
+        dispatch(LoginWithAnonymous(()=>{navigate("/main")}));
     }
 
     const loginSelector: string|null = useSelector((state:RootState) =>

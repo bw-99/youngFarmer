@@ -5,13 +5,14 @@ import { createStore } from 'redux';
 
 export interface PurchaseDataType {
     open_modal: boolean,
+    select_num: number,
     select_item_info: PurchaseDetail | null,
 }
 
 export interface PurchaseDetail {
-    item_weight: number | null,
-    number_of_item: number | null,
-    wanna_pave: number | null,
+    item_weight: string | null,
+    number_of_item: string | null,
+    wanna_pave: string | null,
 }
 
 export interface PurchaseDataObjectType {
@@ -20,10 +21,11 @@ export interface PurchaseDataObjectType {
 
 const purchaseInfoInit: PurchaseDataType  = {
     open_modal: false,
+    select_num: 0,
     select_item_info: {
-        item_weight: null,
-        number_of_item: null,
-        wanna_pave: null
+        item_weight: "3kg",
+        number_of_item: "12개입",
+        wanna_pave: "선물용 포장"
     },
 }
 

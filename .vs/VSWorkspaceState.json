@@ -4,12 +4,13 @@
     "\\frontend",
     "\\frontend\\src",
     "\\frontend\\src\\assets",
+    "\\frontend\\src\\assets\\images",
     "\\frontend\\src\\pages",
     "\\frontend\\src\\pages\\ProductPage",
-    "\\frontend\\src\\pages\\ProductPage\\atoms",
     "\\frontend\\src\\pages\\ProductPage\\components",
+    "\\frontend\\src\\pages\\PurchasePage",
     "\\frontend\\src\\reducers"
   ],
-  "SelectedNode": "\\frontend\\src\\pages\\ProductPage\\components\\BottomBar.tsx",
+  "SelectedNode": "\\frontend\\src\\assets\\images\\icon-lock@3x.png",
   "PreviewInSolutionExplorer": false
 }
