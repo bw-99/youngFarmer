@@ -1,0 +1,208 @@
+import { call, delay, put, SagaReturnType, takeLatest } from "redux-saga/effects";
+import { LOGIN_FAIL, LOGIN_PAYLOAD, LOGIN_SUCCESS, LOGIN_TRY, LOGIN_WITH_ANONYMOUS, LOGIN_WITH_KAKAO, LOGIN_WITH_NAVER } from "../pages/LoginPage/LoginAction";
+import { db, FirebaseAuth, kakaoConfig } from "..";
+import { GET_PRODUCT, GET_PRODUCT_SUCCESS } from "../pages/ProductPage/ProductAction";
+import { addDoc, collection, deleteDoc, DocumentData, getDoc, getDocs, limit, orderBy, query, updateDoc, where } from "firebase/firestore";
+import { AxiosResponse } from "axios";
+import { CartProductDataType, ProductDataOrderType, ProductDataReviewType, ProductDataType, ProductWithOrderType, ReviewProductDataType } from "../reducers/ProductReducer";
+import { GET_LIKE, GET_LIKE_FAIL, GET_LIKE_SUCCESS, LIKE_CANCEL_FAIL, LIKE_CANCEL_SUCCESS, LIKE_CANCEL_TRY, LIKE_FAIL, LIKE_SUCCESS, LIKE_TRY } from "../pages/LikePage/LikeAction";
+import { LikeDataList } from "../reducers/LikeReducer";
+import { CART_ADD_TRY, CART_CANCEL_TRY, GET_CART, CART_TRY, GET_CART_SUCCESS, GET_CART_FAIL, CART_CANCEL_SUCCESS, CART_CANCEL_FAIL, CART_ADD_SUCCESS, CART_ADD_FAIL } from "../pages/CartPage/CartAction";
+import { CartData, CartDataList } from "../reducers/CartReducer";
+import { SEARCH_CART_SUCCESS, SEARCH_PID_SUCCESS, SEARCH_REVIEW_SUCCESS, SEARCH_UNREVIEW_SUCCESS } from "../pages/SearchPage/SearchDertailAction";
+import { GET_REVIEW, GET_REVIEW_LIST, GET_UNREVIEW_LIST } from "../pages/ReviewPage/ReviewAction";
+
+
+async function convertReview2Product(reviewDataList:ProductDataReviewType[]) {
+
+    const productRef = collection(db, "product");
+    let queryList: any[] = [];
+
+    reviewDataList.forEach((element: ProductDataReviewType) => {
+        queryList.push(
+            query(productRef, where("product_id", "==", element.product_id))
+        );
+    });
+
+    let dataList = [];
+
+    for (const index in queryList) {
+        const fbdata = await getDocs(queryList[index]);
+        dataList.push({
+            product: fbdata.docs[0].data(),
+            review: reviewDataList[index]
+            // option: reviewDataList[index].option
+        });
+    }
+
+    return dataList;
+}
+
+
+async function convertOrder2Product(orderDataList:ProductDataOrderType[]) {
+
+    const productRef = collection(db, "product");
+    let queryList: any[] = [];
+
+    orderDataList.forEach((element: ProductDataOrderType) => {
+        queryList.push(
+            query(productRef, where("product_id", "==", element.product_id))
+        );
+    });
+
+    let dataList = [];
+
+    for (const index in queryList) {
+        const fbdata = await getDocs(queryList[index]);
+        dataList.push({
+            product: fbdata.docs[0].data(),
+            order: orderDataList[index]
+            // option: reviewDataList[index].option
+        });
+    }
+
+    return dataList;
+}
+
+async function getReviewAPI(payload:any) {
+    let uid = payload.payload;
+
+    const reviewRef = collection(db, "review");
+    const q = query(reviewRef, where("uid", "==", uid));
+    const fbdata = await getDocs(q);
+
+    const reviewDataList = fbdata.docs.map((doc) => {
+        return doc.data();
+    });
+    
+    return reviewDataList;
+}
+
+
+// function* getReview(action:any) {
+//     const result:ProductDataReviewType[] = yield call(getReviewAPI, action.payload);
+    
+//     if(result){     
+//         let pidList = result.map((val) => {
+//             return val.product_id
+//         });
+    
+//         const pidResult: ReviewProductDataType[] = yield call(convertReview2Product, result);
+
+//         console.log("result" + JSON.stringify(result));
+//         yield put({
+//             type: SEARCH_REVIEW_SUCCESS,
+//             payload: {
+//                 reviewProducts: pidResult
+//             },
+//         }); 
+
+        
+//         // yield put({
+//         //     type: CART_ADD_SUCCESS,
+//         //     payload: result,
+//         // }); 
+//     }
+//     else{
+//         // yield put({
+//         //     type: CART_ADD_FAIL,
+//         //     callback: action.payload.callback
+//         // }); 
+//     }
+// }
+
+
+async function getaTotalReviewAPI(payload:any) {
+    let uid = payload.payload;
+
+    const reviewRef = collection(db, "review");
+    const q = query(reviewRef, where("uid", "==", uid));
+    const fbdata = await getDocs(q);
+
+    const reviewDataList = fbdata.docs.map((doc) => {
+        return doc.data();
+    });
+    
+    return reviewDataList;
+}
+
+
+async function getOrderProductsAPI(reviewProducts:ProductDataReviewType[]) {
+    const pidList = reviewProducts.map((rev) => {
+        return rev.product_id
+    });
+
+    const orderRef = collection(db, "order");
+    const q = query(orderRef, where("uid", "==", reviewProducts[0].uid));
+    const fbdata = await getDocs(q);
+
+    let reviewDataList:any = [];
+    let docsList = [...fbdata.docs];
+
+    docsList.filter((doc) => {
+        const data = doc.data();
+        return !pidList.includes(data.product_id);
+    })
+    
+    
+    return docsList.map((doc) => {
+        return doc.data();
+    });
+}
+
+// ! 하던 중
+
+function* getReview(action:any) {
+    const result:ProductDataReviewType[] = yield call(getaTotalReviewAPI, action.payload);
+    if(result){     
+        const reviewProducts: ReviewProductDataType[] = yield call(convertReview2Product, result);
+        yield put({
+            type: SEARCH_REVIEW_SUCCESS,
+            payload: {
+                reviewProducts: reviewProducts
+            },
+        }); 
+
+        const orderResult:ProductDataOrderType[] = yield call(getOrderProductsAPI, result);
+        console.log(orderResult);
+        const unreviewProducts: ProductWithOrderType[] = yield call(convertOrder2Product, orderResult);
+        console.log(unreviewProducts);
+        
+        yield put({
+            type: SEARCH_UNREVIEW_SUCCESS,
+            payload: {
+                unreviewProducts: unreviewProducts
+            },
+        }); 
+    }
+    else{
+        // yield put({
+        //     type: CART_ADD_FAIL,
+        //     callback: action.payload.callback
+        // }); 
+    }
+}
+
+
+
+function* reviewIndex(action: any) {
+    switch (action.payload.type) {
+        case GET_UNREVIEW_LIST:
+            // yield call(getUnReview,action); 
+            break;
+        
+        case GET_REVIEW_LIST:
+            yield call(getReview,action); 
+            // yield call(cancelCart,action); 
+            break;
+    
+        default:
+            break;
+    }
+}
+
+
+export function* getReviewSignal() {
+    yield takeLatest(GET_REVIEW, reviewIndex);
+}
+

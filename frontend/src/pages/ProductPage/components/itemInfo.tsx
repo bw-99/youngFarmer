@@ -94,11 +94,20 @@ export const ItemInfoComp = () => {
                     </ItemLikeBg>   
                 </div>
 
-                <div style={{display: "flex", alignItems:"center"}}>
-                    <ItemRateStar  src={rateStarIcon}/>
-                    <ItemRateText style={{marginLeft: "2px"}}> {getAverageReviewScore(selector.reviewDataList)} ({selector.reviewDataList.length}) </ItemRateText>
-                    <ItemRateArrow  style={{marginLeft: "3px"}} src={rightArrowIcon}/>
-                </div>
+                {
+                    selector.reviewDataList.length ?
+                     
+                    <div style={{display: "flex", alignItems:"center"}}>
+                        <ItemRateStar  src={rateStarIcon}/>
+                        <ItemRateText style={{marginLeft: "2px"}}> {getAverageReviewScore(selector.reviewDataList)} ({selector.reviewDataList.length}) </ItemRateText>
+                        <ItemRateArrow  style={{marginLeft: "3px"}} src={rightArrowIcon}/>
+                    </div>
+                    :
+                    <div>
+                        
+                    </div>
+                }
+                
 
                 <div style={{marginTop:"16px", display: "flex", alignItems:"center", justifyContent:"space-between"}}>
                     <ItemPriceDefault style={{textDecoration: "line-through"}}> {(selector.price).toLocaleString('ko-KR')}원 </ItemPriceDefault>

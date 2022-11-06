@@ -17,6 +17,7 @@ import { getDownloadURL, ref, StorageReference, uploadBytes, uploadBytesResumabl
 import { collection, query, where, limit, getDocs, updateDoc, addDoc } from "firebase/firestore";
 import { data } from "cheerio/lib/api/attributes";
 import { getProfileAction } from "../MyAction";
+import { useNavigate } from 'react-router-dom';
 
 export const ProfileComp = () => {
     const selector: MyPageDataType = useSelector((state:RootState) =>
@@ -114,24 +115,44 @@ const ProfilePersonalComp = () => {
 }
 
 const ProfileFuncComp = () => {
+    const navigate = useNavigate();
+
     return(
         <div style={{marginTop: "20px"}}>
             <ProfileFuncMenu>
-                {ProfileFuncItemComp(orderIcon, "주문•배송")}
+                <ProfileFuncItemComp image={orderIcon} text={"주문•배송"} onClickFun = {() => {
+
+                }} />
                 <ProfileFuncMenuDivider />
-                {ProfileFuncItemComp(reviewIcon, "리뷰작성")}
+                <ProfileFuncItemComp image={reviewIcon} text={"리뷰작성"} onClickFun = {() => {
+                    navigate("/review");
+                }} />
                 <ProfileFuncMenuDivider />
-                {ProfileFuncItemComp(pointIcon, "포인트")}
+                <ProfileFuncItemComp image={pointIcon} text={"포인트"} onClickFun = {() => {
+                    
+                }} />
                 <ProfileFuncMenuDivider />
-                {ProfileFuncItemComp(followIcon, "찜한상점")}
+                <ProfileFuncItemComp image={followIcon} text={"찜한상점"} onClickFun = {() => {
+                    
+                }} />
             </ProfileFuncMenu>
         </div>
     );
 }
 
-const ProfileFuncItemComp = (image:any, text:string) => {
+type mypageIconProps = {
+    image: any,
+    text: string,
+    onClickFun : Function
+}
+
+const ProfileFuncItemComp = ({image, text, onClickFun}:mypageIconProps) => {
     return(
-        <div style={{padding: "0 16px", display: "flex", flexDirection: "column", justifyContent:"center", alignItems:"center"}}>
+        <div 
+        onClick={()=>{
+            onClickFun();
+        }}
+        style={{padding: "0 16px", display: "flex", flexDirection: "column", justifyContent:"center", alignItems:"center"}}>
             <ProfileFuncMenuIcon src={image}/>
             <ProfileFuncMenuText style={{marginTop:"0px"}}> {text} </ProfileFuncMenuText>
         </div>

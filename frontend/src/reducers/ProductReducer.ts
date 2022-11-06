@@ -22,6 +22,11 @@ export interface CartProductDataType {
     option: string,
 }
 
+export interface ReviewProductDataType {
+    product: ProductDataType,
+    review: ProductDataReviewType,
+}
+
 
 export interface ProductDataList {
     products: ProductDataType[],
@@ -31,6 +36,8 @@ export interface ProductDataList {
     cartProducts: ProductDataType[],
     orderProducts: OrderProductDataType[],
     storeList?: StoreDataType[],
+    reviewProducts?: ReviewProductDataType[],
+    unreviewProducts?: ProductWithOrderType[] 
 }
 
 export interface ProductDataType {
@@ -61,11 +68,24 @@ export interface ProductDataReviewType {
     time_created: Timestamp,
     uid: string,
     photos: string[],
+    product_id: number,
     writer: {
         profile_email: string,
         profile_img: string,
         profile_nickname: string
     }
+}
+
+export interface ProductWithOrderType {
+    product: ProductDataType,
+    order: ProductDataOrderType
+}
+
+export interface ProductDataOrderType {
+    option: string,
+    time_created: Timestamp,
+    uid: string,
+    product_id: number,
 }
 
 export interface ProductDataQuestionType {

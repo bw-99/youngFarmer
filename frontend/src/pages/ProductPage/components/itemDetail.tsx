@@ -77,10 +77,11 @@ export const ItemDetailComp = () => {
             </div>
             {
                 index == 0?
-                <ItemDetailPhotoComp photos={selector.photoDataList.photos}/>:
-
+                <ItemDetailPhotoComp photos={selector.photoDataList.photos}/>
+                :
                 index == 1 ?
-                <ItemReviewComp reviewList={selector.reviewDataList}/>:
+                <ItemReviewComp reviewList={selector.reviewDataList}/>
+                :
                 <ItemQuestionComp questionDataList={selector.questionDataList} />
 
             }
@@ -182,35 +183,38 @@ type ReviewDataProps = {
 }
 
 const ItemReviewComp = ({reviewList}:ReviewDataProps) => {
-    if(reviewList.length) {
-        return (
-            <div>
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
-                    <ItemReviewTitle> 상품리뷰 {reviewList.length} </ItemReviewTitle>
-                    <ItemReviewButton> 리뷰작성 </ItemReviewButton>
-                </div>
-    
-                <div style={{ display: "flex", justifyContent: "flex-start", marginBottom: "30px" }}>
-                    <ItemReviewStar src={rateStarOn} />
-                    <ItemReviewStar src={rateStarOn} />
-                    <ItemReviewStar src={rateStarOn} />
-                    <ItemReviewStar src={rateStarOn} />
-                    <ItemReviewStar src={rateStarOff} />
-                    <ItemReviewScore style={{ marginLeft: "8px" }}> {getAverageReviewScore(reviewList)} </ItemReviewScore>
-                </div>
-                
-                {
-                    reviewList.map((review) => {
-                        return <ItemReivewDetailComp review={review}/>
-                    })
-                }
-    
+    return (
+        <div>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+                <ItemReviewTitle> 상품리뷰 {reviewList.length? reviewList.length: ""} </ItemReviewTitle>
+                <ItemReviewButton> 리뷰작성 </ItemReviewButton>
             </div>
-        );
-    }
 
-    return <div></div>
+            {
+                reviewList.length ?
+                <>
+                    <div style={{ display: "flex", justifyContent: "flex-start", marginBottom: "30px" }}>
+                        <ItemReviewStar src={rateStarOn} />
+                        <ItemReviewStar src={rateStarOn} />
+                        <ItemReviewStar src={rateStarOn} />
+                        <ItemReviewStar src={rateStarOn} />
+                        <ItemReviewStar src={rateStarOff} />
+                        <ItemReviewScore style={{ marginLeft: "8px" }}> {getAverageReviewScore(reviewList)} </ItemReviewScore>
+                    </div>
+                    
+                    {
+                        reviewList.map((review) => {
+                            return <ItemReivewDetailComp review={review}/>
+                        })
+                    }
 
+                </>
+                :
+                <>
+                </>
+            }
+        </div>
+    );
 
 }
 

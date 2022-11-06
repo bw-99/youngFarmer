@@ -30,6 +30,8 @@ import SearchDetailPage from './pages/SearchPage/SearchDetailPage';
 import CartPage from './pages/CartPage/CartPage';
 import PurchasePage from './pages/OrderPage/OrderPage';
 import OrderPage from './pages/OrderPage/OrderPage';
+import ReviewPage from './pages/ReviewPage/ReviewPage';
+import AddReviewPage from './pages/ReviewPage/AddReviewPage';
 
 
 export const AuthContext = createContext(false);
@@ -58,6 +60,8 @@ function App() {
                     <Route path='/search' element = {<SearchPage />}/>
                     <Route path='/search/:search' element = {<SearchDetailPage />}/>
                     <Route path='/mypage' element = {<MyPage />}/>
+                    <Route path='/review' element = {<ReviewPage />}/>
+                    <Route path='/review/product/:product_id' element = {<AddReviewPage />}/>
                     <Route path='/product/:productId' element = {<ProductPage />}/>
                     <Route path='/store' element={<StorePage />} />
                     <Route path='/mypage/setting' element={<MySettingPage />} />

@@ -5,6 +5,7 @@ import { getLoginSignal } from './LoginSaga';
 import { getProfileSignal } from './MypageSaga';
 import { getOrderSignal } from './OrderSaga';
 import { getProductSignal } from './ProductSaga';
+import { getReviewSignal } from './ReviewSaga';
 import { getSearchSignal } from './SearchSaga';
 
 export default function* rootSaga() {
@@ -15,6 +16,7 @@ export default function* rootSaga() {
         getLikeSignal(),
         getSearchSignal(),
         getCartSignal(),
-        getOrderSignal()
+        getOrderSignal(),
+        getReviewSignal()
     ]);
 }
