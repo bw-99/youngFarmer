@@ -22,6 +22,27 @@ export const GET_ORDER = "GET_ORDER";
 export const GET_ORDER_SUCCESS = "GET_ORDER_SUCCESS";
 export const GET_ORDER_FAIL = "GET_ORDER_FAIL";
 
+
+
+export const DELIVERY_TRY = "GET_ORDER";
+
+export const GET_DELIVERY_RESULT = "GET_DELIVERY_RESULT";
+
+export const GET_DELIVERY_LOADING = "GET_DELIVERY_LOADING";
+export const GET_DELIVERY_SUCCESS = "GET_DELIVERY_SUCCESS";
+export const GET_DELIVERY_FAIL = "GET_DELIVERY_FAIL";
+
+
+export const getDeliveryTry = (uid?:string) => {
+    return {
+        type: DELIVERY_TRY,
+        payload: {
+            type: DELIVERY_TRY,
+            payload: uid
+        }
+    }
+}
+
 export const setOrderTry = (data: OrderDataType[]) => {
     return {
         type: ORDER_TRY,

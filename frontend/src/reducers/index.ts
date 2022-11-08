@@ -1,6 +1,7 @@
 import {combineReducers} from "redux";
 import { BottomNavigationBarReducer } from "./BottomNavigationBarReducer";
 import { CartReducer } from "./CartReducer";
+import { DeliveryReducer } from "./DeliveryReducer";
 import { LikeReducer } from "./LikeReducer";
 import { LoginReducer, UserInfoReducer } from "./LoginReducer";
 import { ProfileReducer } from "./MypageReducer";
@@ -25,7 +26,8 @@ const rootReducer = combineReducers({
   CartReducer,
   OrderReducer,
   ReviewWriteReducer,
-  ReviewWriteStateReducer
+  ReviewWriteStateReducer,
+  DeliveryReducer
 });
 
 export default rootReducer;

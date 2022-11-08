@@ -53,3 +53,28 @@ export const LoadingWrapper =  ({backgroundColor, isActive,onClose}: backgroundC
         </div>
     );
 }
+
+
+export const CenterBackgroundWrapper = ({backgroundColor, isActive,children,onClose}: backgroundColorParams) => {
+    const dispatch = useDispatch();
+    
+    if(!isActive){
+        return <div></div>
+    }
+    
+    return(
+        <div 
+        onClick={()=>{
+            if(onClose){
+                onClose();
+            }
+            }}
+        style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            backgroundColor: backgroundColor, height: "100vh", width: "100vw", maxWidth:"625px", position: "absolute", zIndex:"1000000", top:0}}>
+            {children}
+        </div>
+    );
+}

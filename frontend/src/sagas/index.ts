@@ -1,5 +1,6 @@
 import { takeEvery, call, put, all } from 'redux-saga/effects'
 import { getCartSignal } from './CartSaga';
+import { getDeliverySignal } from './DeliverySaga';
 import { getLikeSignal } from './LikeSaga';
 import { getLoginSignal } from './LoginSaga';
 import { getProfileSignal } from './MypageSaga';
@@ -17,6 +18,7 @@ export default function* rootSaga() {
         getSearchSignal(),
         getCartSignal(),
         getOrderSignal(),
-        getReviewSignal()
+        getReviewSignal(),
+        getDeliverySignal()
     ]);
 }
