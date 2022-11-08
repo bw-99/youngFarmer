@@ -11,7 +11,7 @@ import { CART_ADD_TRY, CART_CANCEL_TRY, GET_CART, CART_TRY, GET_CART_SUCCESS, GE
 import { CartData, CartDataList } from "../reducers/CartReducer";
 import { SEARCH_CART_SUCCESS, SEARCH_ORDER_SUCCESS, SEARCH_PID_SUCCESS } from "../pages/SearchPage/SearchDertailAction";
 import { OrderDataType } from "../reducers/OrderReducer";
-import { GET_ORDER, GET_ORDER_SUCCESS, ORDER_TRY, SET_ORDER, SET_ORDER_SUCCESS } from "../pages/OrderPage/OrderAction";
+import { PRODUCT_GET_ORDER_SUCCESS, PRODUCT_SET_ORDER_SUCCESS, PRODUCT_SET_ORDER, PRODUCT_GET_ORDER, PRODUCT_ORDER_TRY } from "../pages/OrderPage/ProductAction";
 
 
 export async function convertOrder2Product(orderList:OrderDataType[]) {
@@ -77,7 +77,7 @@ function* getOrder(action:any) {
     }); 
 
     yield put({
-        type: GET_ORDER_SUCCESS,
+        type: PRODUCT_GET_ORDER_SUCCESS,
     }); 
 }
 
@@ -91,7 +91,7 @@ function* setOrder(action:any) {
 
     // console.log("result" + JSON.stringify(result));
     yield put({
-        type: SET_ORDER_SUCCESS,
+        type: PRODUCT_SET_ORDER_SUCCESS,
         payload: action.payload.dataList
     }); 
     
@@ -109,11 +109,11 @@ function* setOrder(action:any) {
 function* orderIndex(action: any) {
     switch (action.payload.type) {
 
-        case SET_ORDER:
+        case PRODUCT_SET_ORDER:
             yield call(setOrder, action)
             break;
 
-        case GET_ORDER:
+        case PRODUCT_GET_ORDER:
             yield call(getOrder, action)
             break;
     
@@ -124,6 +124,6 @@ function* orderIndex(action: any) {
 
 
 export function* getOrderSignal() {
-    yield takeLatest(ORDER_TRY, orderIndex);
+    yield takeLatest(PRODUCT_ORDER_TRY, orderIndex);
 }
 

@@ -6,8 +6,9 @@ import Check from "../../../assets/images/btn-checkbox-2.png";
 import React, { useEffect, useState } from "react";
 import { OrderProductDataType, ProductDataType } from "../../../reducers/ProductReducer";
 import { Spantemp2 } from "../../CartPage/atoms/CartProduct";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../reducers";
+import { saveProductAction } from "../ProductAction";
 
 export type OrderProductListParam = {
     orderProducts: OrderProductDataType[]
@@ -19,9 +20,13 @@ export type OrderProductParam = {
 
 
 export const ProductListComp = () => {
+    const dispatch = useDispatch();
+    
     const orderProductSelector: OrderProductDataType[] = useSelector((state:RootState) =>
         state.SearchDetailReducer.orderProducts
     );     
+
+    
 
     return(
         <>
@@ -37,6 +42,15 @@ export const ProductListComp = () => {
 }
 
 const ProductComp = ({orderProduct}:OrderProductParam) => {
+    const dispatch = useDispatch();
+    useEffect(() => {
+        if(orderProduct) {
+            console.log(orderProduct);
+            dispatch(saveProductAction(orderProduct));
+        }
+    }, []);
+
+
     return (
         <Sector style = {{ display: "flex", flexDirection: "column"}}>
                     <div style = {{display: "flex", flexDirection: "row", margin: "0 16px 10px 16px",alignItems:"center", justifyContent: "space-between"}}> 

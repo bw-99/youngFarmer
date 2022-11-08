@@ -2,10 +2,11 @@ import {combineReducers} from "redux";
 import { BottomNavigationBarReducer } from "./BottomNavigationBarReducer";
 import { CartReducer } from "./CartReducer";
 import { DeliveryReducer } from "./DeliveryReducer";
+import { DiscountReducer } from "./DiscountReducer";
 import { LikeReducer } from "./LikeReducer";
 import { LoginReducer, UserInfoReducer } from "./LoginReducer";
 import { ProfileReducer } from "./MypageReducer";
-import { OrderReducer } from "./OrderReducer";
+import { OrderReducer, OrderSendReducer } from "./OrderReducer";
 import { ProductInfoReducer } from "./ProductReducer";
 import { PurchaseReducer } from "./PurchaseReducer";
 import { ReviewWriteReducer, ReviewWriteStateReducer } from "./ReviewReducer";
@@ -27,7 +28,9 @@ const rootReducer = combineReducers({
   OrderReducer,
   ReviewWriteReducer,
   ReviewWriteStateReducer,
-  DeliveryReducer
+  DeliveryReducer,
+  DiscountReducer,
+  OrderSendReducer
 });
 
 export default rootReducer;

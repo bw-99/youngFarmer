@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import checkIcon from "../../../assets/images/btn-checkbox-1@3x.png";
 import checkNotIcon from "../../../assets/images/btn-checkbox-2@3x.png";
 import { useDispatch, useSelector } from 'react-redux';
-import { getDeliveryTry } from "../OrderAction";
 import { db, FirebaseAuth } from './../../../index';
 import { DeliveryDataType } from "../../../reducers/DeliveryReducer";
 import { RootState } from "../../../reducers";
@@ -11,6 +10,7 @@ import { BackgroundWrapper, CenterBackgroundWrapper } from "../../../common/Back
 import axios from "axios";
 import DaumPostcode from "react-daum-postcode";
 import ReactDom from 'react-dom';
+import { getDeliveryTry, saveDeliveryAction } from "../DeliveryAction";
 
 export const DeliveryComp = () => {
     const dispatch = useDispatch();
@@ -34,7 +34,6 @@ export const DeliveryComp = () => {
     const [deliveryDefault, setDeliveryDefault] = useState(false);
 
 
-    console.log(process.env.REACT_APP_JUSO_KEY);
 
     // * 기존 default 설정을 모두 OFF
     const undefault = async() => {
@@ -91,6 +90,36 @@ export const DeliveryComp = () => {
         }
     }
 
+    const checkCanSubmit = () => {
+        
+        return (
+            selectedDeliveryOption?.name &&
+            selectedDeliveryOption?.phone &&
+            selectedDeliveryOption?.location_main &&
+            selectedDeliveryOption?.location_sub &&
+            selectedDeliveryOption?.requirement
+        );
+    }
+
+    const handleSendDeliveryOption = () => {
+        if(!checkCanSubmit()) {
+            return false;
+        }
+
+        let devOption:DeliveryDataType = {
+            location_main: selectedDeliveryOption!.location_main,
+            location_sub: selectedDeliveryOption!.location_sub,
+            name: selectedDeliveryOption!.name,
+            phone: selectedDeliveryOption!.phone,
+            requirement: selectedDeliveryOption!.requirement,
+            uid: FirebaseAuth.currentUser!.uid,
+            is_default: deliveryDefault,
+            time_created: Timestamp.now()
+        } 
+
+        dispatch(saveDeliveryAction(devOption));
+    }
+
     useEffect(() => {
         FirebaseAuth.onAuthStateChanged((user) => {
             dispatch(getDeliveryTry(user!.uid));
@@ -103,7 +132,7 @@ export const DeliveryComp = () => {
             if(defaultDeliveryInfo) {
                 setSelectedDeliveryOption(defaultDeliveryInfo);
 
-
+                
                 // setDeliverMan(defaultDeliveryInfo.name);
                 // setDeliverPhone(defaultDeliveryInfo.phone);
                 // setDeliverLocationMain(defaultDeliveryInfo.location_main);
@@ -113,7 +142,23 @@ export const DeliveryComp = () => {
             }
         }
 
+       
+
     }, [deliverySelector])
+
+    useEffect(() => {
+        console.log("***************");
+        
+        if(deliverySelector) {
+            handleSendDeliveryOption();
+        }
+    }, [
+        selectedDeliveryOption!.name,
+        selectedDeliveryOption!.phone,
+        selectedDeliveryOption!.location_main,
+        selectedDeliveryOption!.location_sub,
+        selectedDeliveryOption!.requirement,
+    ])
 
 
     return(
@@ -158,7 +203,7 @@ export const DeliveryComp = () => {
                     <div>
                         주소
                     </div>
-                    <input placeholder="주소를 입력하세요" value={selectedDeliveryOption ? selectedDeliveryOption!.location_main : ""} onChange={(e)=>{
+                    <input disabled={true} placeholder="주소를 입력하세요" value={selectedDeliveryOption ? selectedDeliveryOption!.location_main : ""} onChange={(e)=>{
                         setDeliverLocationMain(e.target.value);
                         selectedDeliveryOption!.location_main = e.target.value;
                     }}>
@@ -217,7 +262,8 @@ export const DeliveryComp = () => {
             </div>
 
             <button onClick={()=>{
-                handleSetDeliveryOption();
+                handleSendDeliveryOption();
+                // handleSetDeliveryOption();
             }}>
                 (임시) 주소 저장
             </button>

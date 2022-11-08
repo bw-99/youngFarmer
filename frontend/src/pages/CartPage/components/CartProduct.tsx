@@ -15,8 +15,8 @@ import checkNotIcon from "../../../assets/images/btn-checkbox-2@3x.png";
 import { CartProductDataType, ProductDataType } from "../../../reducers/ProductReducer";
 import { cartCancelAction } from "../CartAction";
 import { OrderDataType } from "../../../reducers/OrderReducer";
-import { addOrderTry, cancelOrderTry, setOrderTry } from "../../OrderPage/OrderAction";
 import { useNavigate } from "react-router-dom";
+import { addProductOrderTry, cancelProductOrderTry, setProductOrderTry } from "../../OrderPage/ProductAction";
 
 type CartProductCheckParmas = {
     cartProduct: CartProductDataType
@@ -36,7 +36,7 @@ export const CartProductComponent = ({cartProduct, allCheck, order}:CartProductC
 
    
     const handleDirectOrder = () => {
-        dispatch(setOrderTry([{
+        dispatch(setProductOrderTry([{
             count: count,
             product_id: cartProduct.product.product_id,
             option: cartProduct.option
@@ -48,14 +48,14 @@ export const CartProductComponent = ({cartProduct, allCheck, order}:CartProductC
         if(ischecked) {
             console.log("add order");
             
-            dispatch(addOrderTry({
+            dispatch(addProductOrderTry({
                 count: count,
                 product_id: cartProduct.product.product_id,
                 option: cartProduct.option
             }));
         }
         else{
-            dispatch(cancelOrderTry({
+            dispatch(cancelProductOrderTry({
                 count: count,
                 product_id: cartProduct.product.product_id,
                 option: cartProduct.option

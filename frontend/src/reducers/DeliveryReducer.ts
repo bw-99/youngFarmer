@@ -1,8 +1,8 @@
 import { GET_CART_SUCCESS, GET_CART_FAIL, CART_CANCEL_SUCCESS, CART_CANCEL_FAIL, CART_ADD_FAIL, CART_ADD_SUCCESS } from "../pages/CartPage/CartAction";
 import { GET_LIKE_FAIL, GET_LIKE_SUCCESS, LIKE_CANCEL_FAIL, LIKE_CANCEL_SUCCESS, LIKE_FAIL, LIKE_SUCCESS } from "../pages/LikePage/LikeAction";
-import { SET_ORDER, CANCEL_ORDER, SET_ORDER_SUCCESS, ADD_ORDER, ADD_ORDER_SUCCESS, CLEAR_ORDER, GET_DELIVERY_RESULT } from "../pages/OrderPage/OrderAction";
 import { ProductDataType } from "./ProductReducer";
 import { Timestamp } from 'firebase/firestore';
+import { GET_DELIVERY_RESULT } from "../pages/OrderPage/DeliveryAction";
 
 export interface DeliveryDataType {
     location_main: string,

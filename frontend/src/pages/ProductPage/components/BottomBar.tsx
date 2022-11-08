@@ -11,7 +11,7 @@ import { likeAction, likeCancelAction } from "../../LikePage/LikeAction";
 import { closeModalAction, openModalAction } from "../PurchaseAction"
 import { cartAddAction } from "../../CartPage/CartAction";
 import { object } from "prop-types";
-import { setOrderTry } from "../../OrderPage/OrderAction";
+import { setProductOrderTry } from "../../OrderPage/ProductAction";
 
 type bottomBarCompParam = {
     product_id : number
@@ -124,7 +124,7 @@ export const BottomBarComp = ({product_id}:bottomBarCompParam) => {
                     장바구니 </BottomBoxShoppingCart>
                     <BottomBoxBuy onClick={(e) => {
                         purchaseClickEvent(e);
-                        dispatch(setOrderTry([{
+                        dispatch(setProductOrderTry([{
                             count: 1,
                             product_id: product_id,
                             option: JSON.stringify(modalselector.select_item_info)

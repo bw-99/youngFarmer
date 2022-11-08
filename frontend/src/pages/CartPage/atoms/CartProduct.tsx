@@ -268,7 +268,7 @@ font-family: AppleSDGothicNeo;
 export const PaymentBtn = styled.div`
 height: 56px;
 border-radius: 28px;
-background-image: linear-gradient(to bottom, #fb6159, #ed3e3e);
+/* background-image: linear-gradient(to bottom, #fb6159, #ed3e3e); */
 
 display:flex;
 align-items:center;
@@ -281,6 +281,6 @@ font-family: AppleSDGothicNeo;
   line-height: normal;
   letter-spacing: normal;
   text-align: center;
-  color: #fff;
+  /* color: #fff; */
 
 `

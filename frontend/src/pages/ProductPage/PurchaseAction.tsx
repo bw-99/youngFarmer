@@ -1,10 +1,10 @@
+import { PurchaseDataType } from "../../reducers/PurchaseReducer"
+
 export const CLOSE_MODAL = "SELECT_PRODUCT";
 export const OPEN_MODAL = "OPEN_MODAL";
 export const SELECT_WEIGHT = "SELECT_WEIGHT";
 export const SELECT_NUMBER_OF_ITEM = "SELECT_NUMBER_OF_ITEM";
 export const SELECT_WANNA_PAVE = "SELECT_WANNA_PAVE";
-
-import { PurchaseDataType } from "../../reducers/PurchaseReducer"
 
 
 export const closeModalAction = (data: PurchaseDataType) => {

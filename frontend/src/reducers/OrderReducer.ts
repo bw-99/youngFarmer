@@ -1,7 +1,11 @@
 import { GET_CART_SUCCESS, GET_CART_FAIL, CART_CANCEL_SUCCESS, CART_CANCEL_FAIL, CART_ADD_FAIL, CART_ADD_SUCCESS } from "../pages/CartPage/CartAction";
 import { GET_LIKE_FAIL, GET_LIKE_SUCCESS, LIKE_CANCEL_FAIL, LIKE_CANCEL_SUCCESS, LIKE_FAIL, LIKE_SUCCESS } from "../pages/LikePage/LikeAction";
-import { SET_ORDER, CANCEL_ORDER, SET_ORDER_SUCCESS, ADD_ORDER, ADD_ORDER_SUCCESS, CLEAR_ORDER } from "../pages/OrderPage/OrderAction";
-import { ProductDataType } from "./ProductReducer";
+import { OrderProductDataType, ProductDataType } from "./ProductReducer";
+import { DeliveryDataType } from './DeliveryReducer';
+import { DiscountDataType } from './DiscountReducer';
+import { SAVE_DISCOUNT_ACTION } from "../pages/OrderPage/DiscountAction";
+import { SAVE_DELIVERY_ACTION } from "../pages/OrderPage/DeliveryAction";
+import { PRODUCT_SET_ORDER_SUCCESS, PRODUCT_ADD_ORDER, PRODUCT_CANCEL_ORDER, SAVE_PRODUCT_ACTION } from "../pages/OrderPage/ProductAction";
 
 export interface OrderDataType {
     count: number,
@@ -10,8 +14,7 @@ export interface OrderDataType {
 }
 
 
-
- interface OrderDataListType {
+interface OrderDataListType {
     orders: OrderDataType[]
 }
 
@@ -24,14 +27,14 @@ export function OrderReducer(state = orderInitState, action: any) {
     
     switch (action.type) {
 
-        case SET_ORDER_SUCCESS:
+        case PRODUCT_SET_ORDER_SUCCESS:
             return {
                 ...state,
                 orders: action.payload,
             };
         
 
-        case ADD_ORDER:
+        case PRODUCT_ADD_ORDER:
             orderProductList = [action.payload];
 
             for (const order of state.orders) {
@@ -48,7 +51,7 @@ export function OrderReducer(state = orderInitState, action: any) {
                 orders: orderProductList,
             };       
 
-        case CANCEL_ORDER:
+        case PRODUCT_CANCEL_ORDER:
             orderProductList = [];
 
             for (const order of state.orders) {
@@ -70,3 +73,55 @@ export function OrderReducer(state = orderInitState, action: any) {
     }
 }
 
+export interface OrderSending {
+    products: OrderProductDataType[] | null,
+    delivery: DeliveryDataType | null,
+    discount: DiscountDataType | null,
+    // setOrder: boolean
+}
+
+const orderSendInit:OrderSending = {
+    products: [],
+    delivery: null,
+    discount: null,
+}
+
+export function OrderSendReducer(state = orderSendInit, action: any) {
+    console.log(state);
+    
+    switch (action.type) {
+        case SAVE_DISCOUNT_ACTION:
+            return {
+                ...state,
+                discount: action.payload,
+            };
+
+        case SAVE_DELIVERY_ACTION:
+            return {
+                ...state,
+                delivery: action.payload,
+            };
+        
+        case SAVE_PRODUCT_ACTION:
+            let products:any = [];
+            if(state && state.products){
+                products = [...state.products];
+            }
+
+            products.push(action.payload);
+
+            // * 중복 제거
+            products = products.filter( function( item: any, index: any, inputArray: string | any[] ) {
+                return inputArray.indexOf(item) == index;
+            });
+
+
+            return {
+                ...state,
+                products: products,
+            };
+
+        default:
+            return state;
+    }
+}

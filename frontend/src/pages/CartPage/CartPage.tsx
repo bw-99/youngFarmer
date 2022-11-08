@@ -25,7 +25,7 @@ import { cartCancelAction, getCartAction } from "./CartAction";
 import {PaymentBtn} from "./atoms/CartProduct"
 import { CartTopComp } from "./components/CartTop";
 import { OrderDataType } from "../../reducers/OrderReducer";
-import { setOrderTry } from "../OrderPage/OrderAction";
+import { setProductOrderTry } from "../OrderPage/ProductAction";
 
 
 function CartPage(props: any) {
@@ -68,7 +68,7 @@ function CartPage(props: any) {
                     <PaymentBtn 
                     onClick={()=>{
                         setOrder(true);
-                        dispatch(setOrderTry(orderSelector));
+                        dispatch(setProductOrderTry(orderSelector));
                         navigate("/order");
                     }}
                     style={{

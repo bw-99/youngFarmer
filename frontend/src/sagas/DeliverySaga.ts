@@ -11,8 +11,8 @@ import { CART_ADD_TRY, CART_CANCEL_TRY, GET_CART, CART_TRY, GET_CART_SUCCESS, GE
 import { CartData, CartDataList } from "../reducers/CartReducer";
 import { SEARCH_CART_SUCCESS, SEARCH_ORDER_SUCCESS, SEARCH_PID_SUCCESS } from "../pages/SearchPage/SearchDertailAction";
 import { OrderDataType } from "../reducers/OrderReducer";
-import { DELIVERY_TRY, GET_DELIVERY_RESULT, GET_DELIVERY_SUCCESS, GET_ORDER, GET_ORDER_SUCCESS, ORDER_TRY, SET_ORDER, SET_ORDER_SUCCESS } from "../pages/OrderPage/OrderAction";
 import { DeliveryDataType } from "../reducers/DeliveryReducer";
+import { GET_DELIVERY_RESULT, DELIVERY_TRY } from "../pages/OrderPage/DeliveryAction";
 
 
 export async function convertOrder2Product(orderList:OrderDataType[]) {
