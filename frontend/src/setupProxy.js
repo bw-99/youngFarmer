@@ -22,4 +22,16 @@ module.exports = function(app) {
         }
     })
   );
+
+
+  app.use(
+    '/juso',
+    createProxyMiddleware({
+        target: process.env.REACT_APP_JUSO_DOMAIN,
+        changeOrigin: true,
+        pathRewrite: {
+          "^/juso" : ""
+        }
+    })
+  );
 };

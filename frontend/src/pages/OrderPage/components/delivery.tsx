@@ -8,6 +8,9 @@ import { DeliveryDataType } from "../../../reducers/DeliveryReducer";
 import { RootState } from "../../../reducers";
 import { addDoc, collection, getDocs, query, Timestamp, updateDoc, where } from "firebase/firestore";
 import { BackgroundWrapper, CenterBackgroundWrapper } from "../../../common/BackgroundWrapper/BackgroundWrapper";
+import axios from "axios";
+import DaumPostcode from "react-daum-postcode";
+import ReactDom from 'react-dom';
 
 export const DeliveryComp = () => {
     const dispatch = useDispatch();
@@ -20,7 +23,9 @@ export const DeliveryComp = () => {
 
     const [selectLocation, setSelectLocation] = useState(false);
 
-    const [selectedDeliveryOption, setSelectedDeliveryOption] = useState<DeliveryDataType | null>(null);
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+    const [selectedDeliveryOption, setSelectedDeliveryOption] = useState<DeliveryDataType | null>({} as DeliveryDataType);
     const [deliverMan, setDeliverMan] = useState("");
     const [deliverPhone, setDeliverPhone] = useState("");
     const [deliverLocationMain, setDeliverLocationMain] = useState("");
@@ -35,10 +40,7 @@ export const DeliveryComp = () => {
     const undefault = async() => {
         const deliveryRef = collection(db, "delivery");
 
-        const defaultDeliveryInfo = deliverySelector.filter((dev) => dev.is_default)[0];
-        
-        let queryTemp = query(deliveryRef, where("time_created","==",defaultDeliveryInfo.time_created));
-        queryTemp = query(queryTemp, where("is_default","==",true));
+        let queryTemp = query(deliveryRef, where("is_default","==",true));
         const fbdata = await getDocs(queryTemp);
 
         if(!fbdata.empty) {
@@ -113,13 +115,6 @@ export const DeliveryComp = () => {
 
     }, [deliverySelector])
 
-    if(!selectedDeliveryOption) {
-        return(
-            <div>
-
-            </div>
-        );
-    } 
 
     return(
         <div>
@@ -137,9 +132,9 @@ export const DeliveryComp = () => {
                     <div>
                         수령인
                     </div>
-                    <input placeholder="수령인 성함을 입력하세요" value={selectedDeliveryOption.name} onChange={(e)=>{
+                    <input placeholder="수령인 성함을 입력하세요" value={selectedDeliveryOption ? selectedDeliveryOption!.name : ""} onChange={(e)=>{
                         setDeliverMan(e.target.value);
-                        selectedDeliveryOption.name = e.target.value;
+                        selectedDeliveryOption!.name = e.target.value;
                     }}>
                     </input>
                 </div>
@@ -149,8 +144,8 @@ export const DeliveryComp = () => {
                     <div>
                         휴대폰
                     </div>
-                    <input placeholder="휴대폰 번호를 입력하세요" value={selectedDeliveryOption.phone} onChange={(e)=>{
-                        selectedDeliveryOption.phone = e.target.value;
+                    <input placeholder="휴대폰 번호를 입력하세요" value={selectedDeliveryOption ? selectedDeliveryOption!.phone : ""} onChange={(e)=>{
+                        selectedDeliveryOption!.phone = e.target.value;
                         setDeliverPhone(e.target.value);
                     }}>
                     </input>
@@ -161,12 +156,34 @@ export const DeliveryComp = () => {
                     <div>
                         주소
                     </div>
-                    <input placeholder="주소를 입력하세요" value={selectedDeliveryOption.location_main} onChange={(e)=>{
+                    <input placeholder="주소를 입력하세요" value={selectedDeliveryOption ? selectedDeliveryOption!.location_main : ""} onChange={(e)=>{
                         setDeliverLocationMain(e.target.value);
-                        selectedDeliveryOption.location_main = e.target.value;
+                        selectedDeliveryOption!.location_main = e.target.value;
                     }}>
                     </input>
+
+                    <button onClick={() => {
+                        setIsPopupOpen(true);
+
+                    }}>
+                        도로명 찾기
+                    </button>
+
+                    {/* <DeliveryPopUp /> */}
                     
+                </div>
+
+
+                {/* 세부 주소 */}
+                <div style={{display:"flex", margin:"20px"}}>
+                    <div>
+                        세부 주소
+                    </div>
+                    <input placeholder="세부 주소를 입력하세요" value={selectedDeliveryOption ? selectedDeliveryOption!.location_sub : ""} onChange={(e)=>{
+                        setDeliverLocationSub(e.target.value);
+                        selectedDeliveryOption!.location_sub = e.target.value;
+                    }}>
+                    </input>                    
                 </div>
 
 
@@ -175,9 +192,9 @@ export const DeliveryComp = () => {
                     <div>
                         배송요청
                     </div>
-                    <input placeholder="배송 요청사항을 입력하세요" value={selectedDeliveryOption.requirement} onChange={(e)=>{
+                    <input placeholder="배송 요청사항을 입력하세요" value={selectedDeliveryOption ? selectedDeliveryOption!.requirement : ""} onChange={(e)=>{
                         setDeliverReq(e.target.value);
-                        selectedDeliveryOption.requirement = e.target.value;
+                        selectedDeliveryOption!.requirement = e.target.value;
                     }}>
                     </input>
                 </div>
@@ -203,6 +220,26 @@ export const DeliveryComp = () => {
                 (임시) 주소 저장
             </button>
 
+
+            <CenterBackgroundWrapper 
+            onClose={() => {
+                setIsPopupOpen(false);
+            }}
+            backgroundColor={"rgba(0,0,0,0.5)"} isActive={isPopupOpen}>
+                {
+                    <div onClick={(e) => {
+                        e.stopPropagation();
+                    }}>
+                        <PopupPostCode 
+                        selectedDeliveryOption = {selectedDeliveryOption}
+                        onClose={() => {
+                            setIsPopupOpen(false);
+                        } } setDeliverLocationMain={setDeliverLocationMain} />
+                    </div>
+                    
+                }
+            </CenterBackgroundWrapper>
+
             <CenterBackgroundWrapper 
             onClose={() => {
                 setSelectLocation(false);
@@ -216,7 +253,7 @@ export const DeliveryComp = () => {
                             deliverySelector.map((dev) => {
                                 return(
                                     <div 
-                                    key={Timestamp.now().toString()}
+                                    key={Timestamp.now().nanoseconds}
                                     onClick={(e)=>{
                                         setSelectedDeliveryOption(dev);
                                         setSelectLocation(false);
@@ -235,4 +272,45 @@ export const DeliveryComp = () => {
             
         </div>
     );
+}
+
+type RoadSettingType = {
+    // deliverLocationMain:any,
+    selectedDeliveryOption: any,
+    setDeliverLocationMain:any,
+    onClose: any
+}
+
+
+const PopupPostCode = ({selectedDeliveryOption, setDeliverLocationMain, onClose}:RoadSettingType) => {
+    const handlePostCode = (data:any) => {
+        let fullAddress = data.address;
+        let extraAddress = ''; 
+        
+        if (data.addressType === 'R') {
+          if (data.bname !== '') {
+            extraAddress += data.bname;
+          }
+          if (data.buildingName !== '') {
+            extraAddress += (extraAddress !== '' ? `, ${data.buildingName}` : data.buildingName);
+          }
+          fullAddress += (extraAddress !== '' ? ` (${extraAddress})` : '');
+        }
+        console.log(data)
+        console.log(fullAddress)
+        console.log(data.zonecode)
+        selectedDeliveryOption.location_main = fullAddress;
+        setDeliverLocationMain(fullAddress);
+        onClose();
+    }
+ 
+    const postCodeStyle:any = {
+        display: "block",
+        maxWidth: "calc(625px - 32px)",
+        width: "100vw"
+      };
+ 
+    return(
+        <DaumPostcode style={{...postCodeStyle}} onComplete={handlePostCode} />
+    )
 }
