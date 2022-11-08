@@ -1,4 +1,4 @@
-import React,{ useState } from "react";
+import React,{ useEffect, useState } from "react";
 import { IndexSelectedText, IndexNotSelectedText, IndexSelectedLine, IndexNotSelectedLine, ImageBox, ItemReviewTitle, ItemReviewButton, ItemReviewStar, ItemReviewScore, SepLine, ReviewerPhoto, ReviewerNickname, EachRateStar, EachRateStarScore, ReviewContent, ReviewPhoto, ContentDate, QuestionNickname, QuestionUnansweredButton, QuestionLockIcon, QuestionContent } from "../atoms/itemDetail";
 
 import productExOne from "../../../assets/images/product-ex1@3x.png";
@@ -14,6 +14,7 @@ import rateStarOff from "../../../assets/images/btn-rate-off@3x.png";
 
 import iconLock from "../../../assets/images/icon-lock@3x.png";
 import { getAverageReviewScore } from "./itemInfo";
+import { useNavigate, useParams } from "react-router-dom";
 
 
 export const ItemDetailComp = () => {
@@ -183,23 +184,42 @@ type ReviewDataProps = {
 }
 
 const ItemReviewComp = ({reviewList}:ReviewDataProps) => {
+    const [averageScore, SetaverageScore] = useState(5);
+    const params = useParams();
+    const navigate = useNavigate();
+    useEffect(() => {
+        SetaverageScore(getAverageReviewScore(reviewList));
+    }, [])
+
+    const DisplayStar = () => {
+        let DisplayStarCompList = [];
+        let score = 1;
+        for (score = 1; score < averageScore; score++) {
+            DisplayStarCompList.push(<ItemReviewStar src={rateStarOn} />);
+        }
+        for ( score; score < 6; score++) {
+            DisplayStarCompList.push(<ItemReviewStar src={rateStarOff} />);
+        }
+        return <>{DisplayStarCompList}</>;
+    }
+
     return (
         <div>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
                 <ItemReviewTitle> 상품리뷰 {reviewList.length? reviewList.length: ""} </ItemReviewTitle>
-                <ItemReviewButton> 리뷰작성 </ItemReviewButton>
+                <ItemReviewButton
+                onClick={()=>{
+                    navigate("/review/product/"+params!.productId);
+                }}
+                > 리뷰작성 </ItemReviewButton>
             </div>
 
             {
                 reviewList.length ?
                 <>
                     <div style={{ display: "flex", justifyContent: "flex-start", marginBottom: "30px" }}>
-                        <ItemReviewStar src={rateStarOn} />
-                        <ItemReviewStar src={rateStarOn} />
-                        <ItemReviewStar src={rateStarOn} />
-                        <ItemReviewStar src={rateStarOn} />
-                        <ItemReviewStar src={rateStarOff} />
-                        <ItemReviewScore style={{ marginLeft: "8px" }}> {getAverageReviewScore(reviewList)} </ItemReviewScore>
+                        <DisplayStar />
+                        <ItemReviewScore style={{ marginLeft: "8px" }}> {averageScore.toFixed(1)} </ItemReviewScore>
                     </div>
                     
                     {
@@ -227,6 +247,7 @@ const ItemReivewDetailComp = ({review}:reviewDataType) => {
         <div>
             <SepLine />
             <div style={{padding: "24px 0"}}>
+                {/* header */}
                 <div style={{display: "flex", justifyContent:"space-between", alignItems:"center"}}>
                     <div style={{display: "flex", alignItems:"center"}}>
                         <ReviewerPhoto  src={
@@ -241,13 +262,22 @@ const ItemReivewDetailComp = ({review}:reviewDataType) => {
                         <EachRateStarScore> {review.score} </EachRateStarScore>
                     </div>
                 </div>
+                
 
                 <div style={{display: "flex", marginTop: "10px", justifyContent: "space-between"}}>
                     <div>
                         <ReviewContent> {review.content} </ReviewContent>
                         <ContentDate style={{marginTop:"7px"}}> {`${review.time_created.toDate().toLocaleDateString("kr-KR")}`} </ContentDate>
                     </div>
-                    <ReviewPhoto src={review.photos[0]} />
+                    {
+                        review.photos && review.photos.length
+                        ?
+                        <div style={{marginLeft: "16px"}}>
+                            <ReviewPhoto src={review.photos[0]} />
+                        </div>
+                        :
+                        <></>
+                    }
                 </div>
             </div>
         </div>

@@ -167,5 +167,5 @@ export const getAverageReviewScore = (reviewList: ProductDataReviewType[]) => {
         score+=review.score
     });
 
-    return (score/(reviewList.length)).toFixed(1);
+    return (score/(reviewList.length));
 }

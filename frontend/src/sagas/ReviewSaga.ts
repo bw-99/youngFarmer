@@ -10,7 +10,7 @@ import { LikeDataList } from "../reducers/LikeReducer";
 import { CART_ADD_TRY, CART_CANCEL_TRY, GET_CART, CART_TRY, GET_CART_SUCCESS, GET_CART_FAIL, CART_CANCEL_SUCCESS, CART_CANCEL_FAIL, CART_ADD_SUCCESS, CART_ADD_FAIL } from "../pages/CartPage/CartAction";
 import { CartData, CartDataList } from "../reducers/CartReducer";
 import { SEARCH_CART_SUCCESS, SEARCH_PID_SUCCESS, SEARCH_REVIEW_SUCCESS, SEARCH_UNREVIEW_SUCCESS } from "../pages/SearchPage/SearchDertailAction";
-import { GET_REVIEW, GET_REVIEW_LIST, GET_UNREVIEW_LIST } from "../pages/ReviewPage/ReviewAction";
+import { GET_REVIEW, GET_REVIEW_LIST, GET_REVIEW_ONE, GET_REVIEW_ONE_FAIL, GET_REVIEW_ONE_RESULT, GET_REVIEW_ONE_SUCCESS, GET_UNREVIEW_LIST } from "../pages/ReviewPage/ReviewAction";
 
 
 async function convertReview2Product(reviewDataList:ProductDataReviewType[]) {
@@ -40,7 +40,8 @@ async function convertReview2Product(reviewDataList:ProductDataReviewType[]) {
 
 
 async function convertOrder2Product(orderDataList:ProductDataOrderType[]) {
-
+    console.log(orderDataList);
+    
     const productRef = collection(db, "product");
     let queryList: any[] = [];
 
@@ -111,6 +112,34 @@ async function getReviewAPI(payload:any) {
 //     }
 // }
 
+async function checkDuplicateReview(uid:string, product_id: number) {
+    const reviewRef = collection(db, "review");
+    const reviewq = query(reviewRef, where("uid", "==", uid), where("product_id", "==", product_id));
+    const reviewfbdata = await getDocs(reviewq);
+
+    return !reviewfbdata.empty;
+}
+
+
+async function getOrderProductAPI(uid:string, product_id: number) {
+
+    const isDuplicate = await checkDuplicateReview(uid, product_id);
+
+    if(!isDuplicate){
+        const orderRef = collection(db, "order");
+        const q = query(orderRef, where("uid", "==", uid), where("product_id", "==", product_id));
+        const fbdata = await getDocs(q);
+
+        if(fbdata.empty) {
+            return false;
+        }
+        
+        return fbdata.docs[0].data();
+    }
+    else{
+        return false;
+    }
+}
 
 async function getaTotalReviewAPI(payload:any) {
     let uid = payload.payload;
@@ -139,7 +168,7 @@ async function getOrderProductsAPI(reviewProducts:ProductDataReviewType[]) {
     let reviewDataList:any = [];
     let docsList = [...fbdata.docs];
 
-    docsList.filter((doc) => {
+    docsList= docsList.filter((doc) => {
         const data = doc.data();
         return !pidList.includes(data.product_id);
     })
@@ -185,6 +214,36 @@ function* getReview(action:any) {
 
 
 
+function* getReviewOne(payload:any) {
+    let uid = payload.uid;
+    let product_id = payload.product_id;
+
+    const result:ProductDataOrderType = yield call(getOrderProductAPI, uid, product_id);
+    console.log(result);
+    
+    if(result){     
+        const orderProducts: ReviewProductDataType[] = yield call(convertOrder2Product, [result]);
+        yield put({
+            type: GET_REVIEW_ONE_SUCCESS,
+        });
+        
+        yield put({
+            type: GET_REVIEW_ONE_RESULT,
+            payload: {
+                orderProducts: orderProducts[0]
+            },
+        }); 
+
+    }
+    else{
+        yield put({
+            type: GET_REVIEW_ONE_FAIL,
+        }); 
+    }
+}
+
+
+
 function* reviewIndex(action: any) {
     switch (action.payload.type) {
         case GET_UNREVIEW_LIST:
@@ -193,6 +252,13 @@ function* reviewIndex(action: any) {
         
         case GET_REVIEW_LIST:
             yield call(getReview,action); 
+            // yield call(cancelCart,action); 
+            break;
+        
+        case GET_REVIEW_ONE:
+            console.log("get GET_REVIEW_ONE");
+            
+            yield call(getReviewOne,action.payload.payload); 
             // yield call(cancelCart,action); 
             break;
     

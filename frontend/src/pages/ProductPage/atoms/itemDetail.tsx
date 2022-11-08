@@ -110,10 +110,12 @@ export const ReviewContent = styled.div`
   font-size: 14px;
   line-height: 22px;
   color: #6b6b6b;
-  width: calc((100vw - 16px - 16px) - 88px - 16px);
-  max-height: 66px;
+  /* width: calc((100% - 16px - 16px) - 88px - 16px); */
+  height: 66px;
   overflow: hidden;
   text-overflow: ellipsis;
+  overflow-wrap: normal;
+  word-wrap: break-word;
 `
 
 export const ReviewPhoto = styled.img`

@@ -15,10 +15,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../reducers";
 import { AppBarComponentOnlyBack } from "../../common/AppBar/AppBar";
 import { Sector, SectorTitle, StoreName, DeliveryCharge, Line, ProductName, ProductCost, SaleRate, Package, SeparateSectorLine } from "./atoms/product";
-import { ProductComp } from "./components/product";
 import { OrderDataType } from "../../reducers/OrderReducer";
 import { clearOrder, getOrderAction } from "./OrderAction";
 import { OrderProductDataType } from "../../reducers/ProductReducer";
+import { ProductListComp } from "./components/product";
+import { DeliveryComp } from "./components/delivery";
 
 function OrderPage(props: any) {
     const dispatch = useDispatch();
@@ -31,21 +32,6 @@ function OrderPage(props: any) {
     const orderProductSelector: OrderProductDataType[] = useSelector((state:RootState) =>
         state.SearchDetailReducer.orderProducts
     );     
-
-    // useEffect(() => {
-    //   dispatch(getOrderAction(orderSelector))
-    // }, [])
-
-    // useEffect(() => {
-    //   dispatch(clearOrder());
-    // }, [])
-    
-    // useEffect(() => {
-    //     if(orderProductSelector.length == 0){
-    //         alert("주문 예정인 상품이 없습니다.")
-    //         navigate(-1);
-    //     }
-    // })
     
     return(
         <AppFrame>
@@ -58,13 +44,11 @@ function OrderPage(props: any) {
             </SectorTitle>
 
             <div style={{marginTop: "20px"}}>
-                {
-                    orderProductSelector.map((orderProduct) => {
-                        return (
-                            <ProductComp orderProduct={orderProduct} />
-                        )
-                    })
-                }
+                <ProductListComp />
+            </div>
+
+            <div style={{marginTop: "30px"}}>
+                <DeliveryComp />
             </div>
         </AppFrame>
     )

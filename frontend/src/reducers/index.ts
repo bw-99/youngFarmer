@@ -7,6 +7,7 @@ import { ProfileReducer } from "./MypageReducer";
 import { OrderReducer } from "./OrderReducer";
 import { ProductInfoReducer } from "./ProductReducer";
 import { PurchaseReducer } from "./PurchaseReducer";
+import { ReviewWriteReducer, ReviewWriteStateReducer } from "./ReviewReducer";
 import { SearchDetailReducer, SearchFilterReducer, SearchReducer, SearchToggleReducer } from "./SearchReducer";
 
 const rootReducer = combineReducers({
@@ -22,7 +23,9 @@ const rootReducer = combineReducers({
   SearchFilterReducer,
   SearchToggleReducer,
   CartReducer,
-  OrderReducer
+  OrderReducer,
+  ReviewWriteReducer,
+  ReviewWriteStateReducer
 });
 
 export default rootReducer;

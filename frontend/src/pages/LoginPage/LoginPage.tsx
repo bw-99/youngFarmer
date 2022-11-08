@@ -18,7 +18,7 @@ import { kakaoConfig } from "../..";
 import { getAuth, signInAnonymously } from "firebase/auth";
 import { AppFrame } from "../../App";
 import { RootState } from "../../reducers";
-import { BackgroundWrapper } from "../../common/BackgroundWrapper/BackgroundWrapper";
+import { BackgroundWrapper, LoadingWrapper } from "../../common/BackgroundWrapper/BackgroundWrapper";
 
 
   
@@ -99,8 +99,9 @@ function LoginPage(props: any) {
                 </BottomBox>
             </MainBox>
          </div>
-
-         <BackgroundWrapper backgroundColor="rgba(255,255,255, 0.8)" isActive={loginSelector === login_result_loading}/>
+         
+         <LoadingWrapper backgroundColor={"rgba(255,255,255,0.6)"} isActive={loginSelector === login_result_loading} />
+         {/* <BackgroundWrapper backgroundColor="rgba(255,255,255, 0.8)" isActive={loginSelector === login_result_loading}/> */}
         
         
         </AppFrame>

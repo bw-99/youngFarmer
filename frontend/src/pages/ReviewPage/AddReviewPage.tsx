@@ -1,27 +1,19 @@
 import React, { useEffect, useState } from "react";
 
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
-import styled from "styled-components";
 import { AppFrame } from "../../App";
 
-
-import alarm from "../../assets/images/alarm@3x.png";
-import shopping_bag from "../../assets/images/shopping_bag@3x.png";
-import { AppBarComponentNoBack, AppBarComponentOnlyBack, AppBarComponentProduct, AppBarComponentSearch } from "../../common/AppBar/AppBar";
+import { AppBarComponentOnlyBack } from "../../common/AppBar/AppBar";
 
 
-
-import { BottomNavigationBar } from "../../common/BottomNavigationBar/BottomNavigationBar";
-import { CategoryComponent } from "../../common/Category/category";
-
-import { collection, doc, setDoc, getDoc, query, orderBy, limit, getDocs, where } from "firebase/firestore";
+import { collection, query, getDocs, where, addDoc, Timestamp } from "firebase/firestore";
 import { db, FirebaseAuth, storage } from "../..";
 import { useDispatch, useSelector } from "react-redux";
-import { ProductDataType, ProductWithOrderType, ReviewProductDataType } from "../../reducers/ProductReducer";
+import { ProductWithOrderType, ReviewProductDataType } from "../../reducers/ProductReducer";
 import { RootState } from "../../reducers";
-import { CircularProgress } from '@mui/material';
-import { getRreviewListAction, getUnreviewListAction } from "./ReviewAction";
-import { getDownloadURL, ref, StorageReference, uploadBytesResumable } from "firebase/storage";
+import { getReviewOneAction, getRreviewListAction, GET_REVIEW_ONE_FAIL } from "./ReviewAction";
+import { getDownloadURL, ref, StorageReference, uploadBytes } from "firebase/storage";
+import { LoadingWrapper } from "../../common/BackgroundWrapper/BackgroundWrapper";
 
 function AddReviewPage(props: any) {
     const params = useParams();
@@ -30,77 +22,106 @@ function AddReviewPage(props: any) {
     const dispatch = useDispatch();
 
     const [product, setProduct] = useState<ProductWithOrderType | null>(null);
+
     const [reviewText, setReviewText] = useState("");
+    const [reviewPhotos, setReviewPhotos] = useState<any | null>(null);
     const [reviewRate, setReviewRate] = useState(5);
 
-    const [toggle, setToggle] = useState(true);
+    const [isUploading, setIsUploading] = useState(false);
 
-    const reviewSelector: ReviewProductDataType[] = useSelector((state:RootState) =>
-        state.SearchDetailReducer.reviewProducts
-    ); 
-    
-    const unreviewSelector: ProductWithOrderType[] = useSelector((state:RootState) =>
-        state.SearchDetailReducer.unreviewProducts
+
+    const preReviewSelector: ProductWithOrderType | null= useSelector((state:RootState) =>
+        state.ReviewWriteReducer
     );  
 
+    const preReviewStateSelector: any =  useSelector((state:RootState) =>
+        state.ReviewWriteStateReducer
+    );  
+
+
+    // * 해당 product fetching
     useEffect(() => {
         FirebaseAuth.onAuthStateChanged((user) => {
             if(user) {
-                dispatch(getRreviewListAction(user.uid));
+                dispatch(getReviewOneAction(Number(params.product_id), user.uid))
             }
         })
     }, [])
 
+    // * fetching 해온 결과를 product 변수에 할당
     useEffect(() => {
-        if(unreviewSelector) {
-            unreviewSelector.forEach((unreviewProduct) =>{
-                console.log(unreviewProduct.product.product_id ,  params.product_id);
-                
-                if(unreviewProduct.product.product_id === Number(params.product_id)) {
-                    setProduct(unreviewProduct);
-                }
-            })
+        if(preReviewSelector) {         
+            setProduct(preReviewSelector);   
         }
-    }, [unreviewSelector])
+    }, [preReviewSelector])
 
-    const photoUploadHandler = (e: any) => {
-        const img = e.target.files[0];
-        console.log(img);
+    // * fetching 실패 시 리다이렉팅
+    useEffect(() => {
+        if(preReviewStateSelector) {
+            if(preReviewStateSelector.result === GET_REVIEW_ONE_FAIL){
+                alert("구매하지 않은 품목 또는 이미 작성한 품목은 리뷰할 수 없습니다.");
+                navigate(-1);
+            }
+        }
+    }, [preReviewStateSelector])
 
+    const checkDuplicateReview = async (uid:string, product_id: number) => {
+        console.log(uid);
+
+        const reviewRef = collection(db, "review");
+        const q = query(reviewRef, where("uid", "==", uid), where("product_id", "==", product_id));
+        const fbdata = await getDocs(q);
+
+        return fbdata.empty;
+    }
+
+    const uploadPhoto = async(img: any) => {
         const storageRef:StorageReference = ref(storage, `/${img.name}`)!;
-          
-        const uploadTask = uploadBytesResumable(storageRef, img);
+        const uploadTask = await uploadBytes(storageRef, img);
+        const url = await getDownloadURL(uploadTask.ref);
+        return url;
+    }
 
-        // uploadTask.on(
-        //     "state_changed",
-        //     (snapshot) => {
-        //         const percent = Math.round(
-        //             (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        //         );
-        //     },
-        //     (err) => console.log(err),
-        //     () => {
-        //         // download url
-        //         getDownloadURL(uploadTask.snapshot.ref).then( async (url) => {
+    const uploadReviewData = async(content: string, photoList: any[], rate: number, uid:string, product_id: number) => {
+        const reviewRef = collection(db, "review");
 
-        //             const userRef = collection(db, "user");
-        //             const q = query(userRef, where("uid", "==", selector.uid), limit(1));
-        //             const fbdata = await getDocs(q);
+        let photoUrlList = [];
 
-        //             const profileRef = collection(fbdata.docs[0].ref, "profile");
-        //             const q2 = query(profileRef);
-        //             const fbdata2 = await getDocs(q2);
+        for (const photo of photoList) {
+            let url = await uploadPhoto(photo);
+            photoUrlList.push(url);
+        }
 
-        //             await updateDoc(fbdata2.docs[0].ref, {
-        //                 profile_img: url
-        //             });
+        const result = await addDoc(reviewRef, {
+            content: content,
+            photos: photoUrlList,
+            score: rate,
+            time_created: Timestamp.now(),
+            uid: uid,
+            product_id: product_id
+        });
 
-        //             dispatch(getProfileAction(selector.uid));
-        //             console.log(url);
-        //         });
-        //     }
-        // ); 
+        return result;
+    }
 
+    const firebaseUploadHandler = async () => {
+        let uid = FirebaseAuth.currentUser!.uid;
+        let product_id = product!.product.product_id;
+
+        let reviewDuplicate = await checkDuplicateReview(uid,product_id);
+        
+        if(!reviewDuplicate) {
+            console.log("review duplicated");
+            return ;
+        }
+        else{
+            console.log("review NOT duplicated");
+            // 리뷰 가능
+            if(reviewText && reviewPhotos && reviewRate) {
+                let uploadResult = await uploadReviewData(reviewText, reviewPhotos, reviewRate, uid, product_id);
+                console.log(JSON.stringify(uploadResult));
+            }
+        }
     }
 
     if (product) {
@@ -123,7 +144,9 @@ function AddReviewPage(props: any) {
                         accept='image/jpg,impge/png,image/jpeg,image/gif' 
                         name='review_photo' 
                         // style={{display:"none"}}
-                        onChange={photoUploadHandler}
+                        onChange={(e) => {
+                            setReviewPhotos(e.target.files);
+                        }}
                         multiple>
                     </input>
                 </div>
@@ -135,18 +158,28 @@ function AddReviewPage(props: any) {
                     }}/>
                 </div>
 
-                <button>
+                <button onClick={async ()=>{
+                    setIsUploading(true);
+                    await firebaseUploadHandler();
+                    setIsUploading(false);
+                    alert("업로드 완료!");
+                }}>
                     리뷰 전송
                 </button>
                 
+
+                <LoadingWrapper backgroundColor={"rgba(255,255,255,0.6)"} isActive={isUploading} />
 
             </AppFrame>
         );
     }
     else{
+
         return (
             <AppFrame>
                 {/*<PaymentPageComp />*/}
+                {/* {JSON.stringify(preReviewSelector)} */}
+                {/* {JSON.stringify(unreviewSelector)} */}
             </AppFrame>
         )
     }   

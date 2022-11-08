@@ -19,6 +19,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../reducers";
 import { searchRecommendTryAction } from "../SearchPage/SearchDertailAction";
 import { ProductDataType } from "../../reducers/ProductReducer";
+import { LoadingWrapper } from "../../common/BackgroundWrapper/BackgroundWrapper";
 
 
 function MainPage(props: any) {
