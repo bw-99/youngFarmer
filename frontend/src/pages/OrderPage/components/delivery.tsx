@@ -121,7 +121,9 @@ export const DeliveryComp = () => {
             <div style={{display: "flex"}}>
                 <h3> 배송 정보 </h3>
                 <button onClick={() => {
-                            setSelectLocation(!selectLocation);
+                            if(deliverySelector.length > 0) {
+                                setSelectLocation(!selectLocation);
+                            }
                         }}>
                     배송지 목록
                 </button>
