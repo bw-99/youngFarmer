@@ -6,7 +6,7 @@ import { db, FirebaseAuth } from './../../../index';
 import { DeliveryDataType } from "../../../reducers/DeliveryReducer";
 import { RootState } from "../../../reducers";
 import { addDoc, collection, getDocs, query, Timestamp, updateDoc, where } from "firebase/firestore";
-import { BackgroundWrapper, CenterBackgroundWrapper } from "../../../common/BackgroundWrapper/BackgroundWrapper";
+import { BackgroundWrapper, CenterBackgroundWrapper, TopBackgroundWrapper } from "../../../common/BackgroundWrapper/BackgroundWrapper";
 import axios from "axios";
 import DaumPostcode from "react-daum-postcode";
 import ReactDom from 'react-dom';
@@ -269,11 +269,11 @@ export const DeliveryComp = () => {
             </button>
 
 
-            <CenterBackgroundWrapper 
+            <TopBackgroundWrapper 
             onClose={() => {
                 setIsPopupOpen(false);
             }}
-            backgroundColor={"rgba(0,0,0,0.5)"} isActive={isPopupOpen}>
+            backgroundColor={"rgba(255,255,255,0.7)"} isActive={isPopupOpen}>
                 {
                     <div onClick={(e) => {
                         e.stopPropagation();
@@ -286,7 +286,7 @@ export const DeliveryComp = () => {
                     </div>
                     
                 }
-            </CenterBackgroundWrapper>
+            </TopBackgroundWrapper>
 
             <CenterBackgroundWrapper 
             onClose={() => {
@@ -354,7 +354,7 @@ const PopupPostCode = ({selectedDeliveryOption, setDeliverLocationMain, onClose}
  
     const postCodeStyle:any = {
         display: "block",
-        maxWidth: "calc(625px - 32px)",
+        maxWidth: "calc(625px)",
         width: "100vw"
       };
  

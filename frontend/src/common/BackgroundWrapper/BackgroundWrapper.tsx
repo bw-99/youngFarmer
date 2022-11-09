@@ -13,6 +13,16 @@ type backgroundColorParams = {
 export const BackgroundWrapper = ({backgroundColor, isActive,children,onClose}: backgroundColorParams) => {
     const dispatch = useDispatch();
     
+    useEffect(() => {
+        if(isActive) {
+            document.body.style.overflow = 'hidden';
+        }
+        return () => {
+            document.body.style.overflow = 'unset'
+        };
+    }, [isActive])
+
+
     if(!isActive){
         return <div></div>
     }
@@ -24,7 +34,8 @@ export const BackgroundWrapper = ({backgroundColor, isActive,children,onClose}: 
                 onClose();
             }
             }}
-        style={{backgroundColor: backgroundColor, height: "100vh", width: "100vw", maxWidth:"625px", position: "absolute", zIndex:"1000000", top:0}}>
+        style={{
+            backgroundColor: backgroundColor, height: "100%", width: "100vw", maxWidth:"625px", position: "absolute", zIndex:"1000000", top:0}}>
             {children}
         </div>
     );
@@ -33,6 +44,15 @@ export const BackgroundWrapper = ({backgroundColor, isActive,children,onClose}: 
 export const LoadingWrapper =  ({backgroundColor, isActive,onClose}: backgroundColorParams) => {
     const dispatch = useDispatch();
     
+    useEffect(() => {
+        if(isActive) {
+            document.body.style.overflow = 'hidden';
+        }
+        return () => {
+            document.body.style.overflow = 'unset'
+        };
+    }, [isActive])
+
     if(!isActive){
         return <div></div>
     }
@@ -57,7 +77,16 @@ export const LoadingWrapper =  ({backgroundColor, isActive,onClose}: backgroundC
 
 export const CenterBackgroundWrapper = ({backgroundColor, isActive,children,onClose}: backgroundColorParams) => {
     const dispatch = useDispatch();
-    
+
+    useEffect(() => {
+        if(isActive) {
+            document.body.style.overflow = 'hidden';
+        }
+        return () => {
+            document.body.style.overflow = 'unset'
+        };
+    }, [isActive])
+
     if(!isActive){
         return <div></div>
     }
@@ -72,6 +101,40 @@ export const CenterBackgroundWrapper = ({backgroundColor, isActive,children,onCl
         style={{
             display: "flex",
             alignItems: "center",
+            justifyContent: "center",
+            backgroundColor: backgroundColor, height: "100vh", width: "100vw", maxWidth:"625px", position: "absolute", zIndex:"1000000", top:0}}>
+            {children}
+        </div>
+    );
+}
+
+
+export const TopBackgroundWrapper = ({backgroundColor, isActive,children,onClose}: backgroundColorParams) => {
+    const dispatch = useDispatch();
+    
+    useEffect(() => {
+        if(isActive) {
+            document.body.style.overflow = 'hidden';
+        }
+        return () => {
+            document.body.style.overflow = 'unset'
+        };
+    }, [isActive])
+
+    if(!isActive){
+        return <div></div>
+    }
+    
+    return(
+        <div 
+        onClick={()=>{
+            if(onClose){
+                onClose();
+            }
+            }}
+        style={{
+            display: "flex",
+            alignItems: "flex-start",
             justifyContent: "center",
             backgroundColor: backgroundColor, height: "100vh", width: "100vw", maxWidth:"625px", position: "absolute", zIndex:"1000000", top:0}}>
             {children}

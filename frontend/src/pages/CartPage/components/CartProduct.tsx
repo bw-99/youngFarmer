@@ -109,18 +109,21 @@ export const CartProductComponent = ({cartProduct, allCheck, order}:CartProductC
                         e.stopPropagation();
                         e.preventDefault();
                         }}>
-                            <div style={{display: "flex", justifyContent: "flex-start"}}>
-                                {
-                                    Object.keys(JSON.parse(cartProduct.option)).map((key:any) => {
-                                        return <Spantemp2 key={key}>
-                                            {JSON.parse(cartProduct.option)[key]} •&nbsp;
-                                        </Spantemp2>
-                                    })
-                                }
-                            {/* <Spantemp2>{cartProduct.option}</Spantemp2> */}
-                            {/* <Spantemp2>{cartProduct.option}</Spantemp2> */}
-
-                            </div>
+                            {
+                                cartProduct.option?
+                                <div style={{display: "flex", justifyContent: "flex-start"}}>
+                                    {
+                                        Object.keys(JSON.parse(cartProduct.option)).map((key:any) => {
+                                            return <Spantemp2 key={key}>
+                                                {JSON.parse(cartProduct.option)[key]} •&nbsp;
+                                            </Spantemp2>
+                                        })
+                                    }
+                                </div>
+                                :
+                                <></>
+                            }
+                            
                         </CartProductBoxPart2SmallBox>
 
                         <div style={{marginTop: "10px", marginBottom:"16px"}}>

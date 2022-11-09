@@ -61,6 +61,8 @@ function CartPage(props: any) {
                     })
                 }
                 </div>
+
+                
                 
                 <div style={{
                     backgroundColor: "white",
@@ -71,7 +73,11 @@ function CartPage(props: any) {
                         dispatch(setProductOrderTry(orderSelector));
                         navigate("/order");
                     }}
-                    style={{
+                    style = {{
+                        width: "calc(100vw - 32px)",
+                        maxWidth: "calc(625px - 32px)",
+                        backgroundImage: "linear-gradient(to bottom, #fb6159, #ed3e3e)",
+                        color: "#ffffff",
                         margin:"0 16px"
                         }}>결제하기</PaymentBtn>
                 </div>

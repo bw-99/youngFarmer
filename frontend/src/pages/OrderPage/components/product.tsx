@@ -26,14 +26,12 @@ export const ProductListComp = () => {
         state.SearchDetailReducer.orderProducts
     );     
 
-    
-
     return(
         <>
         {
             orderProductSelector.map((orderProduct) => {
                 return (
-                    <ProductComp orderProduct={orderProduct} />
+                    <ProductComp key={orderProduct.product.product_id} orderProduct={orderProduct} />
                 )
             })
         }
@@ -76,11 +74,15 @@ const ProductComp = ({orderProduct}:OrderProductParam) => {
                                 <Package style = {{display: "flex", margin: "8px 0 0 0"}}> 
                                 {
                                     // JSON.stringify(orderProduct.option)
+                                    orderProduct.option?
                                     Object.keys(JSON.parse(orderProduct.option)).map((key:any) => {
                                         return <Spantemp2 key={key}>
                                             {JSON.parse(orderProduct.option)[key]} •&nbsp;
                                         </Spantemp2>
                                     })
+                                    :
+                                    <></>
+                                    
                                 }
 
                                 </Package>

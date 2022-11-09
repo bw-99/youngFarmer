@@ -5,7 +5,7 @@ import { db, kakaoConfig } from "..";
 import axios from 'axios'
 import { apiClient, get, post } from "../api/axios";
 import { deleteUser, getAuth, signInAnonymously, signInWithCustomToken, signOut, updateEmail, updateProfile } from "firebase/auth";
-import { collection, query, where, limit, getDocs, setDoc, doc, addDoc } from "firebase/firestore";
+import { collection, query, where, limit, getDocs, setDoc, doc, addDoc, deleteDoc } from "firebase/firestore";
 import { FirebaseAuth } from './../index';
 
 type LoginServiceResponse = SagaReturnType<any>;
@@ -102,17 +102,11 @@ async function signUpAPI(uid:string, is_guest:boolean, data:loginData | null) {
     const userProfileRef = collection(db, "user",result.id, "profile");
     console.log("user profile 데이터 삽입 중");
 
-    const auth = getAuth();
-
     if(data) {
         await addDoc(userProfileRef, {
             profile_nickname: data.nickname,
             profile_email: data.email,
             profile_img: null
-        })
-
-        updateProfile(auth.currentUser!,{
-            displayName :  data.nickname
         })
     }
     else{
@@ -121,11 +115,30 @@ async function signUpAPI(uid:string, is_guest:boolean, data:loginData | null) {
             profile_email: null,
             profile_img: null
         })
-
-        updateProfile(auth.currentUser!,{
-            displayName :  "Guest-"+uid.substring(0,3),
-        })
     }
+
+    // const discountRef = collection(db, "discount");
+    // addDoc(discountRef, {
+    //     uid: uid,
+    //     point: 0,
+    //     coupon_list: []
+    // });
+    // 1회성 코드
+    const discountRef = collection(db, "discount");
+
+    let userListDocs = await getDocs(userRef);
+    let userList = userListDocs.docs.map((doc) => {
+        return doc.data();
+    })
+
+    for (const tempUid of userList) {
+        addDoc(discountRef, {
+            uid: tempUid.uid,
+            point: 0,
+            coupon_list: []
+        });
+    }
+
     console.log("create user info 완료");
 }
 

@@ -24,6 +24,7 @@ import { db, FirebaseAuth } from './../../index';
 import { getAuth } from "firebase/auth";
 import { DISCOUNT_TYPE_AMOUNT, DISCOUNT_TYPE_PERCENT } from './../../reducers/DiscountReducer';
 import { PayMethodComp } from "./components/payMethod";
+import { BackgroundWrapper } from "../../common/BackgroundWrapper/BackgroundWrapper";
 
 
 declare const window: any;
@@ -62,7 +63,6 @@ function OrderPage(props: any) {
     }
 
     const makeImpParam = () => {
-        alert(orderSendSelector.payMethod!.payMethod);
         const pg = orderSendSelector.payMethod!.payMethod;
         const pay_method = orderSendSelector.payMethod!.payMethod;
         const merchant_uid:string = createMerchantUid();
@@ -80,7 +80,7 @@ function OrderPage(props: any) {
         // 포인트 계산
         amount -= orderSendSelector.discount!.point;
         // 쿠폰 계산
-        if(orderSendSelector.discount!.coupon_list && orderSendSelector.discount!.coupon_list.length > 0){
+        if(orderSendSelector.discount!.coupon_list && orderSendSelector.discount!.coupon_list.length > 0 && orderSendSelector.discount!.coupon_list[0]){
             const useCoupon = orderSendSelector.discount!.coupon_list[0];
             if(useCoupon.discount_type == DISCOUNT_TYPE_AMOUNT) {
                 amount -= useCoupon.discount;
@@ -116,12 +116,12 @@ function OrderPage(props: any) {
             // 결제 성공 시 로직
             console.log("결제 성공");
             
-            apiClient.post(process.env.REACT_APP_FIREBASE_FUNCTION_PAYMENT_API!, {
-                imp_uid: rsp.imp_uid,
-                merchant_uid: rsp.merchant_uid
-            }).then((data) => {
-                console.log(data);
-            })
+            // apiClient.post(process.env.REACT_APP_FIREBASE_FUNCTION_PAYMENT_API!, {
+            //     imp_uid: rsp.imp_uid,
+            //     merchant_uid: rsp.merchant_uid
+            // }).then((data) => {
+            //     console.log(data);
+            // })
           } else {
             // 결제 실패 시 로직,
             console.log("결제 실패");
@@ -198,7 +198,7 @@ function OrderPage(props: any) {
             </div>
 
 
-            <div style={{height: "500px"}}>
+            <div style={{height: "100px"}}>
 
             </div>
 
