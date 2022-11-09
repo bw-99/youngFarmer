@@ -117,27 +117,27 @@ async function signUpAPI(uid:string, is_guest:boolean, data:loginData | null) {
         })
     }
 
-    // const discountRef = collection(db, "discount");
-    // addDoc(discountRef, {
-    //     uid: uid,
-    //     point: 0,
-    //     coupon_list: []
-    // });
-    // 1회성 코드
     const discountRef = collection(db, "discount");
+    addDoc(discountRef, {
+        uid: uid,
+        point: 0,
+        coupon_list: []
+    });
+    // 1회성 코드
+    // const discountRef = collection(db, "discount");
 
-    let userListDocs = await getDocs(userRef);
-    let userList = userListDocs.docs.map((doc) => {
-        return doc.data();
-    })
+    // let userListDocs = await getDocs(userRef);
+    // let userList = userListDocs.docs.map((doc) => {
+    //     return doc.data();
+    // })
 
-    for (const tempUid of userList) {
-        addDoc(discountRef, {
-            uid: tempUid.uid,
-            point: 0,
-            coupon_list: []
-        });
-    }
+    // for (const tempUid of userList) {
+    //     addDoc(discountRef, {
+    //         uid: tempUid.uid,
+    //         point: 0,
+    //         coupon_list: []
+    //     });
+    // }
 
     console.log("create user info 완료");
 }
