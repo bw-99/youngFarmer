@@ -13,12 +13,24 @@ module.exports = function(app) {
   );
 
   app.use(
-    '/functions',
+    '/kakaoAPI',
     createProxyMiddleware({
-        target: process.env.REACT_APP_FIREBASE_FUNCTION_URL,
+        target: process.env.REACT_APP_FIREBASE_FUNCTION_KAKAO_API,
         changeOrigin: true,
         pathRewrite: {
-          "^/functions" : ""
+          "^/kakaoAPI" : ""
+        }
+    })
+  );
+
+
+  app.use(
+    '/paymentAPI',
+    createProxyMiddleware({
+        target: process.env.REACT_APP_FIREBASE_FUNCTION_PAYMENT_API,
+        changeOrigin: true,
+        pathRewrite: {
+          "^/paymentAPI" : ""
         }
     })
   );

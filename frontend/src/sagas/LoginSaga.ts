@@ -27,9 +27,11 @@ async function kakaoLoginAPI(payload:any) {
     )
 
     console.log(result.data.access_token);
-
+    console.log(process.env.REACT_APP_FIREBASE_FUNCTION_KAKAO_API);
+    console.log(isLocal);
+    
     const customToken = await post(
-        `${isLocal? "/functions" : process.env.REACT_APP_FIREBASE_FUNCTION_URL}/verifyToken`,
+        `${isLocal? "/kakaoAPI" : process.env.REACT_APP_FIREBASE_FUNCTION_KAKAO_API}/verifyToken`,
         {
             headers: {
                 'Content-Type': 'text/plain',
