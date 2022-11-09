@@ -35,6 +35,7 @@ function MainPage(props: any) {
     useEffect(
         () => {
             dispatch(searchRecommendTryAction());
+            console.log(FirebaseAuth.currentUser);
         }
         , []
     )
@@ -59,10 +60,10 @@ function MainPage(props: any) {
 
     return (
         <div style={{maxWidth:"625px", position: "relative", width: "100vw", height:"100vh" }}>
-            <AppBarComponentMain />
+            {/* <AppBarComponentMain />
             
 
-            <BottomNavigationBar />
+            <BottomNavigationBar /> */}
            
         </div>
 

@@ -18,7 +18,7 @@ import { BottomNavBarChanger } from './services/BottomNavBarChanger';
 import { ScrollToTop } from './services/ScrollToTop';
 import MyPage from './pages/MyPage/MyPage';
 import StorePage from './pages/StorePage/StorePage';
-import { AuthProvider, LoginRoute, PrivateRoute } from './services/firebase';
+import { AuthProvider, LoginRoute, PrivateRoute, PublicRoute } from './services/firebase';
 import LoginKakaoPage from './pages/LoginPage/LoginPageKakao';
 import AgreePage from './pages/LoginPage/AgreePage';
 import SubmitInfoPage from './pages/LoginPage/SubmitInfoPage';
@@ -77,10 +77,14 @@ function App() {
                   <Route path="/login" element = {<LoginRoute />}>
                     <Route path="/login" element = {<LoginPage />}/>
                     <Route path="/login/oauth/kakao" element = {<LoginKakaoPage />}/>
-                    <Route path="/login/agree/:code" element = {<AgreePage />}/>
-                    <Route path="/login/submitInfo/:code" element = {<SubmitInfoPage />}/>
-                    
                   </Route>
+
+
+                  <Route path="/signup" element = {<PrivateRoute />}>
+                    <Route path="/signup/agree/:code" element = {<AgreePage />}/>
+                    <Route path="/signup/submitInfo/:code" element = {<SubmitInfoPage />}/>
+                  </Route>
+                  
                 <Route path="*" element = {<h1>Page Not Found</h1>}/>
               </Routes>
           </AuthProvider>

@@ -4,57 +4,63 @@ import { loginData, LOGIN_FAIL, LOGIN_LOADING, LOGIN_PAYLOAD, LOGIN_SUCCESS, LOG
 import { db, kakaoConfig } from "..";
 import axios from 'axios'
 import { apiClient, get, post } from "../api/axios";
-import { getAuth, signInAnonymously, signInWithCustomToken, updateEmail, updateProfile } from "firebase/auth";
+import { deleteUser, getAuth, signInAnonymously, signInWithCustomToken, signOut, updateEmail, updateProfile } from "firebase/auth";
 import { collection, query, where, limit, getDocs, setDoc, doc, addDoc } from "firebase/firestore";
+import { FirebaseAuth } from './../index';
 
 type LoginServiceResponse = SagaReturnType<any>;
 
 
 async function kakaoLoginAPI(payload:any) {
-    try {
-        const isLocal:boolean =  window.location.hostname == "localhost" && window.location.origin != process.env.REACT_APP_FIREBASE_LOCAL;
-    
-        const data: loginData = payload.data;
+    // const auth2 = getAuth();
+    // alert(JSON.stringify(auth2.currentUser));
+    // alert(JSON.stringify(FirebaseAuth.currentUser));
+    // // return false;
 
-        const code:string = data.code;
-        
-        
-        const result = await post(
-            `${isLocal? "/kakaoLogin" : "https://kauth.kakao.com"}/oauth/token?grant_type=${encodeURI("authorization_code")}&client_id=${encodeURIComponent(kakaoConfig.restAPIKey)}&redirect_uri=${encodeURI(window.location.origin + "/login/oauth/kakao")}&code=${encodeURI(code)}`, 
-            {
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
-                },
-            }
-        )
-
-        console.log(result.data.access_token);
-        console.log(process.env.REACT_APP_FIREBASE_FUNCTION_KAKAO_API);
-        console.log(isLocal);
-        
-        const customToken = await post(
-            `${isLocal? "/kakaoAPI" : process.env.REACT_APP_FIREBASE_FUNCTION_KAKAO_API}/verifyToken`,
-            {
-                headers: {
-                    'Content-Type': 'text/plain',
-                },
-                token: result.data.access_token
-            }
-        );
-
-        console.log(customToken);
-        console.log(customToken.data.firebase_token);
-        
-
-        const auth = getAuth();
-        const userCredential = await signInWithCustomToken(auth, customToken.data.firebase_token)
-        const user = userCredential.user;
-        console.log("kakao login result1 : " + JSON.stringify(user));
-        return user.uid;
-    } catch (error) {
-        return false;
+    if(FirebaseAuth.currentUser) {
+        return FirebaseAuth.currentUser.uid;
     }
     
+    const isLocal:boolean =  window.location.hostname == "localhost" && window.location.origin != process.env.REACT_APP_FIREBASE_LOCAL;
+    
+    const data: loginData = payload.data;
+
+    const code:string = data.code;
+    
+    
+    const result = await post(
+        `${isLocal? "/kakaoLogin" : "https://kauth.kakao.com"}/oauth/token?grant_type=${encodeURI("authorization_code")}&client_id=${encodeURIComponent(kakaoConfig.restAPIKey)}&redirect_uri=${encodeURI(window.location.origin + "/login/oauth/kakao")}&code=${encodeURI(code)}`, 
+        {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
+            },
+        }
+    )
+
+    console.log(result.data.access_token);
+    console.log(process.env.REACT_APP_FIREBASE_FUNCTION_KAKAO_API);
+    console.log(isLocal);
+    
+    const customToken = await post(
+        `${isLocal? "/kakaoAPI" : process.env.REACT_APP_FIREBASE_FUNCTION_KAKAO_API}/verifyToken`,
+        {
+            headers: {
+                'Content-Type': 'text/plain',
+            },
+            token: result.data.access_token
+        }
+    );
+
+    console.log(customToken);
+    console.log(customToken.data.firebase_token);
+    
+
+    const auth = getAuth();
+    const userCredential = await signInWithCustomToken(auth, customToken.data.firebase_token)
+    const user = userCredential.user;
+    console.log("kakao login result1 : " + JSON.stringify(user));
+    return user.uid;
+
 }
 
 async function anonymousLoginAPI(payload:LOGIN_PAYLOAD) {
@@ -66,9 +72,15 @@ async function anonymousLoginAPI(payload:LOGIN_PAYLOAD) {
 
 async function needSignUpAPI(uid:string, is_guest:boolean, ) {
     const userRef = collection(db, "user");
-    const q = query(userRef, where("uid", "==", uid), limit(1));
+    const q = query(userRef, where("uid", "==", uid));
     const fbdata = await getDocs(q);
     const isNew:boolean = fbdata.empty;
+    if(!isNew) {
+        console.log(fbdata.docs[0].data());
+    }
+    console.log("isNew = "+ JSON.stringify(isNew));
+    console.log("is_guest = "+ JSON.stringify(is_guest));
+    
 
     return (isNew && !is_guest);
 }
@@ -79,31 +91,51 @@ async function signUpAPI(uid:string, is_guest:boolean, data:loginData | null) {
     const userRef = collection(db, "user");
 
     // 신규 가입
+    console.log("user 데이터 삽입 중");
     const result = await addDoc(userRef, {
         uid: uid,
         is_guest:is_guest
     });
+    console.log(result);
+    
 
     const userProfileRef = collection(db, "user",result.id, "profile");
+    console.log("user profile 데이터 삽입 중");
+
+    const auth = getAuth();
+
     if(data) {
         await addDoc(userProfileRef, {
             profile_nickname: data.nickname,
             profile_email: data.email,
             profile_img: null
         })
+
+        updateProfile(auth.currentUser!,{
+            displayName :  data.nickname
+        })
     }
     else{
-        console.log("user 데이터 삽입 중");
-
         await addDoc(userProfileRef, {
             profile_nickname: "Guest-"+uid.substring(0,3),
             profile_email: null,
             profile_img: null
         })
+
+        updateProfile(auth.currentUser!,{
+            displayName :  "Guest-"+uid.substring(0,3),
+        })
     }
     console.log("create user info 완료");
 }
 
+
+async function deleteAuth() {
+    await signOut(FirebaseAuth);
+    console.log("signout");
+    // await deleteUser(FirebaseAuth.currentUser!);
+    
+}
 // function* kakaoSignup(action: any) {
 //     const result =  yield call(needSignUp, )
 // }
@@ -115,8 +147,13 @@ function* kakaoLogin(action:any) {
     console.log("kakao login result2 : " + JSON.stringify(uid));
     
     const needSignUp:LoginServiceResponse = yield call(needSignUpAPI, uid as string, false);
+    console.log("needSignUp = " + JSON.stringify(needSignUp));
+    
     // const needSignUp:LoginServiceResponse = yield call(signUpAPI, result as string, false, action.payload.data);
     if(needSignUp) {
+        console.log(action.payload.data);
+        console.log(action.payload.data.nickname.trim().length > 0);
+        
         if(action.payload.data && action.payload.data.nickname.trim().length > 0) {
             const signUpResult: LoginServiceResponse = yield call(signUpAPI, uid as string, false, action.payload.data);
             yield put({
@@ -125,6 +162,8 @@ function* kakaoLogin(action:any) {
             }); 
         }
         else{
+            // yield call(deleteAuth);
+
             yield put({
                 type: LOGIN_FAIL,
                 callback: action.payload.fCallback

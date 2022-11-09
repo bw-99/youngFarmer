@@ -74,3 +74,11 @@ export const LoginRoute:FC<NavigateProps> = ({children, ...props}):any => {
         <Navigate to={"/main"} /> : <Outlet/> 
     );
 }
+
+export const PublicRoute:FC<NavigateProps> = ({children, ...props}):any => {
+    let currentUser = useContext(AuthContext);
+
+    return (
+        <Outlet/> 
+    );
+}

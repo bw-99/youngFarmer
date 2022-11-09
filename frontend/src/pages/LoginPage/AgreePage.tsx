@@ -104,7 +104,7 @@ export const AgreePage = () => {
                     }}
                     onClick= {() => {
                         if(ischecked2&&ischecked3&&ischecked4){
-                            navigate("/login/submitInfo/"+params.code);
+                            navigate("/signup/submitInfo/"+params.code);
                         }
                     }}
                     >

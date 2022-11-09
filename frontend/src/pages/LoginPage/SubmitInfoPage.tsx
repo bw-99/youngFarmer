@@ -149,7 +149,7 @@ export const SubmitInfoPage = () => {
                 <SubmitButtonText>회원가입</SubmitButtonText>
             </AssignPageSubmitButton2>
 
-             <BackgroundWrapper backgroundColor="rgba(255,255,255, 0.8)" isActive={loginSelector === login_result_loading}/>
+             {/* <BackgroundWrapper backgroundColor="rgba(255,255,255, 0.8)" isActive={loginSelector === login_result_loading}/> */}
         </AppFrame>
     );
 }

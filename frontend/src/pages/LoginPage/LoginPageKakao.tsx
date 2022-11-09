@@ -50,8 +50,8 @@ function LoginKakaoPage(props: any) {
                         email: "",
                         phoneNumber: ""
                     },  
-                    () => {navigate("/");},
-                    () => {navigate("/login/agree/"+code);},
+                    () => {navigate("/main");},
+                    () => {navigate("/signup/agree/"+code);},
             ));
         }
         
@@ -62,13 +62,13 @@ function LoginKakaoPage(props: any) {
     //     () => {
     //         const code = searchParams.get("code");
     //         if(code){
-    //             navigate("/login/agree/"+code);
+    //             navigate("/signup/agree/"+code);
     //             // dispatch(
     //             //     LoginWithKakaoAction(
     //             //         code, 
     //             //         () => {navigate("/");},
     //             //         () => {navigate("/");},
-    //             //         () => {navigate("/login/agree");},
+    //             //         () => {navigate("/signup/agree");},
     //             //         ));
     //         }   
     //     }, [searchParams.get("code")]
