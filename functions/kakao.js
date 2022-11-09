@@ -1,23 +1,25 @@
-'use strict';
+const functions = require("firebase-functions");
 
 // import necessary modules
 const express = require('express');
 const bodyParser = require('body-parser');
 const request = require('request-promise');
+const cors = require("cors");
 
-// Firebase setup
-const firebaseAdmin = require('firebase-admin');
-// you should manually put your service-account.json in the same folder app.js
-// is located at.
-const serviceAccount = require('./service-account.json');
+
+const firebaseAdmin = require("firebase-admin");
 
 // Kakao API request url to retrieve user profile based on access token
 const requestMeUrl = 'https://kapi.kakao.com/v2/user/me?secure_resource=true';
+
+const serviceAccount = require('./service-account.json');
 
 // Initialize FirebaseApp with service-account.json
 firebaseAdmin.initializeApp({
   credential: firebaseAdmin.credential.cert(serviceAccount),
 });
+
+
 
 
 /**
@@ -106,14 +108,21 @@ function createFirebaseToken(kakaoAccessToken) {
 };
 
 
-// create an express app and use json body parser
 const app = express();
 app.use(bodyParser.json());
+app.use(cors({
+  origin: '*', // 모든 출처 허용 옵션. true 를 써도 된다.
+}));
+var port = '3000';
+app.set('port', port);
 
 
 // default root url to test if the server is up
-app.get('/', (req, res) => res.status(200)
-.send('KakaoLoginServer for Firebase is up and running!'));
+app.get('/', (req, res) => {
+  console.log("hi");
+  res.status(200)
+.send('KakaoLoginServer for Firebase is up and running!')});
+
 
 // actual endpoint that creates a firebase token with Kakao access token
 app.post('/verifyToken', (req, res) => {
@@ -129,8 +138,7 @@ app.post('/verifyToken', (req, res) => {
   });
 });
 
-// Start the server
-const server = app.listen(process.env.PORT || '8000', () => {
-  console.log('KakaoLoginServer for Firebase listening on port %s',
-  server.address().port);
-});
+
+module.exports = functions.region("asia-northeast3").https.onRequest(app);
+
+// exports.kakaoRouter = kakaoRouter;
