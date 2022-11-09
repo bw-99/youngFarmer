@@ -6,6 +6,20 @@ const bodyParser = require('body-parser');
 const request = require('request-promise');
 const cors = require("cors");
 
+function verifyOrder() {
+  return;
+}
+
+
+function manageFirebase() {
+  return;
+}
+
+function callImPortAPI() {
+  return;
+}
+
+
 const app = express();
 app.use(bodyParser.json());
 app.use(cors({
@@ -14,11 +28,13 @@ app.use(cors({
 var port = '3000';
 app.set('port', port);
 
-
-// const paymentRouter = require('express').Router();
-
 app.get('/' , (req , res) =>{
     return res.status(200).json('hello from user route');
+});
+
+app.post('/' , (req , res) =>{
+  console.log(req.body);
+  return res.status(200);
 });
 
 // module.exports = paymentRouter;

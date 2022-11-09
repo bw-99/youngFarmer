@@ -4,6 +4,9 @@ import { ProductDataType } from "./ProductReducer";
 import { Timestamp } from 'firebase/firestore';
 import { GET_DISCOUNT_RESULT } from "../pages/OrderPage/DiscountAction";
 
+export const DISCOUNT_TYPE_AMOUNT = "amount";
+export const DISCOUNT_TYPE_PERCENT = "percent";
+
 
 export interface CouponSrcType {
     uid: string,
@@ -11,7 +14,9 @@ export interface CouponSrcType {
     description: string,
     time_started: Timestamp,
     time_deleted: Timestamp,
-    title: string
+    title: string,
+    discount_type: string,
+    discount: number
 }
 
 

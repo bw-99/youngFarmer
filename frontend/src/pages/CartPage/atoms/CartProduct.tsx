@@ -269,7 +269,7 @@ export const PaymentBtn = styled.div`
 height: 56px;
 border-radius: 28px;
 /* background-image: linear-gradient(to bottom, #fb6159, #ed3e3e); */
-
+width: 100%;
 display:flex;
 align-items:center;
 justify-content:center;

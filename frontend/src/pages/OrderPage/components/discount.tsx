@@ -83,7 +83,7 @@ export const DiscountComp = () => {
                         }}>
                             {
                                 discountSelector.coupon_list.map((coupon) => {
-                                    return <option key={Timestamp.now().nanoseconds} value={JSON.stringify(coupon)}>{coupon.title}</option>;
+                                    return <option key={Timestamp.now().nanoseconds + coupon.title} value={JSON.stringify(coupon)}>{coupon.title}</option>;
                                 })
                             }
                             

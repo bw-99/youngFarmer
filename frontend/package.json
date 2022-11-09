@@ -17,6 +17,7 @@
     "axios": "^0.27.2",
     "cheerio": "^1.0.0-rc.12",
     "cors": "^2.8.5",
+    "crypto-js": "^4.1.1",
     "express": "^4.18.2",
     "firebase": "^9.10.0",
     "http-proxy-middleware": "^2.0.6",
@@ -70,6 +71,7 @@
     ]
   },
   "devDependencies": {
+    "@types/crypto-js": "^4.1.1",
     "@types/styled-components": "^5.1.26",
     "babel-plugin-named-exports-order": "^0.0.2",
     "prop-types": "^15.8.1",

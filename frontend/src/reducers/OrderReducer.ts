@@ -6,6 +6,7 @@ import { DiscountDataType } from './DiscountReducer';
 import { SAVE_DISCOUNT_ACTION } from "../pages/OrderPage/DiscountAction";
 import { SAVE_DELIVERY_ACTION } from "../pages/OrderPage/DeliveryAction";
 import { PRODUCT_SET_ORDER_SUCCESS, PRODUCT_ADD_ORDER, PRODUCT_CANCEL_ORDER, SAVE_PRODUCT_ACTION } from "../pages/OrderPage/ProductAction";
+import { SAVE_PAY_METHOD_ACTION } from "../pages/OrderPage/PayMethodAction";
 
 export interface OrderDataType {
     count: number,
@@ -73,10 +74,16 @@ export function OrderReducer(state = orderInitState, action: any) {
     }
 }
 
+
+export interface PaymentMethodDataType {
+    payMethod: string
+}
+
 export interface OrderSending {
     products: OrderProductDataType[] | null,
     delivery: DeliveryDataType | null,
     discount: DiscountDataType | null,
+    payMethod: PaymentMethodDataType | null
     // setOrder: boolean
 }
 
@@ -84,6 +91,7 @@ const orderSendInit:OrderSending = {
     products: [],
     delivery: null,
     discount: null,
+    payMethod: null
 }
 
 export function OrderSendReducer(state = orderSendInit, action: any) {
@@ -95,6 +103,12 @@ export function OrderSendReducer(state = orderSendInit, action: any) {
                 ...state,
                 discount: action.payload,
             };
+
+        case SAVE_PAY_METHOD_ACTION:
+            return {
+                ...state,
+                payMethod: action.payload
+            }
 
         case SAVE_DELIVERY_ACTION:
             return {
