@@ -11,44 +11,50 @@ type LoginServiceResponse = SagaReturnType<any>;
 
 
 async function kakaoLoginAPI(payload:any) {
-    const isLocal:boolean =  window.location.hostname == "localhost" && window.location.origin != process.env.REACT_APP_FIREBASE_LOCAL;
+    try {
+        const isLocal:boolean =  window.location.hostname == "localhost" && window.location.origin != process.env.REACT_APP_FIREBASE_LOCAL;
     
-    const data: loginData = payload.data;
+        const data: loginData = payload.data;
 
-    const code:string = data.code;
+        const code:string = data.code;
+        
+        
+        const result = await post(
+            `${isLocal? "/kakaoLogin" : "https://kauth.kakao.com"}/oauth/token?grant_type=${encodeURI("authorization_code")}&client_id=${encodeURIComponent(kakaoConfig.restAPIKey)}&redirect_uri=${encodeURI(window.location.origin + "/login/oauth/kakao")}&code=${encodeURI(code)}`, 
+            {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
+                },
+            }
+        )
+
+        console.log(result.data.access_token);
+        console.log(process.env.REACT_APP_FIREBASE_FUNCTION_KAKAO_API);
+        console.log(isLocal);
+        
+        const customToken = await post(
+            `${isLocal? "/kakaoAPI" : process.env.REACT_APP_FIREBASE_FUNCTION_KAKAO_API}/verifyToken`,
+            {
+                headers: {
+                    'Content-Type': 'text/plain',
+                },
+                token: result.data.access_token
+            }
+        );
+
+        console.log(customToken);
+        console.log(customToken.data.firebase_token);
+        
+
+        const auth = getAuth();
+        const userCredential = await signInWithCustomToken(auth, customToken.data.firebase_token)
+        const user = userCredential.user;
+        console.log("kakao login result1 : " + JSON.stringify(user));
+        return user.uid;
+    } catch (error) {
+        return false;
+    }
     
-    const result = await post(
-        `${isLocal? "/kakaoLogin" : "https://kauth.kakao.com"}/oauth/token?grant_type=${encodeURI("authorization_code")}&client_id=${encodeURIComponent(kakaoConfig.restAPIKey)}&redirect_uri=${encodeURI(window.location.origin + "/login/oauth/kakao")}&code=${encodeURI(code)}`, 
-        {
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
-            },
-        }
-    )
-
-    console.log(result.data.access_token);
-    console.log(process.env.REACT_APP_FIREBASE_FUNCTION_KAKAO_API);
-    console.log(isLocal);
-    
-    const customToken = await post(
-        `${isLocal? "/kakaoAPI" : process.env.REACT_APP_FIREBASE_FUNCTION_KAKAO_API}/verifyToken`,
-        {
-            headers: {
-                'Content-Type': 'text/plain',
-            },
-            token: result.data.access_token
-        }
-    );
-
-    console.log(customToken);
-    console.log(customToken.data.firebase_token);
-    
-
-    const auth = getAuth();
-    const userCredential = await signInWithCustomToken(auth, customToken.data.firebase_token)
-    const user = userCredential.user;
-    console.log("kakao login result1 : " + JSON.stringify(user));
-    return user.uid;
 }
 
 async function anonymousLoginAPI(payload:LOGIN_PAYLOAD) {
@@ -58,88 +64,87 @@ async function anonymousLoginAPI(payload:LOGIN_PAYLOAD) {
     return signinResult.user.uid;
 }
 
-async function createUserInfo(uid:string, is_guest:boolean, data:loginData | null) {
-    console.log("createUserInfo");
-    
+async function needSignUpAPI(uid:string, is_guest:boolean, ) {
     const userRef = collection(db, "user");
     const q = query(userRef, where("uid", "==", uid), limit(1));
     const fbdata = await getDocs(q);
     const isNew:boolean = fbdata.empty;
 
-    // 신규 가입
-    // ! 회원가입 페이지에서 넘어오는 데이터로 구현 필요
-    if(fbdata.empty){
-        const result = await addDoc(userRef, {
-            uid: uid,
-            is_guest:is_guest
-        });
-
-        const userProfileRef = collection(db, "user",result.id, "profile");
-        if(data) {
-            await addDoc(userProfileRef, {
-                profile_nickname: data.nickname,
-                profile_email: data.email,
-                profile_img: null
-            })
-        }
-        else{
-            console.log("user 데이터 삽입 중");
-
-            await addDoc(userProfileRef, {
-                profile_nickname: "Guest-"+uid.substring(0,3),
-                profile_email: null,
-                profile_img: null
-            })
-        }
-        
-    }
-
-    console.log("create user info 완료");
-    
-    // SNS 연동 로그인 중 첫 로그인일 경우
     return (isNew && !is_guest);
 }
+
+async function signUpAPI(uid:string, is_guest:boolean, data:loginData | null) {
+    console.log("createUserInfo");
+    
+    const userRef = collection(db, "user");
+
+    // 신규 가입
+    const result = await addDoc(userRef, {
+        uid: uid,
+        is_guest:is_guest
+    });
+
+    const userProfileRef = collection(db, "user",result.id, "profile");
+    if(data) {
+        await addDoc(userProfileRef, {
+            profile_nickname: data.nickname,
+            profile_email: data.email,
+            profile_img: null
+        })
+    }
+    else{
+        console.log("user 데이터 삽입 중");
+
+        await addDoc(userProfileRef, {
+            profile_nickname: "Guest-"+uid.substring(0,3),
+            profile_email: null,
+            profile_img: null
+        })
+    }
+    console.log("create user info 완료");
+}
+
+// function* kakaoSignup(action: any) {
+//     const result =  yield call(needSignUp, )
+// }
 
 function* kakaoLogin(action:any) {
     console.log("kakao login");
     
-    const result:LoginServiceResponse = yield call(kakaoLoginAPI, action.payload);
-    console.log("kakao login result2 : " + JSON.stringify(result));
+    const uid:LoginServiceResponse = yield call(kakaoLoginAPI, action.payload);
+    console.log("kakao login result2 : " + JSON.stringify(uid));
     
-    const needSignUp:LoginServiceResponse = yield call(createUserInfo, result as string, false, action.payload.data);
-
-    if(result){
-        yield put({
-            type: LOGIN_SUCCESS,
-            callback: action.payload.callback
-        }); 
-        // if(needSignUp) {
-        //     yield put({
-        //         type: LOGIN_SUCCESS_FIRST,
-        //         callback: action.payload.callback
-        //     });
-        // }
-        // else{
-        //     yield put({
-        //         type: LOGIN_SUCCESS,
-        //         callback: action.payload.callback
-        //     }); 
-        // }
+    const needSignUp:LoginServiceResponse = yield call(needSignUpAPI, uid as string, false);
+    // const needSignUp:LoginServiceResponse = yield call(signUpAPI, result as string, false, action.payload.data);
+    if(needSignUp) {
+        if(action.payload.data && action.payload.data.nickname.trim().length > 0) {
+            const signUpResult: LoginServiceResponse = yield call(signUpAPI, uid as string, false, action.payload.data);
+            yield put({
+                type: LOGIN_SUCCESS,
+                callback: action.payload.sCallback
+            }); 
+        }
+        else{
+            yield put({
+                type: LOGIN_FAIL,
+                callback: action.payload.fCallback
+            }); 
+        }
     }
     else{
         yield put({
-            type: LOGIN_FAIL,
-            callback: action.payload.callback
+            type: LOGIN_SUCCESS,
+            callback: action.payload.sCallback
         }); 
     }
 }
 
 function* anonymousLogin(payload:LOGIN_PAYLOAD) {
-    const result:LoginServiceResponse =  yield call(anonymousLoginAPI, payload);
-    console.log(result);
-    yield call(createUserInfo, result as string, true, null);
+    const uid:LoginServiceResponse =  yield call(anonymousLoginAPI, payload);
+    console.log(uid);
+    yield call(signUpAPI, uid as string, true, null);
 
-    if(result) {
+    if(uid) {
         console.log("login success");
         
         yield put({

@@ -39,7 +39,7 @@ export function UserInfoReducer(state = userInfoInitState, action: any) {
 export function LoginReducer(state = loginInfoInitState, action: any) {
     switch (action.type) {
         case LOGIN_SUCCESS:
-            // action.callback();
+            action.callback();
             return {
                 ...state
             };
@@ -56,6 +56,7 @@ export function LoginReducer(state = loginInfoInitState, action: any) {
 
         case LOGIN_FAIL:
             console.log("로그인 실패");
+            action.callback();
             
             return {
                 ...state
