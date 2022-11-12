@@ -32,7 +32,7 @@ import PurchasePage from './pages/OrderPage/OrderPage';
 import OrderPage from './pages/OrderPage/OrderPage';
 import ReviewPage from './pages/ReviewPage/ReviewPage';
 import AddReviewPage from './pages/ReviewPage/AddReviewPage';
-
+import ChatPage2 from './pages/ChatPage/ChatPage2';
 
 export const AuthContext = createContext(false);
 
@@ -57,6 +57,7 @@ function App() {
                     <Route path='/like' element = {<LikePage />}/>
                     <Route path='/splash' element = {<SplashPage />}/>
                     <Route path='/chat' element = {<ChatPage />}/>
+                    <Route path='/chat2' element = {<ChatPage2 />}/>
                     <Route path='/search' element = {<SearchPage />}/>
                     <Route path='/search/:search' element = {<SearchDetailPage />}/>
                     <Route path='/mypage' element = {<MyPage />}/>
