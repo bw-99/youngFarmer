@@ -121,7 +121,7 @@ const ProfileFuncComp = () => {
         <div style={{marginTop: "20px"}}>
             <ProfileFuncMenu>
                 <ProfileFuncItemComp image={orderIcon} text={"주문•배송"} onClickFun = {() => {
-
+                    navigate(`/list`);
                 }} />
                 <ProfileFuncMenuDivider />
                 <ProfileFuncItemComp image={reviewIcon} text={"리뷰작성"} onClickFun = {() => {

@@ -33,6 +33,7 @@ import OrderPage from './pages/OrderPage/OrderPage';
 import ReviewPage from './pages/ReviewPage/ReviewPage';
 import AddReviewPage from './pages/ReviewPage/AddReviewPage';
 import ChatPage2 from './pages/ChatPage/ChatPage2';
+import ListPage from './pages/ListPage/ListPage';
 
 export const AuthContext = createContext(false);
 
@@ -71,6 +72,7 @@ function App() {
                     <Route path='/cart' element={<CartPage />} />
                     <Route path='/mypage/setting/info' element={<MyInfoRevisePage />} />
                     <Route path='/order' element={<OrderPage />} />
+                    <Route path='/list' element={<ListPage />} />
 
 
                   </Route>

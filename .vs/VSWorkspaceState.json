@@ -3,14 +3,14 @@
     "",
     "\\frontend",
     "\\frontend\\src",
-    "\\frontend\\src\\assets",
-    "\\frontend\\src\\assets\\images",
+    "\\frontend\\src\\common\\AppBar",
     "\\frontend\\src\\pages",
+    "\\frontend\\src\\pages\\ListPage",
+    "\\frontend\\src\\pages\\MyPage",
+    "\\frontend\\src\\pages\\MyPage\\atoms",
     "\\frontend\\src\\pages\\ProductPage",
-    "\\frontend\\src\\pages\\ProductPage\\components",
-    "\\frontend\\src\\pages\\PurchasePage",
-    "\\frontend\\src\\reducers"
+    "\\frontend\\src\\pages\\ProductPage\\components"
   ],
-  "SelectedNode": "\\frontend\\src\\assets\\images\\icon-lock@3x.png",
+  "SelectedNode": "\\frontend\\src\\pages\\ProductPage\\components\\itemDetail.tsx",
   "PreviewInSolutionExplorer": false
 }
