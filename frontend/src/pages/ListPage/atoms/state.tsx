@@ -4,7 +4,7 @@ export const StateSelectBox = styled.div`
   height: 38px;
   display: flex;
   align-items: center;
-  padding: 0 16px;
+  justify-content: center;
   border-radius: 8px;
   border: solid 1px #fb6159;
   background-color: #fff;
@@ -29,7 +29,7 @@ export const StateNonSelectBox = styled.div`
   border-radius: 8px;
   display: flex;
   align-items: center;
-  padding: 0 16px;
+  justify-content: center;
   background-color: #f5f5f5;
 `
 

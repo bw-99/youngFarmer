@@ -16,6 +16,12 @@ import {
 } from "../ReviewPage/atoms/ReviewPage"
 
 
+import {
+    PurchaseDate, PurchaseState, WriteReviewBox, WriteReviewText, PurchaseDot,
+    ProductImg, ProductLocateText, ProductTitleText, ProductPriceText, ProductDetailText, ProductDetailDot,
+    UnReviewSepLine,
+} from "../ReviewPage/atoms/UnReviewPage"
+
 import { BottomNavigationBar } from "../../common/BottomNavigationBar/BottomNavigationBar";
 import { CategoryComponent } from "../../common/Category/category";
 
@@ -120,7 +126,7 @@ function ReviewPage(props: any) {
                                 </div>
                             </>
                             :
-                            <>
+                            /*<>
                                 <h1> 리뷰 가능 상품 </h1>
                                 {
                                     unreviewSelector.map((pr) => {
@@ -135,6 +141,41 @@ function ReviewPage(props: any) {
                                         )
                                     })
                                 }
+                            </>*/
+                            <>
+                                <div style={{ marginTop: "24px", height: "130px", }}>
+                                    <div style={{display: "flex" ,justifyContent:"space-between"} }>
+                                        <div style={{ display: "flex", alignItems: "center" } }>
+                                            <PurchaseDate>2022.10.16</PurchaseDate>
+                                            <PurchaseDot style={{ marginLeft: "8px" }} />
+                                            <PurchaseState style={{ marginLeft: "8px" } }>구매확정</PurchaseState>
+                                        </div>
+                                        <div>
+                                            
+                                        </div>
+                                        <WriteReviewBox style={{display:"flex", alignItems:"center", justifyContent:"center"} }>
+                                            <WriteReviewText>리뷰작성</WriteReviewText>
+                                        </WriteReviewBox>
+                                    </div>
+                                    <div style={{ marginTop: "20px", display:"flex"} }>
+                                        <ProductImg src={testImage} />
+                                        <div style={{display:"flex", marginTop: "7px", marginLeft:"16px" ,flexDirection:"column"} }>
+                                            <ProductLocateText>산천</ProductLocateText>
+                                            <ProductTitleText style={{ marginTop: "4px"} }>친환경 복숭아 5kg /10kg</ProductTitleText>
+                                            <div style={{ display: "flex", marginTop: "10px", alignItems:"center" }}>
+                                                <ProductPriceText>29,000원</ProductPriceText>
+                                                <ProductDetailText style={{marginLeft:"10px"} }>12개입</ProductDetailText>
+                                                <ProductDetailDot style={{ marginLeft: "2px" }} />
+
+                                                <ProductDetailText style={{ marginLeft: "2px" }}>10kg</ProductDetailText>
+                                                <ProductDetailDot style={{ marginLeft: "2px" }} />
+
+                                                <ProductDetailText style={{ marginLeft: "2px" }}>선물용 포장</ProductDetailText>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <UnReviewSepLine style={{ marginTop: "20px" }} />
+                                </div>
                             </>
                     }
                 </div>

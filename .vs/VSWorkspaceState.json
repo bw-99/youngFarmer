@@ -5,12 +5,10 @@
     "\\frontend\\src",
     "\\frontend\\src\\pages",
     "\\frontend\\src\\pages\\ListPage",
-    "\\frontend\\src\\pages\\ProductPage",
-    "\\frontend\\src\\pages\\ProductPage\\atoms",
-    "\\frontend\\src\\pages\\ProductPage\\components",
     "\\frontend\\src\\pages\\ReviewPage",
+    "\\frontend\\src\\pages\\ReviewPage\\atoms",
     "\\frontend\\src\\reducers"
   ],
-  "SelectedNode": "\\frontend\\src\\pages\\ProductPage\\components\\itemInfo.tsx",
+  "SelectedNode": "\\frontend\\src\\pages\\ReviewPage\\atoms\\ReviewPage.tsx",
   "PreviewInSolutionExplorer": false
 }

@@ -1,5 +1,5 @@
 ﻿import React, { useEffect } from "react";
-import {ProductStateList } from "../ListPage/components/state"
+import {ProductStateList } from "../ListPage/components/ListPageComp"
 import { useParams, Link, useLocation, useNavigate } from 'react-router-dom';
 import { AppFrame } from "../../App";
 import rightArrow from "../../assets/images/btn-arrow-r-14-px@3x.png"
@@ -13,7 +13,7 @@ import { FirebaseAuth } from "../..";
 import defaultPhoto from "../../assets/images/btn-avatar-default@3x.png";
 
 
-export const MySettingPage = () => {
+export const ListPage = () => {
 
     const dispatch = useDispatch();
 
@@ -31,4 +31,4 @@ export const MySettingPage = () => {
 
 }
 
-export default MySettingPage;
+export default ListPage;
