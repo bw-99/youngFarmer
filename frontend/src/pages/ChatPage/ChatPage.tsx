@@ -14,12 +14,14 @@ import { AppBarComponentNoBack, AppBarComponentSetting } from "../../common/AppB
 import { BottomNavigationBar } from "../../common/BottomNavigationBar/BottomNavigationBar";
 import { ChatItemComponent } from "./components/chatItem";
 
+import ChatItemComponentLongBtn from "./components/chtItemLongPress";
+
 
 function ChatPage() {
     return (
         <AppFrame>
             {AppBarComponentSetting("채팅목록")}
-            <ChatItemComponent isReaded={true}/>
+            <ChatItemComponentLongBtn isReaded={true}/>
             <ChatItemComponent isReaded={true} />
             <ChatItemComponent isReaded={false} />
             <BottomNavigationBar />
