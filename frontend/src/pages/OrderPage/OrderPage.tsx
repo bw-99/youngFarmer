@@ -121,16 +121,35 @@ function OrderPage(props: any) {
             apiClient.post(process.env.REACT_APP_FIREBASE_FUNCTION_PAYMENT_API + "/complete", {
                 imp_uid: rsp.imp_uid,
                 merchant_uid: rsp.merchant_uid
-            }).then((data) => {
+            }).then(async (data) => {
                 if(data.status == 200) {
+                    console.log(impParam);
+                    const orderdata = {
+                        ...orderSendSelector,
+                        impParam: impParam
+                    }
+                    await saveOrderData(orderdata);
+                    console.log(data);
+                    
                     alert("결제 완료");
+                    // navigate(-1);
                 }
             })
           } else {
-            console.log("결제 실패");
+            alert("결제 실패");
+            navigate(-1);
           }
         });
       }
+
+    const saveOrderData = async(data: any) => {
+        // ! 왜 에러?
+        const orderRef = collection(db, "order");
+        console.log(data);
+        await addDoc(orderRef, {
+            ...data
+        });
+    }
 
     const saveImpOnFS = async (impParam: any) => {
         const preorderRef = collection(db, "preorder");
