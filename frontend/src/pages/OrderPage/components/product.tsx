@@ -19,17 +19,17 @@ export type OrderProductParam = {
 }
 
 
-export const ProductListComp = () => {
+export const ProductListComp = ({orderProducts}:OrderProductListParam) => {
     const dispatch = useDispatch();
     
-    const orderProductSelector: OrderProductDataType[] = useSelector((state:RootState) =>
-        state.SearchDetailReducer.orderProducts
-    );     
+    // const orderProductSelector: OrderProductDataType[] = useSelector((state:RootState) =>
+    //     state.SearchDetailReducer.orderProducts
+    // );     
 
     return(
         <>
         {
-            orderProductSelector.map((orderProduct) => {
+            orderProducts.map((orderProduct) => {
                 return (
                     <ProductComp key={orderProduct.product.product_id} orderProduct={orderProduct} />
                 )

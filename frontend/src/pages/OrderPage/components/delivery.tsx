@@ -12,6 +12,11 @@ import DaumPostcode from "react-daum-postcode";
 import ReactDom from 'react-dom';
 import { getDeliveryTry, saveDeliveryAction } from "../DeliveryAction";
 
+type DeliveryParam = {
+    deliveryInfo: DeliveryDataType | null
+}
+
+
 export const DeliveryComp = () => {
     const dispatch = useDispatch();
 

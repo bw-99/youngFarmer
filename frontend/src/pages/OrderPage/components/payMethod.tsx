@@ -18,7 +18,7 @@ export const PayMethodComp = () => {
             </div>
 
             <button disabled={true} style={{marginTop: "30px"}}>
-                토스페이
+                카카오페이
             </button>
 
         </div>

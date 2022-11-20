@@ -8,7 +8,7 @@ import styled from "styled-components";
 import { AppFrame } from "../../App";
 
 import CryptoJS from 'crypto-js';
-import { collection, doc, setDoc, getDoc, query, orderBy, limit, getDocs, where, Timestamp, addDoc } from "firebase/firestore";
+import { collection, doc, setDoc, getDoc, query, orderBy, limit, getDocs, where, Timestamp, addDoc, updateDoc, deleteDoc } from "firebase/firestore";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../reducers";
 import { AppBarComponentOnlyBack } from "../../common/AppBar/AppBar";
@@ -25,6 +25,9 @@ import { getAuth } from "firebase/auth";
 import { DISCOUNT_TYPE_AMOUNT, DISCOUNT_TYPE_PERCENT } from './../../reducers/DiscountReducer';
 import { PayMethodComp } from "./components/payMethod";
 import { BackgroundWrapper } from "../../common/BackgroundWrapper/BackgroundWrapper";
+import { ProductDataOrderType } from './../../reducers/ProductReducer';
+import { convertOrder2Product } from "../../sagas/OrderSaga";
+import { DeliveryDataType } from "../../reducers/DeliveryReducer";
 
 
 declare const window: any;
@@ -42,6 +45,8 @@ function OrderPage(props: any) {
     );     
 
     const [payPossible, setPayPossible] = useState(false);
+    const [productInfo, setProductInfo] = useState<OrderProductDataType[]>();
+    const [deliveryInfo, setDeliveryInfo] = useState<DeliveryDataType | null>(null);
 
     const orderSendSelector: OrderSending = useSelector((state:RootState) => state.OrderSendReducer);
     var IMP = window.IMP; 
@@ -63,8 +68,10 @@ function OrderPage(props: any) {
     }
 
     const makeImpParam = () => {
-        const pg = orderSendSelector.payMethod!.payMethod;
-        const pay_method = orderSendSelector.payMethod!.payMethod;
+        const pg = "kakaopay.TC0ONETIME"
+        // orderSendSelector.payMethod!.payMethod;
+        const pay_method = "card";
+        // orderSendSelector.payMethod!.payMethod;
         const merchant_uid:string = createMerchantUid();
         const name = orderSendSelector!.products!.length > 1 
                     ? orderSendSelector!.products![0].product.title + `외 ${orderSendSelector!.products!.length -1 }개`
@@ -110,22 +117,17 @@ function OrderPage(props: any) {
         console.log("결제 요청");
         
         IMP.request_pay(impParam, (rsp:any) => { // callback
-        console.log(rsp);
-        
           if (rsp.success) {
-            // 결제 성공 시 로직
-            console.log("결제 성공");
-            
-            // apiClient.post(process.env.REACT_APP_FIREBASE_FUNCTION_PAYMENT_API!, {
-            //     imp_uid: rsp.imp_uid,
-            //     merchant_uid: rsp.merchant_uid
-            // }).then((data) => {
-            //     console.log(data);
-            // })
+            apiClient.post(process.env.REACT_APP_FIREBASE_FUNCTION_PAYMENT_API + "/complete", {
+                imp_uid: rsp.imp_uid,
+                merchant_uid: rsp.merchant_uid
+            }).then((data) => {
+                if(data.status == 200) {
+                    alert("결제 완료");
+                }
+            })
           } else {
-            // 결제 실패 시 로직,
             console.log("결제 실패");
-            console.log(rsp);
           }
         });
       }
@@ -146,9 +148,9 @@ function OrderPage(props: any) {
         // requestPay();
     }
 
-
     useEffect(() => {
         if(orderSendSelector) {
+            console.log(JSON.stringify(orderSendSelector));
             const isPossible = (
                 orderSendSelector!.products!.length > 0
                 &&
@@ -160,8 +162,53 @@ function OrderPage(props: any) {
                 isPossible
             );
         }
-        
     }, [orderSendSelector])
+
+    const getOrderProducts = async (uid:string) => {
+        const preorderRef = collection(db, "preorder");
+        const q = query(preorderRef, where("uid", "==", uid));
+        const target = await getDocs(q);
+        if(target.empty) {
+            navigate(-1);
+            return;
+        }
+        const productList = await convertOrder2Product(target.docs[0].data().products);
+        setProductInfo(productList);
+        return;
+    }
+
+    // const getDeliveryInfo = async (uid:string) => {
+    //     const preorderRef = collection(db, "preorder");
+    //     const q = query(preorderRef, where("uid", "==", uid));
+    //     const target = await getDocs(q);
+    //     if(target.empty) {
+    //         setDeliveryInfo(null);
+    //         return;
+    //     }
+    //     setDeliveryInfo(target.docs[0].data().delivery);
+    //     return;
+    // }
+
+
+    useEffect(() => {
+        FirebaseAuth.onAuthStateChanged((user) => {
+            if(user) {
+                getOrderProducts(user!.uid);
+                // getDeliveryInfo(user!.uid);
+            }
+        })
+    }, []);
+
+    if(!productInfo) {
+        return (
+            <div>
+                loading...
+                {
+                    JSON.stringify(productInfo)
+                }
+            </div>
+        )
+    }
 
     // if(!orderProductSelector || !orderSendSelector)  {
     //     return (
@@ -171,21 +218,21 @@ function OrderPage(props: any) {
     //     );
     // }
     return(
+        
         <AppFrame>
             <AppBarComponentOnlyBack title={"주문/결제"}/>
-            
             <SectorTitle style = {{display: "fixed", marginLeft: "16px", marginTop:"80px"}}> 
                 <span> 총 </span>
-                <span style={{color:"#fb6159"}}>{orderProductSelector.length}</span>
+                <span style={{color:"#fb6159"}}>{productInfo.length}</span>
                 <span>개의 상품</span>
             </SectorTitle>
 
             <div style={{marginTop: "20px"}}>
-                <ProductListComp />
+                <ProductListComp orderProducts={productInfo} />
             </div>
 
             <div style={{marginTop: "30px"}}>
-                <DeliveryComp />
+                <DeliveryComp/>
             </div>
 
             <div style={{marginTop: "30px"}}>

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import styled from "styled-components";
-import { FirebaseAuth } from "../..";
+import { db, FirebaseAuth } from "../..";
 import { AppFrame, AuthContext } from "../../App";
 
 
@@ -26,6 +26,7 @@ import {PaymentBtn} from "./atoms/CartProduct"
 import { CartTopComp } from "./components/CartTop";
 import { OrderDataType } from "../../reducers/OrderReducer";
 import { setProductOrderTry } from "../OrderPage/ProductAction";
+import { addDoc, collection, deleteDoc, getDocs, query, updateDoc, where } from "firebase/firestore";
 
 
 function CartPage(props: any) {
@@ -44,6 +45,34 @@ function CartPage(props: any) {
     const orderSelector: OrderDataType[] = useSelector((state:RootState) =>
         state.OrderReducer.orders
     );    
+
+    const setPreOrderInfo =  async (prDataList: any[]) => {
+        const preorderRef = collection(db, "preorder");
+        console.log(FirebaseAuth.currentUser?.uid);
+        const q = query(preorderRef, where("uid", "==", FirebaseAuth.currentUser?.uid));
+        const target = await getDocs(q);
+        if(target.empty) {
+            await addDoc(preorderRef, {
+                products: prDataList,
+                uid: FirebaseAuth.currentUser?.uid
+            });
+        }
+        else {
+            if(target.docs.length > 1) {
+                for (let index = 1; index < target.docs.length; index++) {
+                    const documnet = target.docs[index];
+                    await deleteDoc(documnet.ref);
+                }
+            }
+            await updateDoc(target.docs[0].ref, {
+                products: prDataList,
+                uid: FirebaseAuth.currentUser?.uid
+            });
+        }
+        
+        
+    }
+    
 
     if(cartSelector) {
         return (
@@ -68,9 +97,10 @@ function CartPage(props: any) {
                     backgroundColor: "white",
                     position:"fixed", bottom: 0, maxWidth:"625px", width:"100%",height:"56px", paddingBottom: "16px"}}>
                     <PaymentBtn 
-                    onClick={()=>{
+                    onClick={async()=>{
                         setOrder(true);
                         dispatch(setProductOrderTry(orderSelector));
+                        await setPreOrderInfo(orderSelector);
                         navigate("/order");
                     }}
                     style = {{
