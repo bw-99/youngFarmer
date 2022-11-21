@@ -45,9 +45,9 @@ function ReviewPage(props: any) {
         state.SearchDetailReducer.reviewProducts
     ); 
     
-    const unreviewSelector: ProductWithOrderType[] = useSelector((state:RootState) =>
+    const unreviewSelector: ProductWithOrderType[] = useSelector((state: RootState) =>
         state.SearchDetailReducer.unreviewProducts
-    );  
+    );
 
     useEffect(() => {
         FirebaseAuth.onAuthStateChanged((user) => {
@@ -56,6 +56,46 @@ function ReviewPage(props: any) {
             }
         })
     }, [])
+
+    const changeTimeStemp = (second: number) => {
+        let date = new Date(second);
+        let year = date.getFullYear().toString().slice(-4); //년도 뒤에 두자리
+        let month = ("0" + (date.getMonth() + 1)).slice(-2); //월 2자리 (01, 02 ... 12)
+        let day = ("0" + date.getDate()).slice(-2); //일 2자리 (01, 02 ... 31)
+        let returnDate = year + "." + month + "." + day
+
+        return returnDate;
+    }
+
+    const changePriceToStr = (price: number) => {
+        if (price < 0) {
+            return "잘못 저장된 금액입니다."
+        }
+
+        let strPrice = price.toString();
+        let returnStr: string = "";
+
+        let reminder: number = (strPrice.length % 3);
+        let quotient: number = Math.floor(strPrice.length / 3);
+
+        let i: number;
+        if (reminder == 0) {
+            for ( i = 1; i < quotient; i++) {
+                returnStr += strPrice.slice(3 * (i - 1), 3 * i);
+                returnStr += ",";
+            }
+            returnStr += strPrice.slice(3 * i);
+        }
+        else {
+            returnStr += strPrice.slice(0, reminder);
+            for (i = 1; i <= quotient; i++) {
+                returnStr += ",";
+                returnStr += strPrice.slice(reminder + 3 * (i - 1), reminder + 3 * i);
+            }
+        }
+        
+        return returnStr + "원";
+    }
 
     if (reviewSelector && unreviewSelector) {
         return (
@@ -102,28 +142,43 @@ function ReviewPage(props: any) {
                                 }
                             </>*/
                             <>
-                                <div style={{marginTop: "24px", height: "130px",} }>
-                                    <div style={{ display: "flex", /*alignItems:"center",*/ justifyContent: "space-between" }}>
-                                        <div style={{ display: "flex", alignItems: "center",} }>
-                                            <ReviewerImage src={rateStarIcon} />
-                                            <ReviewerNickname style={{ marginLeft: "10px" }}>청년 농부</ReviewerNickname>
-                                        </div>
-                                        <div style={{ display: "flex", alignItems: "center", }}>
-                                            <ReviewRateStar src={testImage} style={{marginRight:"4px"} }/>
-                                            <ReviewRateText>4.5</ReviewRateText>
-                                        </div>
-                                    </div>
-                                    <div style={{ display: "flex", marginTop: "10px", justifyContent:"space-between" }}>
-                                        <div style={{ display: "flex", flexDirection: "column" }}>
-                                            <ReviewContent>
-                                                지인한테 선물받아보고 너무 맛있어서 제가 또 구매했습니다. 포장을 튼튼하게 해주셔서 무르지도 않고…
-                                            </ReviewContent>
-                                            <ReviewDate style={{marginTop:"7px"} }>2022.09.13</ReviewDate>
-                                        </div>
-                                        <ReviewedProductImg src={testImage}/>
-                                    </div>
-                                    <SepLine style={{marginTop:"24px"} }/>
-                                </div>
+                                {
+                                    reviewSelector.map((pr, index)=>{
+                                        return (
+                                            <div style={{ marginTop: "24px", height: "130px", }}>
+                                                <div style={{ display: "flex", /*alignItems:"center",*/ justifyContent: "space-between" }}>
+                                                    <div style={{ display: "flex", alignItems: "center", }}>
+                                                        <ReviewerImage src={pr.review.photos[0]} />
+                                                        <ReviewerNickname style={{ marginLeft: "10px" }}>
+                                                            여기 수정해야합니다.{/*{pr.review.writer.profile_nickname} pr.review.writer가 비어있음*/}
+                                                        </ReviewerNickname>
+                                                    </div>
+                                                    <div style={{ display: "flex", alignItems: "center", }}>
+                                                        <ReviewRateStar src={testImage} style={{ marginRight: "4px" }} />
+                                                        <ReviewRateText>{pr.review.score }</ReviewRateText>
+                                                    </div>
+                                                </div>
+                                                <div style={{ display: "flex", marginTop: "10px", justifyContent: "space-between" }}>
+                                                    <div style={{ display: "flex", flexDirection: "column" }}>
+                                                        <ReviewContent>
+                                                            {pr.review.content }
+                                                        </ReviewContent>
+                                                        <ReviewDate style={{ marginTop: "7px" }}>
+                                                            {changeTimeStemp(pr.review.time_created.seconds)}
+                                                        </ReviewDate>
+                                                    </div>
+                                                    <ReviewedProductImg src={pr.product.photo} />
+                                                </div>
+                                                {
+                                                    index + 1 != reviewSelector.length ?
+                                                        <SepLine style={{ marginTop: "24px" }} />
+                                                        :
+                                                        null
+                                                }
+                                            </div>
+                                        )
+                                    })
+                                }
                             </>
                             :
                             /*<>
@@ -143,39 +198,54 @@ function ReviewPage(props: any) {
                                 }
                             </>*/
                             <>
-                                <div style={{ marginTop: "24px", height: "130px", }}>
-                                    <div style={{display: "flex" ,justifyContent:"space-between"} }>
-                                        <div style={{ display: "flex", alignItems: "center" } }>
-                                            <PurchaseDate>2022.10.16</PurchaseDate>
-                                            <PurchaseDot style={{ marginLeft: "8px" }} />
-                                            <PurchaseState style={{ marginLeft: "8px" } }>구매확정</PurchaseState>
-                                        </div>
-                                        <div>
-                                            
-                                        </div>
-                                        <WriteReviewBox style={{display:"flex", alignItems:"center", justifyContent:"center"} }>
-                                            <WriteReviewText>리뷰작성</WriteReviewText>
-                                        </WriteReviewBox>
-                                    </div>
-                                    <div style={{ marginTop: "20px", display:"flex"} }>
-                                        <ProductImg src={testImage} />
-                                        <div style={{display:"flex", marginTop: "7px", marginLeft:"16px" ,flexDirection:"column"} }>
-                                            <ProductLocateText>산천</ProductLocateText>
-                                            <ProductTitleText style={{ marginTop: "4px"} }>친환경 복숭아 5kg /10kg</ProductTitleText>
-                                            <div style={{ display: "flex", marginTop: "10px", alignItems:"center" }}>
-                                                <ProductPriceText>29,000원</ProductPriceText>
-                                                <ProductDetailText style={{marginLeft:"10px"} }>12개입</ProductDetailText>
-                                                <ProductDetailDot style={{ marginLeft: "2px" }} />
+                                {                                    
+                                    unreviewSelector.map((pr, index) => {
+                                        console.log("이겁니다.", pr);
+                                        return (
+                                            <div style={{ marginTop: "24px", height: "130px", }}>
+                                                <div style={{ display: "flex", justifyContent: "space-between" }}>
+                                                    <div style={{ display: "flex", alignItems: "center" }}>
+                                                        <PurchaseDate>{changeTimeStemp(pr.order.time_created.seconds) }</PurchaseDate>
+                                                        <PurchaseDot style={{ marginLeft: "8px" }} />
+                                                        <PurchaseState style={{ marginLeft: "8px" }}>구매확정(여기도 애매함)</PurchaseState>
+                                                    </div>
+                                                    <div>
 
-                                                <ProductDetailText style={{ marginLeft: "2px" }}>10kg</ProductDetailText>
-                                                <ProductDetailDot style={{ marginLeft: "2px" }} />
+                                                    </div>
+                                                    <WriteReviewBox style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+                                                        <WriteReviewText>리뷰작성</WriteReviewText>
+                                                    </WriteReviewBox>
+                                                </div>
+                                                <div style={{ marginTop: "20px", display: "flex" }}>
+                                                    <ProductImg src={pr.product.photo} />
+                                                    <div style={{ display: "flex", marginTop: "7px", marginLeft: "16px", flexDirection: "column" }}>
+                                                        <ProductLocateText>산천(수정 필요)</ProductLocateText>
+                                                        <ProductTitleText style={{ marginTop: "4px" }}>{ pr.product.title}</ProductTitleText>
+                                                        <div style={{ display: "flex", marginTop: "10px", alignItems: "center" }}>
+                                                            <ProductPriceText>
+                                                                {changePriceToStr(pr.product.price)}
+                                                            </ProductPriceText>
+                                                            <ProductDetailText style={{ marginLeft: "10px" }}>(여기 리듀서끼리 연결해야함)12개입</ProductDetailText>
+                                                            <ProductDetailDot style={{ marginLeft: "2px" }} />
 
-                                                <ProductDetailText style={{ marginLeft: "2px" }}>선물용 포장</ProductDetailText>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <UnReviewSepLine style={{ marginTop: "20px" }} />
-                                </div>
+                                                            <ProductDetailText style={{ marginLeft: "2px" }}>10kg</ProductDetailText>
+                                                            <ProductDetailDot style={{ marginLeft: "2px" }} />
+
+                                                            <ProductDetailText style={{ marginLeft: "2px" }}>선물용 포장</ProductDetailText>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {
+                                                    index + 1 != unreviewSelector.length ?
+                                                        <UnReviewSepLine style={{ marginTop: "20px" }} />
+                                                        :
+                                                        null
+                                                }
+                                            </div>            
+                                            )
+                                    })
+                                }
+                                
                             </>
                     }
                 </div>

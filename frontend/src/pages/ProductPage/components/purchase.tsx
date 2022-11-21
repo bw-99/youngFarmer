@@ -72,8 +72,6 @@ export const PurchaseComp = () => {
         }
     }, [purchaseIndex]);
 
-    console.log("이거다",modalselector.select_num);
-
     return (
         <div style={{ display: "flex", height: "100vh", flexDirection: "column", position: "fixed", bottom: parentBottomState, zIndex: "10000", width: "100vw", maxWidth: "625px", }}>
             <div style={{ zIndex: "0", height: "100vh" }}>

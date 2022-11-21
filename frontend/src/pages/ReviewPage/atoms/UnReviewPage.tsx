@@ -84,8 +84,9 @@ export const ProductDetailText = styled.div`
 `
 
 export const ProductDetailDot = styled.div`
-  width: 2px;
-  height: 2px;
+  width: 3px;
+  height: 3px;
+  border-radius: 70%;
   background-color: #dfdfdf;
 `
 
