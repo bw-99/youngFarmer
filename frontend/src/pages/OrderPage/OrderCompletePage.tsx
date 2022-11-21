@@ -23,7 +23,6 @@ import { apiClient } from "../../api/axios";
 import { db, FirebaseAuth } from './../../index';
 import { getAuth } from "firebase/auth";
 import { DISCOUNT_TYPE_AMOUNT, DISCOUNT_TYPE_PERCENT } from './../../reducers/DiscountReducer';
-import { PayMethodComp } from "./components/payMethod";
 import { BackgroundWrapper } from "../../common/BackgroundWrapper/BackgroundWrapper";
 import { ProductDataOrderType } from './../../reducers/ProductReducer';
 import { convertOrder2Product } from "../../sagas/OrderSaga";

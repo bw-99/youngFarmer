@@ -23,11 +23,13 @@ import { apiClient } from "../../api/axios";
 import { db, FirebaseAuth } from './../../index';
 import { getAuth } from "firebase/auth";
 import { DISCOUNT_TYPE_AMOUNT, DISCOUNT_TYPE_PERCENT } from './../../reducers/DiscountReducer';
-import { PayMethodComp } from "./components/payMethod";
 import { BackgroundWrapper } from "../../common/BackgroundWrapper/BackgroundWrapper";
 import { ProductDataOrderType } from './../../reducers/ProductReducer';
 import { convertOrder2Product } from "../../sagas/OrderSaga";
 import { DeliveryDataType } from "../../reducers/DeliveryReducer";
+import { PayAmountComp } from "./components/payAmount";
+import { PayMethodComp } from "./components/payMethod";
+import { PayAgreeComp } from "./components/agree";
 
 
 declare const window: any;
@@ -44,6 +46,9 @@ function OrderPage(props: any) {
         state.SearchDetailReducer.orderProducts
     );     
 
+    // const [agree, setAgree] = useState(false);
+    const [timeNow, setTimeNow] = useState<Date>();
+
     const [payPossible, setPayPossible] = useState(false);
     const [productInfo, setProductInfo] = useState<OrderProductDataType[]>();
     const [deliveryInfo, setDeliveryInfo] = useState<DeliveryDataType | null>(null);
@@ -54,6 +59,7 @@ function OrderPage(props: any) {
 
     const createMerchantUid = () => {
         const now = new Date();
+        setTimeNow(now);
         const year = now.getFullYear();
         const month = now.getMonth() < 10 ? `0${now.getMonth()}` : now.getMonth();
         const date = now.getDate() < 10 ? `0${now.getDate()}` : now.getDate();
@@ -68,8 +74,8 @@ function OrderPage(props: any) {
     }
 
     const makeImpParam = () => {
-        const pg = "kakaopay.TC0ONETIME"
-        // orderSendSelector.payMethod!.payMethod;
+        // const pg = "kakaopay.TC0ONETIME"
+        const pg = orderSendSelector.payMethod!.payMethod;
         const pay_method = "card";
         // orderSendSelector.payMethod!.payMethod;
         const merchant_uid:string = createMerchantUid();
@@ -129,6 +135,7 @@ function OrderPage(props: any) {
                         ...orderSendSelector,
                         impParam: JSON.stringify(impParam),
                         merchant_uid: impParam.merchant_uid,
+                        time_created: Timestamp.now(),
                         uid: auth.currentUser!.uid
                     }
                     await saveOrderData(orderdata);
@@ -136,11 +143,11 @@ function OrderPage(props: any) {
                     
                     alert("결제 완료");
                     navigate("/order/complete/"+impParam.merchant_uid);
-                    // navigate(-1);
                 }
             })
           } else {
             alert("결제 실패");
+            navigate(-1);
             navigate(-1);
           }
         });
@@ -178,6 +185,10 @@ function OrderPage(props: any) {
                 orderSendSelector!.delivery!
                 &&
                 orderSendSelector!.discount
+                &&
+                orderSendSelector!.payMethod
+                &&
+                orderSendSelector!.agreeCondition
             ) as boolean;
             setPayPossible(
                 isPossible
@@ -265,6 +276,13 @@ function OrderPage(props: any) {
                 <PayMethodComp />
             </div>
 
+            <div style={{marginTop: "30px"}}>
+                <PayAmountComp />
+            </div>
+            
+            <div style={{marginTop: "30px"}}>
+                <PayAgreeComp/>
+            </div>
 
             <div style={{height: "100px"}}>
 

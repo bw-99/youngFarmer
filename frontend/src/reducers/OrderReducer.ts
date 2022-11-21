@@ -4,7 +4,7 @@ import { OrderProductDataType, ProductDataType } from "./ProductReducer";
 import { DeliveryDataType } from './DeliveryReducer';
 import { DiscountDataType } from './DiscountReducer';
 import { SAVE_DISCOUNT_ACTION } from "../pages/OrderPage/DiscountAction";
-import { SAVE_DELIVERY_ACTION } from "../pages/OrderPage/DeliveryAction";
+import { SAVE_AGREE_ACTION, SAVE_DELIVERY_ACTION } from "../pages/OrderPage/DeliveryAction";
 import { PRODUCT_SET_ORDER_SUCCESS, PRODUCT_ADD_ORDER, PRODUCT_CANCEL_ORDER, SAVE_PRODUCT_ACTION } from "../pages/OrderPage/ProductAction";
 import { SAVE_PAY_METHOD_ACTION } from "../pages/OrderPage/PayMethodAction";
 
@@ -83,7 +83,8 @@ export interface OrderSending {
     products: OrderProductDataType[] | null,
     delivery: DeliveryDataType | null,
     discount: DiscountDataType | null,
-    payMethod: PaymentMethodDataType | null
+    payMethod: PaymentMethodDataType | null,
+    agreeCondition: boolean
     // setOrder: boolean
 }
 
@@ -91,7 +92,8 @@ const orderSendInit:OrderSending = {
     products: [],
     delivery: null,
     discount: null,
-    payMethod: null
+    payMethod: null,
+    agreeCondition: false
 }
 
 export function OrderSendReducer(state = orderSendInit, action: any) {
@@ -115,6 +117,12 @@ export function OrderSendReducer(state = orderSendInit, action: any) {
                 ...state,
                 delivery: action.payload,
             };
+
+        case SAVE_AGREE_ACTION:
+            return {
+                ...state,
+                agreeCondition: action.payload
+            }
         
         case SAVE_PRODUCT_ACTION:
             let products:any = [];
