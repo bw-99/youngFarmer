@@ -5,15 +5,10 @@ import {AppBarMainBox, TopText, StoreBox, StoreImg, StoreName, GPA, DOT, Classif
 import BackBtn from "../../../assets/images/btn-back.png";
 import StarBtn from "../../../assets/images/btn-rate-on.png";
 
-export const PointPageComp = () => {
+export const StorePointPageComp = () => {
     return(
-        <div style = {{display: "flex", height: "100vh", flexDirection: "column", position: "fixed", bottom: "0", zIndex: "10000", width: "100vw", maxWidth:"625px"}}>
-        
-            <AppBarMainBox style = {{display: "flex", flexDirection: "row", zIndex: "1", maxWidth: "625px", padding: "16px 40px 16px 16px", margin: "0 0 20px 0"}}>
-                <img src = {BackBtn} style = {{position: "fixed", margin: "0 0 0 16px"}} />
-                <TopText style = {{display: "flex"}}> 찜한 상점 </TopText>
-            </AppBarMainBox>
-            
+        <div>
+    
             <StoreBox style = {{display: "flex", flexDirection: "row", margin: "0 16px 16px 16px", padding: "7px 16px 7px 7px"}}>
                 <StoreImg style = {{display: "flex", margin: "0 16px 0 0 "}} />
                 <div style = {{display: "flex", flexDirection: "column"}}>

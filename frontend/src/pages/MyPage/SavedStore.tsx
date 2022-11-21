@@ -9,20 +9,23 @@ import { AppFrame } from "../../App";
 
 import alarm from "../../assets/images/alarm@3x.png";
 import shopping_bag from "../../assets/images/shopping_bag@3x.png";
-import { AppBarComponentMyPage, AppBarComponentNoBack } from "../../common/AppBar/AppBar";
+import { AppBarComponentMyPage, AppBarComponentNoBack, AppBarComponentOnlyBack } from "../../common/AppBar/AppBar";
 
 
 
 import { BottomNavigationBar } from "../../common/BottomNavigationBar/BottomNavigationBar";
 import { RootState } from "../../reducers";
 import { MyPageDataType } from "../../reducers/MypageReducer";
+import { PointPageComp } from "./components/point";
 import { ProfileComp } from "./components/profile";
+import { StorePointPageComp } from "./components/savedStore";
 import { ServiceCenterComp } from "./components/serviceCenter";
 import { ShoppingComp } from "./components/shopping";
 import { getProfileAction } from "./MyAction";
 
 
-function MyPage(props: any) {
+
+function SavedStorePage(props: any) {
     const params = useParams();
     const location = useLocation();
     const navigate = useNavigate();
@@ -45,28 +48,22 @@ function MyPage(props: any) {
     }, []);
 
     
+
     if (selector) {
         return(
             <AppFrame>
-                <AppBarComponentMyPage title="마이페이지"/>
-                <ProfileComp />
-                <ShoppingComp />
-                <ServiceCenterComp />
-                <BottomNavigationBar />
+                <AppBarComponentOnlyBack title={"찜한 상점"} />
+                <StorePointPageComp />
             </AppFrame>
         );
     }
     else{
         return (
-            <AppFrame>
-                <AppBarComponentMyPage title="마이페이지"/>
-                {/* {JSON.stringify(selector)} */}
-                <BottomNavigationBar />
-            </AppFrame>  
+           <div></div>
         );
     }
 
    
 }
 
-export default MyPage;
+export default SavedStorePage;

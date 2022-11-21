@@ -129,11 +129,11 @@ const ProfileFuncComp = () => {
                 }} />
                 <ProfileFuncMenuDivider />
                 <ProfileFuncItemComp image={pointIcon} text={"포인트"} onClickFun = {() => {
-                    
+                    navigate("/mypage/point");
                 }} />
                 <ProfileFuncMenuDivider />
                 <ProfileFuncItemComp image={followIcon} text={"찜한상점"} onClickFun = {() => {
-                    
+                    navigate("/mypage/store");
                 }} />
             </ProfileFuncMenu>
         </div>

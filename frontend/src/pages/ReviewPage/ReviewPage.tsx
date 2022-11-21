@@ -52,7 +52,7 @@ function ReviewPage(props: any) {
     useEffect(() => {
         FirebaseAuth.onAuthStateChanged((user) => {
             if(user) {
-                dispatch(getRreviewListAction(user.uid));
+                dispatch(getRreviewListAction(user!.uid));
             }
         })
     }, [])

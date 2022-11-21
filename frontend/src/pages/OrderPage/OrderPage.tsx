@@ -124,14 +124,18 @@ function OrderPage(props: any) {
             }).then(async (data) => {
                 if(data.status == 200) {
                     console.log(impParam);
+                    const auth = getAuth();
                     const orderdata = {
                         ...orderSendSelector,
-                        impParam: impParam
+                        impParam: JSON.stringify(impParam),
+                        merchant_uid: impParam.merchant_uid,
+                        uid: auth.currentUser!.uid
                     }
                     await saveOrderData(orderdata);
                     console.log(data);
                     
                     alert("결제 완료");
+                    navigate("/order/complete/"+impParam.merchant_uid);
                     // navigate(-1);
                 }
             })
@@ -143,12 +147,10 @@ function OrderPage(props: any) {
       }
 
     const saveOrderData = async(data: any) => {
-        // ! 왜 에러?
         const orderRef = collection(db, "order");
         console.log(data);
-        await addDoc(orderRef, {
-            ...data
-        });
+        await addDoc(orderRef, data);
+        await addDoc(collection(db, "delivery"), data.delivery);
     }
 
     const saveImpOnFS = async (impParam: any) => {

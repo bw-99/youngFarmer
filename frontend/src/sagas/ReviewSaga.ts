@@ -151,12 +151,16 @@ async function getaTotalReviewAPI(payload:any) {
     const reviewDataList = fbdata.docs.map((doc) => {
         return doc.data();
     });
-    
+
     return reviewDataList;
 }
 
 
 async function getOrderProductsAPI(reviewProducts:ProductDataReviewType[]) {
+    if(!reviewProducts.length) {
+        return [];
+    }
+ 
     const pidList = reviewProducts.map((rev) => {
         return rev.product_id
     });
