@@ -192,7 +192,11 @@ function ReviewPage(props: any) {
                                                     <div>
 
                                                     </div>
-                                                    <WriteReviewBox style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+                                                    <WriteReviewBox 
+                                                    onClick={()=>{
+                                                        navigate("/review/product/"+pr.product.product_id);
+                                                    }}
+                                                    style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
                                                         <WriteReviewText>리뷰작성</WriteReviewText>
                                                     </WriteReviewBox>
                                                 </div>

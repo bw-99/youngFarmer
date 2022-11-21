@@ -121,6 +121,17 @@ function AddReviewPage(props: any) {
                 let uploadResult = await uploadReviewData(reviewText, reviewPhotos, reviewRate, uid, product_id);
                 console.log(JSON.stringify(uploadResult));
             }
+            else{
+                if(!reviewText) {
+                    alert("리뷰를 입력해주세요.");
+                }
+                else if(!reviewPhotos) {
+                    alert("사진을 업로드해주세요.");
+                }
+                else{
+                    alert("별점을 체크해주세요.");
+                }
+            }
         }
     }
 

@@ -136,7 +136,10 @@ function OrderPage(props: any) {
                         impParam: JSON.stringify(impParam),
                         merchant_uid: impParam.merchant_uid,
                         time_created: Timestamp.now(),
-                        uid: auth.currentUser!.uid
+                        uid: auth.currentUser!.uid,
+                        product_id_list: orderSendSelector!.products!.map((pr) => {
+                            return pr.product.product_id
+                        })
                     }
                     await saveOrderData(orderdata);
                     console.log(data);

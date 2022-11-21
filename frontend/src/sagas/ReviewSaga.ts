@@ -49,7 +49,7 @@ async function convertOrder2Product(orderDataList:ProductDataOrderType[]) {
 
     orderDataList.forEach((element: ProductDataOrderType) => {
         queryList.push(
-            query(productRef, where("product_id", "==", element.product_id))
+            query(productRef, where("product_id", "==", element.product.product_id))
         );
     });
 
@@ -126,17 +126,25 @@ async function checkDuplicateReview(uid:string, product_id: number) {
 async function getOrderProductAPI(uid:string, product_id: number) {
 
     const isDuplicate = await checkDuplicateReview(uid, product_id);
-
     if(!isDuplicate){
         const orderRef = collection(db, "order");
-        const q = query(orderRef, where("uid", "==", uid), where("product_id", "==", product_id));
+        // alert(`${uid} ${product_id}`);
+        const q = query(orderRef, where("uid", "==", uid), where("product_id_list", "array-contains", product_id));
         const fbdata = await getDocs(q);
 
         if(fbdata.empty) {
             return false;
         }
+
+        const productList = fbdata.docs[0].data().products;
+
+        for (const pr of productList) {
+            if( pr.product.product_id == product_id ){
+                return pr;
+            }
+        }
         
-        return fbdata.docs[0].data();
+        return false;
     }
     else{
         return false;
@@ -227,7 +235,7 @@ function* getReview(action:any) {
     for (const order of orderResult) {
         let temp = true;
         for (const review of reviewResult) {
-            if(order.product_id === review.product_id) {
+            if(order.product.product_id === review.product_id) {
                 temp=false;
                 break;
             }
