@@ -98,7 +98,7 @@ export const WriteReviewBox = styled.div`
 `
 
 export const WriteReviewText = styled.div`
-  height: 17px;
+  /* height: 17px; */
   font-family: AppleSDGothicNeo;
   font-size: 14px;
   font-weight: 500;

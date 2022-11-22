@@ -26,11 +26,20 @@ export const SearchResultComp = () => {
                 <OtherChoiceComp />
                 <SearchResultFilterComp />
                 <div style={{padding: "0 9.5px 0 9.5px"}}>
-                    <ItemUnitListComp image_width={165} product_list={
-                        searchSelector.map((product)=> {
-                            return product
-                        })
-                    } />
+                    {
+                        searchSelector.length > 0
+                        ?
+                        <ItemUnitListComp image_width={165} product_list={
+                            searchSelector.map((product)=> {
+                                return product
+                            })
+                        } />
+                        :
+                        <>
+                        검색 결과가 존재하지 않습니다.
+                        </>
+                    }
+                    
                 </div>
             </div>
         );

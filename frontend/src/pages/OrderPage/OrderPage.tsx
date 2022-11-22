@@ -23,11 +23,16 @@ import { apiClient } from "../../api/axios";
 import { db, FirebaseAuth } from './../../index';
 import { getAuth } from "firebase/auth";
 import { DISCOUNT_TYPE_AMOUNT, DISCOUNT_TYPE_PERCENT } from './../../reducers/DiscountReducer';
-import { PayMethodComp } from "./components/payMethod";
 import { BackgroundWrapper } from "../../common/BackgroundWrapper/BackgroundWrapper";
 import { ProductDataOrderType } from './../../reducers/ProductReducer';
 import { convertOrder2Product } from "../../sagas/OrderSaga";
 import { DeliveryDataType } from "../../reducers/DeliveryReducer";
+import { PayAmountComp } from "./components/payAmount";
+import { PayMethodComp } from "./components/payMethod";
+import { PayAgreeComp } from "./components/agree";
+import { saveImpParam } from './OrderAction';
+import { saveOrderData } from "./OrderReadyPage";
+import { setItemWithExpireTime } from './../../services/localStorage';
 
 
 declare const window: any;
@@ -44,6 +49,9 @@ function OrderPage(props: any) {
         state.SearchDetailReducer.orderProducts
     );     
 
+    // const [agree, setAgree] = useState(false);
+    const [timeNow, setTimeNow] = useState<Date>();
+
     const [payPossible, setPayPossible] = useState(false);
     const [productInfo, setProductInfo] = useState<OrderProductDataType[]>();
     const [deliveryInfo, setDeliveryInfo] = useState<DeliveryDataType | null>(null);
@@ -54,6 +62,7 @@ function OrderPage(props: any) {
 
     const createMerchantUid = () => {
         const now = new Date();
+        setTimeNow(now);
         const year = now.getFullYear();
         const month = now.getMonth() < 10 ? `0${now.getMonth()}` : now.getMonth();
         const date = now.getDate() < 10 ? `0${now.getDate()}` : now.getDate();
@@ -62,21 +71,18 @@ function OrderPage(props: any) {
         const auth = getAuth();
         console.log(auth.currentUser!.uid);
 
-        const merchantUid = `ORD${nowString}-${auth.currentUser!.uid}-${Timestamp.now().nanoseconds}`;
+        const merchantUid = `ORD${nowString}-${auth.currentUser!.uid.substring(0,5)}-${new Date().getTime()}`;
         console.log(merchantUid);
         return merchantUid;
     }
 
     const makeImpParam = () => {
-        const pg = "kakaopay.TC0ONETIME"
-        // orderSendSelector.payMethod!.payMethod;
+        const pg = orderSendSelector.payMethod!.payMethod;
         const pay_method = "card";
-        // orderSendSelector.payMethod!.payMethod;
         const merchant_uid:string = createMerchantUid();
         const name = orderSendSelector!.products!.length > 1 
                     ? orderSendSelector!.products![0].product.title + `외 ${orderSendSelector!.products!.length -1 }개`
                     : orderSendSelector!.products![0].product.title;
-
 
         // * 결제 금액 계산
         let amount = 0;
@@ -100,8 +106,8 @@ function OrderPage(props: any) {
         const buyer_name = orderSendSelector!.delivery!.name;
         const buyer_tel = orderSendSelector!.delivery!.phone;
         const buyer_addr = orderSendSelector!.delivery!.location_main + " " + orderSendSelector!.delivery!.location_sub;
-
-        return  {
+        
+        const impParam = {
             pg:pg,
             pay_method: pay_method,
             merchant_uid: merchant_uid,
@@ -110,61 +116,71 @@ function OrderPage(props: any) {
             buyer_name: buyer_name,
             buyer_tel: buyer_tel,
             buyer_addr: buyer_addr,
-        }
+            m_redirect_url: `${window.location.origin}/order/ready/`+merchant_uid
+        };
+
+        dispatch(saveImpParam(JSON.stringify(impParam)));
+
+        return impParam;
     }
 
     const requestPay = (impParam: any) => {
-        console.log("결제 요청");
-        
-        IMP.request_pay(impParam, (rsp:any) => { // callback
-          if (rsp.success) {
-            apiClient.post(process.env.REACT_APP_FIREBASE_FUNCTION_PAYMENT_API + "/complete", {
-                imp_uid: rsp.imp_uid,
-                merchant_uid: rsp.merchant_uid
-            }).then(async (data) => {
-                if(data.status == 200) {
-                    console.log(impParam);
-                    const orderdata = {
-                        ...orderSendSelector,
-                        impParam: impParam
-                    }
-                    await saveOrderData(orderdata);
-                    console.log(data);
-                    
-                    alert("결제 완료");
-                    // navigate(-1);
-                }
+        const auth = getAuth();
+        const orderdata = {
+            ...orderSendSelector,
+            impParam: JSON.stringify(impParam),
+            merchant_uid: impParam.merchant_uid,
+            time_created: Timestamp.now(),
+            uid: auth.currentUser!.uid,
+            product_id_list: orderSendSelector!.products!.map((pr) => {
+                return pr.product.product_id
             })
-          } else {
-            alert("결제 실패");
-            navigate(-1);
-          }
+        }
+        setItemWithExpireTime("orderData", orderdata, 1000*60*2);
+
+        IMP.request_pay({
+            ...impParam
+        }, (rsp:any) => { // callback
+            console.log(rsp);
+            if (rsp.success) {
+                apiClient.post(process.env.REACT_APP_FIREBASE_FUNCTION_PAYMENT_API + "/complete", {
+                    imp_uid: rsp.imp_uid,
+                    merchant_uid: rsp.merchant_uid
+                }).then(async (data) => {
+                    if(data.status == 200) {
+                        await saveOrderData(orderdata);
+                        console.log(data);
+                        navigate("/order/complete/"+impParam.merchant_uid);
+                    }
+                })
+            } else {
+                alert("결제 실패");
+                navigate(-1);
+                navigate(-1);
+            }
         });
+        
+        
       }
 
-    const saveOrderData = async(data: any) => {
-        // ! 왜 에러?
-        const orderRef = collection(db, "order");
-        console.log(data);
-        await addDoc(orderRef, {
-            ...data
-        });
-    }
 
-    const saveImpOnFS = async (impParam: any) => {
-        const preorderRef = collection(db, "preorder");
-        await addDoc(preorderRef, {
-            merchant_uid: impParam.merchant_uid,
-            imp: impParam
-        })
-    }
+
+    // ! 굳이 imp 값을 preorder에 저장할 필요 없어서 지움
+    // const saveImpOnFS = async (impParam: any) => {
+    //     const preorderRef = collection(db, "preorder");
+    //     await addDoc(preorderRef, {
+    //         merchant_uid: impParam.merchant_uid,
+    //         imp: impParam
+    //     })
+    // }
 
 
     const orderFinal = async () => {
         const impParam = makeImpParam();
-        await saveImpOnFS(impParam);
-        requestPay(impParam);
-        // requestPay();
+        // await saveImpOnFS(impParam);
+        setTimeout(() => {
+            requestPay(impParam);
+        }, 2000);
     }
 
     useEffect(() => {
@@ -176,6 +192,10 @@ function OrderPage(props: any) {
                 orderSendSelector!.delivery!
                 &&
                 orderSendSelector!.discount
+                &&
+                orderSendSelector!.payMethod
+                &&
+                orderSendSelector!.agreeCondition
             ) as boolean;
             setPayPossible(
                 isPossible
@@ -263,6 +283,13 @@ function OrderPage(props: any) {
                 <PayMethodComp />
             </div>
 
+            <div style={{marginTop: "30px"}}>
+                <PayAmountComp />
+            </div>
+            
+            <div style={{marginTop: "30px"}}>
+                <PayAgreeComp/>
+            </div>
 
             <div style={{height: "100px"}}>
 

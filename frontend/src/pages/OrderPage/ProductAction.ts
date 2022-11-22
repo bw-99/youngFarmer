@@ -71,3 +71,12 @@ export const saveProductAction = (products:OrderProductDataType) => {
         payload: products
     };
 }
+
+export const REMOVE_PRODUCT_ACTION = "REMOVE_PRODUCT_ACTION";
+
+export const removeProductAction = (products:OrderProductDataType) => {
+    return {
+        type: REMOVE_PRODUCT_ACTION,
+        payload: products
+    };
+}

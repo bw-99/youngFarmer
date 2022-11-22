@@ -29,7 +29,7 @@ export interface ReviewProductDataType {
 
 
 export interface ProductDataList {
-    products: ProductDataType[],
+    products: ProductDataType[] | null,
     recommendResult: ProductDataType[],
     pidProducts: ProductDataType[],
     likeProducts: ProductDataType[],
@@ -37,7 +37,7 @@ export interface ProductDataList {
     orderProducts: OrderProductDataType[],
     storeList?: StoreDataType[],
     reviewProducts?: ReviewProductDataType[],
-    unreviewProducts?: ProductWithOrderType[] 
+    unreviewProducts?: ProductDataOrderType[] 
 }
 
 export interface ProductDataType {
@@ -86,6 +86,7 @@ export interface ProductDataOrderType {
     time_created: Timestamp,
     uid: string,
     product_id: number,
+    product: ProductDataType
 }
 
 export interface ProductDataQuestionType {

@@ -28,7 +28,7 @@ import { CategoryComponent } from "../../common/Category/category";
 import { collection, doc, setDoc, getDoc, query, orderBy, limit, getDocs, where } from "firebase/firestore";
 import { db, FirebaseAuth } from "../..";
 import { useDispatch, useSelector } from "react-redux";
-import { ProductDataType, ProductWithOrderType, ReviewProductDataType } from "../../reducers/ProductReducer";
+import { ProductDataOrderType, ProductDataType, ProductWithOrderType, ReviewProductDataType } from "../../reducers/ProductReducer";
 import { RootState } from "../../reducers";
 import { CircularProgress } from '@mui/material';
 import { getRreviewListAction, getUnreviewListAction } from "./ReviewAction";
@@ -45,14 +45,14 @@ function ReviewPage(props: any) {
         state.SearchDetailReducer.reviewProducts
     ); 
     
-    const unreviewSelector: ProductWithOrderType[] = useSelector((state: RootState) =>
+    const unreviewSelector: ProductDataOrderType[] = useSelector((state: RootState) =>
         state.SearchDetailReducer.unreviewProducts
     );
 
     useEffect(() => {
         FirebaseAuth.onAuthStateChanged((user) => {
             if(user) {
-                dispatch(getRreviewListAction(user.uid));
+                dispatch(getRreviewListAction(user!.uid));
             }
         })
     }, [])
@@ -134,15 +134,12 @@ function ReviewPage(props: any) {
                             }
                         </div>
                     </div>
+                    <>
+                    </>
+                    
                     {
                         toggle
                             ?
-                            /*<>
-                                <h1> 리뷰한 상품 </h1>
-                                {
-                                    console.log(JSON.stringify(reviewSelector))
-                                }
-                            </>*/
                             <>
                                 {
                                     reviewSelector.map((pr, index)=>{
@@ -183,57 +180,58 @@ function ReviewPage(props: any) {
                                 }
                             </>
                             :
-                            /*<>
-                                <h1> 리뷰 가능 상품 </h1>
-                                {
-                                    unreviewSelector.map((pr) => {
-                                        console.log(JSON.stringify(pr));
-                                        return (
-                                            <button onClick={() => {
-                                                navigate("/review/product/" + pr.product.product_id);
-                                            }}>
-                                                리뷰작성
-                                                {JSON.stringify(pr)}
-                                            </button>
-                                        )
-                                    })
-                                }
-                            </>*/
                             <>
                                 {                                    
                                     unreviewSelector.map((pr, index) => {
-                                        console.log("이겁니다.", pr);
                                         return (
                                             <div style={{ marginTop: "24px", height: "130px", }}>
                                                 <div style={{ display: "flex", justifyContent: "space-between" }}>
                                                     <div style={{ display: "flex", alignItems: "center" }}>
-                                                        <PurchaseDate>{changeTimeStemp(pr.order.time_created.seconds) }</PurchaseDate>
+                                                        <PurchaseDate>{pr.time_created ? changeTimeStemp(pr.time_created.seconds) :changeTimeStemp(new Date().getSeconds()) }</PurchaseDate>
                                                         <PurchaseDot style={{ marginLeft: "8px" }} />
-                                                        <PurchaseState style={{ marginLeft: "8px" }}>구매확정(여기도 애매함)</PurchaseState>
+                                                        <PurchaseState style={{ marginLeft: "8px" }}>구매확정</PurchaseState>
                                                     </div>
                                                     <div>
 
                                                     </div>
+<<<<<<< HEAD
                                                     <WriteReviewBox style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
                                                         <WriteReviewText onClick={() => { navigate("/review/product/" + pr.product.product_id); } }>리뷰작성</WriteReviewText>
+=======
+                                                    <WriteReviewBox 
+                                                    onClick={()=>{
+                                                        navigate("/review/product/"+pr.product.product_id);
+                                                    }}
+                                                    style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+                                                        <WriteReviewText>리뷰작성</WriteReviewText>
+>>>>>>> 40f9df9f6e312bcf4bdacfe3507dbb984ef2c646
                                                     </WriteReviewBox>
                                                 </div>
                                                 <div style={{ marginTop: "20px", display: "flex" }}>
                                                     <ProductImg src={pr.product.photo} />
                                                     <div style={{ display: "flex", marginTop: "7px", marginLeft: "16px", flexDirection: "column" }}>
-                                                        <ProductLocateText>산천(수정 필요)</ProductLocateText>
+                                                        {/* // ? 수정 필요 */}
+                                                        <ProductLocateText>산천</ProductLocateText>
                                                         <ProductTitleText style={{ marginTop: "4px" }}>{ pr.product.title}</ProductTitleText>
                                                         <div style={{ display: "flex", marginTop: "10px", alignItems: "center" }}>
                                                             <ProductPriceText>
                                                                 {changePriceToStr(pr.product.price)}
                                                             </ProductPriceText>
-                                                            <ProductDetailText style={{ marginLeft: "10px" }}>(여기 리듀서끼리 연결해야함)12개입</ProductDetailText>
-                                                            <ProductDetailDot style={{ marginLeft: "2px" }} />
-
-                                                            <ProductDetailText style={{ marginLeft: "2px" }}>10kg</ProductDetailText>
-                                                            <ProductDetailDot style={{ marginLeft: "2px" }} />
-
-                                                            <ProductDetailText style={{ marginLeft: "2px" }}>선물용 포장</ProductDetailText>
+                                                        
+                                                            {
+                                                                pr.option?
+                                                                <div style={{ marginLeft: "10px", display: "flex", justifyContent: "flex-start"}}>
+                                                                    {
+                                                                        Object.keys(JSON.parse(pr.option)).map((key:any) => {
+                                                                            return <ProductDetailText key={key}>
+                                                                                {JSON.parse(pr.option)[key]} •&nbsp;
+                                                                            </ProductDetailText>
+                                                                        })
+                                                                    }
+                                                                </div>
+                                                                :
+                                                                <></>
+                                                            }
                                                         </div>
                                                     </div>
                                                 </div>

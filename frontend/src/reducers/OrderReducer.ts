@@ -4,9 +4,11 @@ import { OrderProductDataType, ProductDataType } from "./ProductReducer";
 import { DeliveryDataType } from './DeliveryReducer';
 import { DiscountDataType } from './DiscountReducer';
 import { SAVE_DISCOUNT_ACTION } from "../pages/OrderPage/DiscountAction";
-import { SAVE_DELIVERY_ACTION } from "../pages/OrderPage/DeliveryAction";
-import { PRODUCT_SET_ORDER_SUCCESS, PRODUCT_ADD_ORDER, PRODUCT_CANCEL_ORDER, SAVE_PRODUCT_ACTION } from "../pages/OrderPage/ProductAction";
+import { SAVE_AGREE_ACTION, SAVE_DELIVERY_ACTION } from "../pages/OrderPage/DeliveryAction";
+import { PRODUCT_SET_ORDER_SUCCESS, PRODUCT_ADD_ORDER, PRODUCT_CANCEL_ORDER, SAVE_PRODUCT_ACTION, REMOVE_PRODUCT_ACTION } from "../pages/OrderPage/ProductAction";
 import { SAVE_PAY_METHOD_ACTION } from "../pages/OrderPage/PayMethodAction";
+import { stat } from "fs";
+import { SAVE_IMP_PARAM } from "../pages/OrderPage/OrderAction";
 
 export interface OrderDataType {
     count: number,
@@ -83,7 +85,9 @@ export interface OrderSending {
     products: OrderProductDataType[] | null,
     delivery: DeliveryDataType | null,
     discount: DiscountDataType | null,
-    payMethod: PaymentMethodDataType | null
+    payMethod: PaymentMethodDataType | null,
+    agreeCondition: boolean,
+    impParam: string | null
     // setOrder: boolean
 }
 
@@ -91,7 +95,9 @@ const orderSendInit:OrderSending = {
     products: [],
     delivery: null,
     discount: null,
-    payMethod: null
+    payMethod: null,
+    agreeCondition: false,
+    impParam: null
 }
 
 export function OrderSendReducer(state = orderSendInit, action: any) {
@@ -115,6 +121,26 @@ export function OrderSendReducer(state = orderSendInit, action: any) {
                 ...state,
                 delivery: action.payload,
             };
+
+        case SAVE_AGREE_ACTION:
+            return {
+                ...state,
+                agreeCondition: action.payload
+            }
+
+        case SAVE_IMP_PARAM:
+            // alert("SAVE_IMP_PARAM reducer" + action.payload);
+            return {
+                ...state,
+                impParam: action.payload
+            }
+
+
+        case REMOVE_PRODUCT_ACTION: 
+            return {
+                ...state,
+                products: []
+            }
         
         case SAVE_PRODUCT_ACTION:
             let products:any = [];
@@ -124,18 +150,32 @@ export function OrderSendReducer(state = orderSendInit, action: any) {
 
             products.push(action.payload);
 
-            // * 중복 제거
-            products = products.filter( function( item: any, index: any, inputArray: string | any[] ) {
-                return inputArray.indexOf(item) == index;
-            });
+            const productIdSet = new Set(products.map((pr:any) => {
+                return pr.product.product_id
+            }));
 
+            console.log(productIdSet);
+
+            let finalProductList: any[] = [];
+
+            productIdSet.forEach((product_id, index) => {
+                for (const pr of products) {
+                    if(pr.product.product_id === product_id) {
+                        finalProductList.push(pr);
+                        break;
+                    }
+                }
+            })
 
             return {
                 ...state,
-                products: products,
+                products: finalProductList,
             };
 
         default:
-            return state;
+
+            return {
+                ...state,
+            };
     }
 }

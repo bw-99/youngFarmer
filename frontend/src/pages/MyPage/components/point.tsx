@@ -5,18 +5,13 @@ import {PointDetailBox, PointDetailContent, PointDetailDate, PointDetailAmountPl
 import BackBtn from "../../../assets/images/btn-back.png";
 import PointImg from "../../../assets/images/point.png";
 import RefreshImg from "../../../assets/images/btn-refresh.png";
+import { AppBarComponentOnlyBack } from "../../../common/AppBar/AppBar";
 
 
 
 export const PointPageComp = () => {
     return(
-        <div style = {{display: "flex", height: "100vh", flexDirection: "column", position: "fixed", bottom: "0", zIndex: "10000", width: "100vw", maxWidth:"625px"}}>
-        
-            <AppBarMainBox style = {{display: "flex", flexDirection: "row", zIndex: "1", maxWidth: "625px", padding: "16px 0 16px 0", margin: "0 0 24px 0"}}>
-                <img src = {BackBtn} style = {{position: "fixed", margin: "0 0 0 16px"}} />
-                <TopText style = {{display: "flex", margin: "2px 270.5px 2px 270.5px"}}> 포인트 </TopText>
-            </AppBarMainBox>
-            
+        <div>
             <AvailablePointBox style = {{display: "flex", flexDirection: "row", maxWidth: "593px", padding: "25px 16px 24px 16px", margin: "20px 16px 16px 16px"}}>
                 <AvailablePoint style = {{display: "flex", margin: "7px 77px 7px 0"}}> 사용 가능한 포인트 </AvailablePoint>
                 <img src = {PointImg} style = {{position: "fixed", margin: "2px 6px 5px 77px"}} />
@@ -56,11 +51,6 @@ export const PointPageComp = () => {
                 <PointDetailAmountMinus style = {{display: "flex", margin: "10px 0 10px 0"}}> -3,000p </PointDetailAmountMinus>
                 <SeparateLine style = {{display: "flex", margin: "0 16px 0 16px"}} />
             </PointDetailBox>
-
-            
-
-
-
         </div>
     )
 }

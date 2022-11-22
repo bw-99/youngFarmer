@@ -8,7 +8,7 @@ import { OrderProductDataType, ProductDataType } from "../../../reducers/Product
 import { Spantemp2 } from "../../CartPage/atoms/CartProduct";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../reducers";
-import { saveProductAction } from "../ProductAction";
+import { removeProductAction, saveProductAction } from "../ProductAction";
 
 export type OrderProductListParam = {
     orderProducts: OrderProductDataType[]
@@ -43,8 +43,11 @@ const ProductComp = ({orderProduct}:OrderProductParam) => {
     const dispatch = useDispatch();
     useEffect(() => {
         if(orderProduct) {
-            console.log(orderProduct);
             dispatch(saveProductAction(orderProduct));
+        }
+
+        return () => {
+            dispatch(removeProductAction(orderProduct));
         }
     }, []);
 

@@ -28,7 +28,7 @@ export const getUnreviewListAction = (uid?: string) => {
     }
 }
 
-export const getRreviewListAction = (uid?: string) => {
+export const getRreviewListAction = (uid: string) => {
     console.log("getRreviewListAction");
     
     return {

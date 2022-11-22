@@ -77,23 +77,18 @@ export const BottomBarComp = ({product_id}:bottomBarCompParam) => {
 
     const purchaseClickEvent = (e: React.MouseEvent) => {
         e.preventDefault();
-        if (modalselector.open_modal) {
-            //when modal open
-            let canNext: boolean = true;
-            Object.keys(modalselector.select_item_info).forEach(key => {
-                if (!modalselector.select_item_info[key] && canNext) {
-                    canNext = false;
-                }
-            })
-            if (canNext) {
-                navigate(`/order`);
-            } else {
-                console.log("추가해세요");
+
+        let canNext: boolean = true;
+        Object.keys(modalselector.select_item_info).forEach(key => {
+            if (!modalselector.select_item_info[key] && canNext) {
+                canNext = false;
             }
-        }
-        else {
-            //when modal close
-            dispatch(openModalAction(modalselector));
+        })
+        if (canNext) {
+            return true;
+        } else {
+            console.log("추가해세요");
+            return false;
         }
     }
 
@@ -151,15 +146,26 @@ export const BottomBarComp = ({product_id}:bottomBarCompParam) => {
                     }} style={{marginRight: "9px"}}> 
                     장바구니 </BottomBoxShoppingCart>
                     <BottomBoxBuy onClick={async(e) => {
-                        purchaseClickEvent(e);
-                        const prData = {
-                            count: 1,
-                            product_id: product_id,
-                            option: JSON.stringify(modalselector.select_item_info)
-                        };
-                        dispatch(setProductOrderTry([prData]));
-                        await setPreOrderInfo([prData]);
-                        navigate("/order");
+                        if(modalselector.open_modal) {
+                            const canGo = purchaseClickEvent(e);
+                            if(canGo){
+                                dispatch(closeModalAction(modalselector));
+                                const prData = {
+                                    count: 1,
+                                    product_id: product_id,
+                                    option: JSON.stringify(modalselector.select_item_info)
+                                };
+                                dispatch(setProductOrderTry([prData]));
+                                await setPreOrderInfo([prData]);
+                                navigate("/order");
+                            }
+                        }
+                        else{
+                            dispatch(openModalAction(modalselector));
+                        }
+
+
+                       
                     }} style={{ marginRight: "16px" }}> 구매하기 </BottomBoxBuy>
                 </div>
             </BottomBoxAtom>

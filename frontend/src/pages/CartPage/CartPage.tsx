@@ -12,7 +12,7 @@ import shopping_bag from "../../assets/images/shopping_bag@3x.png";
 import { AppBarComponentMyPage, AppBarComponentNoBack, AppBarComponentOnlyBack } from "../../common/AppBar/AppBar";
 
 
-import {CartProductComponent} from "./components/CartProduct"
+import {CartProductComponent, setPreOrderInfo} from "./components/CartProduct"
 
 
 import { BottomNavigationBar } from "../../common/BottomNavigationBar/BottomNavigationBar";
@@ -46,32 +46,7 @@ function CartPage(props: any) {
         state.OrderReducer.orders
     );    
 
-    const setPreOrderInfo =  async (prDataList: any[]) => {
-        const preorderRef = collection(db, "preorder");
-        console.log(FirebaseAuth.currentUser?.uid);
-        const q = query(preorderRef, where("uid", "==", FirebaseAuth.currentUser?.uid));
-        const target = await getDocs(q);
-        if(target.empty) {
-            await addDoc(preorderRef, {
-                products: prDataList,
-                uid: FirebaseAuth.currentUser?.uid
-            });
-        }
-        else {
-            if(target.docs.length > 1) {
-                for (let index = 1; index < target.docs.length; index++) {
-                    const documnet = target.docs[index];
-                    await deleteDoc(documnet.ref);
-                }
-            }
-            await updateDoc(target.docs[0].ref, {
-                products: prDataList,
-                uid: FirebaseAuth.currentUser?.uid
-            });
-        }
-        
-        
-    }
+    
     
 
     if(cartSelector) {
@@ -90,8 +65,6 @@ function CartPage(props: any) {
                     })
                 }
                 </div>
-
-                
                 
                 <div style={{
                     backgroundColor: "white",
@@ -122,10 +95,8 @@ function CartPage(props: any) {
 
         </AppFrame>
     )
-
-
-
    
 }
+
 
 export default CartPage;
