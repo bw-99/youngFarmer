@@ -1,4 +1,4 @@
-import React, { createContext, FC, ReactElement, ReactNode, useContext, useEffect } from 'react';
+﻿import React, { createContext, FC, ReactElement, ReactNode, useContext, useEffect } from 'react';
 import { BrowserRouter, Navigate, Route, Router, Routes } from 'react-router-dom';
 
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
@@ -62,7 +62,7 @@ function App() {
                     <Route path='/search' element = {<SearchPage />}/>
                     <Route path='/search/:search' element = {<SearchDetailPage />}/>
                     <Route path='/mypage' element = {<MyPage />}/>
-                    <Route path='/review' element = {<ReviewPage />}/>
+                    <Route path='/review' element={<ReviewPage />}/>
                     <Route path='/review/product/:product_id' element = {<AddReviewPage />}/>
                     <Route path='/product/:productId' element = {<ProductPage />}/>
                     <Route path='/store' element={<StorePage />} />

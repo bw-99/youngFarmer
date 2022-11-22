@@ -57,6 +57,8 @@ function ReviewPage(props: any) {
         })
     }, [])
 
+    console.log(props);
+
     const changeTimeStemp = (second: number) => {
         let date = new Date(second);
         let year = date.getFullYear().toString().slice(-4); //년도 뒤에 두자리
@@ -213,7 +215,7 @@ function ReviewPage(props: any) {
 
                                                     </div>
                                                     <WriteReviewBox style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-                                                        <WriteReviewText>리뷰작성</WriteReviewText>
+                                                        <WriteReviewText onClick={() => { navigate("/review/product/" + pr.product.product_id); } }>리뷰작성</WriteReviewText>
                                                     </WriteReviewBox>
                                                 </div>
                                                 <div style={{ marginTop: "20px", display: "flex" }}>

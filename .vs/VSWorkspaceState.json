@@ -4,10 +4,12 @@
     "\\frontend",
     "\\frontend\\src",
     "\\frontend\\src\\pages",
+    "\\frontend\\src\\pages\\ProductPage",
     "\\frontend\\src\\pages\\ProductPage\\components",
     "\\frontend\\src\\pages\\ReviewPage",
+    "\\frontend\\src\\pages\\ReviewPage\\atoms",
     "\\frontend\\src\\reducers"
   ],
-  "SelectedNode": "\\frontend\\src\\reducers\\ProductReducer.ts",
+  "SelectedNode": "\\frontend\\src\\reducers\\ReviewReducer.ts",
   "PreviewInSolutionExplorer": false
 }
