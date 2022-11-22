@@ -194,17 +194,13 @@ function ReviewPage(props: any) {
                                                     <div>
 
                                                     </div>
-<<<<<<< HEAD
-                                                    <WriteReviewBox style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-                                                        <WriteReviewText onClick={() => { navigate("/review/product/" + pr.product.product_id); } }>리뷰작성</WriteReviewText>
-=======
+                                                 
                                                     <WriteReviewBox 
                                                     onClick={()=>{
                                                         navigate("/review/product/"+pr.product.product_id);
                                                     }}
                                                     style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
                                                         <WriteReviewText>리뷰작성</WriteReviewText>
->>>>>>> 40f9df9f6e312bcf4bdacfe3507dbb984ef2c646
                                                     </WriteReviewBox>
                                                 </div>
                                                 <div style={{ marginTop: "20px", display: "flex" }}>
