@@ -7,6 +7,7 @@ import { RootState } from "../../../reducers";
 import { Timestamp } from 'firebase/firestore';
 import { OrderSending } from "../../../reducers/OrderReducer";
 import { OrderProductDataType, ProductDataType } from "../../../reducers/ProductReducer";
+import { useNavigate } from 'react-router-dom';
 
 export const PrListComp = () => {
     const orderSelector: OrderType = useSelector((state: RootState) =>
@@ -98,6 +99,7 @@ type OrderTimeParam = {
 }
 
 const OrderTimeComp = ({order}:OrderPrType) => {
+    const navigate = useNavigate();
     const time = new Date(order.time_created!.seconds * 1000);
     return (
         <div style={{ display: "flex", justifyContent: "space-between" , alignItems: "center"}}>
@@ -109,7 +111,11 @@ const OrderTimeComp = ({order}:OrderPrType) => {
             <div>
 
             </div>
-            <WriteReviewBox style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <WriteReviewBox 
+            onClick={()=>{
+                navigate("/order/detail/"+ order.merchant_uid);
+            }}
+            style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
                 <WriteReviewText>주문상세</WriteReviewText>
             </WriteReviewBox>
         </div>

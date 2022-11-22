@@ -38,6 +38,7 @@ import SavedStorePage from './pages/MyPage/SavedStore';
 import OrderCompletePage from './pages/OrderPage/OrderCompletePage';
 import OrderReadyPage from './pages/OrderPage/OrderReadyPage';
 import OrderListPage from './pages/OrderListPage/OrderListPage';
+import { OrderDetailPage } from './pages/OrderListPage/OrderDetailPage';
 
 export const AuthContext = createContext(false);
 
@@ -78,6 +79,7 @@ function App() {
                     <Route path='/mypage/point' element={<PointPage />} />
                     <Route path='/mypage/store' element={<SavedStorePage />} />
                     <Route path='/order' element={<OrderPage />} />
+                    <Route path='/order/detail/:merchant_uid' element={<OrderDetailPage />} />
                     <Route path='/order/complete/:merchant_uid' element={<OrderCompletePage />} />
                     <Route path='/order/ready/:merchant_uid' element={<OrderReadyPage />} />
                     <Route path='/list' element={<OrderListPage />} />

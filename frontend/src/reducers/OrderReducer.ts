@@ -90,7 +90,8 @@ export interface OrderSending {
     agreeCondition: boolean,
     impParam: string | null
     time_created: Timestamp | null,
-    delivery_state: string | null
+    delivery_state: string | null,
+    merchant_uid: string | null
     // setOrder: boolean
 }
 
@@ -102,7 +103,8 @@ const orderSendInit:OrderSending = {
     agreeCondition: true,
     impParam: null,
     time_created: null,
-    delivery_state: null
+    delivery_state: null,
+    merchant_uid: null
 }
 
 export function OrderSendReducer(state = orderSendInit, action: any) {
