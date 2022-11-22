@@ -226,8 +226,6 @@ async function getOrderProductsAPI(reviewProducts:ProductDataReviewType[]) {
     });
 }
 
-// ! 하던 중
-
 function* getReview(action:any) {
     const orderResult:ProductDataOrderType[] = yield call(getaTotalOrderAPI, action.payload);
     const reviewResult:ProductDataReviewType[] = yield call(getaTotalReviewAPI, action.payload);

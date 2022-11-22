@@ -128,12 +128,13 @@ export const DiscountComp = () => {
                     전액사용
                 </DiscountPoint>
             </div>
-{/* 
+            {/* 
             <button onClick={() => {
                 handleSubmitDisInfo();
             }}> 
             (임시) 할인 정보 제출
-            </button> */}
+            </button> 
+            */}
         </div>
     );
 }

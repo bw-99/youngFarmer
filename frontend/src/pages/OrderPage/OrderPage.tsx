@@ -138,16 +138,19 @@ function OrderPage(props: any) {
         }
         setItemWithExpireTime("orderData", orderdata, 1000*60*2);
 
+        // 결제 요청
         IMP.request_pay({
             ...impParam
-        }, (rsp:any) => { // callback
+        }, (rsp:any) => {
             console.log(rsp);
             if (rsp.success) {
+                // 서버에 요청 보내서 거래 위조 여부 검증
                 apiClient.post(process.env.REACT_APP_FIREBASE_FUNCTION_PAYMENT_API + "/complete", {
                     imp_uid: rsp.imp_uid,
                     merchant_uid: rsp.merchant_uid
                 }).then(async (data) => {
                     if(data.status == 200) {
+                        // 정상 거래일 때, 거래 정보를 firebase에 저장
                         await saveOrderData(orderdata);
                         console.log(data);
                         navigate("/order/complete/"+impParam.merchant_uid);
