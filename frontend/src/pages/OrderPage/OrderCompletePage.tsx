@@ -106,14 +106,17 @@ function OrderCompletePage(props: any) {
     return(
         <AppFrame>
             <AppBarComponentOnlyBack title={"주문/결제"}/>
-
-            <div style={{
-                marginTop: "calc(50vh - 170px)",
-                display:"flex", flexDirection: "column", alignItems: "center"}}>
-                <CircleBox />
-                <MainText style={{marginTop: "30px"}}> 주문 결제가 완료되었습니다. </MainText>
-                <SubText style={{marginTop: "12px"}}> 다양한 상품을 담아보세요. </SubText>
+            <div style={{height: "100%", display:"flex", alignItems:"center", justifyContent:"center"}}>
+                <div style={{
+                    // marginTop: "calc(50vh - 170px)",
+                    marginBottom: "100px",
+                    display:"flex", flexDirection: "column", alignItems: "center"}}>
+                    <CircleBox />
+                    <MainText style={{marginTop: "30px"}}> 주문 결제가 완료되었습니다. </MainText>
+                    <SubText style={{marginTop: "12px"}}> 다양한 상품을 담아보세요. </SubText>
+                </div>
             </div>
+
             
             <div style={{
                     backgroundColor: "white",

@@ -7,6 +7,8 @@ import { SAVE_DISCOUNT_ACTION } from "../pages/OrderPage/DiscountAction";
 import { SAVE_AGREE_ACTION, SAVE_DELIVERY_ACTION } from "../pages/OrderPage/DeliveryAction";
 import { PRODUCT_SET_ORDER_SUCCESS, PRODUCT_ADD_ORDER, PRODUCT_CANCEL_ORDER, SAVE_PRODUCT_ACTION, REMOVE_PRODUCT_ACTION } from "../pages/OrderPage/ProductAction";
 import { SAVE_PAY_METHOD_ACTION } from "../pages/OrderPage/PayMethodAction";
+import { stat } from "fs";
+import { SAVE_IMP_PARAM } from "../pages/OrderPage/OrderAction";
 
 export interface OrderDataType {
     count: number,
@@ -84,7 +86,8 @@ export interface OrderSending {
     delivery: DeliveryDataType | null,
     discount: DiscountDataType | null,
     payMethod: PaymentMethodDataType | null,
-    agreeCondition: boolean
+    agreeCondition: boolean,
+    impParam: string | null
     // setOrder: boolean
 }
 
@@ -93,7 +96,8 @@ const orderSendInit:OrderSending = {
     delivery: null,
     discount: null,
     payMethod: null,
-    agreeCondition: false
+    agreeCondition: false,
+    impParam: null
 }
 
 export function OrderSendReducer(state = orderSendInit, action: any) {
@@ -122,6 +126,13 @@ export function OrderSendReducer(state = orderSendInit, action: any) {
             return {
                 ...state,
                 agreeCondition: action.payload
+            }
+
+        case SAVE_IMP_PARAM:
+            // alert("SAVE_IMP_PARAM reducer" + action.payload);
+            return {
+                ...state,
+                impParam: action.payload
             }
 
 
