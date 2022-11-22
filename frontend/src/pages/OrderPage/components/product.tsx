@@ -64,7 +64,7 @@ const ProductComp = ({orderProduct}:OrderProductParam) => {
                     <Line style = {{ margin: "0 16px 12px 16px"}} />
                     <div style = {{marginLeft:"16px", marginRight:"16px", display: "flex", flexDirection: "row",justifyContent:"space-between", alignItems:"center"}}>
                         <div style={{display:"flex", alignItems:"center"}}>
-                            <img src = {orderProduct.product.photo} style = {{width: "88px", height: "88px",objectFit:"cover",  margin: "0 16px 0 0"}}/>
+                            <img src = {orderProduct.product.photo} style = {{width: "88px", height: "88px",objectFit:"cover",borderRadius: "12px",  margin: "0 16px 0 0"}}/>
 
                             <div style = {{display: "flex", flexDirection: "column"}}>
                                 <ProductName style = {{margin: "0px 0 4px 0"}}> {orderProduct.product.title} </ProductName>

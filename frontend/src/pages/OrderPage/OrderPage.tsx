@@ -159,20 +159,7 @@ function OrderPage(props: any) {
                 navigate(-1);
             }
         });
-        
-        
       }
-
-
-
-    // ! 굳이 imp 값을 preorder에 저장할 필요 없어서 지움
-    // const saveImpOnFS = async (impParam: any) => {
-    //     const preorderRef = collection(db, "preorder");
-    //     await addDoc(preorderRef, {
-    //         merchant_uid: impParam.merchant_uid,
-    //         imp: impParam
-    //     })
-    // }
 
 
     const orderFinal = async () => {
@@ -180,7 +167,7 @@ function OrderPage(props: any) {
         // await saveImpOnFS(impParam);
         setTimeout(() => {
             requestPay(impParam);
-        }, 2000);
+        }, 1500);
     }
 
     useEffect(() => {
@@ -216,19 +203,6 @@ function OrderPage(props: any) {
         return;
     }
 
-    // const getDeliveryInfo = async (uid:string) => {
-    //     const preorderRef = collection(db, "preorder");
-    //     const q = query(preorderRef, where("uid", "==", uid));
-    //     const target = await getDocs(q);
-    //     if(target.empty) {
-    //         setDeliveryInfo(null);
-    //         return;
-    //     }
-    //     setDeliveryInfo(target.docs[0].data().delivery);
-    //     return;
-    // }
-
-
     useEffect(() => {
         FirebaseAuth.onAuthStateChanged((user) => {
             if(user) {
@@ -249,13 +223,6 @@ function OrderPage(props: any) {
         )
     }
 
-    // if(!orderProductSelector || !orderSendSelector)  {
-    //     return (
-    //         <div>
-
-    //         </div>
-    //     );
-    // }
     return(
         
         <AppFrame>

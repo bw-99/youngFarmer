@@ -27,7 +27,7 @@ export const AuthProvider:FC<Props> = ({children}) :React.ReactElement|null => {
     const dispatch = useDispatch();
 
     useEffect(()=>{
-        getItemWithExpireTime("user")? setUser(true) : setUser(false);
+        // getItemWithExpireTime("user")? setUser(true) : setUser(false);
         FirebaseAuth.onAuthStateChanged((data)=> {
             if(data){
                 setItemWithExpireTime("user", true, 1000*60*60);
