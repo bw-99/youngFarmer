@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import styled from "styled-components";
-import { FirebaseAuth } from "../..";
+import { db, FirebaseAuth } from "../..";
 import { AppFrame, AuthContext } from "../../App";
 
 
@@ -12,7 +12,7 @@ import shopping_bag from "../../assets/images/shopping_bag@3x.png";
 import { AppBarComponentMyPage, AppBarComponentNoBack, AppBarComponentOnlyBack } from "../../common/AppBar/AppBar";
 
 
-import {CartProductComponent} from "./components/CartProduct"
+import {CartProductComponent, setPreOrderInfo} from "./components/CartProduct"
 
 
 import { BottomNavigationBar } from "../../common/BottomNavigationBar/BottomNavigationBar";
@@ -26,6 +26,7 @@ import {PaymentBtn} from "./atoms/CartProduct"
 import { CartTopComp } from "./components/CartTop";
 import { OrderDataType } from "../../reducers/OrderReducer";
 import { setProductOrderTry } from "../OrderPage/ProductAction";
+import { addDoc, collection, deleteDoc, getDocs, query, updateDoc, where } from "firebase/firestore";
 
 
 function CartPage(props: any) {
@@ -45,6 +46,9 @@ function CartPage(props: any) {
         state.OrderReducer.orders
     );    
 
+    
+    
+
     if(cartSelector) {
         return (
             <AppFrame>
@@ -61,16 +65,15 @@ function CartPage(props: any) {
                     })
                 }
                 </div>
-
-                
                 
                 <div style={{
                     backgroundColor: "white",
                     position:"fixed", bottom: 0, maxWidth:"625px", width:"100%",height:"56px", paddingBottom: "16px"}}>
                     <PaymentBtn 
-                    onClick={()=>{
+                    onClick={async()=>{
                         setOrder(true);
                         dispatch(setProductOrderTry(orderSelector));
+                        await setPreOrderInfo(orderSelector);
                         navigate("/order");
                     }}
                     style = {{
@@ -92,10 +95,8 @@ function CartPage(props: any) {
 
         </AppFrame>
     )
-
-
-
    
 }
+
 
 export default CartPage;

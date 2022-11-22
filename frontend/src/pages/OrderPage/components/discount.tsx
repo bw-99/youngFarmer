@@ -12,6 +12,7 @@ import DaumPostcode from "react-daum-postcode";
 import ReactDom from 'react-dom';
 import { getDiscountTry, saveDiscountAction } from './../DiscountAction';
 import { CouponSrcType, DiscountDataType } from "../../../reducers/DiscountReducer";
+import { DiscountContentDropdown, DiscountContentLabel, DiscountPoint, DiscountPointInput, DiscountPointInputLabel, DiscountTitleAtom } from "../atoms/discount";
 
 
 export const DiscountComp = () => {
@@ -61,22 +62,20 @@ export const DiscountComp = () => {
 
     return(
         <div>
-            <div>
-                <h3>할인 정보</h3>
-            </div>
+            <DiscountTitleAtom
+            style={{margin: "0 16px"}}
+            >할인 정보</DiscountTitleAtom>
 
-            <div style={{display: "flex", marginTop: "30px"}}>
-                <div>
+            <div style={{display: "flex",  margin: "27px 16px 0 16px", alignItems: "center"}}>
+                <DiscountContentLabel style={{marginRight: "43px"}}>
                     쿠폰
-                </div>
-
-                  
-
-                <div  style={{marginLeft: "40px"}}>
+                </DiscountContentLabel>
+                <div style={{flex: 1}}>
                     {
                         discountSelector.coupon_list
                         ?
-                        <select 
+                        <DiscountContentDropdown 
+                        placeholder="쿠폰을 선택해주세요."
                         onChange={(e) => {
                             useCoupon = JSON.parse(e.target.value);
                             console.log(useCoupon);
@@ -87,7 +86,7 @@ export const DiscountComp = () => {
                                 })
                             }
                             
-                        </select>  
+                        </DiscountContentDropdown>  
                         :
                         "쿠폰 없음"
                     }
@@ -95,13 +94,13 @@ export const DiscountComp = () => {
             </div>
 
 
-            <div style={{display: "flex", marginTop: "30px"}}>
-                <div>
+            <div style={{display: "flex",  margin: "20px 16px 0 16px", alignItems: "center"}}>
+                <DiscountContentLabel style={{marginRight: "31px"}}>
                     포인트
-                </div>
+                </DiscountContentLabel>
 
-                <div style={{marginLeft: "40px"}}>
-                    <input type="number" 
+                <div style={{display:"flex",  alignItems: "center"}}>
+                    <DiscountPointInput type="number"
                     
                     onChange={(e) => {
                         const pointInput = Number(e.target.value);
@@ -115,23 +114,27 @@ export const DiscountComp = () => {
                         discountSelector.point
                         :
                         usePointAmount
-                    }/> P
+                    }/> 
+                    <DiscountPointInputLabel>
+                        P
+                    </DiscountPointInputLabel>
                     
                 </div>
 
-                <button disabled={discountSelector.point === 0} style={{marginLeft: "40px"}} onClick={() => {
+                <DiscountPoint disabled={discountSelector.point === 0} style={{marginLeft: "40px"}} onClick={() => {
                     setUsePoint(!usePoint);
                     setUsePointAmount(usePointAmount)
                 }}>
                     전액사용
-                </button>
+                </DiscountPoint>
             </div>
-
+            {/* 
             <button onClick={() => {
                 handleSubmitDisInfo();
             }}> 
             (임시) 할인 정보 제출
-            </button>
+            </button> 
+            */}
         </div>
     );
 }

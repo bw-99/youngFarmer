@@ -56,7 +56,7 @@ function ProductPage(props: any) {
         }
     }, [modalselector.open_modal]);
 
-    if (selector) {
+    if (selector && selector.product_id == Number(params.productId)) {
         return (
             <AppFrame>
                 {/*<PaymentPageComp />*/}

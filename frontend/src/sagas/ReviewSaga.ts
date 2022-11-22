@@ -39,6 +39,8 @@ async function convertReview2Product(reviewDataList:ProductDataReviewType[]) {
 }
 
 
+
+
 async function convertOrder2Product(orderDataList:ProductDataOrderType[]) {
     console.log(orderDataList);
     
@@ -47,7 +49,7 @@ async function convertOrder2Product(orderDataList:ProductDataOrderType[]) {
 
     orderDataList.forEach((element: ProductDataOrderType) => {
         queryList.push(
-            query(productRef, where("product_id", "==", element.product_id))
+            query(productRef, where("product_id", "==", element.product.product_id))
         );
     });
 
@@ -124,17 +126,25 @@ async function checkDuplicateReview(uid:string, product_id: number) {
 async function getOrderProductAPI(uid:string, product_id: number) {
 
     const isDuplicate = await checkDuplicateReview(uid, product_id);
-
     if(!isDuplicate){
         const orderRef = collection(db, "order");
-        const q = query(orderRef, where("uid", "==", uid), where("product_id", "==", product_id));
+        // alert(`${uid} ${product_id}`);
+        const q = query(orderRef, where("uid", "==", uid), where("product_id_list", "array-contains", product_id));
         const fbdata = await getDocs(q);
 
         if(fbdata.empty) {
             return false;
         }
+
+        const productList = fbdata.docs[0].data().products;
+
+        for (const pr of productList) {
+            if( pr.product.product_id == product_id ){
+                return pr;
+            }
+        }
         
-        return fbdata.docs[0].data();
+        return false;
     }
     else{
         return false;
@@ -148,15 +158,52 @@ async function getaTotalReviewAPI(payload:any) {
     const q = query(reviewRef, where("uid", "==", uid));
     const fbdata = await getDocs(q);
 
+    console.log(fbdata);
+
     const reviewDataList = fbdata.docs.map((doc) => {
         return doc.data();
     });
-    
+
     return reviewDataList;
 }
 
 
+async function getaTotalOrderAPI(payload:any) {
+    let uid = payload.payload;
+
+    const orderRef = collection(db, "order");
+    const q = query(orderRef, where("uid", "==", uid));
+    const fbdata = await getDocs(q);
+
+    console.log(fbdata);
+    let orderDataList: any[] = [];
+    for (const doc of fbdata.docs) {
+        const prList = doc.data().products;
+        for (const pr of prList) {
+            let temp = true;
+            for (const order of orderDataList) {
+                if(order.product.product_id == pr.product.product_id) {
+                    temp = false;
+                    break;
+                }
+            }
+            
+            if(temp) {
+                orderDataList.push(pr);
+            }
+        }
+    }
+
+    return orderDataList;
+}
+
+
+
 async function getOrderProductsAPI(reviewProducts:ProductDataReviewType[]) {
+    if(!reviewProducts.length) {
+        return [];
+    }
+ 
     const pidList = reviewProducts.map((rev) => {
         return rev.product_id
     });
@@ -179,37 +226,42 @@ async function getOrderProductsAPI(reviewProducts:ProductDataReviewType[]) {
     });
 }
 
-// ! 하던 중
-
 function* getReview(action:any) {
-    const result:ProductDataReviewType[] = yield call(getaTotalReviewAPI, action.payload);
-    if(result){     
-        const reviewProducts: ReviewProductDataType[] = yield call(convertReview2Product, result);
-        yield put({
-            type: SEARCH_REVIEW_SUCCESS,
-            payload: {
-                reviewProducts: reviewProducts
-            },
-        }); 
+    const orderResult:ProductDataOrderType[] = yield call(getaTotalOrderAPI, action.payload);
+    const reviewResult:ProductDataReviewType[] = yield call(getaTotalReviewAPI, action.payload);
+    let unReviewResult = [];
+    for (const order of orderResult) {
+        let temp = true;
+        for (const review of reviewResult) {
+            if(order.product.product_id === review.product_id) {
+                temp=false;
+                break;
+            }
+        }
 
-        const orderResult:ProductDataOrderType[] = yield call(getOrderProductsAPI, result);
-        console.log(orderResult);
-        const unreviewProducts: ProductWithOrderType[] = yield call(convertOrder2Product, orderResult);
-        console.log(unreviewProducts);
-        
-        yield put({
-            type: SEARCH_UNREVIEW_SUCCESS,
-            payload: {
-                unreviewProducts: unreviewProducts
-            },
-        }); 
+        if(temp) {
+            unReviewResult.push(order);
+        }
     }
-    else{
-        // yield put({
-        //     type: CART_ADD_FAIL,
-        //     callback: action.payload.callback
-        // }); 
-    }
+    console.log(unReviewResult);
+    
+    // const unreviewProducts: ProductWithOrderType[] = yield call(convertOrder2Product, unReviewResult);
+    // console.log(unreviewProducts);
+    
+    yield put({
+        type: SEARCH_UNREVIEW_SUCCESS,
+        payload: {
+            unreviewProducts: unReviewResult
+        },
+    }); 
+    
+    const reviewProducts: ReviewProductDataType[] = yield call(convertReview2Product, reviewResult);
+    yield put({
+        type: SEARCH_REVIEW_SUCCESS,
+        payload: {
+            reviewProducts: reviewProducts
+        },
+    }); 
 }
 
 

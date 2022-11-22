@@ -29,6 +29,7 @@ export const IndexSelectedLine = styled.div`
 export const ReviewerImage = styled.img`
   width: 32px;
   height: 32px;
+  border-radius: 70%;
 `
 
 export const ReviewerNickname = styled.div`

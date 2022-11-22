@@ -84,8 +84,9 @@ export const ProductDetailText = styled.div`
 `
 
 export const ProductDetailDot = styled.div`
-  width: 2px;
-  height: 2px;
+  width: 3px;
+  height: 3px;
+  border-radius: 70%;
   background-color: #dfdfdf;
 `
 
@@ -97,7 +98,7 @@ export const WriteReviewBox = styled.div`
 `
 
 export const WriteReviewText = styled.div`
-  height: 17px;
+  /* height: 17px; */
   font-family: AppleSDGothicNeo;
   font-size: 14px;
   font-weight: 500;

@@ -30,3 +30,11 @@ export const saveDeliveryAction = (payload: DeliveryDataType) => {
         payload: payload
     }
 }
+
+export const SAVE_AGREE_ACTION = "SAVE_AGREE_ACTION";
+export const saveAgreeAction = (payload: boolean) => {
+    return {
+        type: SAVE_AGREE_ACTION,
+        payload: payload
+    }
+}

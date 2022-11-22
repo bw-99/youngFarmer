@@ -23,14 +23,13 @@ interface Props {
  * 2. user가 reload될 때마다 null -> 렌더링 직전 localstorage 값 비교 -> true -> 바로 main -> 이후 auth 변경 때마다 localstorage 변경
  */
 export const AuthProvider:FC<Props> = ({children}) :React.ReactElement|null => {
-    const [user, setUser] = useState<null | boolean>(getItemWithExpireTime("user")? true : false);
+    const [user, setUser] = useState<null | boolean>(null);
     const dispatch = useDispatch();
 
     useEffect(()=>{
-        getItemWithExpireTime("user")? setUser(true) : setUser(false);
+        // getItemWithExpireTime("user")? setUser(true) : setUser(false);
         FirebaseAuth.onAuthStateChanged((data)=> {
             if(data){
-                console.log("auth provider use effect");
                 setItemWithExpireTime("user", true, 1000*60*60);
                 dispatch(getLikeAction(data.uid));
                 dispatch(getCartAction(data.uid));
@@ -60,6 +59,13 @@ interface NavigateProps {
 export const PrivateRoute:FC<NavigateProps> = ({children, ...props}):any => {
     const currentUser = useContext(AuthContext);
 
+    if(currentUser == null) {
+        return(
+            <div>
+            </div>
+        );
+    }
+
     return (
         currentUser?  <Outlet/> 
         : <Navigate to={"/login"}/> 
@@ -68,6 +74,13 @@ export const PrivateRoute:FC<NavigateProps> = ({children, ...props}):any => {
 
 export const LoginRoute:FC<NavigateProps> = ({children, ...props}):any => {
     let currentUser = useContext(AuthContext);
+
+    if(currentUser == null) {
+        return(
+            <div>
+            </div>
+        );
+    }
 
     return (
         currentUser? 

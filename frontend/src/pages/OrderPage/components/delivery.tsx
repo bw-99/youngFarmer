@@ -11,11 +11,15 @@ import axios from "axios";
 import DaumPostcode from "react-daum-postcode";
 import ReactDom from 'react-dom';
 import { getDeliveryTry, saveDeliveryAction } from "../DeliveryAction";
+import { DeliverCheckAtom, DeliverCheckDefault, DeliveryConPlaceInput, DeliveryConPlaceInputDisabled, DeliveryContentAtom, DeliveryFindAtom, DeliveryListAtom, DeliveryTtitleAtom, SepLineAtom } from "../atoms/delivery";
+
+type DeliveryParam = {
+    deliveryInfo: DeliveryDataType | null
+}
+
 
 export const DeliveryComp = () => {
     const dispatch = useDispatch();
-
-
 
     const deliverySelector: DeliveryDataType[] = useSelector((state:RootState) =>
         state.DeliveryReducer.deliveryList
@@ -131,13 +135,6 @@ export const DeliveryComp = () => {
             const defaultDeliveryInfo = deliverySelector.filter((dev) => dev.is_default)[0];
             if(defaultDeliveryInfo) {
                 setSelectedDeliveryOption(defaultDeliveryInfo);
-
-                
-                // setDeliverMan(defaultDeliveryInfo.name);
-                // setDeliverPhone(defaultDeliveryInfo.phone);
-                // setDeliverLocationMain(defaultDeliveryInfo.location_main);
-                // setDeliverLocationSub(defaultDeliveryInfo.location_sub);
-                // setDeliverReq(defaultDeliveryInfo.requirement);
                 setDeliveryDefault(defaultDeliveryInfo.is_default);
             }
         }
@@ -147,8 +144,6 @@ export const DeliveryComp = () => {
     }, [deliverySelector])
 
     useEffect(() => {
-        console.log("***************");
-        
         if(deliverySelector) {
             handleSendDeliveryOption();
         }
@@ -163,112 +158,13 @@ export const DeliveryComp = () => {
 
     return(
         <div>
-            <div style={{display: "flex"}}>
-                <h3> 배송 정보 </h3>
-                <button onClick={() => {
-                            if(deliverySelector.length > 0) {
-                                setSelectLocation(!selectLocation);
-                            }
-                        }}>
-                    배송지 목록
-                </button>
-            </div>
-            <div>
-                {/* 수령인 */}
-                <div style={{display:"flex", margin:"20px"}}>
-                    <div>
-                        수령인
-                    </div>
-                    <input placeholder="수령인 성함을 입력하세요" value={selectedDeliveryOption ? selectedDeliveryOption!.name : ""} onChange={(e)=>{
-                        setDeliverMan(e.target.value);
-                        selectedDeliveryOption!.name = e.target.value;
-                    }}>
-                    </input>
-                </div>
+            <DeliveryTitleComp selectLocation={selectLocation} setSelectLocation={setSelectLocation} />
+            <DeliveryContentomp 
+                setDeliverMan={setDeliverMan} setDeliverPhone={setDeliverPhone} setDeliverLocationMain={setDeliverLocationMain}
+                setIsPopupOpen={setIsPopupOpen} setDeliverLocationSub={setDeliverLocationSub} setDeliverReq={setDeliverReq}
+                setDeliveryDefault={setDeliveryDefault} selectedDeliveryOption={selectedDeliveryOption} deliveryDefault={deliveryDefault} />
 
-                {/* 휴대폰 */}
-                <div style={{display:"flex", margin:"20px"}}>
-                    <div>
-                        휴대폰
-                    </div>
-                    <input placeholder="휴대폰 번호를 입력하세요" value={selectedDeliveryOption ? selectedDeliveryOption!.phone : ""} onChange={(e)=>{
-                        selectedDeliveryOption!.phone = e.target.value;
-                        setDeliverPhone(e.target.value);
-                    }}>
-                    </input>
-                </div>
-
-                {/* 주소 */}
-                <div style={{display:"flex", margin:"20px"}}>
-                    <div>
-                        주소
-                    </div>
-                    <input disabled={true} placeholder="주소를 입력하세요" value={selectedDeliveryOption ? selectedDeliveryOption!.location_main : ""} onChange={(e)=>{
-                        setDeliverLocationMain(e.target.value);
-                        selectedDeliveryOption!.location_main = e.target.value;
-                    }}>
-                    </input>
-
-                    <button onClick={() => {
-                        setIsPopupOpen(true);
-
-                    }}>
-                        도로명 찾기
-                    </button>
-
-                    {/* <DeliveryPopUp /> */}
-                    
-                </div>
-
-
-                {/* 세부 주소 */}
-                <div style={{display:"flex", margin:"20px"}}>
-                    <div>
-                        세부 주소
-                    </div>
-                    <input placeholder="세부 주소를 입력하세요" value={selectedDeliveryOption ? selectedDeliveryOption!.location_sub : ""} onChange={(e)=>{
-                        setDeliverLocationSub(e.target.value);
-                        selectedDeliveryOption!.location_sub = e.target.value;
-                    }}>
-                    </input>                    
-                </div>
-
-
-                {/* 배송요청 */}
-                <div style={{display:"flex", margin:"20px"}}>
-                    <div>
-                        배송요청
-                    </div>
-                    <input placeholder="배송 요청사항을 입력하세요" value={selectedDeliveryOption ? selectedDeliveryOption!.requirement : ""} onChange={(e)=>{
-                        setDeliverReq(e.target.value);
-                        selectedDeliveryOption!.requirement = e.target.value;
-                    }}>
-                    </input>
-                </div>
-
-            </div>
-
-            <div onClick={()=>{
-                setDeliveryDefault(!deliveryDefault);
-            }}>
-                {
-                    deliveryDefault?
-                    <img src={checkIcon}/>
-                    :
-                    <img src={checkNotIcon}/>
-                }
-
-                기본 배송지로 설정
-            </div>
-
-            <button onClick={()=>{
-                handleSendDeliveryOption();
-                // handleSetDeliveryOption();
-            }}>
-                (임시) 주소 저장
-            </button>
-
-
+            <SepLineAtom style={{marginTop: "25px"}}/>
             <TopBackgroundWrapper 
             onClose={() => {
                 setIsPopupOpen(false);
@@ -292,7 +188,7 @@ export const DeliveryComp = () => {
             onClose={() => {
                 setSelectLocation(false);
             }}
-            backgroundColor={"rgba(0,0,0,0.5)"} isActive={selectLocation}>
+            backgroundColor={"rgba(255,255,255,0.7)"} isActive={selectLocation}>
                 {
                     <div onClick={(e) => {
                         e.stopPropagation();
@@ -321,6 +217,144 @@ export const DeliveryComp = () => {
         </div>
     );
 }
+
+type DeliveryTitleProp = {
+    selectLocation: boolean,
+    setSelectLocation: any
+}
+
+const DeliveryTitleComp = ({selectLocation, setSelectLocation}:DeliveryTitleProp) => {
+    const deliverySelector: DeliveryDataType[] = useSelector((state:RootState) =>
+        state.DeliveryReducer.deliveryList
+    );     
+
+    return (
+        <div style={{
+            margin: "0 16px",
+            display: "flex", justifyContent: "space-between", alignItems: "center"}}>
+            <DeliveryTtitleAtom> 배송 정보 </DeliveryTtitleAtom>
+            <DeliveryListAtom onClick={() => {
+                        if(deliverySelector.length > 0) {
+                            setSelectLocation(!selectLocation);
+                        }
+                    }}>
+                배송지 목록
+            </DeliveryListAtom>
+        </div>
+    );
+}
+
+
+type DeliveryContentProp = {
+    selectedDeliveryOption: any,
+    setDeliverMan: any,
+    setDeliverPhone: any,
+    setDeliverLocationMain: any,
+    setIsPopupOpen: any,
+    setDeliverLocationSub: any,
+    setDeliverReq: any,
+    setDeliveryDefault: any,
+    deliveryDefault: any
+}
+
+const DeliveryContentomp = ({selectedDeliveryOption, setDeliverMan, setDeliverPhone, setDeliverLocationMain, setIsPopupOpen, setDeliverLocationSub, setDeliverReq, setDeliveryDefault, deliveryDefault}:DeliveryContentProp) => {
+    const deliverySelector: DeliveryDataType[] = useSelector((state:RootState) =>
+        state.DeliveryReducer.deliveryList
+    );     
+
+    return (
+        <div>
+            {/* 수령인 */}
+            <div style={{display:"flex", margin: "16px 16px 0 16px", alignItems: "center"}}>
+                <DeliveryContentAtom style={{marginRight: "31px"}}>
+                    수령인
+                </DeliveryContentAtom>
+                <DeliveryConPlaceInput placeholder="수령인 성함을 입력하세요" value={selectedDeliveryOption ? selectedDeliveryOption!.name : ""} onChange={(e)=>{
+                    setDeliverMan(e.target.value);
+                    selectedDeliveryOption!.name = e.target.value;
+                }}>
+                </DeliveryConPlaceInput>
+            </div>
+
+                {/* 휴대폰 */}
+                <div style={{display:"flex", margin: "26px 16px 0 16px", alignItems: "center"}}>
+                    <DeliveryContentAtom style={{marginRight: "31px"}}>
+                        휴대폰
+                    </DeliveryContentAtom>
+                    <DeliveryConPlaceInput placeholder="휴대폰 번호를 입력하세요" value={selectedDeliveryOption ? selectedDeliveryOption!.phone : ""} onChange={(e)=>{
+                        selectedDeliveryOption!.phone = e.target.value;
+                        setDeliverPhone(e.target.value);
+                    }}>
+                    </DeliveryConPlaceInput>
+                </div>
+
+                {/* 주소 */}
+                <div style={{display:"flex", margin: "26px 16px 0 16px", alignItems: "flex-start"}}>
+                    <DeliveryContentAtom style={{marginRight: "43px", padding: "11px 0"}}>
+                        주소
+                    </DeliveryContentAtom>
+
+                    <div style={{flex: 1}}>
+                        <div style={{display:"flex", flex: 1}}>
+                            <DeliveryConPlaceInputDisabled disabled={true} value={selectedDeliveryOption ? selectedDeliveryOption!.location_main : ""} onChange={(e)=>{
+                                setDeliverLocationMain(e.target.value);
+                                selectedDeliveryOption!.location_main = e.target.value;
+                            }}>
+                            </DeliveryConPlaceInputDisabled>
+
+                            <DeliveryFindAtom 
+                            style={{marginLeft: "19.5px"}}
+                            onClick={() => {
+                                setIsPopupOpen(true);
+                            }}>
+                                주소 찾기
+                            </DeliveryFindAtom>
+                        </div>
+
+                        <div style={{display:"flex", flex: 1, marginTop:"8px"}}>
+                            <DeliveryConPlaceInput placeholder="세부 주소를 입력하세요" value={selectedDeliveryOption ? selectedDeliveryOption!.location_sub : ""} onChange={(e)=>{
+                            setDeliverLocationSub(e.target.value);
+                            selectedDeliveryOption!.location_sub = e.target.value;
+                        }}>
+                            </DeliveryConPlaceInput>     
+                        </div>
+                    </div>
+                </div>
+
+                {/* 배송요청 */}
+                <div style={{display:"flex", margin: "26px 16px 0 16px", alignItems: "center"}}>
+                    <DeliveryContentAtom style={{marginRight: "19px"}}>
+                        배송요청
+                    </DeliveryContentAtom>
+                    <DeliveryConPlaceInput placeholder="배송 요청사항을 입력하세요" value={selectedDeliveryOption ? selectedDeliveryOption!.requirement : ""} onChange={(e)=>{
+                         setDeliverReq(e.target.value);
+                         selectedDeliveryOption!.requirement = e.target.value;
+                    }}>
+                    </DeliveryConPlaceInput>
+                </div>
+
+
+                <div 
+                style={{display:"flex", margin: "26px 16px 0 16px", alignItems: "center"}}
+                onClick={()=>{
+                    setDeliveryDefault(!deliveryDefault);
+                }}>
+                    {
+                        deliveryDefault?
+                        <DeliverCheckAtom src={checkIcon}/>
+                        :
+                        <DeliverCheckAtom src={checkNotIcon}/>
+                    }
+                    <DeliverCheckDefault style={{marginLeft: "6px", marginTop: "2px"}}>
+                        기본 배송지로 설정
+                    </DeliverCheckDefault>
+
+                </div>
+        </div>
+    );
+}
+
+
 
 type RoadSettingType = {
     // deliverLocationMain:any,

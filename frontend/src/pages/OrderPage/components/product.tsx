@@ -8,7 +8,7 @@ import { OrderProductDataType, ProductDataType } from "../../../reducers/Product
 import { Spantemp2 } from "../../CartPage/atoms/CartProduct";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../reducers";
-import { saveProductAction } from "../ProductAction";
+import { removeProductAction, saveProductAction } from "../ProductAction";
 
 export type OrderProductListParam = {
     orderProducts: OrderProductDataType[]
@@ -19,17 +19,17 @@ export type OrderProductParam = {
 }
 
 
-export const ProductListComp = () => {
+export const ProductListComp = ({orderProducts}:OrderProductListParam) => {
     const dispatch = useDispatch();
     
-    const orderProductSelector: OrderProductDataType[] = useSelector((state:RootState) =>
-        state.SearchDetailReducer.orderProducts
-    );     
+    // const orderProductSelector: OrderProductDataType[] = useSelector((state:RootState) =>
+    //     state.SearchDetailReducer.orderProducts
+    // );     
 
     return(
         <>
         {
-            orderProductSelector.map((orderProduct) => {
+            orderProducts.map((orderProduct) => {
                 return (
                     <ProductComp key={orderProduct.product.product_id} orderProduct={orderProduct} />
                 )
@@ -43,8 +43,11 @@ const ProductComp = ({orderProduct}:OrderProductParam) => {
     const dispatch = useDispatch();
     useEffect(() => {
         if(orderProduct) {
-            console.log(orderProduct);
             dispatch(saveProductAction(orderProduct));
+        }
+
+        return () => {
+            dispatch(removeProductAction(orderProduct));
         }
     }, []);
 
@@ -61,7 +64,7 @@ const ProductComp = ({orderProduct}:OrderProductParam) => {
                     <Line style = {{ margin: "0 16px 12px 16px"}} />
                     <div style = {{marginLeft:"16px", marginRight:"16px", display: "flex", flexDirection: "row",justifyContent:"space-between", alignItems:"center"}}>
                         <div style={{display:"flex", alignItems:"center"}}>
-                            <img src = {orderProduct.product.photo} style = {{width: "88px", height: "88px",objectFit:"cover",  margin: "0 16px 0 0"}}/>
+                            <img src = {orderProduct.product.photo} style = {{width: "88px", height: "88px",objectFit:"cover",borderRadius: "12px",  margin: "0 16px 0 0"}}/>
 
                             <div style = {{display: "flex", flexDirection: "column"}}>
                                 <ProductName style = {{margin: "0px 0 4px 0"}}> {orderProduct.product.title} </ProductName>
