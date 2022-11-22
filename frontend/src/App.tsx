@@ -33,11 +33,11 @@ import OrderPage from './pages/OrderPage/OrderPage';
 import ReviewPage from './pages/ReviewPage/ReviewPage';
 import AddReviewPage from './pages/ReviewPage/AddReviewPage';
 import ChatPage2 from './pages/ChatPage/ChatPage2';
-import ListPage from './pages/ListPage/ListPage';
 import PointPage from './pages/MyPage/PointPage';
 import SavedStorePage from './pages/MyPage/SavedStore';
 import OrderCompletePage from './pages/OrderPage/OrderCompletePage';
 import OrderReadyPage from './pages/OrderPage/OrderReadyPage';
+import OrderListPage from './pages/OrderListPage/OrderListPage';
 
 export const AuthContext = createContext(false);
 
@@ -80,7 +80,7 @@ function App() {
                     <Route path='/order' element={<OrderPage />} />
                     <Route path='/order/complete/:merchant_uid' element={<OrderCompletePage />} />
                     <Route path='/order/ready/:merchant_uid' element={<OrderReadyPage />} />
-                    <Route path='/list' element={<ListPage />} />
+                    <Route path='/list' element={<OrderListPage />} />
                   </Route>
 
                   <Route path="/login" element = {<LoginRoute />}>

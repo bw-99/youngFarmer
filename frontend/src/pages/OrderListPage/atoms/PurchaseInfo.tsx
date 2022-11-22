@@ -16,7 +16,7 @@ export const PurchaseState = styled.div`
   height: 17px;
   font-family: AppleSDGothicNeo;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
   font-stretch: normal;
   font-style: normal;
   line-height: normal;
@@ -33,6 +33,7 @@ export const ProductImg = styled.img`
   width: 88px;
   height: 88px;
   border-radius: 12px;
+  object-fit: cover;
 `
 
 export const ProductLocateText = styled.div`
@@ -60,7 +61,6 @@ export const ProductTitleText = styled.div`
 `
 
 export const ProductPriceText = styled.div`
-  height: 19px;
   font-family: AppleSDGothicNeo;
   font-size: 16px;
   font-weight: 800;
@@ -72,7 +72,6 @@ export const ProductPriceText = styled.div`
 `
 
 export const ProductDetailText = styled.div`
-  height: 15px;
   font-family: AppleSDGothicNeo;
   font-size: 12px;
   font-weight: 500;
@@ -111,4 +110,13 @@ export const WriteReviewText = styled.div`
 export const UnReviewSepLine = styled.div`
   height: 8px;
   background-color: #f7f7f7;
+  max-width: calc(625px - 32px);
+  width: calc(100vw - 32px);
+`
+
+export const SemiSepLine = styled.div`
+  height: 1px;
+  background-color: #efefef;
+  max-width: calc(625px - 32px);
+  width: calc(100vw - 32px);
 `

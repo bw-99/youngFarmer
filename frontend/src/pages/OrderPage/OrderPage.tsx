@@ -130,8 +130,9 @@ function OrderPage(props: any) {
             ...orderSendSelector,
             impParam: JSON.stringify(impParam),
             merchant_uid: impParam.merchant_uid,
-            time_created: Timestamp.now(),
+            time_created: new Date(),
             uid: auth.currentUser!.uid,
+            delivery_state: "배송준비",
             product_id_list: orderSendSelector!.products!.map((pr) => {
                 return pr.product.product_id
             })

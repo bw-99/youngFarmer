@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const StateSelectBox = styled.div`
-  height: 38px;
+  padding: 10px 16px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -12,7 +12,8 @@ export const StateSelectBox = styled.div`
 
 export const StateSelectText = styled.div`
   /*width: 25px;
-  */height: 17px;
+  */
+  height: 17px;
   font-family: AppleSDGothicNeo;
   font-size: 14px;
   font-weight: 500;
@@ -25,12 +26,13 @@ export const StateSelectText = styled.div`
 
 export const StateNonSelectBox = styled.div`
   /*width: 100px;*/
-  height: 38px;
+  padding: 10px 16px;
   border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: #f5f5f5;
+  border: solid 1px #f5f5f5;
 `
 
 export const StateNonSelectText = styled.div`
