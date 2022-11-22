@@ -18,6 +18,7 @@ import { ShareIconBlackComponent, ShareIconComponent } from "./ShareIcon/ShareIc
 import { MySettingComponent } from "./SettingIcon/Mysetting";
 import { searchFilterTryAction, searchTryAction } from "../../pages/SearchPage/SearchDertailAction";
 import { RootState } from "../../reducers";
+import { searchRemoveAction } from './../../pages/SearchPage/SearchDertailAction';
 
 // btn-search
 interface ScrollProps {
@@ -379,6 +380,10 @@ export const AppBarComponentSearch = () => {
         }
         else{
             dispatch(searchTryAction(params.search!));
+        }
+
+        return () => {
+            dispatch(searchRemoveAction());
         }
     }, [params.search, searchParams.get("searchFilter")]);
     

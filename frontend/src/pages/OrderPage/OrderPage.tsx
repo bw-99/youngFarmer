@@ -155,29 +155,44 @@ function OrderPage(props: any) {
           }
         });
       }
+    const isExistDuplicateDeliver = async(delivery:DeliveryDataType) => {
+        console.log("isExistDuplicateDeliver");
+        const deliverRef = collection(db, "delivery");
+        let q = query(deliverRef,
+            where("location_main","==",delivery.location_main),
+            where("location_sub","==",delivery.location_sub),
+            where("name","==",delivery.name),
+            where("phone","==",delivery.phone),
+            where("uid","==",delivery.uid),
+        );
+        const isEmpty = (await getDocs(q)).empty;
+        return !isEmpty;
+    }
 
     const saveOrderData = async(data: any) => {
         const orderRef = collection(db, "order");
-        console.log(data);
         await addDoc(orderRef, data);
-        await addDoc(collection(db, "delivery"), data.delivery);
+        const canAddDeliver:boolean = await isExistDuplicateDeliver(orderSendSelector!.delivery!);
+        if(canAddDeliver) {
+            await addDoc(collection(db, "delivery"), data.delivery);
+        }
     }
+    // ! 굳이 imp 값을 preorder에 저장할 필요 없어서 지움
+    // const saveImpOnFS = async (impParam: any) => {
+    //     const preorderRef = collection(db, "preorder");
+    //     await addDoc(preorderRef, {
+    //         merchant_uid: impParam.merchant_uid,
+    //         imp: impParam
+    //     })
+    // }
 
-    const saveImpOnFS = async (impParam: any) => {
-        const preorderRef = collection(db, "preorder");
-        await addDoc(preorderRef, {
-            merchant_uid: impParam.merchant_uid,
-            imp: impParam
-        })
-    }
 
-
-    const orderFinal = async () => {
-        const impParam = makeImpParam();
-        await saveImpOnFS(impParam);
-        requestPay(impParam);
-        // requestPay();
-    }
+    // const orderFinal = async () => {
+    //     const impParam = makeImpParam();
+    //     await saveImpOnFS(impParam);
+        
+    //     // requestPay(impParam);
+    // }
 
     useEffect(() => {
         if(orderSendSelector) {
@@ -299,7 +314,7 @@ function OrderPage(props: any) {
                     onClick={()=>{
                         // * 서버로 데이터 전송
                         if(payPossible) {
-                            orderFinal();
+                            // orderFinal();
                             apiClient.post("/paymentAPI", {
                                 ...orderSendSelector
                             });

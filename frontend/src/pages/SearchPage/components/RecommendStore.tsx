@@ -19,11 +19,18 @@ export const RecommendStoreComponent = () => {
             <RecommendText>  오늘의 추천 상점 </RecommendText>
             <div style={{marginTop: "8px"}}>
                 {
+                    storeSelector.length > 0
+                    ?
                     storeSelector.map((store) => {
                         return(
                             <RecommendStoreItemComp key={store.name} store={store}/>
                         )
                     })
+                    :
+                    <>
+                    검색 결과가 존재하지 않습니다.
+                    </>
+
                 }
             </div>
         </div>

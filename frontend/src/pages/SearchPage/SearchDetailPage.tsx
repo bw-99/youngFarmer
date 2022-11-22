@@ -41,7 +41,8 @@ function SearchDetailPage(props: any) {
         state.SearchFilterReducer
     );
 
-    if(searchSelector) {
+
+    if(searchSelector.products) {
         return (
             <AppFrame>
                 <AppBarComponentSearch />

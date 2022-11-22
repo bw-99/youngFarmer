@@ -29,7 +29,7 @@ export interface ReviewProductDataType {
 
 
 export interface ProductDataList {
-    products: ProductDataType[],
+    products: ProductDataType[] | null,
     recommendResult: ProductDataType[],
     pidProducts: ProductDataType[],
     likeProducts: ProductDataType[],

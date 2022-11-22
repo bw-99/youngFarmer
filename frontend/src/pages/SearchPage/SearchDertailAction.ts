@@ -106,3 +106,17 @@ export const searchLikeTryAction = (pidList: number[]) => {
         }
     }
 }
+
+
+export const SEARCH_REMOVE = "SEARCH_REMOVE";
+
+
+
+export const searchRemoveAction = () => {
+    return {
+        type: SEARCH_REMOVE,
+        payload: {
+            type: SEARCH_REMOVE,
+        }
+    }
+}

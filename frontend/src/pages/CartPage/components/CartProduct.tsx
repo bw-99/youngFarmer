@@ -17,6 +17,8 @@ import { cartCancelAction } from "../CartAction";
 import { OrderDataType } from "../../../reducers/OrderReducer";
 import { useNavigate } from "react-router-dom";
 import { addProductOrderTry, cancelProductOrderTry, setProductOrderTry } from "../../OrderPage/ProductAction";
+import { addDoc, collection, deleteDoc, getDocs, query, Timestamp, updateDoc, where } from "firebase/firestore";
+import { db, FirebaseAuth } from "../../..";
 
 type CartProductCheckParmas = {
     cartProduct: CartProductDataType
@@ -35,12 +37,14 @@ export const CartProductComponent = ({cartProduct, allCheck, order}:CartProductC
     }, [allCheck])
 
    
-    const handleDirectOrder = () => {
-        dispatch(setProductOrderTry([{
+    const handleDirectOrder = async() => {
+        const data = [{
             count: count,
             product_id: cartProduct.product.product_id,
             option: cartProduct.option
-        }]));
+        }];
+        dispatch(setProductOrderTry(data));
+        await setPreOrderInfo(data);
         navigate("/order");
     }
 
@@ -183,6 +187,36 @@ export const CartProductComponent = ({cartProduct, allCheck, order}:CartProductC
         
     );
 }
+
+export const setPreOrderInfo =  async (prDataList: any[]) => {
+    const preorderRef = collection(db, "preorder");
+    console.log(FirebaseAuth.currentUser?.uid);
+    const q = query(preorderRef, where("uid", "==", FirebaseAuth.currentUser?.uid));
+    const target = await getDocs(q);
+    if(target.empty) {
+        await addDoc(preorderRef, {
+            products: prDataList,
+            uid: FirebaseAuth.currentUser?.uid,
+            time_created: Timestamp.now()
+        });
+    }
+    else {
+        if(target.docs.length > 1) {
+            for (let index = 1; index < target.docs.length; index++) {
+                const documnet = target.docs[index];
+                await deleteDoc(documnet.ref);
+            }
+        }
+        await updateDoc(target.docs[0].ref, {
+            products: prDataList,
+            uid: FirebaseAuth.currentUser?.uid,
+            time_created: Timestamp.now()
+        });
+    }
+    
+    
+}
+
 
 
 type counterParmas = {
