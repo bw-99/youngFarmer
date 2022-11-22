@@ -5,6 +5,7 @@ import { OrderSending, PaymentMethodDataType } from '../../../reducers/OrderRedu
 import { savePayMethodAction, TOSS_PAY, KAKAO_PAY, PAYCO_PAY } from '../PayMethodAction';
 import { useState } from 'react';
 import { DISCOUNT_TYPE_AMOUNT, DISCOUNT_TYPE_PERCENT } from '../../../reducers/DiscountReducer';
+import { LightSepLine, PayAmountCol, PayAmountTitle, PayAmountTotalLabel, PayAmountTotalVal, PayAmountVal } from '../atoms/payAmount';
 
 export const PayAmountComp = () => {
     const dispatch = useDispatch();
@@ -62,53 +63,64 @@ export const PayAmountComp = () => {
     }, [orderSendSelector])
     return (
         <div>
-            <div>
-                <h3>결제 금액</h3>
-            </div>
+            <PayAmountTitle style={{marginLeft: "16px"}}>
+                결제금액
+            </PayAmountTitle>
 
-            <div style={{display:"flex"}}>
-                <div>
+            <LightSepLine style={{margin: "16px 16px 0 16px"}}/>
+            
+
+            <div style={{display:"flex", margin: "24px 16px 0 16px", alignItems:"center", justifyContent:"space-between"}}>
+                <PayAmountCol>
                     총 상품금액
-                </div>
-                <div>
-                   {totalPrice}
-                </div>
+                </PayAmountCol>
+
+                <PayAmountVal>
+                    {totalPrice.toLocaleString('kr')}원 
+                </PayAmountVal>
             </div>
 
-            <div style={{display:"flex"}}>
-                <div>
+            <div style={{display:"flex", margin: "20px 16px 0 16px", alignItems:"center", justifyContent:"space-between"}}>
+                <PayAmountCol>
                     상품할인
-                </div>
-                <div>
-                   {discountTotalPrice}
-                </div>
+                </PayAmountCol>
+
+                <PayAmountVal>
+                    -{discountTotalPrice.toLocaleString('kr')}원 
+                </PayAmountVal>
             </div>
 
-            <div style={{display:"flex"}}>
-                <div>
+            <div style={{display:"flex", margin: "20px 16px 0 16px", alignItems:"center", justifyContent:"space-between"}}>
+                <PayAmountCol>
                     쿠폰/포인트 할인
-                </div>
-                <div>
-                   {couponPrice}
-                </div>
+                </PayAmountCol>
+
+                <PayAmountVal>
+                    {couponPrice.toLocaleString('kr')}원 
+                </PayAmountVal>
             </div>
 
-            <div style={{display:"flex"}}>
-                <div>
+            <div style={{display:"flex", margin: "20px 16px 0 16px", alignItems:"center", justifyContent:"space-between"}}>
+                <PayAmountCol>
                     배송비
-                </div>
-                <div>
-                   {deliveryPrice}
-                </div>
+                </PayAmountCol>
+
+                <PayAmountVal>
+                    {deliveryPrice.toLocaleString('kr')}원 
+                </PayAmountVal>
             </div>
 
-            <div style={{display:"flex"}}>
-                <div>
+            <LightSepLine style={{marginTop: "24px"}} />
+
+
+            <div style={{display:"flex", margin: "21px 16px 0 16px", alignItems:"center", justifyContent:"space-between"}}>
+                <PayAmountTotalLabel>
                     총 결제 금액
-                </div>
-                <div>
-                   {finalPrice}
-                </div>
+                </PayAmountTotalLabel>
+                
+                <PayAmountTotalVal>
+                   {finalPrice.toLocaleString('kr')}원 
+                </PayAmountTotalVal>
             </div>
 
         </div>

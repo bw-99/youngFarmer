@@ -62,6 +62,7 @@ export const DiscountPoint = styled.button`
   height: 42px;
   border-radius: 8px;
   background-color: #efefef;
+  border: none;
 
   display: flex;
   align-items: center;
@@ -72,4 +73,11 @@ export const DiscountPoint = styled.button`
   font-weight: 500;
   text-align: center;
   color: #6b6b6b;
+`
+
+export const SepLine = styled.div`
+  width: calc(100vw);
+  max-width: 625px;
+  height: 8px;
+  background-color: #f7f7f7;
 `

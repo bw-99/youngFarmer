@@ -96,7 +96,7 @@ const orderSendInit:OrderSending = {
     delivery: null,
     discount: null,
     payMethod: null,
-    agreeCondition: false,
+    agreeCondition: true,
     impParam: null
 }
 
@@ -173,7 +173,6 @@ export function OrderSendReducer(state = orderSendInit, action: any) {
             };
 
         default:
-
             return {
                 ...state,
             };

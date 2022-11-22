@@ -170,7 +170,7 @@ function OrderPage(props: any) {
         // await saveImpOnFS(impParam);
         setTimeout(() => {
             requestPay(impParam);
-        }, 1500);
+        }, 1000);
     }
 
     useEffect(() => {
@@ -184,8 +184,8 @@ function OrderPage(props: any) {
                 orderSendSelector!.discount
                 &&
                 orderSendSelector!.payMethod
-                &&
-                orderSendSelector!.agreeCondition
+                // &&
+                // orderSendSelector!.agreeCondition
             ) as boolean;
             setPayPossible(
                 isPossible
@@ -218,12 +218,13 @@ function OrderPage(props: any) {
     if(!productInfo) {
         return (
             <div>
-                loading...
-                {
-                    JSON.stringify(productInfo)
-                }
+
             </div>
         )
+    }
+
+    if(productInfo && productInfo.length == 0) {
+        navigate(-1);
     }
 
     return(
@@ -257,9 +258,9 @@ function OrderPage(props: any) {
                 <PayAmountComp />
             </div>
             
-            <div style={{marginTop: "30px"}}>
+            {/* <div style={{marginTop: "30px"}}>
                 <PayAgreeComp/>
-            </div>
+            </div> */}
 
             <div style={{height: "100px"}}>
 
@@ -267,7 +268,8 @@ function OrderPage(props: any) {
 
             <div style={{
                     backgroundColor: "white",
-                    position:"fixed", bottom: 0, maxWidth:"118px", width:"100%",height:"56px", paddingBottom: "16px"}}>
+                    position:"fixed", bottom: 0, maxWidth:"625px", 
+                    width:"100%", height:"calc(56px)", padding: "16px 0"}}>
                     <PaymentBtn 
                 
                     onClick={()=>{
