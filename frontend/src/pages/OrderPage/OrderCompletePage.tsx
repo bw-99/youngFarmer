@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import TextFieldRecipient from "../../assets/images/textfield-off_recipient.png";
 import TextFieldPhone from "../../assets/images/textfield-off_phone.png";
 import TextFieldAddress from "../../assets/images/textfield-off.png";
+import CheckIcon from "../../assets/images/check.png";
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import styled from "styled-components";
 import { AppFrame } from "../../App";
@@ -35,6 +36,9 @@ export const CircleBox = styled.div`
   height: 88px;
   background-color: rgba(251, 97, 89, 0.1);
   border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
 
 export const MainText = styled.div`
@@ -111,7 +115,15 @@ function OrderCompletePage(props: any) {
                     // marginTop: "calc(50vh - 170px)",
                     marginBottom: "100px",
                     display:"flex", flexDirection: "column", alignItems: "center"}}>
-                    <CircleBox />
+                    <CircleBox>
+                        <img 
+                        style={{
+                            width: "30px",
+                            height: "30px",
+                            objectFit: "cover"
+                        }}
+                        src={CheckIcon} alt="" />
+                    </CircleBox>
                     <MainText style={{marginTop: "30px"}}> 주문 결제가 완료되었습니다. </MainText>
                     <SubText style={{marginTop: "12px"}}> 다양한 상품을 담아보세요. </SubText>
                 </div>
