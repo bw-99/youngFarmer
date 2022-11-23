@@ -29,6 +29,7 @@ export const ProductPrice = styled.div`
 
 
 export const ProductOption = styled.div`
+  margin-top:6px;
   font-family: AppleSDGothicNeo;
   font-size: 12px;
   font-weight: 500;
