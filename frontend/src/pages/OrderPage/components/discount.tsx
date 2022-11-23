@@ -12,7 +12,7 @@ import DaumPostcode from "react-daum-postcode";
 import ReactDom from 'react-dom';
 import { getDiscountTry, saveDiscountAction } from './../DiscountAction';
 import { CouponSrcType, DiscountDataType } from "../../../reducers/DiscountReducer";
-import { DiscountContentDropdown, DiscountContentLabel, DiscountPoint, DiscountPointInput, DiscountPointInputLabel, DiscountTitleAtom } from "../atoms/discount";
+import { DiscountContentDropdown, DiscountContentLabel, DiscountPoint, DiscountPointInput, DiscountPointInputLabel, DiscountTitleAtom, SepLine } from "../atoms/discount";
 
 
 export const DiscountComp = () => {
@@ -128,13 +128,8 @@ export const DiscountComp = () => {
                     전액사용
                 </DiscountPoint>
             </div>
-            {/* 
-            <button onClick={() => {
-                handleSubmitDisInfo();
-            }}> 
-            (임시) 할인 정보 제출
-            </button> 
-            */}
+
+            <SepLine style={{marginTop: "24px"}}/>
         </div>
     );
 }

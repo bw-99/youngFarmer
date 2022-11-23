@@ -33,6 +33,7 @@ export const ProductImg = styled.img`
   width: 88px;
   height: 88px;
   border-radius: 12px;
+  object-fit: cover;
 `
 
 export const ProductLocateText = styled.div`

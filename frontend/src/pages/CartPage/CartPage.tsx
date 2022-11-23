@@ -68,7 +68,7 @@ function CartPage(props: any) {
                 
                 <div style={{
                     backgroundColor: "white",
-                    position:"fixed", bottom: 0, maxWidth:"625px", width:"100%",height:"56px", paddingBottom: "16px"}}>
+                    position:"fixed", bottom: 0, maxWidth:"625px", width:"100%",height:"56px", padding: "16px 0"}}>
                     <PaymentBtn 
                     onClick={async()=>{
                         setOrder(true);

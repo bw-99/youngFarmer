@@ -9,6 +9,7 @@ import { PRODUCT_SET_ORDER_SUCCESS, PRODUCT_ADD_ORDER, PRODUCT_CANCEL_ORDER, SAV
 import { SAVE_PAY_METHOD_ACTION } from "../pages/OrderPage/PayMethodAction";
 import { stat } from "fs";
 import { SAVE_IMP_PARAM } from "../pages/OrderPage/OrderAction";
+import { Timestamp } from 'firebase/firestore';
 
 export interface OrderDataType {
     count: number,
@@ -88,6 +89,9 @@ export interface OrderSending {
     payMethod: PaymentMethodDataType | null,
     agreeCondition: boolean,
     impParam: string | null
+    time_created: Timestamp | null,
+    delivery_state: string | null,
+    merchant_uid: string | null
     // setOrder: boolean
 }
 
@@ -96,8 +100,11 @@ const orderSendInit:OrderSending = {
     delivery: null,
     discount: null,
     payMethod: null,
-    agreeCondition: false,
-    impParam: null
+    agreeCondition: true,
+    impParam: null,
+    time_created: null,
+    delivery_state: null,
+    merchant_uid: null
 }
 
 export function OrderSendReducer(state = orderSendInit, action: any) {
@@ -173,7 +180,6 @@ export function OrderSendReducer(state = orderSendInit, action: any) {
             };
 
         default:
-
             return {
                 ...state,
             };

@@ -91,6 +91,7 @@ export const ReviewDate = styled.div`
 export const ReviewedProductImg = styled.img`
   width: 88px;
   height: 88px;
+  object-fit: cover;
   border-radius: 12px;
 `
 
