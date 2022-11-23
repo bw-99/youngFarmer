@@ -66,7 +66,7 @@ export const OrderListPage = () => {
         getOrderList();
     }, []);
 
-    if(!orderSelector || !orderSelector.all.length) {
+    if(!orderSelector || !orderSelector.all) {
         return(
             <div>
             </div>

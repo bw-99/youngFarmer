@@ -17,21 +17,21 @@ export interface PaymentMethodDataType {
 }
 
 export interface OrderType {
-    all: OrderSending[],
+    all: OrderSending[] | null,
     // ready: OrderSending[],
     // onDeliver: OrderSending[],
     // deliverComplete: OrderSending[],
     // refund: OrderSending[],
-    selected: OrderSending[]
+    selected: OrderSending[] | null
 }
 
 const orderTypeInit:OrderType = {
-    all: [],
+    all: null,
     // ready: [],
     // onDeliver: [],
     // deliverComplete: [],
     // refund: [],
-    selected: []
+    selected: null
 }
 
 export function OrderListReducer(state = orderTypeInit, action: any) {
@@ -47,14 +47,14 @@ export function OrderListReducer(state = orderTypeInit, action: any) {
             }
 
         case GET_ALL_ORDER_LIST: 
-            const allOrder = [...state.all];
+            const allOrder = [...state.all!];
             return {
                 ...state,
                 selected: allOrder
             }
         
         case GET_READY_ORDER_LIST:
-            let readyList = [...state.all];
+            let readyList = [...state.all!];
             readyList = readyList.filter((order) => {
                 return order.delivery_state === "배송준비";
             })
@@ -64,7 +64,7 @@ export function OrderListReducer(state = orderTypeInit, action: any) {
             }
         
         case GET_ON_DELIVER_ORDER_LIST:
-            let onDeliverList = [...state.all];
+            let onDeliverList = [...state.all!];
             onDeliverList = onDeliverList.filter((order) => {
                 return order.delivery_state === "배송중";
             })
@@ -74,7 +74,7 @@ export function OrderListReducer(state = orderTypeInit, action: any) {
             }
     
         case GET_DELIVER_COMPLETE_ORDER_LIST:
-            let compDeliverList = [...state.all];
+            let compDeliverList = [...state.all!];
             compDeliverList = compDeliverList.filter((order) => {
                 return order.delivery_state === "배송완료";
             })
@@ -84,7 +84,7 @@ export function OrderListReducer(state = orderTypeInit, action: any) {
             }
         
         case GET_REFUND_ORDER_LIST:
-            let refundList = [...state.all];
+            let refundList = [...state.all!];
             refundList = refundList.filter((order) => {
                 return order.delivery_state === "취소/교환/환불";
             })

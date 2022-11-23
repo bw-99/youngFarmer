@@ -17,11 +17,11 @@ export const PrListComp = () => {
     return (
         <div style={{margin: "10px 16px 0 16px"}}>
             {
-                orderSelector.selected.map((order) =>{
+                orderSelector.selected!.map((order) =>{
                     return (
                         <>
                         {
-                            <OrderComp order={order} />
+                            <OrderComp key={JSON.stringify(order) + order.time_created} order={order} />
                         }
                         </>
                     )

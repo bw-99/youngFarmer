@@ -29,7 +29,7 @@ export const IndexSelectedLine = styled.div`
 export const ReviewerImage = styled.img`
   width: 32px;
   height: 32px;
-  border-radius: 70%;
+  /* border-radius: 70%; */
 `
 
 export const ReviewerNickname = styled.div`
@@ -48,7 +48,6 @@ export const ReviewRateStar = styled.img`
   width: 16px;
   height: 16px;
   border-radius: 1px;
-  background-color: #fb6159;
 `
 
 export const ReviewRateText = styled.div`
@@ -60,8 +59,8 @@ export const ReviewRateText = styled.div`
   line-height: normal;
   letter-spacing: normal;
   color: #6b6b6b;
-}
 `
+
 
 export const ReviewContent = styled.div`
   width: 239px;

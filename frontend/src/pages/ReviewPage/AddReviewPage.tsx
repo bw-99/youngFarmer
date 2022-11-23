@@ -14,6 +14,11 @@ import { RootState } from "../../reducers";
 import { getReviewOneAction, getRreviewListAction, GET_REVIEW_ONE_FAIL } from "./ReviewAction";
 import { getDownloadURL, ref, StorageReference, uploadBytes } from "firebase/storage";
 import { LoadingWrapper } from "../../common/BackgroundWrapper/BackgroundWrapper";
+import { ReviewTopComp } from "./components/reviewTopComp";
+import { RateComp } from "./components/rate";
+import { ReviewContentComp } from "./components/reviewContent";
+import { ReviewPhotoComp } from "./components/reviewPhoto";
+import { PaymentBtn } from "../CartPage/atoms/CartProduct";
 
 function AddReviewPage(props: any) {
     const params = useParams();
@@ -22,6 +27,8 @@ function AddReviewPage(props: any) {
     const dispatch = useDispatch();
 
     const [product, setProduct] = useState<ProductWithOrderType | null>(null);
+
+    const [reviewPossible, setReviewPossible] = useState(false);
 
     const [reviewText, setReviewText] = useState("");
     const [reviewPhotos, setReviewPhotos] = useState<any | null>(null);
@@ -34,7 +41,7 @@ function AddReviewPage(props: any) {
         state.ReviewWriteReducer
     );  
 
-    const preReviewStateSelector: any =  useSelector((state:RootState) =>
+    const preReviewStateSelector: any = useSelector((state:RootState) =>
         state.ReviewWriteStateReducer
     );  
 
@@ -112,6 +119,8 @@ function AddReviewPage(props: any) {
         
         if(!reviewDuplicate) {
             console.log("review duplicated");
+            alert("이미 작성한 리뷰가 있습니다.");
+            navigate(-1);
             return ;
         }
         else{
@@ -120,10 +129,16 @@ function AddReviewPage(props: any) {
             if(reviewText && reviewPhotos && reviewRate) {
                 let uploadResult = await uploadReviewData(reviewText, reviewPhotos, reviewRate, uid, product_id);
                 console.log(JSON.stringify(uploadResult));
+                alert("리뷰 작성이 완료되었습니다.");
+                navigate(-1);
+                return ;
             }
             else{
                 if(!reviewText) {
                     alert("리뷰를 입력해주세요.");
+                }
+                else if (reviewText.length < 20) {
+                    alert("리뷰를 20글자 이상 작성해주세요.")
                 }
                 else if(!reviewPhotos) {
                     alert("사진을 업로드해주세요.");
@@ -135,48 +150,42 @@ function AddReviewPage(props: any) {
         }
     }
 
+    useEffect(() => {
+        setReviewPossible(reviewText && reviewText.length >= 20 && reviewPhotos && reviewRate);
+    },[reviewText, reviewPhotos, reviewRate])
+
     if (product) {
         return (
             <AppFrame>
                 <AppBarComponentOnlyBack title={"리뷰 작성"}/>
-                {
-                    JSON.stringify(product)
-                }
-                <div>
-                    <h1> 리뷰 작성 </h1>
-                    <input type={"text"} value={reviewText} onChange={(e)=> {
-                        setReviewText(e.target.value);
-                    }}></input>
-                </div>
+                
+                <ReviewTopComp product={product}/>
+                <RateComp reviewRate={reviewRate} setReviewRate={setReviewRate} />
+                <ReviewContentComp reviewText={reviewText} setReviewText={setReviewText} />
+                <ReviewPhotoComp reviewPhotos={reviewPhotos} setReviewPhotos={setReviewPhotos} />
 
-                <div>
-                    <h1> 리뷰 사진 </h1>
-                    <input type='file' 
-                        accept='image/jpg,impge/png,image/jpeg,image/gif' 
-                        name='review_photo' 
-                        // style={{display:"none"}}
-                        onChange={(e) => {
-                            setReviewPhotos(e.target.files);
-                        }}
-                        multiple>
-                    </input>
+                <div style={{
+                    backgroundColor: "white",
+                    position:"fixed", bottom: 0, maxWidth:"625px", 
+                    width:"100%", height:"calc(56px)", padding: "16px 0"}}>
+                    <PaymentBtn 
+                
+                    onClick={async ()=>{
+                        // * 서버로 데이터 전송
+                        if(reviewPossible) {
+                            setIsUploading(true);
+                            await firebaseUploadHandler();
+                            setIsUploading(false);
+                        }
+                    }}
+                    style = {{
+                        width: "calc(100vw - 32px)",
+                        maxWidth: "calc(625px - 32px)",
+                        backgroundImage: reviewPossible ?"linear-gradient(to bottom, #fb6159, #ed3e3e)"  : "linear-gradient(to bottom, #efefef, #efefef)",
+                        color: reviewPossible ?"#ffffff"  : "#444444",
+                        margin:"0 16px"
+                        }}>전송하기</PaymentBtn>
                 </div>
-
-                <div>
-                    <h1> 리뷰 평점 </h1>
-                    <input type="number" value={reviewRate} onChange={ (e) => {
-                        setReviewRate(Number(e.target.value));
-                    }}/>
-                </div>
-
-                <button onClick={async ()=>{
-                    setIsUploading(true);
-                    await firebaseUploadHandler();
-                    setIsUploading(false);
-                    alert("업로드 완료!");
-                }}>
-                    리뷰 전송
-                </button>
                 
 
                 <LoadingWrapper backgroundColor={"rgba(255,255,255,0.6)"} isActive={isUploading} />

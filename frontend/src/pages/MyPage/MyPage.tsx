@@ -59,9 +59,9 @@ function MyPage(props: any) {
     else{
         return (
             <AppFrame>
-                <AppBarComponentMyPage title="마이페이지"/>
+                {/* <AppBarComponentMyPage title="마이페이지"/> */}
                 {/* {JSON.stringify(selector)} */}
-                <BottomNavigationBar />
+                {/* <BottomNavigationBar /> */}
             </AppFrame>  
         );
     }

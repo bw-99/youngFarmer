@@ -15,7 +15,7 @@ import {
     ReviewContent, ReviewDate, ReviewedProductImg, SepLine,
 } from "../ReviewPage/atoms/ReviewPage"
 
-
+import starOn from "../../assets/images/star-copy-3@3x.png";
 import {
     PurchaseDate, PurchaseState, WriteReviewBox, WriteReviewText, PurchaseDot,
     ProductImg, ProductLocateText, ProductTitleText, ProductPriceText, ProductDetailText, ProductDetailDot,
@@ -149,11 +149,13 @@ function ReviewPage(props: any) {
                                                     <div style={{ display: "flex", alignItems: "center", }}>
                                                         <ReviewerImage src={pr.review.photos[0]} />
                                                         <ReviewerNickname style={{ marginLeft: "10px" }}>
-                                                            여기 수정해야합니다.{/*{pr.review.writer.profile_nickname} pr.review.writer가 비어있음*/}
+                                                            {
+                                                                pr.review.uid
+                                                            }
                                                         </ReviewerNickname>
                                                     </div>
                                                     <div style={{ display: "flex", alignItems: "center", }}>
-                                                        <ReviewRateStar src={testImage} style={{ marginRight: "4px" }} />
+                                                        <ReviewRateStar src={starOn} style={{ marginRight: "4px" }} />
                                                         <ReviewRateText>{pr.review.score }</ReviewRateText>
                                                     </div>
                                                 </div>

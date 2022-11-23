@@ -86,7 +86,6 @@ function OrderReadyPage(props: any) {
         })
     }
 
-
     
     useEffect(() => {
         console.log(imp_uid);
