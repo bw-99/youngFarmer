@@ -70,14 +70,14 @@ export const RecommendItemLike = styled.img`
 
 
 export const RecommendItemImage = styled.img`
-width: 154px;
-height: 154px;
-background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
-border-radius: 12px;
-object-fit: cover;
-src: ${(props:any) => props.src};
-position: relative;
-z-index: 1;
+  width: 154px;
+  height: 154px;
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
+  border-radius: 12px;
+  object-fit: cover;
+  src: ${(props:any) => props.src};
+  position: relative;
+  z-index: 1;
 `
 
 

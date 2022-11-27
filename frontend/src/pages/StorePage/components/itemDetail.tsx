@@ -224,7 +224,7 @@ export const ItemDetailComp = ({storeData}:StoreParam) => {
                 {
                      <div style={{display:"flex", marginLeft:"-9.5px", flexWrap:"wrap"}}>
                         {
-                            filteredProduct!.length
+                            filteredProduct! && filteredProduct!.length 
                             ?
                             <>
                             {

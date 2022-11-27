@@ -4,27 +4,65 @@ import {AppBarMainBox, TopText, StoreBox, StoreImg, StoreName, GPA, DOT, Classif
 
 import BackBtn from "../../../assets/images/btn-back.png";
 import StarBtn from "../../../assets/images/btn-rate-on.png";
+import { StoreDataType } from "../../StorePage/StoreType";
+import { FollowButton } from "../../../common/FollowButton/followButton";
 
-export const StorePointPageComp = () => {
+type StoreListParam = {
+    storeList: StoreDataType[]
+}
+
+export const StorePointPageComp = ({storeList}:StoreListParam) => {
     return(
         <div style={{marginTop: "76px"}}>
-            <StoreBox style = {{display: "flex", flexDirection: "row",  justifyContent:"space-between", margin: "0 16px 16px 16px", padding: "7px 16px 7px 7px", alignItems:"center"}}>
+            {
+                storeList.length
+                ?
+                storeList.map((store) => {
+                    return <StoreComp store={store}/>
+                })
+                :
+                <div>
+                    찜한 상점이 없습니다.
+                </div>
+            }
+            
+            
+        </div>
+    )
+}
+
+type StoreParam = {
+    store: StoreDataType
+}
+
+const StoreComp = ({store}:StoreParam) => {
+    return(
+        <StoreBox style = {{display: "flex", flexDirection: "row",  justifyContent:"space-between", margin: "0 16px 16px 16px", padding: "7px 16px 7px 7px", alignItems:"center"}}>
                 <div style={{display: "flex", alignItems:"center"}}>
-                    <StoreImg style = {{display: "flex", margin: "0 16px 0 7px"}} />
+                    <StoreImg src={store.photo} style = {{display: "flex", margin: "0 16px 0 7px"}} />
                     <div style = {{display: "flex", flexDirection: "column"}}>
-                        <StoreName style = {{display: "flex", margin: "12px 0 9px 0"}}> 청년농부 </StoreName>
+                        <StoreName style = {{display: "flex", margin: "12px 0 9px 0"}}> {store.name} </StoreName>
                         <div style = {{display: "flex", flexDirection: "row", alignItems:"center"}}>
-                            <img src = {StarBtn} style = {{display: "flex", margin: "0 2px 0 0"}} />
+                            <img src = {StarBtn} style = {{
+                                width: "16px",
+                                height: "16px",
+                                display: "flex", margin: "0 2px 0 0"}} />
                             <GPA style = {{display: "flex", margin : "0 8px 0 0"}}> 5.0 </GPA>
-                            <DOT style = {{display: "flex", margin : "0 8px 0 0"}} />
-                            <Classification style = {{display: "flex"}}> 채소 </Classification>
+                            {
+                                store.category.map((cat) => {
+                                    return (
+                                        <div style={{display:"flex", alignItems:"center", marginRight: "8px", justifyContent:"flex-start"}}>
+                                            <DOT style = {{display: "flex", margin : "0 8px 0 0"}} />
+                                            <Classification style = {{display: "flex"}}> {cat} </Classification>
+                                        </div>
+                                    )
+                                })
+                            }
+                            
                         </div>
                     </div>
                 </div>
-                <FollowingBox style = {{display: "flex", margin: "0 0 0 0", alignItems:"center", justifyContent:"center"}}>
-                    <FollowingText style = {{display: "flex"}}> 팔로잉 </FollowingText>
-                </FollowingBox>
+                <FollowButton store_id={store.store_id}/>
             </StoreBox>
-        </div>
     )
 }

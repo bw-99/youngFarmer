@@ -5,7 +5,7 @@ import { DeliveryReducer } from "./DeliveryReducer";
 import { DiscountReducer } from "./DiscountReducer";
 import { LikeReducer } from "./LikeReducer";
 import { LoginReducer, UserInfoReducer } from "./LoginReducer";
-import { ProfileReducer } from "./MypageReducer";
+import { ProfileReducer, StoreFollowReducer } from "./MypageReducer";
 import { OrderListReducer } from "./OrderListReducer";
 import { OrderReducer, OrderSendReducer } from "./OrderReducer";
 import { ProductInfoReducer } from "./ProductReducer";
@@ -32,7 +32,8 @@ const rootReducer = combineReducers({
   DeliveryReducer,
   DiscountReducer,
   OrderSendReducer,
-  OrderListReducer
+  OrderListReducer,
+  StoreFollowReducer
 });
 
 export default rootReducer;

@@ -4,7 +4,9 @@ import React from "react";
 import recommendItemStawberry from "../../../assets/images/main_recommend_strawberry.png";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../reducers";
-import { ProductDataType, StoreDataType } from "../../../reducers/ProductReducer";
+import { ProductDataType } from "../../../reducers/ProductReducer";
+import { StoreDataType } from "../../StorePage/StoreType";
+import { FollowButton } from "../../../common/FollowButton/followButton";
 
 
 
@@ -64,7 +66,7 @@ const RecommendStoreItemComp = ({store}:productParam) => {
                 
 
                 <div style={{marginRight: "16px"}}>
-                    <RecommendItemFollowButton> 팔로우 </RecommendItemFollowButton>
+                    <FollowButton store_id={store.store_id}/>
                 </div>
             </RecommendItem>
         </div>

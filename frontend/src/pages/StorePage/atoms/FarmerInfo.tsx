@@ -59,21 +59,41 @@ export const FarmerSortText = styled.div`
   color: #979797;
 `
 
-export const FarmerFollowButton = styled.div`
-  width: 66px;
-  height: 36px;
-  border-radius: 18px;
-  background-color: #fb6159;
-  font-family: AppleSDGothicNeo;
-  font-size: 13px;
-  font-weight: 500;
-  line-height: 20px;
-  text-align: center;
-  color: #ffffff;
-  display: flex;
-  align-items:center;
-  justify-content: center;
-`
+// export const FarmerFollowButton = styled.div`
+//   width: 66px;
+//   height: 36px;
+//   border-radius: 18px;
+//   background-color: #fb6159;
+//   border: solid 1px #fb6159;
+//   font-family: AppleSDGothicNeo;
+//   font-size: 13px;
+//   font-weight: 500;
+//   line-height: 20px;
+//   text-align: center;
+//   color: #ffffff;
+//   display: flex;
+//   align-items:center;
+//   justify-content: center;
+// `
+
+// export const FarmerAlreadyFollowedButton = styled.div`
+//   width: 66px;
+//   height: 36px;
+//   border-radius: 18px;
+//   border: solid 1px #fb6159;
+//   background-color: #ffffff;
+//   font-family: AppleSDGothicNeo;
+//   font-size: 13px;
+//   font-weight: 500;
+//   line-height: 20px;
+//   text-align: center;
+//   color: #fb6159;
+//   display: flex;
+//   align-items:center;
+//   justify-content: center;
+// `
+
+
 
 
 export const DetailSepLine = styled.div`

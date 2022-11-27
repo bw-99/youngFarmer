@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import styled from "styled-components";
-import { FirebaseAuth } from "../..";
+import { db, FirebaseAuth } from "../..";
 import { AppFrame } from "../../App";
 
 
@@ -22,6 +22,10 @@ import { StorePointPageComp } from "./components/savedStore";
 import { ServiceCenterComp } from "./components/serviceCenter";
 import { ShoppingComp } from "./components/shopping";
 import { getProfileAction } from "./MyAction";
+import { collection, query } from 'firebase/firestore';
+import { where } from 'firebase/firestore';
+import { getDocs } from 'firebase/firestore';
+import { StoreDataType } from "../StorePage/StoreType";
 
 
 
@@ -31,29 +35,41 @@ function SavedStorePage(props: any) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const selector: MyPageDataType = useSelector((state:RootState) =>
-        state.ProfileReducer!.mypageInfo
-    );      
 
-    useEffect(() => {
-        
-        FirebaseAuth.onAuthStateChanged((user)=> {
-            if(user){
-                console.log("dispatch!!");
-                dispatch(getProfileAction(user!.uid));
+
+    const followSelector: number[] = useSelector((state:RootState) =>
+        state.StoreFollowReducer.store_list
+    ); 
+
+    const [storeList, setStoreList] = useState<StoreDataType[] | null>(null);
+
+    const getStoreData = async() => {
+        const storeRef = collection(db, "store");
+        let storeListData:any[] = [];
+        for (const store_id of followSelector) {
+            console.log(store_id);
+            
+            let q = query(storeRef, where("store_id" , "==", store_id));
+            let temp = await getDocs(q);
+            if(temp.empty) {
+                continue;
             }
-        })
-       
-        
-    }, []);
+            storeListData.push(temp.docs[0].data());
+        }
+        setStoreList(storeListData);
+    }
 
-    
 
-    if (selector) {
+    useEffect(()=> {
+        getStoreData();
+    },[followSelector])
+
+
+    if (storeList) {
         return(
             <AppFrame>
                 <AppBarComponentOnlyBack title={"찜한 상점"} />
-                <StorePointPageComp />
+                <StorePointPageComp storeList={storeList!} />
             </AppFrame>
         );
     }

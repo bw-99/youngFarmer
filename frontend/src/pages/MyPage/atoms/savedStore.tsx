@@ -28,6 +28,7 @@ export const StoreImg = styled.img`
     width: 66px;
     height: 66px;
     border-radius: 50%;
+    object-fit: cover;
 `
 export const StoreName = styled.div`
     font-family: AppleSDGothicNeo;

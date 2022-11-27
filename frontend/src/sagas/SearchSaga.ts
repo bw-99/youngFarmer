@@ -4,11 +4,12 @@ import { db, kakaoConfig } from "..";
 import { GET_PRODUCT, GET_PRODUCT_SUCCESS } from "../pages/ProductPage/ProductAction";
 import { collection, DocumentData, endAt, getDoc, getDocs, limit, orderBy, query,  QueryConstraint, startAt, where } from "firebase/firestore";
 import { AxiosResponse } from "axios";
-import { ProductDataType, StoreDataType } from "../reducers/ProductReducer";
+import { ProductDataType } from "../reducers/ProductReducer";
 import { GET_PROFILE, GET_PROFILE_SUCCESS } from "../pages/MyPage/MyAction";
 import { MyPageDataType } from "../reducers/MypageReducer";
 import { getAuth } from "firebase/auth";
 import { FILTER_TYPE, SEARCH_FAIL, SEARCH_FILTER_TRY, SEARCH_PID_FAIL, SEARCH_PID_SUCCESS, SEARCH_PID_TRY, SEARCH_RECOMMNEND_SUCCESS, SEARCH_RECOMMNEND_TRY, SEARCH_STORE_SUCCESS, SEARCH_STORE_TRY, SEARCH_SUCCESS, SEARCH_TRY } from "../pages/SearchPage/SearchDertailAction";
+import { StoreDataType } from "../pages/StorePage/StoreType";
 
 
 
@@ -54,9 +55,14 @@ async function getSearchStoreAPI(searchResult:ProductDataType[], payload:any) {
         })
     }
 
-    
+    let setDataList:any[] = [];
+    for (const store of dataList) {
+        if(!setDataList.filter((pushedStore) => pushedStore.store_id === store.store_id).length) {
+            setDataList.push(store);
+        }
+    }
 
-    return dataList;
+    return setDataList;
 }
 
 async function getSearchFilterAPI(payload:any) {

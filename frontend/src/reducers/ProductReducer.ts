@@ -2,13 +2,8 @@ import { Timestamp } from "firebase/firestore";
 import { GET_PRODUCT, GET_PRODUCT_FAIL, GET_PRODUCT_LOADING, GET_PRODUCT_SUCCESS } from "../pages/ProductPage/ProductAction";
 
 import { createStore } from 'redux';
+import { StoreDataType } from "../pages/StorePage/StoreType";
 
-export interface StoreDataType {
-    store_id: number,
-    name: string,
-    photo: string,
-    category : string[]
-}
 
 export interface OrderProductDataType {
     product: ProductDataType,

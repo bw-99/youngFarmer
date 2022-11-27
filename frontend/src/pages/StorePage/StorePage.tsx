@@ -22,6 +22,8 @@ import { db } from "../..";
 import { where } from 'firebase/firestore';
 import { StoreDataType, StoreProductDataType } from "./StoreType";
 import { ProductDataType } from "../../reducers/ProductReducer";
+import { useSelector } from "react-redux";
+import { RootState } from "../../reducers";
 
 
 function StorePage(props: any) {
@@ -30,6 +32,10 @@ function StorePage(props: any) {
     const navigate = useNavigate();
 
     const [storeData, setStoreData] = useState<StoreProductDataType | null>(null);
+
+    const followSelector: number[] = useSelector((state:RootState) =>
+        state.StoreFollowReducer.store_list
+    ); 
 
     const store_id = params.store_id;
 

@@ -4,12 +4,15 @@ import rightArrowIcon from "../../../assets/images/btn-arrow-r-14-px@3x.png";
 import itemLikeIcon from "../../../assets/images/like-off@3x.png";
 import rateStarIcon from "../../../assets/images/rate-star@3x.png";
 
-import { FarmerProfileImage, FarmerNickname, FarmerRateStar, FarmerRateText, DetailSepLine, FarmerIntroduceText, FarmerSortIcon, FarmerSortText, FarmerFollowButton } from "../atoms/FarmerInfo";
+import { FarmerProfileImage, FarmerNickname, FarmerRateStar, FarmerRateText, DetailSepLine, FarmerIntroduceText, FarmerSortIcon, FarmerSortText } from "../atoms/FarmerInfo";
 import { ItemBestMark, ItemBestMarkRedBorder, ItemSaleMark } from "../../../common/ItemList/ItemList";
 import { LikeIconComp } from "../../MainPage/components/recommend";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { StoreProductDataType } from "../StoreType";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../reducers";
+import { FollowButton } from "../../../common/FollowButton/followButton";
 
 type StoreParam = {
     storeData: StoreProductDataType
@@ -41,7 +44,7 @@ export const FarmerInfoComp = ({storeData}:StoreParam) => {
                     </div>
                 </div>
                 <div style={{ marginRight: "16px" }}>
-                    <FarmerFollowButton> 팔로우 </FarmerFollowButton>
+                    <FollowButton store_id={storeData.store_id} />
                 </div>
             </div>
             <FarmerIntroduceText style={{padding: "0 16px"}}>{storeData.description}</FarmerIntroduceText>

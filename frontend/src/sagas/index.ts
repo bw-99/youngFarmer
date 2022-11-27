@@ -8,6 +8,7 @@ import { getProfileSignal } from './MypageSaga';
 import { getOrderSignal } from './OrderSaga';
 import { getProductSignal } from './ProductSaga';
 import { getReviewSignal } from './ReviewSaga';
+import { getStoreSaveSignal } from './SaveStoreSaga';
 import { getSearchSignal } from './SearchSaga';
 
 export default function* rootSaga() {
@@ -21,6 +22,7 @@ export default function* rootSaga() {
         getOrderSignal(),
         getReviewSignal(),
         getDeliverySignal(),
-        getDiscountSignal()
+        getDiscountSignal(),
+        getStoreSaveSignal()
     ]);
 }
