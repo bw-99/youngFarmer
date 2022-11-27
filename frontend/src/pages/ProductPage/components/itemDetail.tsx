@@ -15,6 +15,7 @@ import rateStarOff from "../../../assets/images/btn-rate-off@3x.png";
 import iconLock from "../../../assets/images/icon-lock@3x.png";
 import { getAverageReviewScore } from "./itemInfo";
 import { useNavigate, useParams } from "react-router-dom";
+import { StoreDataType } from "../../StorePage/StoreType";
 
 
 export const ItemDetailComp = () => {
@@ -23,6 +24,10 @@ export const ItemDetailComp = () => {
     const selector: ProductDataType = useSelector((state:RootState) =>
         state.ProductInfoReducer!.productInfo
     );  
+
+
+
+
 
 
     return(
@@ -125,6 +130,7 @@ type QuestionDataProps = {
 
 
 const ItemQuestionDetailComp = ({question}:QuestionDataProps) => {
+    
     return (
         <div>
             <SepLine />
@@ -188,7 +194,7 @@ const ItemReviewComp = ({reviewList}:ReviewDataProps) => {
     const params = useParams();
     const navigate = useNavigate();
     useEffect(() => {
-        SetaverageScore(getAverageReviewScore(reviewList));
+        SetaverageScore(Number(getAverageReviewScore(reviewList)));
     }, [])
 
     const DisplayStar = () => {

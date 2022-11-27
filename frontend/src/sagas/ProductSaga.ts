@@ -62,11 +62,18 @@ async function getProdcutAPI(payload:any) {
         return doc.data()
     });
 
+    const storeRef = collection(db, "store");
+    const q5 = query(storeRef, where("store_id", "==", productData.store_id));
+    const fbdata5 = await getDocs(q5);
+
     return {
-        ...productData,
-        reviewDataList: reviewDataList,
-        photoDataList: photoDataList,
-        questionDataList: questionDataList
+        productInfo: {
+            ...productData,
+            reviewDataList: reviewDataList,
+            photoDataList: photoDataList,
+            questionDataList: questionDataList,
+        },
+        storeInfo: fbdata5.docs[0].data()
     };
 }
 

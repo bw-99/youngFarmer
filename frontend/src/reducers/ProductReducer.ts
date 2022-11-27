@@ -98,11 +98,13 @@ export interface ProductDataPhotoType {
 }
 
 export interface ProductDataObjectType {
-    productInfo: ProductDataType | null
+    productInfo: ProductDataType | null,
+    storeInfo: StoreDataType | null
 }
 
-const productInfoInitState : ProductDataObjectType | null = {
-    productInfo: null
+const productInfoInitState : ProductDataObjectType = {
+    productInfo: null,
+    storeInfo: null
 };
 
 // export let UserInfo: any = {
@@ -117,19 +119,22 @@ export function ProductInfoReducer(state = productInfoInitState, action: any) {
             
             return {
                 ...state,
-                productInfo: action.payload,
+                productInfo: action.payload.productInfo,
+                storeInfo: action.payload.storeInfo,
             };
 
         case GET_PRODUCT_FAIL:
             return {
                 ...state,
-                productInfo: action.payload,
+                productInfo: action.payload.productInfo,
+                storeInfo: action.payload.storeInfo,
             };
 
         case GET_PRODUCT_LOADING:
             return {
                 ...state,
-                productInfo: action.payload,
+                productInfo: action.payload.productInfo,
+                storeInfo: action.payload.storeInfo,
             };
 
         default:

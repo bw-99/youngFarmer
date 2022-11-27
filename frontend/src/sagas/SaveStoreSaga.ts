@@ -10,6 +10,7 @@ import { MyPageDataType } from "../reducers/MypageReducer";
 import { getAuth } from "firebase/auth";
 import { ref } from 'firebase/storage';
 
+
 async function getFollowedAPI(payload:any) {
     const uid = payload.uid;
     const followRef = collection(db, "follow");
@@ -18,6 +19,7 @@ async function getFollowedAPI(payload:any) {
     const followData =  fbdata.docs.map((doc) => doc.data().store_id);
     return followData;
 }
+
 
 async function setFollowedAPI(payload:any) {
     const uid = payload.uid;

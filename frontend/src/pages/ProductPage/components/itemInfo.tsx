@@ -15,11 +15,14 @@ import { RootState } from "../../../reducers";
 import { ProductDataReviewType, ProductDataType } from "../../../reducers/ProductReducer";
 import { LikeData } from "../../../reducers/LikeReducer";
 import { likeCancelAction, likeAction } from "../../LikePage/LikeAction";
+import { StoreDataType } from "../../StorePage/StoreType";
 
 
 // connect()(ItemLike);
 // TODO: Product id 받아오기
 export const ItemInfoComp = () => {
+
+
 
     const selector: ProductDataType = useSelector((state:RootState) =>
         state.ProductInfoReducer!.productInfo
@@ -152,10 +155,15 @@ export const ItemInfoComp = () => {
 const FarmerComp = () => {
     const navigate = useNavigate();
 
+    const storeSelector: StoreDataType = useSelector((state:RootState) =>
+        state.ProductInfoReducer!.storeInfo
+    );  
+
+
     return(
-        <div onClick={() => {navigate("/store")}} style={{display: "flex",alignItems:"center"}}>
-            <FarmerProfile src={recommendItemStawberry}/>
-            <FarmerNickname style={{marginLeft: "10px"}}> 청년농부 </FarmerNickname> 
+        <div onClick={() => {navigate(`/store/${storeSelector.store_id}`)}} style={{display: "flex",alignItems:"center"}}>
+            <FarmerProfile src={storeSelector.photo}/>
+            <FarmerNickname style={{marginLeft: "10px"}}> {storeSelector.name} </FarmerNickname> 
             <FarmerArrow style={{marginLeft:"2px"}} src={rightArrowIcon}/>
         </div>
     );
@@ -167,5 +175,5 @@ export const getAverageReviewScore = (reviewList: ProductDataReviewType[]) => {
         score+=review.score
     });
 
-    return (score/(reviewList.length));
+    return (score/(reviewList.length)).toFixed(1);
 }
