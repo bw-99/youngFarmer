@@ -34,7 +34,8 @@ export async function convertOrder2Product(orderList:OrderDataType[]) {
             dataList.push({
                 count: orderList[index].count,
                 product: product,
-                option: orderList[index].option
+                option: orderList[index].option,
+                store: null
             });
         }
     }

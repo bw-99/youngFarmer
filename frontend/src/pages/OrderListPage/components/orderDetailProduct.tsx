@@ -1,15 +1,53 @@
 import { OrderProductDataType } from "../../../reducers/ProductReducer"
 import { ProductImage, ProductName, ProductOption, ProductPrice, StoreName } from "../atoms/orderDetailProduct"
 import { OrderParam } from "../OrderDetailPage"
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { object } from 'prop-types';
 
 export const OrderDetailProductComp = ({order}:OrderParam) =>{
+
+    const [productByStore, setProductByStore] = useState<any>();
+
+    useEffect(()=>{
+        let storeList:any[] = [];
+        let productList:any = {};
+        for (const pr of order!.products!) {
+            if(storeList.includes(pr.product.store_id)) {
+                productList[pr.store!.name].push({
+                    product: pr.product,
+                    option: pr.option
+                });
+            }
+            else {
+                storeList.push(pr.product.store_id);
+                productList[pr.store!.name] = [{
+                    product: pr.product,
+                    option: pr.option
+                }];
+            }
+        }
+        setProductByStore(productList);
+    },[order]);
+
+    if(!productByStore) {
+        return (
+            <></>
+        )
+    }
+
+    // * 가게별 정렬
     return (
         <div>
+
+
             {
-                order.products!.map((pr) => {
-                    return (
-                        <OrderDetailProductItemComp pr={pr}/>
-                    )
+                Object.keys(productByStore).map((key:any) => {
+                        return (
+                            productByStore[key].map((pr:any) => {
+                                return <OrderDetailProductItemComp pr={pr}/>
+                            })
+                        )
                 })
             }
         </div>

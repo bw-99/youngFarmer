@@ -9,6 +9,7 @@ export interface OrderProductDataType {
     product: ProductDataType,
     count: number,
     option: string,
+    store: StoreDataType | null
 }
 
 

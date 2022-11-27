@@ -12,6 +12,7 @@ import { CartData, CartDataList } from "../reducers/CartReducer";
 import { SEARCH_CART_SUCCESS, SEARCH_ORDER_SUCCESS, SEARCH_PID_SUCCESS } from "../pages/SearchPage/SearchDertailAction";
 import { OrderDataType } from "../reducers/OrderReducer";
 import { PRODUCT_GET_ORDER_SUCCESS, PRODUCT_SET_ORDER_SUCCESS, PRODUCT_SET_ORDER, PRODUCT_GET_ORDER, PRODUCT_ORDER_TRY } from "../pages/OrderPage/ProductAction";
+import { StoreDataType } from "../pages/StorePage/StoreType";
 
 
 export async function convertOrder2Product(orderList:OrderDataType[]) {
@@ -29,11 +30,13 @@ export async function convertOrder2Product(orderList:OrderDataType[]) {
         const fbdata = await getDocs(queryList[index]);
         if(!fbdata.empty) {
             const product:ProductDataType = fbdata.docs[0].data() as ProductDataType;
+            const storeData = await getDocs(query( collection(db, "store"), where("store_id", "==", product.store_id)));
         
             dataList.push({
                 count: orderList[index].count,
                 product: product,
-                option: orderList[index].option
+                option: orderList[index].option,
+                store: storeData.docs[0].data() as StoreDataType
             });
         }
     }

@@ -23,6 +23,7 @@ import { ProductFilter } from "./components/filter";
 import { updateDoc } from 'firebase/firestore';
 import { OrderDetailTopComp } from "./components/orderDetailTItle";
 import { OrderDetailProductComp } from "./components/orderDetailProduct";
+import { StoreDataType } from "../StorePage/StoreType";
 
 
 export const OrderDetailPage = () => {
@@ -46,7 +47,18 @@ export const OrderDetailPage = () => {
             navigate(-1);
             return;
         }
-        const orderData:any = result.docs[0].data();
+        let orderData:OrderSending = result.docs[0].data() as OrderSending;
+        const productRef = collection(db, "product");
+        const storeRef = collection(db, "store");
+        for (const index in orderData.products!) {
+            let product = orderData.products![index];
+            let store_id = await (await getDocs(query(productRef, where("product_id", "==", product.product.product_id)))).docs[0].data().store_id;
+            let storeData = await getDocs(query(storeRef, where("store_id" , "==", store_id)));
+            orderData.products![index] = {
+                ...product,
+                store: storeData.docs[0].data() as StoreDataType 
+            }
+        }
         setOrderInfo(orderData);
     }
 
@@ -66,9 +78,7 @@ export const OrderDetailPage = () => {
             <AppBarComponentOnlyBack title={"주문 상세"} />
             <OrderDetailTopComp order={orderInfo} />
             <OrderDetailProductComp order={orderInfo} />
-            {
-                JSON.stringify(orderInfo)
-            }
+            
         </AppFrame>
         
     );
