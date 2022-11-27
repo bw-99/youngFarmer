@@ -11,46 +11,50 @@ import { AppBarComponentOnlyBack } from "../../../common/AppBar/AppBar";
 
 export const PointPageComp = () => {
     return(
-        <div>
-            <AvailablePointBox style = {{display: "flex", flexDirection: "row", maxWidth: "593px", padding: "25px 16px 24px 16px", margin: "20px 16px 16px 16px"}}>
-                <AvailablePoint style = {{display: "flex", margin: "7px 77px 7px 0"}}> 사용 가능한 포인트 </AvailablePoint>
-                <img src = {PointImg} style = {{position: "fixed", margin: "2px 6px 5px 77px"}} />
-                <PointAmount style = {{display: "flex", margin: "0 0 0 6px"}}> 34,000P </PointAmount>
+        <div style={{marginTop: "76px"}}>
+            <AvailablePointBox style = {{display: "flex", 
+            margin:"0 16px 0 16px",
+            flexDirection: "row", maxWidth: "calc(625px - 32px)",
+            alignItems:"center",justifyContent:"space-between"}}>
+                <AvailablePoint style = {{display: "flex", margin: "7px 77px 7px 16px"}}> 사용 가능한 포인트 </AvailablePoint>
+                
+                <div style={{display:"flex", alignItems:"center", marginRight:"16px"}}>
+                    <img src = {PointImg} style = {{margin: "2px 6px 5px 77px", width:"24px",  height:"24px"}} />
+                    <PointAmount style = {{display: "flex", margin: "0 0 0 6px"}}> 34,000 P </PointAmount>
+                </div>
             </AvailablePointBox>
 
-            <div style = {{display: "flex", flexDirection: "row"}}>
-                <img src = {RefreshImg} style = {{position: "fixed", margin: "16px 2px 20px 114px"}} />
+            <div style = {{display: "flex", flexDirection: "row", justifyContent:"center", margin:"16px 0 20px 0"}}>
+                <img src = {RefreshImg} style = {{}} />
                 <UpdateDate style = {{display: "flex"}}> 업데이트 2022년10월06일 </UpdateDate>
             </div>
 
-            <SeparateBar style = {{display: "flex", width: "100vw"}} />
+            <SeparateBar style = {{display: "flex", maxWidth: "calc(625px - 32px)"}} />
 
-            <PointDetailBox style = {{display: "flex", flexDirection: "row", padding: "20px 16px 0 16px"}}>
-                <div style = {{display: "flex", flexDirection: "column"}}>
-                    <PointDetailContent style = {{display: "flex", margin: "0 0 3px 0"}}> 이벤트 </PointDetailContent>
-                    <PointDetailDate style = {{display: "flex", margin: "0 0 20px 0"}}> 2022년 10월 03일 </PointDetailDate>
+            <PointDetailBox style = {{display: "flex", flexDirection: "column", margin: "20px 16px 0 16px"}}>
+                <div style={{display: "flex", justifyContent:"space-between"}}>
+                    <div style = {{display: "flex", flexDirection: "column"}}>
+                        <PointDetailContent style = {{display: "flex", margin: "0 0 3px 0"}}> 이벤트 </PointDetailContent>
+                        <PointDetailDate style = {{display: "flex", margin: "0 0 20px 0"}}> 2022년 10월 03일 </PointDetailDate>
+                    </div>
+                    <PointDetailAmountPlus style = {{display: "flex", margin: "10px 0 10px 0"}}> +500p </PointDetailAmountPlus>
                 </div>
-                <PointDetailAmountPlus style = {{display: "flex", margin: "10px 0 10px 0"}}> +500p </PointDetailAmountPlus>
+                
                 <SeparateLine style = {{display: "flex", margin: "0 16px 0 16px"}} />
             </PointDetailBox>
 
-            <PointDetailBox style = {{display: "flex", flexDirection: "row", padding: "20px 16px 0 16px"}}>
-                <div style = {{display: "flex", flexDirection: "column"}}>
-                    <PointDetailContent style = {{display: "flex", margin: "0 0 3px 0"}}> 리뷰 작성 </PointDetailContent>
-                    <PointDetailDate style = {{display: "flex", margin: "0 0 20px 0"}}> 2022년 10월 03일 </PointDetailDate>
+            <PointDetailBox style = {{display: "flex", flexDirection: "column", margin: "20px 16px 0 16px"}}>
+                <div style={{display: "flex", justifyContent:"space-between"}}>
+                    <div style = {{display: "flex", flexDirection: "column"}}>
+                        <PointDetailContent style = {{display: "flex", margin: "0 0 3px 0"}}> 상품 구매 </PointDetailContent>
+                        <PointDetailDate style = {{display: "flex", margin: "0 0 20px 0"}}> 2022년 10월 03일 </PointDetailDate>
+                    </div>
+                    <PointDetailAmountMinus style = {{display: "flex", margin: "10px 0 10px 0"}}> -100p </PointDetailAmountMinus>
                 </div>
-                <PointDetailAmountPlus style = {{display: "flex", margin: "10px 0 10px 0"}}> +100p </PointDetailAmountPlus>
+                
                 <SeparateLine style = {{display: "flex", margin: "0 16px 0 16px"}} />
             </PointDetailBox>
 
-            <PointDetailBox style = {{display: "flex", flexDirection: "row", padding: "20px 16px 0 16px"}}>
-                <div style = {{display: "flex", flexDirection: "column"}}>
-                    <PointDetailContent style = {{display: "flex", margin: "0 0 3px 0"}}> 상품구입 </PointDetailContent>
-                    <PointDetailDate style = {{display: "flex", margin: "0 0 20px 0"}}> 2022년 10월 03일 </PointDetailDate>
-                </div>
-                <PointDetailAmountMinus style = {{display: "flex", margin: "10px 0 10px 0"}}> -3,000p </PointDetailAmountMinus>
-                <SeparateLine style = {{display: "flex", margin: "0 16px 0 16px"}} />
-            </PointDetailBox>
         </div>
     )
 }

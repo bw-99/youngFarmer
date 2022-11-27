@@ -19,7 +19,8 @@ export const TopText = styled.div`
     color: #272727;
 `
 export const AvailablePointBox = styled.div`
-    width: 593px;
+    /* width: 593px; */
+    width: calc(100vw - 32px);
     height: 80px;
     border-radius: 12px;
     box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
@@ -58,12 +59,10 @@ export const UpdateDate = styled.div`
     color: #979797;
 `
 export const SeparateBar = styled.div`
-    width: 625px;
     height: 8px;
     background-color: #f4f4f4;
 `
 export const PointDetailBox = styled.div`
-    width: 625px;
     height: 80px;
 `
 export const PointDetailContent = styled.div`

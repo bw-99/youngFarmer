@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { BackIconComponent, BackIconWhiteComponent } from "./BackIcon/BackIcon";
-import { NotiComponent } from "./NotiIcon/NotiIcon";
+import { NotiComponent, NotiComponentWhite } from "./NotiIcon/NotiIcon";
 import { ShoppingBagIconComponent, ShoppingBagIconWhiteComponent } from "./ShoppingBagIcon/ShoppingBagIconComponent";
 
 
@@ -234,7 +234,7 @@ export const AppBarComponentStore = () => {
                 </div>
 
                 <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "center" }}>
-                    {isScrollDown ? <NotiComponent /> : <NotiComponent />} {/*--Notice컴포넌트 화이트 필요*/}
+                    {isScrollDown ? <NotiComponent /> : <NotiComponentWhite />} {/*--Notice컴포넌트 화이트 필요*/}
                     {isScrollDown ? <ShoppingBagIconComponent /> : <ShoppingBagIconWhiteComponent />}
                 </div>
             </div>

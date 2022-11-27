@@ -5,7 +5,7 @@ export const FarmerProfileImage = styled.img`
   width: 66px;
   height: 66px;
   border-radius: 33px;
-  /*object-fit: contain;*/
+  object-fit: cover;
 `
 
 export const FarmerNickname = styled.div`

@@ -1,5 +1,5 @@
-import React,{ useState } from "react";
-import { IndexSelectedText, IndexNotSelectedText, IndexSelectedLine, IndexNotSelectedLine, ProductCategoryTitleBox, LineDraw, ProductPopularImg, ProdcutPopularBox, ProductTitle, ProductPrice, ProductSale, ProductFilter, ProdcutRecentBox, ProductRecentImg} from "../atoms/itemDetail";
+import React,{ useEffect, useState } from "react";
+import { IndexSelectedText, IndexNotSelectedText, IndexSelectedLine, IndexNotSelectedLine, ProductCategoryTitleBox, LineDraw, ProductPopularImg, ProdcutPopularBox, ProductTitle, ProductPrice, ProductSale, ProductFilter, ProdcutRecentBox, ProductRecentImg, ProductPopularImgWrap} from "../atoms/itemDetail";
 
 import productExOne from "../../../assets/images/product-ex1@3x.png";
 import productExTwo from "../../../assets/images/product-ex2@3x.png";
@@ -17,14 +17,57 @@ import { RootState } from "../../../reducers";
 import { ProductDataReviewType, ProductDataType } from "../../../reducers/ProductReducer";
 import { LikeData } from "../../../reducers/LikeReducer";
 import { likeCancelAction, likeAction } from "../../LikePage/LikeAction";
+import { StoreProductDataType } from "../StoreType";
+import { ItemUnitImgComp } from "../../../common/ItemList/ItemList";
 
-export const ItemDetailComp = () => {
+
+type StoreParam = {
+    storeData: StoreProductDataType
+}
+
+
+export const ItemDetailComp = ({storeData}:StoreParam) => {
     const [index, setIndex] = useState(0);
     const [recentP, setRecentP] = useState(true);
     const [isLiked, setLiked] = useState(true);
 
+    const filterButton = ["all","is_best","is_sale","is_nonpesticide", "is_ontime", "is_vegitable"]
+
+    const [filteredProduct, setFilteredProduct] = useState<ProductDataType[] | null>(null);
+    
     const dispatch = useDispatch();
     const product_id = 1;
+
+
+    useEffect(() => {
+        if(index === 0) {
+            setFilteredProduct([...storeData.product_list]);
+        }
+        else{
+            let prList = [...storeData.product_list];
+            switch (index) {
+                case 1:
+                    prList = prList.filter((pr) => pr.is_best);
+                    break;
+                case 2:
+                    prList = prList.filter((pr) => pr.is_sale);
+                    break;
+                case 3:
+                    prList = prList.filter((pr) => pr.is_nonpesticide);
+                    break;
+                case 4:
+                    prList = prList.filter((pr) => pr.is_ontime);
+                    break;
+                case 5:
+                    prList = prList.filter((pr) => pr.is_vegitable);
+                    break;
+            
+                default:
+                    break;
+            }
+            setFilteredProduct(prList);
+        }
+    }, [index])
 
     const clickHandler = (i: number) => {
         return (event: React.MouseEvent) => {
@@ -44,7 +87,7 @@ export const ItemDetailComp = () => {
     return(
         <div style={{ marginLeft: "16px", padding: "0 0 20px 0"}}>
             <div style={{ display: "flex", marginBottom: "22px" }}>
-                <div onClick={clickHandler(0)} style={{ flex: 1 }}>
+                <div onClick={clickHandler(0)} style={{ flex: 1, justifyContent:"center" }}>
                     {
                         index == 0? 
                         <>
@@ -74,31 +117,33 @@ export const ItemDetailComp = () => {
                     }
 
                 </div>
+
                 <div onClick={clickHandler(2)} style={{ flex: 1 }}>
                     {
                         index == 2 ?
                             <>
-                                <IndexSelectedText style={{ padding: "16px 0" }}> 친황경 과일 </IndexSelectedText>
+                                <IndexSelectedText style={{ padding: "16px 0" }}> 할인 </IndexSelectedText>
                                 <IndexSelectedLine />
                             </>
                             :
                             <>
-                                <IndexNotSelectedText style={{ padding: "16px 0" }}> 친황경 과일 </IndexNotSelectedText>
+                                <IndexNotSelectedText style={{ padding: "16px 0" }}> 할인 </IndexNotSelectedText>
                                 <IndexNotSelectedLine />
                             </>
                     }
 
                 </div>
+
                 <div onClick={clickHandler(3)} style={{ flex: 1 }}>
                     {
                         index == 3 ?
                             <>
-                                <IndexSelectedText style={{ padding: "16px 0" }}> 제철 과일 </IndexSelectedText>
+                                <IndexSelectedText style={{ padding: "16px 0" }}> 무농약 </IndexSelectedText>
                                 <IndexSelectedLine />
                             </>
                             :
                             <>
-                                <IndexNotSelectedText style={{ padding: "16px 0" }}> 제철 과일 </IndexNotSelectedText>
+                                <IndexNotSelectedText style={{ padding: "16px 0" }}> 무농약 </IndexNotSelectedText>
                                 <IndexNotSelectedLine />
                             </>
                     }
@@ -108,12 +153,27 @@ export const ItemDetailComp = () => {
                     {
                         index == 4 ?
                             <>
-                                <IndexSelectedText style={{ padding: "16px 0" }}> 친황경 채소 </IndexSelectedText>
+                                <IndexSelectedText style={{ padding: "16px 0" }}> 제철 </IndexSelectedText>
                                 <IndexSelectedLine />
                             </>
                             :
                             <>
-                                <IndexNotSelectedText style={{ padding: "16px 0" }}> 친황경 채소 </IndexNotSelectedText>
+                                <IndexNotSelectedText style={{ padding: "16px 0" }}> 제철 </IndexNotSelectedText>
+                                <IndexNotSelectedLine />
+                            </>
+                    }
+
+                </div>
+                <div onClick={clickHandler(5)} style={{ flex: 1 }}>
+                    {
+                        index == 5 ?
+                            <>
+                                <IndexSelectedText style={{ padding: "16px 0" }}> 채소 </IndexSelectedText>
+                                <IndexSelectedLine />
+                            </>
+                            :
+                            <>
+                                <IndexNotSelectedText style={{ padding: "16px 0" }}> 채소 </IndexNotSelectedText>
                                 <IndexNotSelectedLine />
                             </>
                     }
@@ -122,52 +182,22 @@ export const ItemDetailComp = () => {
             </div>
 
 
-            <div>
+            <div >
                 <div>
                     <ProductCategoryTitleBox>
-                        이번주 인기 상품
+                        이번 주 인기 상품
                     </ProductCategoryTitleBox>
 
-                    <div style={{display:"flex"}}>
-                    <ProdcutPopularBox>
-                            <ProductPopularImg>
-                            </ProductPopularImg>
-                            <ProductTitle style={{marginTop:"8px"}}>친환경 복숭아</ProductTitle>
-                            <div style={{display:"flex", marginTop:"8px"}}>
-                                <ProductPrice>29,000원</ProductPrice>
-                                <ProductSale>20%</ProductSale>
-                            </div>
-                        </ProdcutPopularBox>
-
-                        <ProdcutPopularBox>
-                            <ProductPopularImg>
-                            </ProductPopularImg>
-                            <ProductTitle style={{marginTop:"8px"}}>친환경 복숭아</ProductTitle>
-                            <div style={{display:"flex", marginTop:"8px"}}>
-                                <ProductPrice>29,000원</ProductPrice>
-                                <ProductSale>20%</ProductSale>
-                            </div>
-                        </ProdcutPopularBox>
-
-                        <ProdcutPopularBox>
-                            <ProductPopularImg>
-                            </ProductPopularImg>
-                            <ProductTitle style={{marginTop:"8px"}}>친환경 복숭아</ProductTitle>
-                            <div style={{display:"flex", marginTop:"8px"}}>
-                                <ProductPrice>29,000원</ProductPrice>
-                                <ProductSale>20%</ProductSale>
-                            </div>
-                        </ProdcutPopularBox>
-
-                        <ProdcutPopularBox>
-                            <ProductPopularImg>
-                            </ProductPopularImg>
-                            <ProductTitle style={{marginTop:"8px"}}>친환경 복숭아</ProductTitle>
-                            <div style={{display:"flex", marginTop:"8px"}}>
-                                <ProductPrice>29,000원</ProductPrice>
-                                <ProductSale>20%</ProductSale>
-                            </div>
-                        </ProdcutPopularBox>
+                    <div style={{display:"flex", marginLeft:"-9.5px", overflow:'scroll'}}>
+                        {
+                            storeData.product_list.map((pr) => {
+                                return (
+                                    <div style={{margin: "0 6.5px"}}>
+                                        <ItemUnitImgComp image_width={124} bsFlag={false} product={pr} />
+                                    </div>
+                                )
+                            })
+                        }
                     </div>                   
                 </div>
 
@@ -179,72 +209,41 @@ export const ItemDetailComp = () => {
 
                 <ProductCategoryTitleBox>
 
-                    <div>
-                        최신 상품   
-                        <img src={downbtn} style={{width:"20px", height:"20px", marginLeft:"5px"}} onClick={()=>{setRecentP(!recentP)}} />
+                    <div style={{display:"flex", alignItems:"center"}}>
+                        최신순   
+                        <img src={downbtn} style={{width:"20px", height:"20px", marginLeft:"5px"}} 
+                        // onClick={()=>{setRecentP(!recentP)}} 
+                        />
                     </div>
-                    <div>
+                    {/* <div>
                         <ProductFilter> <img src={filter} style={{width:"16px", height:"16px", marginRight:"2px"}} /> 필터  </ProductFilter>
-                    </div>
+                    </div> */}
 
                     
                 </ProductCategoryTitleBox>
                 {
-                    recentP
-                    ?
-                    <div style={{marginLeft:"16px"}}>
-                        <div style={{display:"flex"}}>
-                            <ProdcutRecentBox>
-                                <ProductRecentImg>
-
-                                </ProductRecentImg>
-                                <ProductOption >산천</ProductOption>
-                                <ProductTitle style={{marginTop:"8px"}}>친환경 복숭아</ProductTitle>
-                                <div style={{display:"flex", marginTop:"8px"}}>
-                                    <ProductPrice>29,000원</ProductPrice>
-                                    <ProductSale>20%</ProductSale>
-                                </div>
-                            
-                            
-                            </ProdcutRecentBox>
-
-                            <ProdcutRecentBox style={{marginLeft:"16px"}}>
-                                <ProductRecentImg>
-
-                                </ProductRecentImg>
-                                <ProductOption>산천</ProductOption>
-                                <ProductTitle style={{marginTop:"8px"}}>친환경 복숭아</ProductTitle>
-                                <div style={{display:"flex", marginTop:"8px"}}>
-                                    <ProductPrice>29,000원</ProductPrice>
-                                    <ProductSale>20%</ProductSale>
-                                </div>
-                            
-                            
-                            </ProdcutRecentBox>
-
-                            <ProdcutRecentBox style={{marginLeft:"16px"}}>
-                                <ProductRecentImg>
-
-                                </ProductRecentImg>
-                                <ProductOption>산천</ProductOption>
-                                <ProductTitle style={{marginTop:"8px"}}>친환경 복숭아</ProductTitle>
-                                <div style={{display:"flex", marginTop:"8px"}}>
-                                    <ProductPrice>29,000원</ProductPrice>
-                                    <ProductSale>20%</ProductSale>
-                                </div>
-                            
-                            
-                            </ProdcutRecentBox>
-
-                        </div>
-                        <LineDraw></LineDraw>
-                        
-
-
-                    </div>
-
-                    :
-                    <div style={{marginLeft:"16px"}}></div>
+                     <div style={{display:"flex", marginLeft:"-9.5px", flexWrap:"wrap"}}>
+                        {
+                            filteredProduct!.length
+                            ?
+                            <>
+                            {
+                                filteredProduct!.map((pr) => {
+                                    return (
+                                        <div style={{margin: "0 6.5px"}}>
+                                            <ItemUnitImgComp image_width={165} bsFlag={true} product={pr} />
+                                        </div>
+                                    )
+                                })
+                            }
+                            </>
+                            :
+                            <div style={{height: "255px"}}>
+                            </div>
+                        }
+                     
+                     
+                 </div>       
                 }
             </div>
             

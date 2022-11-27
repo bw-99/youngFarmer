@@ -32,7 +32,7 @@ export const IndexNotSelectedLine = styled.div`
 `
 
 export const IndexSelectedLine = styled.div`
-  width: 114px;
+  /* width: 114px; */
   height: 2px;
   background-color: #fb6159;
 `
@@ -47,8 +47,9 @@ export const ProductCategoryTitleBox = styled.div`
   line-height: normal;
   letter-spacing: normal;
   color: #272727;
-  margin:16px;
   display:flex;
+  margin-top: 30px;
+  margin-bottom: 16px;
   align-items:center;
   justify-content:space-between;
 `
@@ -59,21 +60,38 @@ flex-direction:column;
 margin-left:16px;
 `
 
-export const ProductPopularImg = styled.div`
-width:124px;
-height:124px;
-background-color:black;
+export const ProductPopularImg = styled.img`
+  width:124px;
+  height:124px;
+  border-radius: 12px;
+  object-fit: cover;
 `
 
+
+export const ProductPopularImgWrap = styled.div`
+  width: 124px;
+  height: 60px;
+  border-radius: 12px;
+  opacity: 0.6;
+  position: absolute;
+  z-index: 10;
+  background-image: linear-gradient(to bottom, #000000, rgba(0, 0, 0, 0));
+`
+
+
 export const ProductTitle = styled.div`
-font-family: AppleSDGothicNeo;
+  font-family: AppleSDGothicNeo;
   font-size: 15px;
+  width: 124px;
   font-weight: 500;
   font-stretch: normal;
   font-style: normal;
   line-height: normal;
   letter-spacing: normal;
   color: #444;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `
 
 export const ProductPrice = styled.div`
@@ -121,7 +139,7 @@ width: 66px;
 export const LineDraw = styled.div`
 height: 1px;
 background-color: #efefef;
-margin:30px 16px 30px 16px;
+margin:30px 0px 30px 0px;
 `
 
 export const ProdcutRecentBox = styled.div`

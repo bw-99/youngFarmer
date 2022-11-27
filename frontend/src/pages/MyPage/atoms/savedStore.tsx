@@ -19,17 +19,15 @@ export const TopText = styled.div`
     color: #272727;
 `
 export const StoreBox = styled.div`
-    width: 593px;
     height: 80px;
     border-radius: 12px;
     border: solid 1px #efefef;
     background-color: #fff;
 `
-export const StoreImg = styled.div`
+export const StoreImg = styled.img`
     width: 66px;
     height: 66px;
-    margin: 0 16px 0 0;
-    border-radius: 33px;
+    border-radius: 50%;
 `
 export const StoreName = styled.div`
     font-family: AppleSDGothicNeo;

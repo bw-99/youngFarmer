@@ -150,7 +150,7 @@ export const ItemUnitImgComp = ({image_width ,bsFlag= true, product}:itemUnitPro
 
             <div onClick={()=>{navigate(targetUrl)}} >
                 <ItemTextInfoSource>산천</ItemTextInfoSource>
-                <ItemTextInfoTitle> {product.title?product.title: "친환경 복숭아 5kg /10kg"} </ItemTextInfoTitle>
+                <ItemTextInfoTitle style={{width: `${image_width}px`}}> {product.title?product.title: "친환경 복숭아 5kg /10kg"} </ItemTextInfoTitle>
                 <div style={{display: "flex", alignItems: "flex-start", marginTop: "8px"}}>
                     <div style={{display:"flex"}}>
                         <ItemTextInfoPrice> {product.price ? product.price + "원" : "29,000원"} </ItemTextInfoPrice>

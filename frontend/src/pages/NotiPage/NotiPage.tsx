@@ -16,42 +16,50 @@ function Notipage () {
     const [isCommu, setIsCommu] = useState(true);
     const [isOrder, setIsOrder] = useState(true);
     
-    // useEffect(
-    //     () => {
-    //         setIsAll(isAll);
-    //         setIsEvent(false);
-    //         setIsCommu(false);
-    //         setIsOrder(false);
-    //     },
-    //     [isAll]
-    // )
-    // useEffect(
-    //     () => {
-    //         setIsAll(false);
-    //         setIsEvent(isEvent);
-    //         setIsCommu(false);
-    //         setIsOrder(false);
-    //     },
-    //     [isEvent]
-    // )
-    // useEffect(
-    //     () => {
-    //         setIsAll(false);
-    //         setIsEvent(isCommu);
-    //         setIsCommu(false);
-    //         setIsOrder(false);
-    //     },
-    //     [isCommu]
-    // )
-    // useEffect(
-    //     () => {
-    //         setIsAll(false);
-    //         setIsEvent(false);
-    //         setIsCommu(false);
-    //         setIsOrder(isOrder);
-    //     },
-    //     [isOrder]
-    // )
+    useEffect(
+        () => {
+            if(isAll) {
+                setIsEvent(false);
+                setIsCommu(false);
+                setIsOrder(false);
+            }
+        },
+        [isAll]
+    )
+    useEffect(
+        () => {
+            if(isEvent) {
+                setIsAll(false);
+                setIsEvent(isEvent);
+                setIsCommu(false);
+                setIsOrder(false);
+            }
+        },
+        [isEvent]
+    )
+
+    useEffect(
+        () => {
+            if(isCommu) {
+                setIsAll(false);
+                setIsEvent(false);
+                setIsCommu(isCommu);
+                setIsOrder(false);
+            }
+        },
+        [isCommu]
+    )
+    useEffect(
+        () => {
+            if(isOrder) {
+                setIsAll(false);
+                setIsEvent(false);
+                setIsCommu(false);
+                setIsOrder(isOrder);
+            }
+        },
+        [isOrder]
+    )
 
 
 

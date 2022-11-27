@@ -160,9 +160,28 @@ async function getaTotalReviewAPI(payload:any) {
 
     console.log(fbdata);
 
-    const reviewDataList = fbdata.docs.map((doc) => {
-        return doc.data();
-    });
+    let reviewDataList: any[] = [];
+    
+    for (const doc of fbdata.docs) {
+        const userRef = collection(db, "user");
+        
+        console.log(uid);
+        
+        const userQ = query(userRef, where("uid", "==", uid));
+        const userData = await getDocs(userQ);
+        console.log(userData.docs[0].data());
+
+        const profileRef = collection(userData.docs[0].ref, "profile");
+        const profileData = await getDocs(query(profileRef));
+        console.log(profileData.docs[0].data());
+
+        reviewDataList.push({
+            ...doc.data(),
+            writer: profileData.docs[0].data()
+        })
+    }
+
+   
 
     return reviewDataList;
 }

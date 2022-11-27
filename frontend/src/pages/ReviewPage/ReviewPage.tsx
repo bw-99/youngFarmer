@@ -144,13 +144,13 @@ function ReviewPage(props: any) {
                                 {
                                     reviewSelector.map((pr, index)=>{
                                         return (
-                                            <div style={{ marginTop: "24px", height: "130px", }}>
+                                            <div style={{ marginTop: "24px", }}>
                                                 <div style={{ display: "flex", /*alignItems:"center",*/ justifyContent: "space-between" }}>
                                                     <div style={{ display: "flex", alignItems: "center", }}>
-                                                        <ReviewerImage src={pr.review.photos[0]} />
+                                                        <ReviewerImage src={pr.review.writer.profile_img} />
                                                         <ReviewerNickname style={{ marginLeft: "10px" }}>
                                                             {
-                                                                pr.review.uid
+                                                                pr.review.writer.profile_nickname
                                                             }
                                                         </ReviewerNickname>
                                                     </div>
@@ -168,7 +168,7 @@ function ReviewPage(props: any) {
                                                             {changeTimeStemp(pr.review.time_created.seconds)}
                                                         </ReviewDate>
                                                     </div>
-                                                    <ReviewedProductImg src={pr.product.photo} />
+                                                    <ReviewedProductImg src={pr.review.photos[0]} />
                                                 </div>
                                                 {
                                                     index + 1 != reviewSelector.length ?
@@ -186,7 +186,7 @@ function ReviewPage(props: any) {
                                 {                                    
                                     unreviewSelector.map((pr, index) => {
                                         return (
-                                            <div style={{ marginTop: "24px", height: "130px", }}>
+                                            <div style={{ marginTop: "24px", }}>
                                                 <div style={{ display: "flex", justifyContent: "space-between" }}>
                                                     <div style={{ display: "flex", alignItems: "center" }}>
                                                         <PurchaseDate>{pr.time_created ? changeTimeStemp(pr.time_created.seconds) :changeTimeStemp(new Date().getSeconds()) }</PurchaseDate>

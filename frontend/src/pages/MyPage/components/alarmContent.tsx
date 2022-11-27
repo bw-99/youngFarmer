@@ -23,14 +23,16 @@ export const AlramContentComp = () => {
     return(
         <AlarmContentBox>
             <AlarmContentBoxSmall>
-                <AlarmContentCategoryBox style={{marginLeft:"16px"}}> {data.category}</AlarmContentCategoryBox>
+                <AlarmContentCategoryBox style={{marginLeft:"16px", marginTop:"13px"}}> {data.category}</AlarmContentCategoryBox>
             </AlarmContentBoxSmall>
-            <AlarmContentBoxSmall>
+            <AlarmContentBoxSmall style={{marginTop: "10px"}}>
                 <AlarmmContentTitleBox style={{marginLeft:"16px"}}>{data.title}</AlarmmContentTitleBox>
             </AlarmContentBoxSmall>
             <AlarmContentBoxSmall>
-                <AlaramContentDateBox style={{marginLeft:"16px"}}>{data.date}</AlaramContentDateBox>    
+                <AlaramContentDateBox style={{marginLeft:"16px", marginTop: "8px"}}>{data.date}</AlaramContentDateBox>    
             </AlarmContentBoxSmall>
+            <div style={{height: "1px",backgroundColor:"#efefef", margin: "12px 16px 0 16px"}}>
+            </div>
         </AlarmContentBox>
     );
 }

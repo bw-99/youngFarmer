@@ -56,8 +56,9 @@ export const ItemTextInfoSource = styled.div`
 export const ItemTextInfoTitle = styled.div`
   font-family: AppleSDGothicNeo;
   font-size: 15px;
-  text-overflow: elapsis;
+  text-overflow: ellipsis;
   white-space:nowrap;
+  overflow: hidden;
   font-weight: 500;
   color: #444444;
   margin: 4px 0 8px 0;

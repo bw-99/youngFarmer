@@ -70,7 +70,7 @@ function App() {
                     <Route path='/review' element={<ReviewPage />}/>
                     <Route path='/review/product/:product_id' element = {<AddReviewPage />}/>
                     <Route path='/product/:productId' element = {<ProductPage />}/>
-                    <Route path='/store' element={<StorePage />} />
+                    <Route path='/store/:store_id' element={<StorePage />} />
                     <Route path='/mypage/setting' element={<MySettingPage />} />
                     <Route path='/mypage/setting/alarm' element={<MyAlarmSettingpage />} />
                     <Route path='/noti' element={<Notipage />} />

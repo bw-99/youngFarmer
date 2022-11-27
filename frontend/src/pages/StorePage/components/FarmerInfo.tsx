@@ -9,20 +9,34 @@ import { ItemBestMark, ItemBestMarkRedBorder, ItemSaleMark } from "../../../comm
 import { LikeIconComp } from "../../MainPage/components/recommend";
 
 import React from "react";
+import { StoreProductDataType } from "../StoreType";
 
-export const FarmerInfoComp = () => {
+type StoreParam = {
+    storeData: StoreProductDataType
+}
+
+export const FarmerInfoComp = ({storeData}:StoreParam) => {
     return (
-        <div style={{ position: "relative",padding: "34px 0 0 0",borderTopRightRadius: "12px", borderTopLeftRadius: " 12px", zIndex: "1", backgroundColor:"white"}}>
+        <div style={{padding: "34px 0 0 0",borderTopRightRadius: "12px", borderTopLeftRadius: "12px", zIndex: "1", backgroundColor:"white", marginTop: "-100px"}}>
             <div style={{ padding: "0 16px", display: "flex", alignItems: "center", justifyContent: "space-between" } }>
                 <div style={{ display: "flex" }}>
-                    <FarmerProfileImage src={recommendItemStawberry} />
+                    <FarmerProfileImage src={storeData.photo} />
                     <div style={{ margin: "7px 0 0 20px", alignItems: "center", justifyContent: "center" } }>
-                        <FarmerNickname> 청년농부 </FarmerNickname>
+                        <FarmerNickname> {storeData.name} </FarmerNickname>
                         <div style={{ marginTop: "8px", display: "flex", alignItems: "center" }}>
                             <FarmerRateStar src={FarmerRateStarIcon} />
                             <FarmerRateText style={{ marginLeft: "2px" }} > 5.0 </FarmerRateText>
-                            <FarmerSortIcon />
-                            <FarmerSortText>채소</FarmerSortText>
+                            {
+                                storeData.category.map((cat) => {
+                                    return (
+                                        <>
+                                            <FarmerSortIcon />
+                                            <FarmerSortText>{cat}</FarmerSortText>
+                                        </>
+                                    )
+                                })
+                            }
+                            
                         </div>
                     </div>
                 </div>
@@ -30,7 +44,7 @@ export const FarmerInfoComp = () => {
                     <FarmerFollowButton> 팔로우 </FarmerFollowButton>
                 </div>
             </div>
-            <FarmerIntroduceText style={{padding: "0 16px"}}>100% 친환경 채소만 판매하는 청년농부입니다.</FarmerIntroduceText>
+            <FarmerIntroduceText style={{padding: "0 16px"}}>{storeData.description}</FarmerIntroduceText>
             <div style={{marginTop: "34px"} }>
                 <DetailSepLine />
             </div>

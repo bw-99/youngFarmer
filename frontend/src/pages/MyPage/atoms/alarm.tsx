@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 
 export const AlarmCategoryBox = styled.div`
-    height:78px;
     padding:16px 0px;
     display:flex;
     background-color:white;
@@ -18,27 +17,23 @@ export const AlarmCategoryBtn = styled.div`
     letter-spacing: normal;
     padding:10px 16px;
     height:17px;
-    width:50px;
-    border-radius:50px;
+    border-radius:8px;
     margin:10px;
-    align-itmes:center;
+    align-items:center;
     text-align:center;
     color:#fb6159;
 
 `
 
 export const AlarmContentBox = styled.div`
-    height:100px;
     display:flex;
     flex-direction:column;
-    background-color:white;
-    border: solid 0.3em white;
-    border-bottom-color:#efefef;
+    justify-content: center;
+    background-color: white;
 `
 
 export const AlarmContentBoxSmall = styled.div`
     width:95%;    
-    height:33.3px;
     display:flex;
     justify-content:flex-start;
     align-items:center;
@@ -84,6 +79,5 @@ export const AlaramContentDateBox = styled.div`
 
 export const AlarmContentsContainer = styled.div`
     background-color: #f7f7f7;
-    height:686px;
-
+    height:100%;
 `
