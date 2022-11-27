@@ -6,6 +6,7 @@ import BackBtn from "../../../assets/images/btn-back.png";
 import StarBtn from "../../../assets/images/btn-rate-on.png";
 import { StoreDataType } from "../../StorePage/StoreType";
 import { FollowButton } from "../../../common/FollowButton/followButton";
+import { useNavigate } from 'react-router-dom';
 
 type StoreListParam = {
     storeList: StoreDataType[]
@@ -36,8 +37,14 @@ type StoreParam = {
 }
 
 const StoreComp = ({store}:StoreParam) => {
+    const navigate = useNavigate();
+
     return(
-        <StoreBox style = {{display: "flex", flexDirection: "row",  justifyContent:"space-between", margin: "0 16px 16px 16px", padding: "7px 16px 7px 7px", alignItems:"center"}}>
+        <StoreBox  
+        onClick={()=>{
+            navigate(`/store/${store.store_id}`);        
+        }}
+        style = {{display: "flex", flexDirection: "row",  justifyContent:"space-between", margin: "0 16px 16px 16px", padding: "7px 16px 7px 7px", alignItems:"center"}}>
                 <div style={{display: "flex", alignItems:"center"}}>
                     <StoreImg src={store.photo} style = {{display: "flex", margin: "0 16px 0 7px"}} />
                     <div style = {{display: "flex", flexDirection: "column"}}>

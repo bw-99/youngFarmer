@@ -7,6 +7,7 @@ import { RootState } from "../../../reducers";
 import { ProductDataType } from "../../../reducers/ProductReducer";
 import { StoreDataType } from "../../StorePage/StoreType";
 import { FollowButton } from "../../../common/FollowButton/followButton";
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -44,9 +45,15 @@ type productParam = {
 }
 
 const RecommendStoreItemComp = ({store}:productParam) => {
+    const navigate = useNavigate();
+
     return(
         <div style={{paddingTop: "8px", paddingBottom: "8px"}}>
-            <RecommendItem style={{display:"flex", alignItems: "center", justifyContent:"space-between"}}>
+            <RecommendItem 
+            onClick={()=>{
+                navigate(`/store/${store.store_id}`);        
+            }}
+            style={{display:"flex", alignItems: "center", justifyContent:"space-between"}}>
                 <div style={{display:"flex", alignItems: "center"}}>
                     <RecommendItemImage src={store.photo}/>
 
