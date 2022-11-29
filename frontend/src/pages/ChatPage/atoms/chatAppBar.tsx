@@ -4,7 +4,7 @@ import React from "react";
 
 export const AppBarMainBoxSmall = styled.div`
     height: 56px;
-    ackground-color: #f5f5f5;
+    background-color: #f5f5f5;
     display:flex;
 `
 

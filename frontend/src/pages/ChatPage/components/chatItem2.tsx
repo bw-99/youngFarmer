@@ -14,7 +14,7 @@ import {
     getFirestore,
 
 } from "firebase/firestore";
-import { FirebaseAuth } from "../../..";
+import { db, FirebaseAuth } from "../../..";
 
 import { AppFrame } from "../../../App";
 import { AppBarComponentOnlyBack } from "../../../common/AppBar/AppBar";
@@ -323,22 +323,35 @@ export const ChatItem2Component = (props: ChatItem2PropsType) => {
 }
 
 export const ChatItemCompOnlyText = (props: any) => {
-    const [storeInfo, setStoreInfo] = useState<StoreProductDataType | null>(null);
-    
-    const userInfo: MyPageDataType = useSelector((state: RootState) =>  
-        state.ProfileReducer!.mypageInfo
-    );
-
     const params = useParams();
     const location = useLocation();
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const db = getFirestore();
+
+    const [storeInfo, setStoreInfo] = useState<StoreProductDataType>({
+        background_photo: location.state.props.background_photo,
+        category: location.state.props.category,
+        description: location.state.props.description,
+        name: location.state.props.name,
+        photo: location.state.props.photo,
+        store_id: location.state.props.store_id,
+        product_list: location.state.props.product_list
+    });
+
+    const userInfo: MyPageDataType = useSelector((state: RootState) =>  
+        state.ProfileReducer!.mypageInfo
+    );
+
+    useEffect(() => {
+        if(userInfo) {
+            makeChatDatebase();
+        }
+    }, [userInfo]);
 
     const makeChatDatebase = async () => {
         //check whether the group(chats in firestore) exists, if not create
-        const combinedId = storeInfo?.store_id + userInfo.uid;
+        const combinedId = storeInfo!.store_id + userInfo.uid;
   
         try {
             const res = await getDoc(doc(db, "chat", combinedId));
@@ -362,27 +375,6 @@ export const ChatItemCompOnlyText = (props: any) => {
             }
         } catch (err) { }
     };
-
-    useEffect(() => {
-        setStoreInfo({
-            background_photo: location.state.props.background_photo,
-            category: location.state.props.category,
-            description: location.state.props.description,
-            name: location.state.props.name,
-            photo: location.state.props.photo,
-            store_id: location.state.props.store_id,
-            product_list: location.state.props.product_list
-        });
-
-        FirebaseAuth.onAuthStateChanged((user) => {
-            if (user) {
-                console.log("dispatch!!");
-                dispatch(getProfileAction(user!.uid));
-            }
-        })
-        makeChatDatebase();
-    }, []);
-
     
     return(
         
