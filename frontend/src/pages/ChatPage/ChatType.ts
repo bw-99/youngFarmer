@@ -2,13 +2,15 @@ import { Timestamp } from 'firebase/firestore';
 
 export type ChatBoxType = {
     profile_list: ChatProfileType[],
-    last_chat: string,
+    last_chat: ChatDataType | null,
     id: string,
 }
 
 export type ChatProfileType = {
     uid: string,
-    photo: string
+    photo: string,
+    profile_nickname: string,
+    profile_img: string,
 }
 
 export type ChatBoxSrcType = {

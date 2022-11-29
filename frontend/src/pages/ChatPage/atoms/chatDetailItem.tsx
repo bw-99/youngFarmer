@@ -91,3 +91,19 @@ export const SendIcon = styled.img`
   height: 24px;
   object-fit: cover;
 `
+
+
+export const SepByDate = styled.div`
+  flex: 1;
+  height: 1px;
+  background-color: #e8e8e8;
+`
+
+
+export const SepTextByDate = styled.div`
+  font-family: AppleSDGothicNeo;
+  font-size: 13px;
+  font-weight: 500;
+  text-align: right;
+  color: #a7a7a7;
+`

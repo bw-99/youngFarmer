@@ -12,16 +12,20 @@ import { AppBarComponentNoBack, AppBarComponentSetting } from "../../common/AppB
 
 
 import { BottomNavigationBar } from "../../common/BottomNavigationBar/BottomNavigationBar";
-import { ChatBoxSrcType, ChatBoxType, ChatProfileType } from "./ChatType";
+import { ChatBoxSrcType, ChatBoxType, ChatDataType, ChatProfileType } from "./ChatType";
 import { ChatItemComponent } from "./components/chatItem";
 
 import ChatItemComponentLongBtn from "./components/chtItemLongPress";
-import { collection, query } from 'firebase/firestore';
+import { collection, doc, query } from 'firebase/firestore';
 import { db } from "../..";
 import { where } from 'firebase/firestore';
 import { FirebaseAuth } from './../../index';
 import { getDocs } from 'firebase/firestore';
 import { getDoc } from 'firebase/firestore';
+import { orderBy } from 'firebase/firestore';
+import { limit } from 'firebase/firestore';
+import { getItemWithNoExpireTime } from './../../services/localStorage';
+import { Timestamp } from 'firebase/firestore';
 
 
 function ChatPage() {
@@ -50,11 +54,20 @@ function ChatPage() {
                 const userProfileCollection =  collection((await getDocs(query(collection(db, "user"), where("uid", "==", uidItem)))).docs[0].ref, "profile");
                 const userProfile = (await getDocs(userProfileCollection)).docs[0].data() as any;
                 console.log(userProfile);
-                userProfileData.push(userProfile);
+                userProfileData.push({
+                    ...userProfile,
+                    uid: uidItem
+                });
             }
+
+            const lastChatRef = collection(db, "userChat");
+            const lcq = query(lastChatRef, where("chat_box_id", "==", chatBoxData.id), orderBy("time_created", "desc"), limit(1));
+            const lcResult = await getDocs(lcq);
+            const lastChatData:ChatDataType = lcResult.docs[0].data() as any;
+            
             chatBoxList.push({
                 profile_list: userProfileData,
-                last_chat: chatBoxData.messages[-1],
+                last_chat: lastChatData,
                 id: chatBoxData.id
             })
         }
@@ -83,11 +96,18 @@ function ChatPage() {
             <AppBarComponentSetting title={"채팅목록"} />
             {
                 chatBoxList?.map((chatBox) => {
+                    const savedLastChatTime:Timestamp = getItemWithNoExpireTime(`chat/${chatBox.id}`) ? getItemWithNoExpireTime(`chat/${chatBox.id}`) : {
+                        seconds: 0,
+                        nanoseconds: 0
+                    } ;
+                    const lastChatTime: Timestamp = chatBox.last_chat!.time_created;
+                    
+                    const isReaded = lastChatTime.nanoseconds - savedLastChatTime.nanoseconds > 0 ? false:true
                     return(
                         <div onClick={() => {
                             navigate(`/chat/${chatBox.id}`);
                         }}>
-                            <ChatItemComponent isReaded={true} />
+                            <ChatItemComponent isReaded={isReaded} chatBox={chatBox} />
                         </div>
                     )
                 })

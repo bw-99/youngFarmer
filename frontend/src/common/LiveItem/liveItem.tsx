@@ -7,8 +7,8 @@ export const LiveTitleListComponent = () => {
     return (
         <div style={{display:"flex", flexWrap:"wrap", flexDirection:"row"}}>
             <LiveItemComponent />
-            <LiveItemComponent />
-            <LiveItemComponent />
+            {/* <LiveItemComponent />
+            <LiveItemComponent /> */}
         </div>
     );
 }

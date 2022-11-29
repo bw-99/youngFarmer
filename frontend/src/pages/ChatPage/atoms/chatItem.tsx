@@ -51,5 +51,6 @@ const NewChatNotiBg = styled.div`
 `
 
 export const NewChatNoti = (count: number) => {
-  return <NewChatNotiBg> {count} </NewChatNotiBg>
+  return <NewChatNotiBg> </NewChatNotiBg>
+  // return <NewChatNotiBg> {count} </NewChatNotiBg>
 }

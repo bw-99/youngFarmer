@@ -49,3 +49,34 @@ export function getItemWithExpireTime(keyName:string) {
   export function removeItem(keyName: string) {
     window.localStorage.removeItem(keyName);
   }
+
+
+
+export function setItemWithNoExpireTime(keyName:string, keyValue:any) {
+  window.localStorage.removeItem(keyName);
+  // localStorage에 저장할 객체
+  const obj = {
+    value : keyValue,
+  }
+
+  // 객체를 JSON 문자열로 변환
+  const objString = JSON.stringify(obj);
+  console.log(objString);
+
+  // setItem
+  window.localStorage.setItem(keyName, objString);
+}
+
+  export function getItemWithNoExpireTime(keyName:string) {
+    const objString = window.localStorage.getItem(keyName);
+    // null 체크
+    if(!objString) {
+      return null;
+    }
+    
+    // 문자열을 객체로 변환
+    const obj = JSON.parse(objString);
+    console.log(obj);
+    
+    return obj.value;
+  }

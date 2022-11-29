@@ -19,6 +19,7 @@ import { ChatDetailItemComponent } from "./components/chatDetailItem";
 import { AppFrame } from "../../App";
 import { AppBarComponentOnlyBack } from "../../common/AppBar/AppBar";
 import { ChatSendBottomBar, SendIcon, SendInput, SendInputWrapper } from "./atoms/chatDetailItem";
+import { setItemWithExpireTime, setItemWithNoExpireTime } from "../../services/localStorage";
 
 const tempData1 = {
     f_name : "청년 농부",
@@ -57,18 +58,25 @@ function ChatDetailPage() {
             let userProfileDataList = []
             for (let index = 0; index < chatBoxData.uid_list.length; index++) {
                 const uidItem = chatBoxData.uid_list[index];
-                const userProfileCollection =  collection((await getDocs(query(collection(db, "user"), where("uid", "==", uidItem)))).docs[0].ref, "profile");
+                console.log(uidItem);
+                
+                const userData = await getDocs(query(collection(db, "user"), where("uid", "==", uidItem)));
+                console.log(userData);
+                
+                const userProfileCollection =  collection(userData.docs[0].ref, "profile");
                 const userProfile = (await getDocs(userProfileCollection)).docs[0].data() as any;
                 userProfileDataList.push(userProfile);
             }
 
             setChatBox({
                 profile_list: userProfileDataList,
-                last_chat: chatBoxData.messages[-1],
+                last_chat: null,
                 id: chatBoxData.id
             });
         }
         catch (error) {
+            console.log(error);
+            
             alert("비정상적인 접근입니다.");
             navigate(-1);
         }
@@ -93,11 +101,12 @@ function ChatDetailPage() {
             let currentChatList:any[] = chatList? [...chatList]: [];
 
             snapshot.forEach((doc) => {
-                // console.log(doc.data().chat);
+                console.log(doc.data().chat);
                 currentChatList.push({
                     uid: doc.data().uid,
                     chat:doc.data().chat,
-                    time_created: doc.data().time_created
+                    time_created: doc.data().time_created,
+                    id: doc.id
                 });
             })
 
@@ -118,6 +127,8 @@ function ChatDetailPage() {
                 return 0;
             })
 
+            setItemWithNoExpireTime(`chat/${params.chat_box_id}`, currentChatList[currentChatList.length -1].time_created);
+
             setChatList(currentChatList);
         });
     }, [chatBox])
@@ -125,7 +136,7 @@ function ChatDetailPage() {
     useEffect(() => {
         setTimeout(() => {
             window.scrollTo(0, window.document.body.scrollHeight);
-        }, 100)
+        }, 10)
     }, [chatList])
 
 
@@ -148,6 +159,7 @@ function ChatDetailPage() {
         <AppFrame>
             <AppBarComponentOnlyBack title={"청년 농부"} />
 
+            <div style={{height:"20px"}}></div>
             {
                 chatList?.map((chatData, index) => {
                     return (
@@ -157,10 +169,11 @@ function ChatDetailPage() {
                             prevChatData={chatList.length >= 1 ? chatList[index - 1] : null} 
                             chatLength={chatList.length}                        
                             />
+                           
                     )
                 })
             }
-
+            
             <div style={{height:"76px"}}></div>
 
             <ChatSendBottomBar style={{maxWidth:"625px", position:"fixed", bottom: 0}}>
@@ -169,6 +182,10 @@ function ChatDetailPage() {
                     style={{color: userInputChat? "#272727":"#c3c3c3"}}
                     value={userInputChat} 
                     placeholder="메세지를 입력하세요."
+                    onSubmit={()=> {
+                        sendChatData(userInputChat);
+                        setUserInputChat("");
+                    }}
                     onChange={(e)=>{
                         setUserInputChat(e.target.value);
                     }} />    

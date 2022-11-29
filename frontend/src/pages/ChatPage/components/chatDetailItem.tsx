@@ -1,5 +1,5 @@
 import { ChatSeperateLine, FarmerNickname, FarmerProfile, NewChatNoti, RecentChat, RecentChatDate } from "../atoms/chatItem";
-import { ChatBoxFromMe, ChatBoxFromYou, ChatProfile, ChatTimeCreated } from "../atoms/chatDetailItem";
+import { ChatBoxFromMe, ChatBoxFromYou, ChatProfile, ChatTimeCreated, SepByDate, SepTextByDate } from "../atoms/chatDetailItem";
 import farmer from "../../../assets/images/farmer.png";
 import React, { useEffect, useState } from "react";
 import { ChatDataType } from "../ChatType";
@@ -20,55 +20,105 @@ interface chatPropsType {
  */
 
 export const ChatDetailItemComponent = ({chatData,nextChatData,prevChatData, chatLength}:chatPropsType ) => {
-    const [isTimeDifferent, setIsTimeDifferent] = useState<boolean | null>(null);
+    const [isDateDifferent, setIsDateDifferent] = useState<boolean | null>(null);
     const [isProfileDiff, setIsProfileDiff] = useState<boolean | null>(null);
 
     useEffect(() => {
         if(prevChatData) {
             if(prevChatData.from_me != chatData.from_me) {
-                setIsTimeDifferent(true);
                 setIsProfileDiff(true);
             }
             else {
                 setIsProfileDiff(false);
-                let timeDiff = chatData.time_created.seconds - prevChatData.time_created.seconds;
-                if( timeDiff <= 60){
-                    setIsTimeDifferent(true);
-                }
-                else{
-                    setIsTimeDifferent(false);
-                }
             }
         }
-        else {
-            setIsProfileDiff(false);
+       
+    })
+
+    useEffect(() => {
+        if(prevChatData) {
+            let chatDate = new Date(chatData.time_created.seconds * 1000);
+            let prevChatDate = new Date(prevChatData.time_created.seconds * 1000);
+            if(prevChatDate.getDate() != chatDate.getDate()) {
+                setIsDateDifferent(true);
+            }
+            else{
+                setIsDateDifferent(false);
+            }            
+        }
+        else{
+            setIsDateDifferent(false);
         }
     })
 
-    if(isProfileDiff == null) {
+
+    if(prevChatData && (isProfileDiff == null || isDateDifferent == null)) {
         return(
             <></>
         );
     }
-
     
     
     if(chatData.from_me) {
         return(
-            <div style={{marginTop: isProfileDiff? "10px": "0px"}}>
-                <ChatDetailItemFromMeComp chatData={chatData} nextChatData={nextChatData} prevChatData={prevChatData} chatLength={chatLength} />
+            <div>
+                {
+                isDateDifferent &&
+                <div style={{marginTop: isProfileDiff? "10px": "0px", marginBottom: isProfileDiff? "10px": "0px"}}>
+                    <SepByDateComp timeString={
+                        `${new Date(chatData.time_created.seconds * 1000).getFullYear()}년\
+                        ${new Date(chatData.time_created.seconds * 1000).getMonth()}월\
+                        ${new Date(chatData.time_created.seconds * 1000).getDate()}일
+                        `
+                    } />
+                </div> 
+                }
+                <div style={{marginTop: isProfileDiff? "10px": "0px", marginBottom: isProfileDiff? "10px": "0px"}}>
+                    <ChatDetailItemFromMeComp chatData={chatData} nextChatData={nextChatData} prevChatData={prevChatData} chatLength={chatLength} />
+                </div>
+                
             </div>
+            
             
         );
     }
 
     return(
-        <div style={{marginTop: isProfileDiff? "10px": "0px"}}>
-            <ChatDetailItemFromYouComp chatData={chatData} nextChatData={nextChatData} prevChatData={prevChatData} chatLength={chatLength} />
+        <div>
+            {
+            isDateDifferent &&
+            <div style={{marginTop: isProfileDiff? "10px": "0px"}}>
+                <SepByDateComp timeString={
+                        `${new Date(chatData.time_created.seconds * 1000).getFullYear()}년\
+                        ${new Date(chatData.time_created.seconds * 1000).getMonth()}월\
+                        ${new Date(chatData.time_created.seconds * 1000).getDate()}일
+                        `
+                    } />
+            </div> 
+            }
+            <div style={{marginTop: isProfileDiff? "10px": "0px"}}>
+                <ChatDetailItemFromYouComp chatData={chatData} nextChatData={nextChatData} prevChatData={prevChatData} chatLength={chatLength} />
+            </div>
+            
         </div>
-        
     );
     
+}
+
+type StringProps = {
+    timeString: string
+}
+
+const SepByDateComp = ({timeString}:StringProps) => {
+    return(
+        <div style={{display:"flex", alignItems:"center", marginTop:"10px", marginBottom: "10px"}}>
+            <SepByDate style={{marginLeft: "16px"}}/>
+            <SepTextByDate style={{padding: "0 5px"}}>
+                {timeString}
+            </SepTextByDate>
+            <SepByDate style={{marginRight: "16px"}}/>
+        </div>
+    )
 }
 
 
@@ -121,7 +171,8 @@ const ChatDetailItemFromYouComp = ({chatData,nextChatData,prevChatData, chatLeng
 
     return(
         <div style={{display: "flex", alignItems:"flex-start", justifyContent:"flex-start", marginTop:"10px"}}>
-            {!isPrevExist && <ChatProfile src={chatData.profile.photo}/>}
+            {!isPrevExist && <ChatProfile src={chatData.profile.photo?chatData.profile.photo: farmer}/>}
+            {isPrevExist && <div style={{width: "32px"}}></div>}
             <div style={{display:"flex", alignItems:"flex-end"}}>
                 <ChatBoxFromYou style={{marginLeft: "8px"}}> {chatData.chat} </ChatBoxFromYou>
                 {isTimeDifferent && <ChatTimeCreated style={{marginLeft: "6px"}}> {convertSec2Date(chatData.time_created.seconds)} </ChatTimeCreated>}
