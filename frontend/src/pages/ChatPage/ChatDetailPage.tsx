@@ -7,6 +7,8 @@ import { RootState } from "../../reducers";
 import { MyPageDataType } from "../../reducers/MypageReducer";
 import { StoreProductDataType } from "../StorePage/StoreType";
 
+import sendIcon from "../../assets/images/btn-send.webp";
+import sendIconActive from "../../assets/images/btn-send-active.webp";
 
 
 import { ChatItem2Component, ChatItemCompOnlyText } from "./components/chatItem2"
@@ -16,6 +18,7 @@ import { ChatBodySmallComponent } from './components/chatBody';
 import { ChatDetailItemComponent } from "./components/chatDetailItem";
 import { AppFrame } from "../../App";
 import { AppBarComponentOnlyBack } from "../../common/AppBar/AppBar";
+import { ChatSendBottomBar, SendIcon, SendInput, SendInputWrapper } from "./atoms/chatDetailItem";
 
 const tempData1 = {
     f_name : "청년 농부",
@@ -90,7 +93,7 @@ function ChatDetailPage() {
             let currentChatList:any[] = chatList? [...chatList]: [];
 
             snapshot.forEach((doc) => {
-                console.log(doc.data().chat);
+                // console.log(doc.data().chat);
                 currentChatList.push({
                     uid: doc.data().uid,
                     chat:doc.data().chat,
@@ -116,9 +119,14 @@ function ChatDetailPage() {
             })
 
             setChatList(currentChatList);
-            
         });
     }, [chatBox])
+
+    useEffect(() => {
+        setTimeout(() => {
+            window.scrollTo(0, window.document.body.scrollHeight);
+        }, 100)
+    }, [chatList])
 
 
     
@@ -139,22 +147,39 @@ function ChatDetailPage() {
     return (
         <AppFrame>
             <AppBarComponentOnlyBack title={"청년 농부"} />
- 
-        {
-            chatList?.map((chatData, index) => {
-                return (
-                    <ChatDetailItemComponent 
-                        chatData={chatData} 
-                        nextChatData={
-                            chatList.length >= index + 1 ? chatList[index + 1] : null
-                        } 
-                        prevChatData={
-                            chatList.length >= 1 ? chatList[index - 1] : null
-                        }
-                    />
-                )
-            })
-        }
+
+            {
+                chatList?.map((chatData, index) => {
+                    return (
+                        <ChatDetailItemComponent 
+                            chatData={chatData}
+                            nextChatData={chatList.length >= index + 1 ? chatList[index + 1] : null}
+                            prevChatData={chatList.length >= 1 ? chatList[index - 1] : null} 
+                            chatLength={chatList.length}                        
+                            />
+                    )
+                })
+            }
+
+            <div style={{height:"76px"}}></div>
+
+            <ChatSendBottomBar style={{maxWidth:"625px", position:"fixed", bottom: 0}}>
+                <SendInputWrapper>
+                    <SendInput 
+                    style={{color: userInputChat? "#272727":"#c3c3c3"}}
+                    value={userInputChat} 
+                    placeholder="메세지를 입력하세요."
+                    onChange={(e)=>{
+                        setUserInputChat(e.target.value);
+                    }} />    
+                    <SendIcon 
+                    src={userInputChat ? sendIconActive : sendIcon} 
+                    onClick={()=>{
+                        sendChatData(userInputChat);
+                        setUserInputChat("");
+                    }}/>
+                </SendInputWrapper>
+            </ChatSendBottomBar>
        </AppFrame>
     );
 

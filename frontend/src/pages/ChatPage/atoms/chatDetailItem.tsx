@@ -53,3 +53,41 @@ export const ChatTimeCreated = styled.div`
   font-weight: 500;
   color: #b5b5b5;
 `
+
+export const ChatSendBottomBar = styled.div`
+  width: 100%;
+  height: 56px;
+  background-color: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`
+
+
+export const SendInputWrapper = styled.div`
+  height: 36px;
+  margin: 0 16px;
+  border-radius: 20px;
+  border: solid 1px #e8e8e8;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+`
+
+
+export const SendInput = styled.input`
+  border-radius: 20px;
+  border: none;
+  outline: none;
+  width: calc(100% - 32px - 40px);
+  padding: 10px 16px;
+
+  font-family: AppleSDGothicNeo;
+  font-size: 14px;
+`
+
+export const SendIcon = styled.img`
+  width: 24px;
+  height: 24px;
+  object-fit: cover;
+`

@@ -443,7 +443,7 @@ export const AppBarComponentSearch = () => {
     )
 }
 
-export const AppBarComponentSetting = (title: string) => {
+export const AppBarComponentSetting = ({title}:StringTitleProps) => {
     const [isScrollDown, setIsScrollDown] = useState(false);
     const [topPosition, setTopPosition] = useState(0);
 

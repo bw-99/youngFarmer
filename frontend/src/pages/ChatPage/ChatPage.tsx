@@ -72,7 +72,7 @@ function ChatPage() {
     if(!chatBoxList) {
         return(
             <AppFrame>
-            {AppBarComponentSetting("채팅목록")}
+            <AppBarComponentSetting title={"채팅목록"} />
             <BottomNavigationBar />
         </AppFrame>
         )
@@ -80,7 +80,7 @@ function ChatPage() {
 
     return (
         <AppFrame>
-            {AppBarComponentSetting("채팅목록")}
+            <AppBarComponentSetting title={"채팅목록"} />
             {
                 chatBoxList?.map((chatBox) => {
                     return(

@@ -9,6 +9,7 @@ interface chatPropsType {
     chatData:ChatDataType;
     nextChatData:ChatDataType | null;
     prevChatData:ChatDataType | null;
+    chatLength: number
 }
 
 
@@ -18,7 +19,7 @@ interface chatPropsType {
  * 다음 채팅이 없다면 -> 시간
  */
 
-export const ChatDetailItemComponent = ({chatData,nextChatData,prevChatData}:chatPropsType ) => {
+export const ChatDetailItemComponent = ({chatData,nextChatData,prevChatData, chatLength}:chatPropsType ) => {
     const [isTimeDifferent, setIsTimeDifferent] = useState<boolean | null>(null);
     const [isProfileDiff, setIsProfileDiff] = useState<boolean | null>(null);
 
@@ -42,7 +43,7 @@ export const ChatDetailItemComponent = ({chatData,nextChatData,prevChatData}:cha
         else {
             setIsProfileDiff(false);
         }
-    }, [])
+    })
 
     if(isProfileDiff == null) {
         return(
@@ -55,7 +56,7 @@ export const ChatDetailItemComponent = ({chatData,nextChatData,prevChatData}:cha
     if(chatData.from_me) {
         return(
             <div style={{marginTop: isProfileDiff? "10px": "0px"}}>
-                <ChatDetailItemFromMeComp chatData={chatData} nextChatData={nextChatData} prevChatData={prevChatData} />
+                <ChatDetailItemFromMeComp chatData={chatData} nextChatData={nextChatData} prevChatData={prevChatData} chatLength={chatLength} />
             </div>
             
         );
@@ -63,7 +64,7 @@ export const ChatDetailItemComponent = ({chatData,nextChatData,prevChatData}:cha
 
     return(
         <div style={{marginTop: isProfileDiff? "10px": "0px"}}>
-            <ChatDetailItemFromYouComp chatData={chatData} nextChatData={nextChatData} prevChatData={prevChatData}  />
+            <ChatDetailItemFromYouComp chatData={chatData} nextChatData={nextChatData} prevChatData={prevChatData} chatLength={chatLength} />
         </div>
         
     );
@@ -71,7 +72,7 @@ export const ChatDetailItemComponent = ({chatData,nextChatData,prevChatData}:cha
 }
 
 
-const ChatDetailItemFromMeComp = ({chatData,nextChatData,prevChatData}:chatPropsType ) => {
+const ChatDetailItemFromMeComp = ({chatData,nextChatData,prevChatData, chatLength}:chatPropsType ) => {
     const isNextExist:boolean = (nextChatData && nextChatData.from_me) ?  true : false; 
     const isPrevExist:boolean = (prevChatData && prevChatData.from_me) ?  true : false; 
     const [isTimeDifferent, setIsTimeDifferent] = useState<boolean | null>(null);
@@ -88,7 +89,7 @@ const ChatDetailItemFromMeComp = ({chatData,nextChatData,prevChatData}:chatProps
         else{
             setIsTimeDifferent(true);
         }
-    }, [])
+    }, [chatLength])
     return(
         <div style={{display:"flex", alignItems:"flex-end", justifyContent:"flex-end", marginTop:"10px"}}>
             {(isTimeDifferent) && <ChatTimeCreated style={{marginRight: "6px"}}> {convertSec2Date(chatData.time_created.seconds)} </ChatTimeCreated>}
@@ -98,7 +99,7 @@ const ChatDetailItemFromMeComp = ({chatData,nextChatData,prevChatData}:chatProps
     );
 }
 
-const ChatDetailItemFromYouComp = ({chatData,nextChatData,prevChatData}:chatPropsType ) => {
+const ChatDetailItemFromYouComp = ({chatData,nextChatData,prevChatData, chatLength}:chatPropsType ) => {
     const isNextExist:boolean = (nextChatData && !nextChatData.from_me) ?  true : false; 
     const isPrevExist:boolean = (prevChatData && !prevChatData.from_me) ?  true : false; 
 
@@ -116,7 +117,7 @@ const ChatDetailItemFromYouComp = ({chatData,nextChatData,prevChatData}:chatProp
         else{
             setIsTimeDifferent(true);
         }
-    }, [])
+    }, [chatLength])
 
     return(
         <div style={{display: "flex", alignItems:"flex-start", justifyContent:"flex-start", marginTop:"10px"}}>
@@ -135,8 +136,7 @@ const isTimeDiff = (timeStampA:Timestamp, timeStampB:Timestamp) => {
     let timeDiff = timeStampA.seconds - timeStampB.seconds;
     const dateTimeA = new Date(timeStampA.seconds * 1000);
     const dateTimeB = new Date(timeStampB.seconds * 1000);
-    console.log(`${timeDiff} - ${dateTimeA.getMinutes() != dateTimeB.getMinutes()}`);
-    
+    console.log(`${timeDiff} - ${dateTimeA.getMinutes() != dateTimeB.getMinutes()} - ${(timeDiff >= 60 && (dateTimeA.getMinutes() != dateTimeB.getMinutes()))}`);
 
     // if(timeDiff >= 60 && (dateTimeA.getMinutes() != dateTimeB.getMinutes())){
     //     return true;
