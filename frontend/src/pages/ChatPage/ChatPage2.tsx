@@ -2,7 +2,7 @@ import React from "react";
 
 
 
-import {ChatItem2Component} from "./components/chatItem2"
+import { ChatItem2Component, ChatItemCompOnlyText } from "./components/chatItem2"
 
 const tempData1 = {
     f_name : "청년 농부",
@@ -27,7 +27,8 @@ const tempData2 = {
 
 function ChatPage2() {
     return (
-        <ChatItem2Component  chatPart={tempData1} appBarPart={tempData2}></ChatItem2Component>
+        /*<ChatItem2Component  chatPart={tempData1} appBarPart={tempData2}></ChatItem2Component>
+        */<ChatItemCompOnlyText />
     );
 }
 

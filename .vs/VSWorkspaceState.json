@@ -3,13 +3,14 @@
     "",
     "\\frontend",
     "\\frontend\\src",
+    "\\frontend\\src\\common\\AppBar",
     "\\frontend\\src\\pages",
-    "\\frontend\\src\\pages\\ProductPage",
-    "\\frontend\\src\\pages\\ProductPage\\components",
-    "\\frontend\\src\\pages\\ReviewPage",
-    "\\frontend\\src\\pages\\ReviewPage\\atoms",
+    "\\frontend\\src\\pages\\ChatPage",
+    "\\frontend\\src\\pages\\ChatPage\\components",
+    "\\frontend\\src\\pages\\MainPage\\atoms",
+    "\\frontend\\src\\pages\\MainPage\\components",
     "\\frontend\\src\\reducers"
   ],
-  "SelectedNode": "\\frontend\\src\\reducers\\ReviewReducer.ts",
+  "SelectedNode": "\\frontend\\src\\pages\\MyPage",
   "PreviewInSolutionExplorer": false
 }

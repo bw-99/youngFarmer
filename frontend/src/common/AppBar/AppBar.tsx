@@ -2,7 +2,8 @@ import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { BackIconComponent, BackIconWhiteComponent } from "./BackIcon/BackIcon";
 import { NotiComponent, NotiComponentWhite } from "./NotiIcon/NotiIcon";
 import { ShoppingBagIconComponent, ShoppingBagIconWhiteComponent } from "./ShoppingBagIcon/ShoppingBagIconComponent";
-
+import {ChatIconComponent, ChatWhiteIconComponent  } from "./ChatIcon/ChatIcon";
+import { StoreDataType, StoreProductDataType } from "../../pages/StorePage/StoreType";
 
 import styled, { keyframes } from "styled-components";
 import { SettingComponent } from "./SettingIcon/SettingIcon";
@@ -19,6 +20,7 @@ import { MySettingComponent } from "./SettingIcon/Mysetting";
 import { searchFilterTryAction, searchTryAction } from "../../pages/SearchPage/SearchDertailAction";
 import { RootState } from "../../reducers";
 import { searchRemoveAction } from './../../pages/SearchPage/SearchDertailAction';
+import { prop } from "cheerio/lib/api/attributes";
 
 // btn-search
 interface ScrollProps {
@@ -205,7 +207,7 @@ export const AppBarComponentProduct = () => {
 }
 
 
-export const AppBarComponentStore = () => {
+export const AppBarComponentStore = (props: StoreProductDataType) => {
     const [isScrollDown, setIsScrollDown] = useState(false);
     const [topPosition, setTopPosition] = useState(0);
 
@@ -235,7 +237,24 @@ export const AppBarComponentStore = () => {
 
                 <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "center" }}>
                     {isScrollDown ? <NotiComponent /> : <NotiComponentWhite />} {/*--Notice컴포넌트 화이트 필요*/}
-                    {isScrollDown ? <ShoppingBagIconComponent /> : <ShoppingBagIconWhiteComponent />}
+                    {isScrollDown ?
+                        <ChatIconComponent
+                            background_photo={props.background_photo}
+                            category={props.category}
+                            description={props.description}
+                            name={props.name}
+                            photo={props.photo}
+                            store_id={props.store_id}
+                            product_list={props.product_list} />
+                        :
+                        <ChatWhiteIconComponent
+                            background_photo={props.background_photo}
+                            category={props.category}
+                            description={props.description}
+                            name={props.name}
+                            photo={props.photo}
+                            store_id={props.store_id}
+                            product_list={props.product_list} />}
                 </div>
             </div>
         </AppBarAtom>

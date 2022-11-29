@@ -78,7 +78,15 @@ function StorePage(props: any) {
 
     return (
         <AppFrame>
-            <AppBarComponentStore />    
+            <AppBarComponentStore
+                background_photo={storeData.background_photo}
+                category={storeData.category}
+                description= { storeData.description}
+                name= { storeData.name}
+                photo= {storeData.photo}
+                store_id= {storeData.store_id}
+                product_list={storeData.product_list}
+            />    
             {/* <AppBarComponentProduct /> */}
             
             <TopImageComp background_photo={storeData!.background_photo} />
