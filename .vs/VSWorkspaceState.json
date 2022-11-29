@@ -3,12 +3,9 @@
     "",
     "\\frontend",
     "\\frontend\\src",
-    "\\frontend\\src\\common\\AppBar",
     "\\frontend\\src\\pages",
     "\\frontend\\src\\pages\\ChatPage",
     "\\frontend\\src\\pages\\ChatPage\\components",
-    "\\frontend\\src\\pages\\MainPage\\atoms",
-    "\\frontend\\src\\pages\\MainPage\\components",
     "\\frontend\\src\\reducers"
   ],
   "SelectedNode": "\\frontend\\src\\pages\\MyPage",

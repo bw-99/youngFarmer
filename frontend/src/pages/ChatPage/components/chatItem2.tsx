@@ -325,7 +325,7 @@ export const ChatItem2Component = (props: ChatItem2PropsType) => {
 export const ChatItemCompOnlyText = (props: any) => {
     const [storeInfo, setStoreInfo] = useState<StoreProductDataType | null>(null);
     
-    const userInfo: MyPageDataType = useSelector((state: RootState) =>
+    const userInfo: MyPageDataType = useSelector((state: RootState) =>  
         state.ProfileReducer!.mypageInfo
     );
 
@@ -339,7 +339,7 @@ export const ChatItemCompOnlyText = (props: any) => {
     const makeChatDatebase = async () => {
         //check whether the group(chats in firestore) exists, if not create
         const combinedId = storeInfo?.store_id + userInfo.uid;
-
+  
         try {
             const res = await getDoc(doc(db, "chat", combinedId));
 
@@ -348,14 +348,17 @@ export const ChatItemCompOnlyText = (props: any) => {
                 await setDoc(doc(db, "chat", combinedId), { messages: [] });
 
                 //create user chat
-                await updateDoc(doc(db, "userChat", userInfo.uid), {
-                    [combinedId + ".userInfo"]: {
-                        uid: storeInfo?.store_id,
-                        displayName: storeInfo?.name,
-                        photoURL: storeInfo?.photo,
-                    },
-                    [combinedId + ".date"]: serverTimestamp(),
-                });
+                const userChatRes = await getDoc(doc(db, "userChat", userInfo.uid));
+                if (!userChatRes.exists()) {
+                    await setDoc(doc(db, "userChat", userInfo.uid), {
+                        [combinedId + ".userInfo"]: {
+                            uid: storeInfo?.store_id,
+                            displayName: storeInfo?.name,
+                            photoURL: storeInfo?.photo,
+                        },
+                        [combinedId + ".date"]: serverTimestamp(),
+                    });
+                }
             }
         } catch (err) { }
     };
