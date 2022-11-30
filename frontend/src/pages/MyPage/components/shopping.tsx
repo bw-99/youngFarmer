@@ -1,7 +1,7 @@
 import { Icon, ShoppingItemAtom, ShoppingItemRightArrow, ShoppingItemText, ShoppingSepLine, ShoppingText } from "../atoms/shopping";
-import questionIcon from "../../../assets/images/icon-question@3x.png";
-import btnRightIcon from "../../../assets/images/btn-arrow-r-14-px@3x.png";
-import plusIcon from "../../../assets/images/icon-plus@3x.png";
+import questionIcon from "../../../assets/images/icon-question@3x.webp";
+import btnRightIcon from "../../../assets/images/btn-arrow-r-14-px@3x.webp";
+import plusIcon from "../../../assets/images/icon-plus@3x.webp";
 import React from "react";
 export const ShoppingComp = () => {
     return(

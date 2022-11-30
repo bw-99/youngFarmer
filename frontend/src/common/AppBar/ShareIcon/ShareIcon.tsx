@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import btnOutIcon from "../../../assets/images/btn-out@3x.png";
-import btnOutBlackIcon from "../../../assets/images/btn-out-black@3x.png";
+import btnOutIcon from "../../../assets/images/btn-out@3x.webp";
+import btnOutBlackIcon from "../../../assets/images/btn-out-black@3x.webp";
 
 const AppBarIcon = styled.img`
   width: 24px;

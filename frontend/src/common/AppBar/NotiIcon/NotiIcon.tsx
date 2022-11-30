@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import alarm from "../../../assets/images/alarm@3x.png";
-import alarmWhite from "../../../assets/images/alarm-white@3x.png";
+import alarm from "../../../assets/images/alarm@3x.webp";
+import alarmWhite from "../../../assets/images/alarm-white@3x.webp";
 import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 

@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import recommendItemStawberry from "../../../assets/images/main_recommend_strawberry.png";
+import recommendItemStawberry from "../../../assets/images/main_recommend_strawberry.webp";
 import { ImageSize, ImageCover } from "../atoms/topImage";
-import topExampleIcon from "../../../assets/images/rectangle@3x.png";
+import topExampleIcon from "../../../assets/images/rectangle@3x.webp";
 import React from "react";
 
 type BackGroundImgParam = {

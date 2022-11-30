@@ -1,7 +1,7 @@
 import { RecommendItem, RecommendItemFollowButton, RecommendItemImage, RecommendItemRate, RecommendItemSortIcon, RecommendItemSortText, RecommendItemTitle, RecommendText } from "../atoms/RecommendStore";
 
 import React from "react";
-import recommendItemStawberry from "../../../assets/images/main_recommend_strawberry.png";
+import recommendItemStawberry from "../../../assets/images/main_recommend_strawberry.webp";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../reducers";
 import { ProductDataType } from "../../../reducers/ProductReducer";

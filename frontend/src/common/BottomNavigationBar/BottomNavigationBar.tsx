@@ -2,20 +2,20 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { RootState } from "../../reducers";
-import HomePageIconOn from "../../assets/images/btn-tabbar-home-on@3x.png";
-import HomePageIconOff from "../../assets/images/btn-tabbar-home-off@3x.png";
+import HomePageIconOn from "../../assets/images/btn-tabbar-home-on@3x.webp";
+import HomePageIconOff from "../../assets/images/btn-tabbar-home-off@3x.webp";
 
-import SearchPageIconOn from "../../assets/images/btn-tabbar-search-on@3x.png";
-import SearchPageIconOff from "../../assets/images/btn-tabbar-search-off@3x.png";
+import SearchPageIconOn from "../../assets/images/btn-tabbar-search-on@3x.webp";
+import SearchPageIconOff from "../../assets/images/btn-tabbar-search-off@3x.webp";
 
-import ChatPageIconOn from "../../assets/images/btn-tabbar-chat-on@3x.png";
-import ChatPageIconOff from "../../assets/images/btn-tabbar-chat-off@3x.png";
+import ChatPageIconOn from "../../assets/images/btn-tabbar-chat-on@3x.webp";
+import ChatPageIconOff from "../../assets/images/btn-tabbar-chat-off@3x.webp";
 
-import LikePageIconOn from "../../assets/images/btn-tabbar-like-on@3x.png";
-import LikePageIconOff from "../../assets/images/btn-tabbar-like-off@3x.png";
+import LikePageIconOn from "../../assets/images/btn-tabbar-like-on@3x.webp";
+import LikePageIconOff from "../../assets/images/btn-tabbar-like-off@3x.webp";
 
-import MyPageIconOn from "../../assets/images/btn-tabbar-mypage-on@3x.png";
-import MyPageIconOff from "../../assets/images/btn-tabbar-mypage-off@3x.png";
+import MyPageIconOn from "../../assets/images/btn-tabbar-mypage-on@3x.webp";
+import MyPageIconOff from "../../assets/images/btn-tabbar-mypage-off@3x.webp";
 
 import styled from "styled-components";
 import { CHAT_PAGE, GOTO_CHAT_PAGE, GOTO_HOME_PAGE, GOTO_LIKE_PAGE, GOTO_MY_PAGE, GOTO_SEARCH_PAGE, HOME_PAGE, LIKE_PAGE, MY_PAGE, SEARCH_PAGE } from "./BottomNavigationBarActions";

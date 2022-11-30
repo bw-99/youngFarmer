@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import shoppingBag from "../../../assets/images/shopping_bag@3x.png";
-import shoppingBagWhite from "../../../assets/images/shoppingbag-white-24-px@3x.png";
+import shoppingBag from "../../../assets/images/shopping_bag@3x.webp";
+import shoppingBagWhite from "../../../assets/images/shoppingbag-white-24-px@3x.webp";
 import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 const AppBarIcon = styled.img`

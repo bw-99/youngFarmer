@@ -6,10 +6,10 @@ import {
     SelectCompleteNumberSign, SelectCompleteNumber,
 
 } from "../atoms/purchase";
-import rightArrowIcon from "../../../assets/images/btn-arrow-r-20-px@3x.png";
-import backIcon from "../../../assets/images/btn-back@3x.png";
-import checkIcon from "../../../assets/images/btn-checkbox-1@3x.png";
-import plusIcon from "../../../assets/images/icon-plus@3x.png";
+import rightArrowIcon from "../../../assets/images/btn-arrow-r-20-px@3x.webp";
+import backIcon from "../../../assets/images/btn-back@3x.webp";
+import checkIcon from "../../../assets/images/btn-checkbox-1@3x.webp";
+import plusIcon from "../../../assets/images/icon-plus@3x.webp";
 
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";

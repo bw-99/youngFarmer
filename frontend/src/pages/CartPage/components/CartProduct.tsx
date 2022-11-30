@@ -4,14 +4,14 @@ import React, {useEffect, useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../reducers";
 
-import transforimg from "../../../assets/images/icon@3x.png" ;
+import transforimg from "../../../assets/images/icon@3x.webp" ;
 
 import {CheckBoxIcon} from "../../LoginPage/atoms/Assignp1"
 
 
 import {CartP1T1,Border8px,Temp1, Temp2,Spantemp2,Spantemp1,CartProductBox,CartProductBoxBorder,CartProductBoxPart1,CartBtn1,CartProductBoxPart2,CartProductBoxPart2Img,CartProductBoxPart2S1,CartProductBoxPart2S2,CartProductBoxPart2SmallBox,CartProductBoxPart2SmallBoxBtn,CartProductBoxPart3,CartProductBoxPart3Small,CartProductBoxPart3SmallPart1,CartProductBoxPart3SmallPart2,CartProductBoxPart4,CartProductBoxPart5, CartP1I1, CartP1T2, CartBtn2} from "../atoms/CartProduct"
-import checkIcon from "../../../assets/images/btn-checkbox-1@3x.png";
-import checkNotIcon from "../../../assets/images/btn-checkbox-2@3x.png";
+import checkIcon from "../../../assets/images/btn-checkbox-1@3x.webp";
+import checkNotIcon from "../../../assets/images/btn-checkbox-2@3x.webp";
 import { CartProductDataType, ProductDataType } from "../../../reducers/ProductReducer";
 import { cartCancelAction } from "../CartAction";
 import { OrderDataType } from "../../../reducers/OrderReducer";

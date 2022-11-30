@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useLongPress, LongPressDetectEvents } from "use-long-press";
 import { ChatSeperateLine, FarmerNickname, FarmerProfile, NewChatNoti, RecentChat, RecentChatDate } from "../atoms/chatItem";
-import farmer from "../../../assets/images/farmer.png";
+import farmer from "../../../assets/images/farmer.webp";
 
 interface chatPropsType {
     isReaded:boolean;

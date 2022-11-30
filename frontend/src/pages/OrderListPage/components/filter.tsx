@@ -6,7 +6,7 @@ import {
     UnReviewSepLine,
 } from "../atoms/PurchaseInfo"
 
-import testImage from "../../../assets/images/peach@3x.png";
+import testImage from "../../../assets/images/peach@3x.webp";
 import { getAllOrderList, getDeliverCompleteOrderList, getOnDeliverOrderList, getReadyOrderList, getRefuncOrderList } from "../OrderListAction";
 import { useDispatch } from 'react-redux';
 

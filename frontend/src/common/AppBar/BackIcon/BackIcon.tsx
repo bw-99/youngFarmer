@@ -1,8 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import backArrow from "../../../assets/images/btn-back@3x.png"
-import backArrowWhite from "../../../assets/images/btn-back-white@3x.png"
+import backArrow from "../../../assets/images/btn-back@3x.webp"
+import backArrowWhite from "../../../assets/images/btn-back-white@3x.webp"
 
 const AppBarArrow = styled.img`
   width: 24px;

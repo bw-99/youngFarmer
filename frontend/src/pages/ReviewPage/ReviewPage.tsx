@@ -4,10 +4,10 @@ import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import styled from "styled-components";
 import { AppFrame } from "../../App";
 
-import testImage from "../../assets/images/peach@3x.png";
-import rateStarIcon from "../../assets/images/rate-star@3x.png";
-import alarm from "../../assets/images/alarm@3x.png";
-import shopping_bag from "../../assets/images/shopping_bag@3x.png";
+import testImage from "../../assets/images/peach@3x.webp";
+import rateStarIcon from "../../assets/images/rate-star@3x.webp";
+import alarm from "../../assets/images/alarm@3x.webp";
+import shopping_bag from "../../assets/images/shopping_bag@3x.webp";
 import { AppBarComponentNoBack, AppBarComponentOnlyBack, AppBarComponentProduct, AppBarComponentSearch } from "../../common/AppBar/AppBar";
 import {
     IndexSelectedLine, IndexSelectedText, IndexNotSelectedLine, IndexNotSelectedText,
@@ -15,7 +15,7 @@ import {
     ReviewContent, ReviewDate, ReviewedProductImg, SepLine,
 } from "../ReviewPage/atoms/ReviewPage"
 
-import starOn from "../../assets/images/star-copy-3@3x.png";
+import starOn from "../../assets/images/star-copy-3@3x.webp";
 import {
     PurchaseDate, PurchaseState, WriteReviewBox, WriteReviewText, PurchaseDot,
     ProductImg, ProductLocateText, ProductTitleText, ProductPriceText, ProductDetailText, ProductDetailDot,

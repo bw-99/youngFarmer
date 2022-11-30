@@ -9,7 +9,7 @@ import styled, { keyframes } from "styled-components";
 import { SettingComponent } from "./SettingIcon/SettingIcon";
 
 
-import searchIconImage from "../../assets/images/btn-search@3x.png";
+import searchIconImage from "../../assets/images/btn-search@3x.webp";
 
 
 import { useDispatch, useSelector } from "react-redux";

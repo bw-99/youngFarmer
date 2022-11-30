@@ -2,9 +2,9 @@ import React from "react";
 
 import {AppBarMainBox, TopText, AvailablePointBox, AvailablePoint, PointAmount, UpdateDate, SeparateBar} from "../atoms/point"
 import {PointDetailBox, PointDetailContent, PointDetailDate, PointDetailAmountPlus,PointDetailAmountMinus, SeparateLine} from "../atoms/point"
-import BackBtn from "../../../assets/images/btn-back.png";
-import PointImg from "../../../assets/images/point.png";
-import RefreshImg from "../../../assets/images/btn-refresh.png";
+import BackBtn from "../../../assets/images/btn-back.webp";
+import PointImg from "../../../assets/images/point.webp";
+import RefreshImg from "../../../assets/images/btn-refresh.webp";
 import { AppBarComponentOnlyBack } from "../../../common/AppBar/AppBar";
 
 

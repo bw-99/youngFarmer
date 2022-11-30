@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../reducers';
 import { OrderSending, PaymentMethodDataType } from '../../../reducers/OrderReducer';
 import { savePayMethodAction, TOSS_PAY, KAKAO_PAY, PAYCO_PAY } from '../PayMethodAction';
-import checkIcon from "../../../assets/images/btn-checkbox-1@3x.png";
-import checkNotIcon from "../../../assets/images/btn-checkbox-2@3x.png";
+import checkIcon from "../../../assets/images/btn-checkbox-1@3x.webp";
+import checkNotIcon from "../../../assets/images/btn-checkbox-2@3x.webp";
 import { saveAgreeAction } from '../DeliveryAction';
 
 type agreeParams = {

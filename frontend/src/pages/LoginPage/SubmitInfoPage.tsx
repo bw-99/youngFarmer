@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, Link, useLocation, useNavigate } from 'react-router-dom';
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import {btnBack} from "../../assets/images/btn-back@3x.png"
+import { btnBack } from "../../assets/images/btn-back@3x.webp"
 
 import { AssignMainBox, BottomImg } from "./atoms/Assignp1";
 import { BottomBox } from "./atoms/Box";

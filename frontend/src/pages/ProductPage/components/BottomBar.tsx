@@ -1,6 +1,6 @@
 import { BottomBoxAtom, BottomBoxBuy, BottomBoxLikeIcon, BottomBoxLikeText, BottomBoxShoppingCart, } from "../atoms/BottomBar";
-import itemLikeOffIcon from "../../../assets/images/like-off@3x.png";
-import itemLikeOnIcon from "../../../assets/images/btn-heart-on@3x.png";
+import itemLikeOffIcon from "../../../assets/images/like-off@3x.webp";
+import itemLikeOnIcon from "../../../assets/images/btn-heart-on@3x.webp";
 
 import React, {useEffect, useState }  from "react";
 import {useNavigate } from "react-router-dom"

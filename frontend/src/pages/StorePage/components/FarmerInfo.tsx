@@ -1,8 +1,8 @@
-import recommendItemStawberry from "../../../assets/images/main_recommend_strawberry.png";
-import FarmerRateStarIcon from "../../../assets/images/rate-star@3x.png";
-import rightArrowIcon from "../../../assets/images/btn-arrow-r-14-px@3x.png";
-import itemLikeIcon from "../../../assets/images/like-off@3x.png";
-import rateStarIcon from "../../../assets/images/rate-star@3x.png";
+import recommendItemStawberry from "../../../assets/images/main_recommend_strawberry.webp";
+import FarmerRateStarIcon from "../../../assets/images/rate-star@3x.webp";
+import rightArrowIcon from "../../../assets/images/btn-arrow-r-14-px@3x.webp";
+import itemLikeIcon from "../../../assets/images/like-off@3x.webp";
+import rateStarIcon from "../../../assets/images/rate-star@3x.webp";
 
 import { FarmerProfileImage, FarmerNickname, FarmerRateStar, FarmerRateText, DetailSepLine, FarmerIntroduceText, FarmerSortIcon, FarmerSortText } from "../atoms/FarmerInfo";
 import { ItemBestMark, ItemBestMarkRedBorder, ItemSaleMark } from "../../../common/ItemList/ItemList";

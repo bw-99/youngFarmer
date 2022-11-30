@@ -6,7 +6,7 @@ import { AppFrame } from "../../App";
 
 
 import alarm from "../../assets/images/alarm@3x.png";
-import shopping_bag from "../../assets/images/shopping_bag@3x.png";
+import shopping_bag from "../../assets/images/shopping_bag@3x.webp";
 import { AppBarComponentNoBack, AppBarComponentSetting } from "../../common/AppBar/AppBar";
 
 

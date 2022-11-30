@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 
-import TextFieldRecipient from "../../assets/images/textfield-off_recipient.png";
-import TextFieldPhone from "../../assets/images/textfield-off_phone.png";
-import TextFieldAddress from "../../assets/images/textfield-off.png";
+import TextFieldRecipient from "../../assets/images/textfield-off_recipient.webp";
+import TextFieldPhone from "../../assets/images/textfield-off_phone.webp";
+import TextFieldAddress from "../../assets/images/textfield-off.webp";
 import { useParams, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import styled from "styled-components";
 import { AppFrame } from "../../App";
