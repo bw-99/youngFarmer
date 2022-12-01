@@ -1,5 +1,3 @@
-import recommendItemStawberry from "../../../assets/images/main_recommend_strawberry.webp";
-import shoppingBag from "../../../assets/images/shopping-bag-20px@3x.webp";
 import defaultPhoto from "../../../assets/images/btn-avatar-default@3x.webp";
 import cameraIcon from "../../../assets/images/icon-camera-16-px@3x.webp";
 import React from "react";
@@ -15,7 +13,6 @@ import { RootState } from "../../../reducers";
 import { db, storage } from "../../..";
 import { getDownloadURL, ref, StorageReference, uploadBytes, uploadBytesResumable } from "firebase/storage";
 import { collection, query, where, limit, getDocs, updateDoc, addDoc } from "firebase/firestore";
-import { data } from "cheerio/lib/api/attributes";
 import { getProfileAction } from "../MyAction";
 import { useNavigate } from 'react-router-dom';
 

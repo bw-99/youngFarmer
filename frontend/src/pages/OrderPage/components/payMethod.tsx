@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../reducers';
-import { OrderSending, PaymentMethodDataType } from '../../../reducers/OrderReducer';
+import { PaymentMethodDataType } from '../../../reducers/OrderReducer';
 import { PayMethodButton, PayMethodTitle, SepLine } from '../atoms/payMethod';
 import { savePayMethodAction, TOSS_PAY, KAKAO_PAY, PAYCO_PAY } from '../PayMethodAction';
 

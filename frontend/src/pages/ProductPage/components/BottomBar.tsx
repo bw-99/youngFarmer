@@ -10,7 +10,6 @@ import { LikeData } from "../../../reducers/LikeReducer";
 import { likeAction, likeCancelAction } from "../../LikePage/LikeAction";
 import { closeModalAction, openModalAction } from "../PurchaseAction"
 import { cartAddAction } from "../../CartPage/CartAction";
-import { object } from "prop-types";
 import { setProductOrderTry } from "../../OrderPage/ProductAction";
 import { addDoc, collection, deleteDoc, getDocs, query, updateDoc, where } from "firebase/firestore";
 import { db, FirebaseAuth } from "../../..";

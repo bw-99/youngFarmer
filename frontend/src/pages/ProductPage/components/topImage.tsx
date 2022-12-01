@@ -1,7 +1,4 @@
-import styled from "styled-components";
-import recommendItemStawberry from "../../../assets/images/main_recommend_strawberry.webp";
 import { ImageSize, ImageCover, BottomBox, BottomBoxCurPage, BottomBoxTotalPage } from "../atoms/topImage";
-import topExampleIcon from "../../../assets/images/rectangle@3x.webp";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../reducers";

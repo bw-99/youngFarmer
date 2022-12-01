@@ -1,12 +1,11 @@
 import recommendRightArrow from "../../../assets/images/btn-arrow-r-20-px@3x.webp";
-import recommendItemStawberry from "../../../assets/images/main_recommend_strawberry.webp";
 import recommendItemLikeIcon from "../../../assets/images/btn-heart-on@3x.webp";
 import recommendItemLikeNotIcon from "../../../assets/images/btn-heart-off@3x.webp";
-import React, { ChangeEvent, FormEvent, useEffect } from "react";
-import { RecommnedTitle, RecommnedTitleText, RecommnedTitleArrow, RecommendList, RecommendItem, RecommendItemBox, RecommendItemImage, RecommendItemCover, RecommendItemTextInfoSource, RecommendItemTextInfoTitle, RecommendItemTextInfoPrice, RecommendItemTextInfoPriceDiscount, RecommendItemLike } from "../atoms/recommend";
+import React from "react";
+import { RecommnedTitle, RecommnedTitleText, RecommnedTitleArrow, RecommendItemLike } from "../atoms/recommend";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { ItemUnitImgComp, ItemUnitListComp } from "../../../common/ItemList/ItemList";
+import { useNavigate } from "react-router-dom";
+import { ItemUnitImgComp} from "../../../common/ItemList/ItemList";
 import { ProductDataType } from "../../../reducers/ProductReducer";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../reducers";

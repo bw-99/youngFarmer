@@ -1,4 +1,3 @@
-import { ChatSeperateLine, FarmerNickname, FarmerProfile, NewChatNoti, RecentChat, RecentChatDate } from "../atoms/chatItem";
 import { ChatBoxFromMe, ChatBoxFromYou, ChatProfile, ChatTimeCreated, SepByDate, SepTextByDate } from "../atoms/chatDetailItem";
 import farmer from "../../../assets/images/farmer.webp";
 import React, { useEffect, useState } from "react";

@@ -1,16 +1,12 @@
-import { Item, ItemCountText, ItemCover, ItemImage, ItemOrderShoppingBagButton, ItemOrderShoppingBagButtonIcon, ItemOrderShoppingBagButtonText, ItemTextInfoPrice, ItemTextInfoPriceDiscount, ItemTextInfoSource, ItemTextInfoTitle, ItemUnitList } from "../../../common/ItemList/atoms/item";
+import { ItemCountText } from "../../../common/ItemList/atoms/item";
 import { ItemUnitListComp } from "../../../common/ItemList/ItemList";
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
 import { RootState } from "../../../reducers";
-import { LikeData } from "../../../reducers/LikeReducer";
 import { ProductDataType } from "../../../reducers/ProductReducer";
-import { searchLikeTryAction } from "../../SearchPage/SearchDertailAction";
 
 export const ItemComponent = () => {
-    const dispatch = useDispatch();
-    const [prList, setPrList] = useState([]);
-
+    
     const likeSelector: ProductDataType[] = useSelector((state:RootState) =>
         state.SearchDetailReducer.likeProducts
     );

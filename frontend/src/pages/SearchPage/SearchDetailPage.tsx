@@ -2,23 +2,18 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
-import styled from "styled-components";
 import { AppFrame } from "../../App";
 
 
-import alarm from "../../assets/images/alarm@3x.webp";
-import shopping_bag from "../../assets/images/shopping_bag@3x.webp";
 import { AppBarComponentNoBack, AppBarComponentSearch } from "../../common/AppBar/AppBar";
 import { BackgroundWrapper } from "../../common/BackgroundWrapper/BackgroundWrapper";
 
 
 
 import { BottomNavigationBar } from "../../common/BottomNavigationBar/BottomNavigationBar";
-import { CategoryComponent } from "../../common/Category/category";
 import { RootState } from "../../reducers";
 import { ProductDataList, ProductDataType } from "../../reducers/ProductReducer";
 import { FilterComponent } from "../SearchPage/components/Filter";
-import { OtherChoiceComp } from "./components/OtherChoice";
 import { SearchResultComp } from "./components/SearchResult";
 import { ToggleComponent } from "./components/ToggleComponent";
 import { SearchFilterCloseAction } from "./SearchActions";

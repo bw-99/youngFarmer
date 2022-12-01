@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React from "react";
 import { Text1 } from "../atoms/CartTop";
 import checkIcon from "../../../assets/images/btn-checkbox-1@3x.webp";
 import checkNotIcon from "../../../assets/images/btn-checkbox-2@3x.webp";

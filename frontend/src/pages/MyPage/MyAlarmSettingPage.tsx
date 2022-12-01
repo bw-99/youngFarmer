@@ -1,6 +1,4 @@
-import React, { Component,useEffect, useState } from "react";
-import { useParams, Link, useLocation, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
 
 //import Switch from "react-switch"
 
@@ -14,8 +12,6 @@ import Switch from '@mui/material/Switch';
 
   
 export const MyAlarmSettingpage = () => {
-    const navigate = useNavigate();
-    const params = useParams();
 
     const [state, setState] = React.useState({
         opt1: true,

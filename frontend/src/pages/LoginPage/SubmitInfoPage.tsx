@@ -1,20 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useParams, Link, useLocation, useNavigate } from 'react-router-dom';
-import styled from "styled-components";
+import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
-import { btnBack } from "../../assets/images/btn-back@3x.webp"
 
-import { AssignMainBox, BottomImg } from "./atoms/Assignp1";
-import { BottomBox } from "./atoms/Box";
-import { NavigateComponent } from "./components/BackArrow";
 import { NavigationBox, AssignPage3Text1Box, AssignPage3Text1, AssignPage3FormBox, AssignPageForm, AssignPageFormLabel, AssignPageFormSpan, AssignPageFormInputForName, AssignPageFormInputForEmail, AssignPageFormInputForNum, AssignPageFormInputButton, ButtonText, AssignPageFormInputForCertificationNum, AssignPageSubmitButton2, SubmitButtonText } from "./atoms/Assignp2";
 import { AppFrame } from "../../App";
 import { AppBarComponentOnlyBack } from "../../common/AppBar/AppBar";
 import { LoginWithKakaoAction, login_result_loading } from "./LoginAction";
 
-import { getAuth, signInWithPhoneNumber, RecaptchaVerifier, PhoneAuthProvider   } from "firebase/auth";
 import { RootState } from "../../reducers";
-import { BackgroundWrapper } from "../../common/BackgroundWrapper/BackgroundWrapper";
 
 
 

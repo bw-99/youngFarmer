@@ -1,8 +1,7 @@
 
 import React, {useEffect, useState} from "react";
 
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../../reducers";
+import { useDispatch, } from "react-redux";
 
 import transforimg from "../../../assets/images/icon@3x.webp" ;
 
@@ -14,7 +13,6 @@ import checkIcon from "../../../assets/images/btn-checkbox-1@3x.webp";
 import checkNotIcon from "../../../assets/images/btn-checkbox-2@3x.webp";
 import { CartProductDataType, ProductDataType } from "../../../reducers/ProductReducer";
 import { cartCancelAction } from "../CartAction";
-import { OrderDataType } from "../../../reducers/OrderReducer";
 import { useNavigate } from "react-router-dom";
 import { addProductOrderTry, cancelProductOrderTry, setProductOrderTry } from "../../OrderPage/ProductAction";
 import { addDoc, collection, deleteDoc, getDocs, query, Timestamp, updateDoc, where } from "firebase/firestore";

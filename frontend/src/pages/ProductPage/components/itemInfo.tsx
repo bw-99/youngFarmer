@@ -1,4 +1,3 @@
-import recommendItemStawberry from "../../../assets/images/main_recommend_strawberry.webp";
 import rightArrowIcon from "../../../assets/images/btn-arrow-r-14-px@3x.webp";
 import itemLikeOffIcon from "../../../assets/images/like-off@3x.webp";
 import itemLikeOnIcon from "../../../assets/images/btn-heart-on@3x.webp";
@@ -6,7 +5,6 @@ import rateStarIcon from "../../../assets/images/rate-star@3x.webp";
 
 import { DeliveryInfoCategory, DeliveryInfoExplainMain, DeliveryInfoExplainSub, DeliveryInfoTitle, DeliverySepLine, FarmerArrow, FarmerNickname, FarmerProfile, ItemDiscount, ItemDiscountPrice, ItemLike, ItemLikeBg, ItemPriceDefault, ItemRateArrow, ItemRateStar, ItemRateText, ItemSepLine, ItemTitle } from "../atoms/itemInfo";
 import { ItemBestMark, ItemBestMarkRedBorder, ItemSaleMark } from "../../../common/ItemList/ItemList";
-import { LikeIconComp } from "../../MainPage/components/recommend";
 
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";

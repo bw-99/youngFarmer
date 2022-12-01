@@ -1,5 +1,5 @@
 import React,{ReactNode} from "react";
-import {ChatDateBox,LineDrawBox,ProducerChatImg,ProductMiddleBox,ProductText1,ProductText2,ProductText3,ProdcutSmallBtn,ProductSmallImg,ChatTimeBox,ConsumerChatBox,ProducerChatBox,ChatForDivisionBox,ProductInfoBigBox,PlusItemBox,PlustIcon,ProductInfoSmallBox,MainChatSmallBox,MainChatBigBox} from "../atoms/chatItem2"
+import {ChatDateBox,LineDrawBox,ProductMiddleBox,ProductText1,ProductText2,ProductText3,ProdcutSmallBtn,ProductSmallImg,ConsumerChatBox,ProducerChatBox,ChatForDivisionBox,ProductInfoSmallBox,MainChatSmallBox} from "../atoms/chatItem2"
 
 
 

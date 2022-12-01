@@ -1,4 +1,4 @@
-import { BannerAtom, BannerBackgroundAtom, BannerButton, BannerCircleOne, BannerCircleTwo, BannerImage, BannerTextBoldAtom, BannerTextLightAtom } from "../atoms/lookEntireBanner";
+import { BannerAtom, BannerButton, BannerCircleOne, BannerCircleTwo, BannerImage, BannerTextBoldAtom, BannerTextLightAtom } from "../atoms/lookEntireBanner";
 import mainMiddleBanner from "../../../assets/images/main_middle_banner.webp";
 import React from "react";
 

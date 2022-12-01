@@ -9,15 +9,11 @@ import {
 import rightArrowIcon from "../../../assets/images/btn-arrow-r-20-px@3x.webp";
 import backIcon from "../../../assets/images/btn-back@3x.webp";
 import checkIcon from "../../../assets/images/btn-checkbox-1@3x.webp";
-import plusIcon from "../../../assets/images/icon-plus@3x.webp";
 
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../reducers";
-import { likeAction, likeCancelAction } from "../../LikePage/LikeAction";
 import { closeModalAction, selectWeight, selectNumberOfItem, selectWannaPave } from "../PurchaseAction"
-import { select } from "redux-saga/effects";
-import { Color } from "@mui/material";
 
 const ITEM_WEIGHT: string = "item_weight";
 const NUMBER_OF_ITEM: string = "number_of_item";

@@ -1,20 +1,14 @@
 import { getDoc, doc, setDoc, serverTimestamp, query, collection, onSnapshot, where, addDoc, getDocs } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { db } from "../..";
-import { RootState } from "../../reducers";
-import { MyPageDataType } from "../../reducers/MypageReducer";
-import { StoreProductDataType } from "../StorePage/StoreType";
 
 import sendIcon from "../../assets/images/btn-send.webp";
 import sendIconActive from "../../assets/images/btn-send-active.webp";
 
 
-import { ChatItem2Component, ChatItemCompOnlyText } from "./components/chatItem2"
 import { FirebaseAuth } from './../../index';
 import { ChatBoxSrcType, ChatBoxType, ChatDataType, ChatProfileType } from "./ChatType";
-import { ChatBodySmallComponent } from './components/chatBody';
 import { ChatDetailItemComponent } from "./components/chatDetailItem";
 import { AppFrame } from "../../App";
 import { AppBarComponentOnlyBack } from "../../common/AppBar/AppBar";

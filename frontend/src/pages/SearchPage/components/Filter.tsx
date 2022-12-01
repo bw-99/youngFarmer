@@ -1,13 +1,8 @@
 import React,{ useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../../reducers";
-import { SearchHistoryType, SearchHistoryTypeList } from "../SearchConstants";
-import { json } from "stream/consumers";
 import { SearchDeleteAction, SearchFilterCloseAction } from "../SearchActions";
 import {BottomImg, WonSpan,FlowSpan,FilterBoxSpan,BottomBox,FilterBox,FilterButtonApplyBox,FilterButtonApplySpan,FilterButtonResetBox,FilterButtonResetSpan,FilterCategoryBox,FilterCategoryBoxSpan,FilterLabelBox,FilterLabelBoxSpan,FilterPriceBox,FilterPriceInput,FilterPriceWonLabel,FilterTitleBox,FilterpriceBoxInner} from "../atoms/FilterItem"
 import MultiRangeSlider from "./MultiRangeSlider"
-import { SEARCH_FILTER } from "../../../reducers/SearchReducer";
-import { searchFilterTryAction } from "../SearchDertailAction";
 import { useNavigate, useParams } from "react-router-dom";
 
 

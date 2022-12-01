@@ -1,39 +1,24 @@
-import React, { useState, createContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import {
-    collection,
-    query,
-    where,
-    getDocs,
+    
     setDoc,
     doc,
-    updateDoc,
     serverTimestamp,
     getDoc,
-    getFirestore,
-
+    
 } from "firebase/firestore";
-import { db, FirebaseAuth } from "../../..";
+import { db} from "../../..";
 
 import { AppFrame } from "../../../App";
 import { AppBarComponentOnlyBack } from "../../../common/AppBar/AppBar";
 import {ProductBigImg,ProducerChatImg,ProductMiddleBox,ProductText1,ProductText2,ProductText3,ProdcutSmallBtn,ProductSmallImg,ChatTimeBox,ConsumerChatBox,ProducerChatBox,ChatForDivisionBox,ProductInfoBigBox,PlusItemBox,PlustIcon,ProductInfoSmallBox,MainChatSmallBox,MainChatBigBox, ChatDateBox, LineDrawBox, ProductBigText1, ProductBigText2, ProductBigText3, ProductBigBtn} from "../atoms/chatItem2"
-import { StoreDataType, StoreProductDataType } from "../../../pages/StorePage/StoreType";
+import { StoreProductDataType } from "../../../pages/StorePage/StoreType";
 import { MyPageDataType } from "../../../reducers/MypageReducer";
 import { RootState } from "../../../reducers";
-import { getProfileAction } from "../../MyPage/MyAction";
-import { ChatAppBarComponent } from "./chatAppBar"
-import iconPicture from "../../../assets/images/icon-chat-btn-1@3x.png"
-import iconCamera from "../../../assets/images/icon-chat-btn-2@3x.png"
-import iconVoiceMessage from "../../../assets/images/icon-chat-btn-3@3x.png"
-import iconRemittance from "../../../assets/images/icon-chat-btn-4@3x.png"
-
-import {ChatBodySmallComponent} from "./chatBody"
 
 import { ChatMenuComponent } from "./chatMenu";
-import { select } from "redux-saga/effects";
-import { prop } from "cheerio/lib/api/attributes";
 
 
 interface appBarPropsType {
@@ -323,11 +308,8 @@ export const ChatItem2Component = (props: ChatItem2PropsType) => {
 }
 
 export const ChatItemCompOnlyText = (props: any) => {
-    const params = useParams();
     const location = useLocation();
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
-
+ 
 
     const [storeInfo, setStoreInfo] = useState<StoreProductDataType>({
         background_photo: location.state.props.background_photo,

@@ -1,18 +1,13 @@
 import React, { useEffect, useState } from "react";
 
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
-import styled from "styled-components";
 import { AppFrame } from "../../App";
 
 
-import alarm from "../../assets/images/alarm@3x.webp";
-import shopping_bag from "../../assets/images/shopping_bag@3x.webp";
 import { AppBarComponentNoBack, AppBarComponentProduct, AppBarComponentSearch } from "../../common/AppBar/AppBar";
 
 
 
-import { BottomNavigationBar } from "../../common/BottomNavigationBar/BottomNavigationBar";
-import { CategoryComponent } from "../../common/Category/category";
 import { BottomBarComp } from "./components/BottomBar";
 import { ItemDetailComp } from "./components/itemDetail";
 import { ItemInfoComp } from "./components/itemInfo";
@@ -20,14 +15,11 @@ import { TopImageComp } from "./components/topImage";
 import { closeModalAction } from "./PurchaseAction"
 /*import { PaymentPageComp } from "./components/PaymentPage"*/
 
-import { collection, doc, setDoc, getDoc, query, orderBy, limit, getDocs, where } from "firebase/firestore";
-import { db } from "../..";
 import { useDispatch, useSelector } from "react-redux";
 import { GetProductInfo } from "./ProductAction";
 import { ProductDataType } from "../../reducers/ProductReducer";
 import { RootState } from "../../reducers";
 import { PurchaseComp } from "./components/purchase";
-import { CircularProgress } from '@mui/material';
 
 function ProductPage(props: any) {
     const params = useParams();

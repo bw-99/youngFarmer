@@ -1,13 +1,8 @@
 ﻿import React, { useEffect, useState } from "react";
 
-import TextFieldRecipient from "../../assets/images/textfield-off_recipient.webp";
-import TextFieldPhone from "../../assets/images/textfield-off_phone.webp";
-import TextFieldAddress from "../../assets/images/textfield-off.webp";
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
-import styled from "styled-components";
 import { AppFrame } from "../../App";
 
-import CryptoJS from 'crypto-js';
 import { collection, doc, setDoc, getDoc, query, orderBy, limit, getDocs, where, Timestamp, addDoc, updateDoc, deleteDoc } from "firebase/firestore";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../reducers";
@@ -23,13 +18,10 @@ import { apiClient } from "../../api/axios";
 import { db, FirebaseAuth } from './../../index';
 import { getAuth } from "firebase/auth";
 import { DISCOUNT_TYPE_AMOUNT, DISCOUNT_TYPE_PERCENT } from './../../reducers/DiscountReducer';
-import { BackgroundWrapper } from "../../common/BackgroundWrapper/BackgroundWrapper";
-import { ProductDataOrderType } from './../../reducers/ProductReducer';
 import { convertOrder2Product } from "../../sagas/OrderSaga";
 import { DeliveryDataType } from "../../reducers/DeliveryReducer";
 import { PayAmountComp } from "./components/payAmount";
 import { PayMethodComp } from "./components/payMethod";
-import { PayAgreeComp } from "./components/agree";
 import { saveImpParam } from './OrderAction';
 import { saveOrderData } from "./OrderReadyPage";
 import { setItemWithExpireTime } from './../../services/localStorage';

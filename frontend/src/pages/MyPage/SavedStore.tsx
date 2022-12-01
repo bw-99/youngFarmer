@@ -1,27 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { useParams, useLocation, useNavigate } from 'react-router-dom';
-import styled from "styled-components";
 import { db, FirebaseAuth } from "../..";
 import { AppFrame } from "../../App";
 
 
-import alarm from "../../assets/images/alarm@3x.webp";
-import shopping_bag from "../../assets/images/shopping_bag@3x.webp";
-import { AppBarComponentMyPage, AppBarComponentNoBack, AppBarComponentOnlyBack } from "../../common/AppBar/AppBar";
+import { AppBarComponentOnlyBack } from "../../common/AppBar/AppBar";
 
 
 
-import { BottomNavigationBar } from "../../common/BottomNavigationBar/BottomNavigationBar";
 import { RootState } from "../../reducers";
-import { MyPageDataType } from "../../reducers/MypageReducer";
-import { PointPageComp } from "./components/point";
-import { ProfileComp } from "./components/profile";
 import { StorePointPageComp } from "./components/savedStore";
-import { ServiceCenterComp } from "./components/serviceCenter";
-import { ShoppingComp } from "./components/shopping";
-import { getProfileAction } from "./MyAction";
 import { collection, query } from 'firebase/firestore';
 import { where } from 'firebase/firestore';
 import { getDocs } from 'firebase/firestore';
@@ -30,11 +19,6 @@ import { StoreDataType } from "../StorePage/StoreType";
 
 
 function SavedStorePage(props: any) {
-    const params = useParams();
-    const location = useLocation();
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
-
 
 
     const followSelector: number[] = useSelector((state:RootState) =>

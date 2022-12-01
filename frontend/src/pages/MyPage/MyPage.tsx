@@ -2,13 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
-import styled from "styled-components";
 import { FirebaseAuth } from "../..";
 import { AppFrame } from "../../App";
 
 
-import alarm from "../../assets/images/alarm@3x.webp";
-import shopping_bag from "../../assets/images/shopping_bag@3x.webp";
 import { AppBarComponentMyPage, AppBarComponentNoBack } from "../../common/AppBar/AppBar";
 
 

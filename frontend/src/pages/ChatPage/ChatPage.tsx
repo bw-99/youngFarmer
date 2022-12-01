@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from "react";
 
-import { useParams, useLocation, useNavigate } from 'react-router-dom';
-import styled from "styled-components";
+import { useNavigate } from 'react-router-dom';
 import { AppFrame } from "../../App";
 
 
-import alarm from "../../assets/images/alarm@3x.png";
-import shopping_bag from "../../assets/images/shopping_bag@3x.webp";
 import { AppBarComponentNoBack, AppBarComponentSetting } from "../../common/AppBar/AppBar";
 
 
@@ -15,13 +12,11 @@ import { BottomNavigationBar } from "../../common/BottomNavigationBar/BottomNavi
 import { ChatBoxSrcType, ChatBoxType, ChatDataType, ChatProfileType } from "./ChatType";
 import { ChatItemComponent } from "./components/chatItem";
 
-import ChatItemComponentLongBtn from "./components/chtItemLongPress";
 import { collection, doc, query } from 'firebase/firestore';
 import { db } from "../..";
 import { where } from 'firebase/firestore';
 import { FirebaseAuth } from './../../index';
 import { getDocs } from 'firebase/firestore';
-import { getDoc } from 'firebase/firestore';
 import { orderBy } from 'firebase/firestore';
 import { limit } from 'firebase/firestore';
 import { getItemWithNoExpireTime } from './../../services/localStorage';

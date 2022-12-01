@@ -1,21 +1,12 @@
 import React,{ useEffect, useState } from "react";
 import { IndexSelectedText, IndexNotSelectedText, IndexSelectedLine, IndexNotSelectedLine, ProductCategoryTitleBox, LineDraw, ProductPopularImg, ProdcutPopularBox, ProductTitle, ProductPrice, ProductSale, ProductFilter, ProdcutRecentBox, ProductRecentImg, ProductPopularImgWrap} from "../atoms/itemDetail";
 
-import productExOne from "../../../assets/images/product-ex1@3x.webp";
-import productExTwo from "../../../assets/images/product-ex2@3x.webp";
-import productExThree from "../../../assets/images/product-ex3@3x.webp";
 import downbtn from "../../../assets/images/btn-dropdown-20-px@3x.webp"
-import filter from "../../../assets/images/btn@3x.webp";
-import { flexbox } from "@mui/system";
-import { ProductOption } from "../../OrderListPage/atoms/orderDetailProduct";
 import itemLikeOffIcon from "../../../assets/images/like-off@3x.webp";
 import itemLikeOnIcon from "../../../assets/images/btn-heart-on@3x.webp";
 import {ItemLike,ItemLikeBg} from "../../ProductPage/atoms/itemInfo";
-import { useNavigate } from "react-router-dom";
 import { useSelector, Provider, connect, useDispatch} from "react-redux";
-import { RootState } from "../../../reducers";
 import { ProductDataReviewType, ProductDataType } from "../../../reducers/ProductReducer";
-import { LikeData } from "../../../reducers/LikeReducer";
 import { likeCancelAction, likeAction } from "../../LikePage/LikeAction";
 import { StoreProductDataType } from "../StoreType";
 import { ItemUnitImgComp } from "../../../common/ItemList/ItemList";

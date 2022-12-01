@@ -1,4 +1,3 @@
-import recommendItemStawberry from "../../../assets/images/main_recommend_strawberry.webp";
 import React from "react";
 import { useSelector } from "react-redux";
 import { ProductDataType } from "../../../reducers/ProductReducer";

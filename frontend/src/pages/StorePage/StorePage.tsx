@@ -1,19 +1,12 @@
 import React, { useEffect, useState } from "react";
 
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
-import styled from "styled-components";
 import { AppFrame } from "../../App";
 
 
-import alarm from "../../assets/images/alarm@3x.webp";
-import shopping_bag from "../../assets/images/shopping_bag@3x.webp";
 import { AppBarComponentNoBack, AppBarComponentStore, AppBarComponentSearch, AppBarComponentProduct } from "../../common/AppBar/AppBar";
 
 
-import {PurchaseComp } from "../ProductPage/components/purchase"
-
-import { BottomNavigationBar } from "../../common/BottomNavigationBar/BottomNavigationBar";
-import { CategoryComponent } from "../../common/Category/category";
 import { ItemDetailComp } from "./components/itemDetail";
 import { FarmerInfoComp } from "./components/FarmerInfo";
 import { TopImageComp } from "./components/topImage";

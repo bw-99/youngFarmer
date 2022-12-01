@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../reducers';
 import { OrderSending, PaymentMethodDataType } from '../../../reducers/OrderReducer';
-import { savePayMethodAction, TOSS_PAY, KAKAO_PAY, PAYCO_PAY } from '../PayMethodAction';
 import { useState } from 'react';
 import { DISCOUNT_TYPE_AMOUNT, DISCOUNT_TYPE_PERCENT } from '../../../reducers/DiscountReducer';
 import { LightSepLine, PayAmountCol, PayAmountTitle, PayAmountTotalLabel, PayAmountTotalVal, PayAmountVal } from '../atoms/payAmount';

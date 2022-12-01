@@ -1,5 +1,4 @@
 import { RateBox, RateLabel, RateStarOff,RateStarOn } from "../atoms/rate"
-import StarBtn from "../../../assets/images/btn-rate-on.webp";
 import starOn from "../../../assets/images/star-copy-3@3x.webp";
 import starOff from "../../../assets/images/star-copy-4@3x.webp";
 

@@ -1,9 +1,8 @@
 import React, { useEffect } from "react";
-import { useParams, Link, useLocation, useNavigate } from 'react-router-dom';
-import {AppColorBig,AppColorSmall,ProfileBoxSmallSmall2,ProfileBoxSmall1,ProfileBoxSmall2,ProfileBoxSmallSmall1,ProfileBtnBox,ProfileExitBtn,TitleBox,ProfileBox,MenuBox,ProfileCorrectionBtn,ProfileImgBox,SmallBtn,BigBtn} from "./atoms/setting"
+import { useNavigate } from 'react-router-dom';
+import {AppColorSmall,ProfileBoxSmall1,ProfileBoxSmall2,ProfileBoxSmallSmall1,ProfileBtnBox,ProfileExitBtn,TitleBox,ProfileBox,MenuBox,ProfileCorrectionBtn,ProfileImgBox,SmallBtn,BigBtn} from "./atoms/setting"
 import { AppFrame } from "../../App";
 import rightArrow from "../../assets/images/btn-arrow-r-14-px@3x.webp"
-import leftArrow from "../../assets/images/btn-back@3x.webp"
 import { AppBarComponentOnlyBack } from "../../common/AppBar/AppBar";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../reducers";

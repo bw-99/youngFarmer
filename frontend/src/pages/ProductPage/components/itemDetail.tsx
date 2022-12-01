@@ -1,8 +1,6 @@
 import React,{ useEffect, useState } from "react";
 import { IndexSelectedText, IndexNotSelectedText, IndexSelectedLine, IndexNotSelectedLine, ImageBox, ItemReviewTitle, ItemReviewButton, ItemReviewStar, ItemReviewScore, SepLine, ReviewerPhoto, ReviewerNickname, EachRateStar, EachRateStarScore, ReviewContent, ReviewPhoto, ContentDate, QuestionNickname, QuestionUnansweredButton, QuestionLockIcon, QuestionContent } from "../atoms/itemDetail";
 
-import productExOne from "../../../assets/images/product-ex1@3x.webp";
-import productExTwo from "../../../assets/images/product-ex2@3x.webp";
 import productExThree from "../../../assets/images/product-ex3@3x.webp";
 
 import { useSelector } from "react-redux";
@@ -15,7 +13,6 @@ import rateStarOff from "../../../assets/images/btn-rate-off@3x.webp";
 import iconLock from "../../../assets/images/icon-lock@3x.webp";
 import { getAverageReviewScore } from "./itemInfo";
 import { useNavigate, useParams } from "react-router-dom";
-import { StoreDataType } from "../../StorePage/StoreType";
 
 
 export const ItemDetailComp = () => {

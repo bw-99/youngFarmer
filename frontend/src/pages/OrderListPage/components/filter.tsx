@@ -1,12 +1,6 @@
 ﻿import React, { useEffect, useState } from "react";
 import { StateSelectBox, StateSelectText, StateNonSelectBox, StateNonSelectText } from "../atoms/state"
-import {
-    PurchaseDate, PurchaseState, WriteReviewBox, WriteReviewText, PurchaseDot,
-    ProductImg, ProductLocateText, ProductTitleText, ProductPriceText, ProductDetailText, ProductDetailDot,
-    UnReviewSepLine,
-} from "../atoms/PurchaseInfo"
 
-import testImage from "../../../assets/images/peach@3x.webp";
 import { getAllOrderList, getDeliverCompleteOrderList, getOnDeliverOrderList, getReadyOrderList, getRefuncOrderList } from "../OrderListAction";
 import { useDispatch } from 'react-redux';
 

@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
-import { useParams, useLocation, useNavigate, Link, useSearchParams } from 'react-router-dom';
-import styled from "styled-components";
+import { useNavigate} from 'react-router-dom';
 
 import bg from "../../assets/images/login_background@3x.webp";
 import kakao from "../../assets/images/icon-ui-sns-kakao@3x.webp";
@@ -12,19 +11,12 @@ import apple from "../../assets/images/icon-sns-apple@3x.webp";
 import { AppleBox, BottomBox, KakaoBox, LookAround, LookAroundBeforeLogin, MainBox, MainTextBold, MainTextBox, MainTextLight, NaverBox, SnsText } from "./atoms/Box";
 import { LoginWithAnonymous, LoginWithKakaoAction, LoginWithNaverAction, login_result_loading } from "./LoginAction";
 import { useDispatch, useSelector } from "react-redux";
-import { get, post } from "../../api/axios";
-import { kakaoConfig } from "../..";
 
-import { getAuth, signInAnonymously } from "firebase/auth";
 import { AppFrame } from "../../App";
 import { RootState } from "../../reducers";
-import { BackgroundWrapper, LoadingWrapper } from "../../common/BackgroundWrapper/BackgroundWrapper";
-
 
   
 function LoginPage(props: any) {
-    const params = useParams();
-    const location = useLocation();
     const navigate = useNavigate();
     const dispatch = useDispatch();
 

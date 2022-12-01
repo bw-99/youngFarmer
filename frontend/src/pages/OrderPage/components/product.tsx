@@ -1,13 +1,9 @@
 import { DeliveryCharge, Line, Package, ProductCost, ProductName, SaleRate, Sector, SectorTitle, SeparateSectorLine, StoreName } from "../atoms/product";
-import BackBtn from "../../../assets/images/btn-back.webp";
 import Truck from "../../../assets/images/btn-order.webp";
-import Peach from "../../../assets/images/peach.webp";
-import Check from "../../../assets/images/btn-checkbox-2.webp";
 import React, { useEffect, useState } from "react";
 import { OrderProductDataType, ProductDataType } from "../../../reducers/ProductReducer";
 import { Spantemp2 } from "../../CartPage/atoms/CartProduct";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../../reducers";
 import { removeProductAction, saveProductAction } from "../ProductAction";
 
 export type OrderProductListParam = {

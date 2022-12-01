@@ -1,30 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, } from "react";
 
-import { useParams, useLocation, useNavigate, Link, useSearchParams } from 'react-router-dom';
-import styled from "styled-components";
-
-import bg from "../../assets/images/login_background@3x.webp";
-import kakao from "../../assets/images/icon-ui-sns-kakao@3x.webp";
-import naver from "../../assets/images/icon-sns-naver@3x.webp";
-import apple from "../../assets/images/icon-sns-apple@3x.webp";
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 
-import { AppleBox, BottomBox, KakaoBox, LookAround, LookAroundBeforeLogin, MainBox, MainTextBold, MainTextBox, MainTextLight, NaverBox, SnsText } from "./atoms/Box";
-import { LoginWithAnonymous, LoginWithKakaoAction, LoginWithNaverAction } from "./LoginAction";
+import {  LoginWithKakaoAction, LoginWithNaverAction } from "./LoginAction";
 import { useDispatch } from "react-redux";
-import { get, post } from "../../api/axios";
-import { db, kakaoConfig } from "../..";
+import { db } from "../..";
 
-import { getAuth, signInAnonymously } from "firebase/auth";
 import { collection, where, limit, getDocs, query } from "firebase/firestore";
-import { FirebaseAuth } from './../../index';
 import { AppFrame } from "../../App";
 
 
   
 function LoginKakaoPage(props: any) {
-    const params = useParams();
-    const location = useLocation();
     const navigate = useNavigate();
     const dispatch = useDispatch();
 

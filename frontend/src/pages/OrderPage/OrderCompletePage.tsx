@@ -1,33 +1,18 @@
 import React, { useEffect, useState } from "react";
 
-import TextFieldRecipient from "../../assets/images/textfield-off_recipient.webp";
-import TextFieldPhone from "../../assets/images/textfield-off_phone.webp";
-import TextFieldAddress from "../../assets/images/textfield-off.webp";
 import CheckIcon from "../../assets/images/check.webp";
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import styled from "styled-components";
 import { AppFrame } from "../../App";
 
-import CryptoJS from 'crypto-js';
 import { collection, doc, setDoc, getDoc, query, orderBy, limit, getDocs, where, Timestamp, addDoc, updateDoc, deleteDoc } from "firebase/firestore";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../reducers";
 import { AppBarComponentOnlyBack } from "../../common/AppBar/AppBar";
-import { Sector, SectorTitle, StoreName, DeliveryCharge, Line, ProductName, ProductCost, SaleRate, Package, SeparateSectorLine } from "./atoms/product";
 import { OrderDataType, OrderSending } from "../../reducers/OrderReducer";
 import { OrderProductDataType } from "../../reducers/ProductReducer";
-import { ProductListComp } from "./components/product";
-import { DeliveryComp } from "./components/delivery";
-import { DiscountComp } from "./components/discount";
 import { PaymentBtn } from "../CartPage/atoms/CartProduct";
-import { apiClient } from "../../api/axios";
 import { db, FirebaseAuth } from './../../index';
-import { getAuth } from "firebase/auth";
-import { DISCOUNT_TYPE_AMOUNT, DISCOUNT_TYPE_PERCENT } from './../../reducers/DiscountReducer';
-import { BackgroundWrapper } from "../../common/BackgroundWrapper/BackgroundWrapper";
-import { ProductDataOrderType } from './../../reducers/ProductReducer';
-import { convertOrder2Product } from "../../sagas/OrderSaga";
-import { DeliveryDataType } from "../../reducers/DeliveryReducer";
 
 
 

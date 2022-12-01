@@ -1,14 +1,9 @@
 import React, { useEffect, useState } from "react";
 
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
-import styled from "styled-components";
 import { AppFrame } from "../../App";
 
-import testImage from "../../assets/images/peach@3x.webp";
-import rateStarIcon from "../../assets/images/rate-star@3x.webp";
-import alarm from "../../assets/images/alarm@3x.webp";
-import shopping_bag from "../../assets/images/shopping_bag@3x.webp";
-import { AppBarComponentNoBack, AppBarComponentOnlyBack, AppBarComponentProduct, AppBarComponentSearch } from "../../common/AppBar/AppBar";
+import {  AppBarComponentOnlyBack, } from "../../common/AppBar/AppBar";
 import {
     IndexSelectedLine, IndexSelectedText, IndexNotSelectedLine, IndexNotSelectedText,
     ReviewerImage, ReviewerNickname, ReviewRateStar, ReviewRateText,
@@ -22,15 +17,11 @@ import {
     UnReviewSepLine,
 } from "../ReviewPage/atoms/UnReviewPage"
 
-import { BottomNavigationBar } from "../../common/BottomNavigationBar/BottomNavigationBar";
-import { CategoryComponent } from "../../common/Category/category";
 
-import { collection, doc, setDoc, getDoc, query, orderBy, limit, getDocs, where } from "firebase/firestore";
 import { db, FirebaseAuth } from "../..";
 import { useDispatch, useSelector } from "react-redux";
 import { ProductDataOrderType, ProductDataType, ProductWithOrderType, ReviewProductDataType } from "../../reducers/ProductReducer";
 import { RootState } from "../../reducers";
-import { CircularProgress } from '@mui/material';
 import { getRreviewListAction, getUnreviewListAction } from "./ReviewAction";
 
 function ReviewPage(props: any) {

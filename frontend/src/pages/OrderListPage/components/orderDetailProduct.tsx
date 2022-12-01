@@ -3,7 +3,6 @@ import { ProductImage, ProductName, ProductOption, ProductPrice, StoreName } fro
 import { OrderParam } from "../OrderDetailPage"
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { object } from 'prop-types';
 
 export const OrderDetailProductComp = ({order}:OrderParam) =>{
 

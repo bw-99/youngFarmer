@@ -3,14 +3,10 @@
     "",
     "\\frontend",
     "\\frontend\\src",
-    "\\frontend\\src\\assets",
-    "\\frontend\\src\\assets\\fonts",
-    "\\frontend\\src\\common\\FollowButton",
-    "\\frontend\\src\\common\\ItemList",
-    "\\frontend\\src\\common\\ItemList\\atoms",
-    "\\frontend\\src\\common\\LiveItem",
-    "\\frontend\\src\\pages\\CartPage\\components"
+    "\\frontend\\src\\pages",
+    "\\frontend\\src\\pages\\MyPage\\atoms",
+    "\\frontend\\src\\pages\\MyPage\\components"
   ],
-  "SelectedNode": "\\frontend\\src\\assets\\fonts\\AppleSDGothicNeoB.woff",
+  "SelectedNode": "\\frontend\\src\\pages",
   "PreviewInSolutionExplorer": false
 }

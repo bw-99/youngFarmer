@@ -1,5 +1,3 @@
-import recommendItemStawberry from "../../../assets/images/main_recommend_strawberry.webp";
-import shoppingBag from "../../../assets/images/shopping-bag-20px@3x.webp";
 import closeIcon from "../../../assets/images/btn-close-20-px@3x.webp";
 
 
@@ -8,9 +6,7 @@ import React,{ useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../reducers";
 import { SearchHistoryType, SearchHistoryTypeList } from "../SearchConstants";
-import { json } from "stream/consumers";
 import { SearchCrateAction, SearchDeleteAction } from "../SearchActions";
-import { searchTryAction } from "../SearchDertailAction";
 import { useNavigate } from "react-router-dom";
 
 export const RecentSearchComponent = () => {

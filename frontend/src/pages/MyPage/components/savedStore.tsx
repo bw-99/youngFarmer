@@ -1,8 +1,7 @@
 import React from "react";
 
-import {AppBarMainBox, TopText, StoreBox, StoreImg, StoreName, GPA, DOT, Classification, FollowingBox, FollowingText} from "../atoms/savedStore"
+import {StoreBox, StoreImg, StoreName, GPA, DOT, Classification} from "../atoms/savedStore"
 
-import BackBtn from "../../../assets/images/btn-back.webp";
 import StarBtn from "../../../assets/images/btn-rate-on.webp";
 import { StoreDataType } from "../../StorePage/StoreType";
 import { FollowButton } from "../../../common/FollowButton/followButton";

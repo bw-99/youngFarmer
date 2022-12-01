@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
-import styled from "styled-components";
-import { useSelector } from "react-redux";
 import { AssignMainBox, AssignText1, AssignText2, AgreeBox1, AssignText3, AgreeBox2, AssignTextRedSmall, AssignTextBlackSmall, BtnBox, BtnBoxInner, BottomImg, AssignText4, CheckBoxIcon } from "./atoms/Assignp1";
-import { BottomBox } from "./atoms/Box";
 import { AppFrame } from "../../App";
 import checkIcon from "../../assets/images/btn-checkbox-1@3x.webp";
 import checkNotIcon from "../../assets/images/btn-checkbox-2@3x.webp";

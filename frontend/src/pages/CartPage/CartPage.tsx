@@ -1,37 +1,25 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, {useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
-import { useParams, useLocation, useNavigate } from 'react-router-dom';
-import styled from "styled-components";
-import { db, FirebaseAuth } from "../..";
-import { AppFrame, AuthContext } from "../../App";
+import { useNavigate } from 'react-router-dom';
+import { AppFrame } from "../../App";
 
 
-import alarm from "../../assets/images/alarm@3x.webp";
-import shopping_bag from "../../assets/images/shopping_bag@3x.webp";
-import { AppBarComponentMyPage, AppBarComponentNoBack, AppBarComponentOnlyBack } from "../../common/AppBar/AppBar";
+import { AppBarComponentOnlyBack } from "../../common/AppBar/AppBar";
 
 
 import {CartProductComponent, setPreOrderInfo} from "./components/CartProduct"
 
 
-import { BottomNavigationBar } from "../../common/BottomNavigationBar/BottomNavigationBar";
 import { RootState } from "../../reducers";
-import { CartData } from "../../reducers/CartReducer";
-import { MyPageDataType } from "../../reducers/MypageReducer";
 import { CartProductDataType, ProductDataType } from "../../reducers/ProductReducer";
-import { cartCancelAction, getCartAction } from "./CartAction";
 
 import {PaymentBtn} from "./atoms/CartProduct"
 import { CartTopComp } from "./components/CartTop";
 import { OrderDataType } from "../../reducers/OrderReducer";
 import { setProductOrderTry } from "../OrderPage/ProductAction";
-import { addDoc, collection, deleteDoc, getDocs, query, updateDoc, where } from "firebase/firestore";
 
 
 function CartPage(props: any) {
-    const params = useParams();
-    const location = useLocation();
     const navigate = useNavigate();
     const dispatch = useDispatch();
 

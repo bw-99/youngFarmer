@@ -1,9 +1,8 @@
 
 import React  from "react";
 
-import { useSelector } from "react-redux";
-import { RootState } from "../../../reducers";
-import {AlarmContentBox,AlarmContentBoxSmall,AlarmContentCategoryBox,AlaramContentDateBox,AlarmmContentTitleBox,AlarmCategoryBtn, AlarmCategoryBox} from "../atoms/alarm"
+
+import {AlarmContentBox,AlarmContentBoxSmall,AlarmContentCategoryBox,AlaramContentDateBox,AlarmmContentTitleBox,} from "../atoms/alarm"
 
 export const AlramContentComp = () => {
 

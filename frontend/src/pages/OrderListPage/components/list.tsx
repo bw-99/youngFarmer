@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { PurchaseDate, PurchaseDot, PurchaseState, WriteReviewBox, WriteReviewText, ProductImg, ProductLocateText, ProductTitleText, ProductPriceText, ProductDetailText, ProductDetailDot, UnReviewSepLine, SemiSepLine } from "../atoms/PurchaseInfo";
-import testImage from "../../../assets/images/peach@3x.webp";
+import React from "react";
+import { PurchaseDate, PurchaseDot, PurchaseState, WriteReviewBox, WriteReviewText, ProductImg, ProductLocateText, ProductTitleText, ProductPriceText, ProductDetailText, UnReviewSepLine, SemiSepLine } from "../atoms/PurchaseInfo";
 import { OrderType } from "../../../reducers/OrderListReducer";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../reducers";

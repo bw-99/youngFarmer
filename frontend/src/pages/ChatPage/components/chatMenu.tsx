@@ -1,5 +1,4 @@
-import React,{ useState } from "react";
-import { AppFrame } from "../../../App";
+import React from "react";
 import { MenuImg,MenuBigBox, MenuSmallBox, BlackOpacityBox, MenuClostBtn } from "../atoms/chatMenu";
 import btn1 from "../../../assets/images/btnChatMenu@3x1.webp"
 import btn2 from "../../../assets/images/btnChatMenu@3x2.webp"

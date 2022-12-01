@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link, useLocation, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from "react-redux";
 import {AlaramContentDateBox,AlarmCategoryBox,AlarmCategoryBtn,AlarmContentBox,AlarmContentBoxSmall,AlarmContentCategoryBox,AlarmContentsContainer,AlarmmContentTitleBox} from "../MyPage/atoms/alarm";
 import {AlramContentComp} from "../MyPage/components/alarmContent"
 import { AppFrame } from "../../App";

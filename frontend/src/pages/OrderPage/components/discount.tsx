@@ -1,15 +1,8 @@
 import React, { useEffect, useState } from "react";
-import checkIcon from "../../../assets/images/btn-checkbox-1@3x.webp";
-import checkNotIcon from "../../../assets/images/btn-checkbox-2@3x.webp";
 import { useDispatch, useSelector } from 'react-redux';
 import { db, FirebaseAuth } from './../../../index';
-import { DeliveryDataType } from "../../../reducers/DeliveryReducer";
 import { RootState } from "../../../reducers";
-import { addDoc, collection, getDocs, query, Timestamp, updateDoc, where } from "firebase/firestore";
-import { BackgroundWrapper, CenterBackgroundWrapper } from "../../../common/BackgroundWrapper/BackgroundWrapper";
-import axios from "axios";
-import DaumPostcode from "react-daum-postcode";
-import ReactDom from 'react-dom';
+import { Timestamp} from "firebase/firestore";
 import { getDiscountTry, saveDiscountAction } from './../DiscountAction';
 import { CouponSrcType, DiscountDataType } from "../../../reducers/DiscountReducer";
 import { DiscountContentDropdown, DiscountContentLabel, DiscountPoint, DiscountPointInput, DiscountPointInputLabel, DiscountTitleAtom, SepLine } from "../atoms/discount";

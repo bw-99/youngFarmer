@@ -7,9 +7,7 @@ import { DeliveryDataType } from "../../../reducers/DeliveryReducer";
 import { RootState } from "../../../reducers";
 import { addDoc, collection, getDocs, query, Timestamp, updateDoc, where } from "firebase/firestore";
 import { BackgroundWrapper, CenterBackgroundWrapper, TopBackgroundWrapper } from "../../../common/BackgroundWrapper/BackgroundWrapper";
-import axios from "axios";
 import DaumPostcode from "react-daum-postcode";
-import ReactDom from 'react-dom';
 import { getDeliveryTry, saveDeliveryAction } from "../DeliveryAction";
 import { DeliverCheckAtom, DeliverCheckDefault, DeliveryConPlaceInput, DeliveryConPlaceInputDisabled, DeliveryContentAtom, DeliveryFindAtom, DeliveryListAtom, DeliveryTtitleAtom, SepLineAtom } from "../atoms/delivery";
 
