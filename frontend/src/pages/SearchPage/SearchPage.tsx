@@ -5,8 +5,8 @@ import styled from "styled-components";
 import { AppFrame } from "../../App";
 
 
-import alarm from "../../assets/images/alarm@3x.png";
-import shopping_bag from "../../assets/images/shopping_bag@3x.png";
+import alarm from "../../assets/images/alarm@3x.webp";
+import shopping_bag from "../../assets/images/shopping_bag@3x.webp";
 import { AppBarComponentNoBack, AppBarComponentSearch } from "../../common/AppBar/AppBar";
 
 

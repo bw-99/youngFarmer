@@ -2,10 +2,10 @@
 import React, { useState } from "react";
 import { useParams, Link, useLocation, useNavigate } from 'react-router-dom';
 import styled from "styled-components";
-import btnBack from "../../../assets/images/btn-back@3x.png"
-import farmer from "../../../assets/images/farmer.png"
+import btnBack from "../../../assets/images/btn-back@3x.webp"
+import farmer from "../../../assets/images/farmer.webp"
 import {BackArrowBtn,NaviageSpanText} from "../atoms/Assignp2"
-import backArrow from "../../../assets/images/btn-back@3x.png"
+import backArrow from "../../../assets/images/btn-back@3x.webp"
 
 
 

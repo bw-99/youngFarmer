@@ -1,9 +1,9 @@
 import { BestBanner, Item, ItemCover, ItemImage, ItemLike, ItemOrderShoppingBagButton, ItemOrderShoppingBagButtonIcon, ItemOrderShoppingBagButtonText, ItemTextInfoPrice, ItemTextInfoPriceDiscount, ItemTextInfoSource, ItemTextInfoTitle, ItemUnitList, SaleBanner } from "./atoms/item";
-import recommendItemStawberry from "../../assets/images/main_recommend_strawberry.png";
-import shoppingBag from "../../assets/images/shopping-bag-20px@3x.png";
+import recommendItemStawberry from "../../assets/images/main_recommend_strawberry.webp";
+import shoppingBag from "../../assets/images/shopping-bag-20px@3x.webp";
 import  React, { useEffect, useRef, useState } from "react";
-import recommendItemLikeIcon from "../../assets/images/btn-heart-on@3x.png";
-import recommendItemLikeNotIcon from "../../assets/images/btn-heart-off@3x.png";
+import recommendItemLikeIcon from "../../assets/images/btn-heart-on@3x.webp";
+import recommendItemLikeNotIcon from "../../assets/images/btn-heart-off@3x.webp";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { likeAction, likeCancelAction } from "../../pages/LikePage/LikeAction";

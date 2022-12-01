@@ -1,12 +1,12 @@
-import recommendItemStawberry from "../../../assets/images/main_recommend_strawberry.png";
-import shoppingBag from "../../../assets/images/shopping-bag-20px@3x.png";
-import defaultPhoto from "../../../assets/images/btn-avatar-default@3x.png";
-import cameraIcon from "../../../assets/images/icon-camera-16-px@3x.png";
+import recommendItemStawberry from "../../../assets/images/main_recommend_strawberry.webp";
+import shoppingBag from "../../../assets/images/shopping-bag-20px@3x.webp";
+import defaultPhoto from "../../../assets/images/btn-avatar-default@3x.webp";
+import cameraIcon from "../../../assets/images/icon-camera-16-px@3x.webp";
 import React from "react";
-import orderIcon from "../../../assets/images/btn-order@3x.png";
-import reviewIcon from "../../../assets/images/btn-review@3x.png";
-import pointIcon from "../../../assets/images/btn-point@3x.png";
-import followIcon from "../../../assets/images/btn-follow@3x.png";
+import orderIcon from "../../../assets/images/btn-order@3x.webp";
+import reviewIcon from "../../../assets/images/btn-review@3x.webp";
+import pointIcon from "../../../assets/images/btn-point@3x.webp";
+import followIcon from "../../../assets/images/btn-follow@3x.webp";
 
 import { ProfileEmail, ProfileFuncMenu, ProfileFuncMenuDivider, ProfileFuncMenuIcon, ProfileFuncMenuText, ProfileNickname, ProfileNicknameSub, ProfilePhoto, ProfilePhotoAtom, ProfilePhotoChange, ProfilePhotoChangeIcon } from "../atoms/profile";
 import { MyPageDataType } from "../../../reducers/MypageReducer";

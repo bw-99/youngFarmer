@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import setting from "../../../assets/images/btn-mysetting@3x.png";
+import setting from "../../../assets/images/btn-mysetting@3x.webp";
 import React from "react";
 import { Link } from "react-router-dom";
 

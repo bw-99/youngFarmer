@@ -3,10 +3,10 @@ import React, { useEffect, useState } from "react";
 import { useParams, useLocation, useNavigate, Link, useSearchParams } from 'react-router-dom';
 import styled from "styled-components";
 
-import bg from "../../assets/images/login_background@3x.png";
-import kakao from "../../assets/images/icon-ui-sns-kakao@3x.png";
-import naver from "../../assets/images/icon-sns-naver@3x.png";
-import apple from "../../assets/images/icon-sns-apple@3x.png";
+import bg from "../../assets/images/login_background@3x.webp";
+import kakao from "../../assets/images/icon-ui-sns-kakao@3x.webp";
+import naver from "../../assets/images/icon-sns-naver@3x.webp";
+import apple from "../../assets/images/icon-sns-apple@3x.webp";
 
 
 import { AppleBox, BottomBox, KakaoBox, LookAround, LookAroundBeforeLogin, MainBox, MainTextBold, MainTextBox, MainTextLight, NaverBox, SnsText } from "./atoms/Box";

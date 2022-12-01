@@ -1,6 +1,6 @@
 import { LiveTitle, LiveTitleText, LiveTitleArrow, LiveItemImage, LiveItemCover, LiveItemCoverTextDate, LiveItemCoverTextMain, LiveItemCoverBottom, LiveItemCoverBottomImage, LiveItemCoverBottomTitle, LiveItemCoverBottomCost, LiveItemCoverBottomDiscount } from "./atoms/live";
-import liveRightArrow from "../../assets/images/btn-arrow-r-20-px@3x.png";
-import liveFruitMarket from "../../assets/images/main_live_fruitMarket.png";
+import liveRightArrow from "../../assets/images/btn-arrow-r-20-px@3x.webp";
+import liveFruitMarket from "../../assets/images/main_live_fruitMarket.webp";
 import { useNavigate } from "react-router-dom";
 import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 export const LiveTitleListComponent = () => {

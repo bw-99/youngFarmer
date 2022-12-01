@@ -1,6 +1,6 @@
-import recommendItemStawberry from "../../../assets/images/main_recommend_strawberry.png";
-import shoppingBag from "../../../assets/images/shopping-bag-20px@3x.png";
-import closeIcon from "../../../assets/images/btn-close-20-px@3x.png";
+import recommendItemStawberry from "../../../assets/images/main_recommend_strawberry.webp";
+import shoppingBag from "../../../assets/images/shopping-bag-20px@3x.webp";
+import closeIcon from "../../../assets/images/btn-close-20-px@3x.webp";
 
 
 import { RecentSearchHistoryBg, RecentSearchSeperateLine, RecentSearchHistoryText, RecentTextStyle, RecentSearchHistoryClose } from "../atoms/RecentSearch";

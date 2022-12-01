@@ -1,14 +1,14 @@
 import styled from "styled-components";
 import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
-import ChatPageIconOff from "../../../assets/images/btn-tabbar-chat-off@3x.png";
+import ChatPageIconOff from "../../../assets/images/btn-tabbar-chat-off@3x.webp";
 
-import SendIconBlack from "../../../assets/images/send_black.png";
+import SendIconBlack from "../../../assets/images/send_black.webp";
 // import SendIconWhite from "../../../assets/images/send_white.png";
-import SendIconWhite from "../../../assets/images/send.png";
+import SendIconWhite from "../../../assets/images/send.webp";
 
-import btnOutIcon from "../../../assets/images/btn-out@3x.png";
-import btnOutBlackIcon from "../../../assets/images/btn-out-black@3x.png";
+import btnOutIcon from "../../../assets/images/btn-out@3x.webp";
+import btnOutBlackIcon from "../../../assets/images/btn-out-black@3x.webp";
 
 
 import { StoreDataType, StoreProductDataType } from "../../../pages/StorePage/StoreType";

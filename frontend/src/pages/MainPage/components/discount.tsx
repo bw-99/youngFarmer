@@ -1,6 +1,6 @@
 import { DiscountBox, DiscountText, MainTextLight, MainTextBold, DiscountPeriod, DiscountImageBox } from "../atoms/atoms"
 
-import mainBanner from "../../../assets/images/main_banner.png";
+import mainBanner from "../../../assets/images/main_banner.webp";
 import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 export const DiscountComponent = () => {
     return (

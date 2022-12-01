@@ -1,8 +1,8 @@
 import { DeliveryCharge, Line, Package, ProductCost, ProductName, SaleRate, Sector, SectorTitle, SeparateSectorLine, StoreName } from "../atoms/product";
-import BackBtn from "../../../assets/images/btn-back.png";
-import Truck from "../../../assets/images/btn-order.png";
-import Peach from "../../../assets/images/peach.png";
-import Check from "../../../assets/images/btn-checkbox-2.png";
+import BackBtn from "../../../assets/images/btn-back.webp";
+import Truck from "../../../assets/images/btn-order.webp";
+import Peach from "../../../assets/images/peach.webp";
+import Check from "../../../assets/images/btn-checkbox-2.webp";
 import React, { useEffect, useState } from "react";
 import { OrderProductDataType, ProductDataType } from "../../../reducers/ProductReducer";
 import { Spantemp2 } from "../../CartPage/atoms/CartProduct";

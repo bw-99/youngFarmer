@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import checkIcon from "../../../assets/images/btn-checkbox-1@3x.png";
-import checkNotIcon from "../../../assets/images/btn-checkbox-2@3x.png";
+import checkIcon from "../../../assets/images/btn-checkbox-1@3x.webp";
+import checkNotIcon from "../../../assets/images/btn-checkbox-2@3x.webp";
 import { useDispatch, useSelector } from 'react-redux';
 import { db, FirebaseAuth } from './../../../index';
 import { DeliveryDataType } from "../../../reducers/DeliveryReducer";

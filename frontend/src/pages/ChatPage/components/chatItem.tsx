@@ -1,5 +1,5 @@
 import { ChatSeperateLine, FarmerNickname, FarmerProfile, NewChatNoti, RecentChat, RecentChatDate } from "../atoms/chatItem";
-import farmer from "../../../assets/images/farmer.png";
+import farmer from "../../../assets/images/farmer.webp";
 import React, { useEffect, useState } from "react";
 import { ChatBoxType, ChatProfileType } from "../ChatType";
 import { FirebaseAuth } from './../../../index';

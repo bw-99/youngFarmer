@@ -1,9 +1,9 @@
 
-import categoryBest from "../../assets/images/category-best@3x.png";
-import categoryDiscount from "../../assets/images/category-discount@3x.png";
-import categorySeasonal from "../../assets/images/category-seasonal@3x.png";
-import categoryVegitable from "../../assets/images/category-vegitable@3x.png";
-import categoryHealthy from "../../assets/images/category-healthy@3x.png";
+import categoryBest from "../../assets/images/category-best@3x.webp";
+import categoryDiscount from "../../assets/images/category-discount@3x.webp";
+import categorySeasonal from "../../assets/images/category-seasonal@3x.webp";
+import categoryVegitable from "../../assets/images/category-vegitable@3x.webp";
+import categoryHealthy from "../../assets/images/category-healthy@3x.webp";
 import styled from "styled-components";
 
 import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";

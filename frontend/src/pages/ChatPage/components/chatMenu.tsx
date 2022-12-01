@@ -1,10 +1,10 @@
 import React,{ useState } from "react";
 import { AppFrame } from "../../../App";
 import { MenuImg,MenuBigBox, MenuSmallBox, BlackOpacityBox, MenuClostBtn } from "../atoms/chatMenu";
-import btn1 from "../../../assets/images/btnChatMenu@3x1.png"
-import btn2 from "../../../assets/images/btnChatMenu@3x2.png"
-import btn3 from "../../../assets/images/btnChatMenu@3x3.png"
-import btn4 from "../../../assets/images/btnChatMenu@3x4.png"
+import btn1 from "../../../assets/images/btnChatMenu@3x1.webp"
+import btn2 from "../../../assets/images/btnChatMenu@3x2.webp"
+import btn3 from "../../../assets/images/btnChatMenu@3x3.webp"
+import btn4 from "../../../assets/images/btnChatMenu@3x4.webp"
 
 interface TempMenuType  {
     isMenuOpen : boolean

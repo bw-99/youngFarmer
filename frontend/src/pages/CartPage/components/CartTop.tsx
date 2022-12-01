@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Text1 } from "../atoms/CartTop";
-import checkIcon from "../../../assets/images/btn-checkbox-1@3x.png";
-import checkNotIcon from "../../../assets/images/btn-checkbox-2@3x.png";
+import checkIcon from "../../../assets/images/btn-checkbox-1@3x.webp";
+import checkNotIcon from "../../../assets/images/btn-checkbox-2@3x.webp";
 import {CheckBoxIcon} from "../../LoginPage/atoms/Assignp1"
 
 type checkParam = {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { AddPhotoAtom, AddPhotoDefaultAtom, UploadPhotoAtom, UploadPhotoDeleteAtom, UploadPhotoDeleteIconAtom, UploadPhotoShadowAtom } from "../atoms/reviewPhoto"
-import deleteIcon from "../../../assets/images/btn-close-16-px@3x.png";
-import gallery from "../../../assets/images/icon-gallery-20-px@3x.png";
+import deleteIcon from "../../../assets/images/btn-close-16-px@3x.webp";
+import gallery from "../../../assets/images/icon-gallery-20-px@3x.webp";
 
 
 type ReviewPhotoParam = {
