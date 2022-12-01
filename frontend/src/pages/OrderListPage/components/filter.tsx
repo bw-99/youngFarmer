@@ -104,7 +104,7 @@ export const ProductFilter = () => {
                             </>
                     }
                 </div>
-                <div onClick={() => { setIndex(4); }} style={{ marginLeft: "10px" }}>
+                {/* <div onClick={() => { setIndex(4); }} style={{ marginLeft: "10px" }}>
                     {
                         index == 4 ?
                             <>
@@ -119,7 +119,7 @@ export const ProductFilter = () => {
                                 </StateNonSelectBox>
                             </>
                     }
-                </div>
+                </div> */}
             </div>
             
         </div>

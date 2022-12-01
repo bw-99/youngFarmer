@@ -13,7 +13,7 @@ import sendIconActive from "../../assets/images/btn-send-active.webp";
 
 import { ChatItem2Component, ChatItemCompOnlyText } from "./components/chatItem2"
 import { FirebaseAuth } from './../../index';
-import { ChatBoxSrcType, ChatBoxType, ChatDataType } from "./ChatType";
+import { ChatBoxSrcType, ChatBoxType, ChatDataType, ChatProfileType } from "./ChatType";
 import { ChatBodySmallComponent } from './components/chatBody';
 import { ChatDetailItemComponent } from "./components/chatDetailItem";
 import { AppFrame } from "../../App";
@@ -49,13 +49,14 @@ function ChatDetailPage() {
     const [userInputChat, setUserInputChat] = useState<string>("");
     const [chatBox, setChatBox] = useState<ChatBoxType | null>(null);
     const [chatList, setChatList] = useState<ChatDataType[] | null>(null);
+    const [otherProfile, setOtherProfile] = useState<ChatProfileType | null>(null);
     
     const getChatBoxList = async(uid:string) => {
         try {
             const chatBoxDoc = doc(db, "chat", `${params.chat_box_id}`);
             let chatBoxData:ChatBoxSrcType = (await getDoc(chatBoxDoc)).data() as any;
 
-            let userProfileDataList = []
+            let userProfileDataList: any[] = []
             for (let index = 0; index < chatBoxData.uid_list.length; index++) {
                 const uidItem = chatBoxData.uid_list[index];
                 console.log(uidItem);
@@ -65,7 +66,10 @@ function ChatDetailPage() {
                 
                 const userProfileCollection =  collection(userData.docs[0].ref, "profile");
                 const userProfile = (await getDocs(userProfileCollection)).docs[0].data() as any;
-                userProfileDataList.push(userProfile);
+                userProfileDataList.push({
+                    ...userProfile,
+                    uid: uidItem
+                });
             }
 
             setChatBox({
@@ -73,6 +77,14 @@ function ChatDetailPage() {
                 last_chat: null,
                 id: chatBoxData.id
             });
+
+            // .find((profile)=>profile.uid == FirebaseAuth.currentUser!.uid)
+            FirebaseAuth.onAuthStateChanged((user) => {
+                if(user) {
+                    setOtherProfile(userProfileDataList.find((profile)=>profile.uid !== FirebaseAuth.currentUser!.uid));
+                }
+            })
+            
         }
         catch (error) {
             console.log(error);
@@ -154,22 +166,32 @@ function ChatDetailPage() {
         });
     }
 
+    if(!chatBox || !otherProfile) {
+        return (
+            <div>
+            </div>
+        );
+    }
+
     
     return (
         <AppFrame>
-            <AppBarComponentOnlyBack title={"청년 농부"} />
+            <AppBarComponentOnlyBack title={
+                `${otherProfile.profile_nickname}`
+            } />
 
             <div style={{height:"20px"}}></div>
             {
                 chatList?.map((chatData, index) => {
                     return (
-                        <ChatDetailItemComponent 
+                        <div style={{margin: "0 16px"}}>
+                            <ChatDetailItemComponent 
                             chatData={chatData}
                             nextChatData={chatList.length >= index + 1 ? chatList[index + 1] : null}
                             prevChatData={chatList.length >= 1 ? chatList[index - 1] : null} 
                             chatLength={chatList.length}                        
                             />
-                           
+                        </div>
                     )
                 })
             }

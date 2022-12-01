@@ -16,11 +16,11 @@ export const PointPageComp = () => {
             margin:"0 16px 0 16px",
             flexDirection: "row", maxWidth: "calc(625px - 32px)",
             alignItems:"center",justifyContent:"space-between"}}>
-                <AvailablePoint style = {{display: "flex", margin: "7px 77px 7px 16px"}}> 사용 가능한 포인트 </AvailablePoint>
+                <AvailablePoint style = {{display: "flex", margin: "7px 0px 7px 16px"}}> 사용 가능한 포인트 </AvailablePoint>
                 
                 <div style={{display:"flex", alignItems:"center", marginRight:"16px"}}>
-                    <img src = {PointImg} style = {{margin: "2px 6px 5px 77px", width:"24px",  height:"24px"}} />
-                    <PointAmount style = {{display: "flex", margin: "0 0 0 6px"}}> 34,000 P </PointAmount>
+                    <img src = {PointImg} style = {{margin: "2px 6px 5px 0px", width:"24px",  height:"24px"}} />
+                    <PointAmount style = {{display: "flex", margin: "0 0 0 6px"}}> 400 P </PointAmount>
                 </div>
             </AvailablePointBox>
 
